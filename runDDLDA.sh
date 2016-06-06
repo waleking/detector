@@ -2,6 +2,10 @@
 # run an example for PK-LDA  
 set -e
 
+#generate wiki.topics from ~/git/wiki_processor/data/features/
+echo "Generate wiki.topics."
+python wiki_topics.py 
+
 #compile
 cd $PWD
 lib="lib"
