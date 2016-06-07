@@ -19,15 +19,18 @@ def loadFeatures(filename):
 
 featureFileFolder="../wiki_processor/data/features"
 #todo, replace it by ../wiki_processor/additional_scripts/topicnames.txt
-files=os.listdir(featureFileFolder)
+files=[filename.strip()+"_features.txt"
+       for filename in open("../wiki_processor/additional_scripts/topicnames.txt","r").readlines()]
 wikiTopicsFile=open("wiki.topics","w")
 idx=0
 for f in files:
-    print(f)
-    d=loadFeatures(featureFileFolder+"/"+f)
-    sortedWords=sorted(d.items(),key=itemgetter(1),reverse=True)
-    for t in sortedWords:
-        word,score=t
-        wikiTopicsFile.write("topic%s\t%s\t%s\n" % (idx,word,score))
-    idx=idx+1
+    if("txt" in f):
+        print(f)
+
+        d=loadFeatures(featureFileFolder+"/"+f)
+        sortedWords=sorted(d.items(),key=itemgetter(1),reverse=True)
+        for t in sortedWords:
+            word,score=t
+            wikiTopicsFile.write("topic%s\t%s\t%s\n" % (idx,word,score))
+        idx=idx+1
 wikiTopicsFile.close()
