@@ -95,7 +95,7 @@
 %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % --- End of Author Metadata ---
 
-\title{Full History Info Enhanced Normal States Training for High Accuracy Event Detection}
+\title{Normal States Training for High Accuracy Event Detection}
 
 %
 % You need the command \numberofauthors to handle the 'placement
@@ -195,13 +195,16 @@ email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
 
 \maketitle
 \begin{abstract}
-In cyberspace, it is a very challenging task to detect events accurately due to its rapid changing nature.
-In our study, we find out the key to improve the accuracy lies in training the normal states well, which describe what happened and help to identify what is happening in cyberspace.
-Traditional methods underestimate the normal states due to the limited training data spanning over a few time windows.
-To overcome this limitation, we propose \textsc{FullReader}, a high accuracy event detection system that trains normal states better by using Wikipedia, which can be treated as an approximation of full history information source. 
-In \textsc{FullReader}, 1) normal states are trained as topical word frequencies; 2) historical topical word frequencies are extracted from Wikipedia pages, categories, and their Topic-PageRank-HITS scores; 3) topical word frequencies of targeted corpus are updated incrementally by Asymmetric-Prior-LDA, using the history information as prior; 4) events are detected by monitoring the change of topical word frequencies. 
-Experiments on the benchmark Edinburgh twitter corpus validate the effectiveness of our proposed \textsc{FullReader}.
+In the news value theory, the \textit{news unexpectedness} expects the journalists to report the events that are different from the routine things, a.k.a., the normal states. 
+For humanbeing, normal states are knowledge learned from news streams and the external environment, and can describe what happened and help to identify what is happening.
+In this paper, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumalation of happened things. 
+In \textsc{NSDetector}, 1) balanced for effectiveness and efficiency, normal states are trained as topical words and their frequencies; 2) historical topical word frequencies are initialized from knowledge base with chi-squared test; 3) topical word frequencies on targeted corpus are maintened by KB-Prior-LDA, using the normal states in knowledge base as prior; 4) events are detected by monitoring the change of topical word frequencies. 
+Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{NSDetector}.
+And further experiments on \textit{reddit} and \textit{arXiv} also demonstrate that \textsc{NSDetector} can be easily adapted on other cyberspace datasets.
+%\textsc{NSDetector} imitates this process automatically in the event detection task, and further verify that the key to improve the accuracy of event detection lies in training the normal states well. 
 \end{abstract}
+
+%\textsc{NSDetector} imitates this process automatically in the event detection task, and further verify that the key to improve the accuracy of event detection lies in training the normal states well. 
 
 
 %
@@ -252,7 +255,7 @@ Experiments on the benchmark Edinburgh twitter corpus validate the effectiveness
 % We no longer use \terms command
 %\terms{Theory}
 
-\keywords{Full history info; normal states initialization and maintenance; event detection; text mining;}
+\keywords{normal states initialization and maintenance; event detection;}
 
 \section{Introduction}
 Improving the accuracy of event detection in cyberspace can benefit many tasks, but it's nontrivial due to the rapid changing nature of cyberspace.
@@ -293,21 +296,11 @@ In this paper, we demonstrate that the better normal states  are learned, the be
 
  and \textit{full history info enhanced normal states training}. 
 
-\begin{figure*}[ht]
-    \centering
-    \subfigure[The first category methods\cite{Petrovic:2010uj}\cite{Wurzer:2015wq} utilize the history information appeared in an evolving training window; the second category\cite{Li2013JointEE}\cite{Nguyen2015EventDA} trains the normal states by the labeled data existed in a fixed time window. Our method intializes the normal states with full history info, and updates them incrementally. With normal states, systems detect events.]{
-                \label{fig:modelDesc:a} %% label for first subfigure
-                \includegraphics[height=7.4cm]{img/modelDescription.pdf}
-        }
-        \quad
-        \quad
-    \subfigure[\textsc{FullReader}'s process flow, taking \textbf{military} related events in cyberspace as an example. \textsc{FullReader} initializes the normal states as topical word frequencies from full history information about military, updates them further at the specific corpus day by day, and detects events finally.]{
-                \label{fig:modelDesc:b} %% label for first subfigure
-                \includegraphics[height=7.0cm]{img/systemExample.pdf}
-        }    
-    \caption{Overview of how event detection systems use history information (left), and an example of our \textsc{FullReader} system process flow on how to detect the military related events (right).}
+\begin{figure}
     \label{fig:modelDesc}
-\end{figure*}
+    \includegraphics[height=7.0cm]{img/systemExample.pdf}
+    \caption{\textsc{NSDetector}'s process flow, taking \textbf{military} related events in cyberspace as an example. \textsc{FullReader} initializes the normal states as topical word frequencies from full history information about military, updates them further at the specific corpus day by day, and detects events finally.}
+\end{figure}
 
 For example, in ideal conditions an event detection system for anti-terrorism has the knowledge about the normal state such as “the words ISIS and Syria are both high-frequent, while the word Russia is not so frequent as them”. 
 With the knowledge of normal state, the system for anti-terrorism can detect the event of “Russia's anti-ISIS op in Syria” as Russia appeared more frequent than the normal state and appeared with ISIS and Syria. 
@@ -352,14 +345,6 @@ Different from the above work, we do not only treat the user modeling result as 
 User modeling can be carried out to obtain web users' demographics information \cite{culotta2015predicting} (e.g., gender, age, ethnicity, education, income, etc.).
 Compared with demographics information, user interests' modeling can be verified more easily \cite{faralli2015large}. 
 
-  尽管文献[1]指出UMass[2] 是FSD任务中最为精确的方法，但由于在Event Detection任务中，the metric used in this method单纯的使用normalized topic weighted minimum cost并不能准确的反映出它能够很好的说明网络空间中的事件检测的准确性。其原因在于计算公式中缩小了CFa的值（一般默认的方法将miss与false alarm的cost的比值设置为10：1），因而传统的方法倾向于扩大召回率而牺牲了准确率。这样的做法在处理newswire信息时并没有太大不妥，原因在于newswire中检测出的novel story是事件的概率极大。而一般的网络空间中不仅仅包含新闻，而且覆盖了各方面的信息【参见Twevent中对twitter信息覆盖面的文献】。在此种情况下，即便是novelty story，也不一定代表了事件（具体的例子见Section实验部分）。进一步的，我们认为UMass在应用到一般的网络空间的事件检测的准确率不高的原因是UMass没有对网络空间的正常状态进行有效的训练。UMass[2]，LSH方法[3]，k-terms Hashing[1]使用聚类簇来表示cyberspace的正常状态，然而对于twitter这种覆盖面极广的社交媒体，聚类簇的方法总是不能穷尽所有正常状态。【这里的说法不是很强健】
-  与UMass，LSH，kterms等在向量空间或者在此基础上的哈希值进行聚类的方法不同，timeUserLDA[4]以及BBTM[5]对网络空间中的正常状态使用topic model进行刻画，将网络空间中的topics试图按照normal topics和bursty topics进行区分。该方法能够有效的检测到被人们广泛关注的bursty topics，这些bursty topics往往是我们需要我们检测的events的一部分。然而此类方法也有明显的缺陷，由于topic model使用对称的先验，因此其topic的规模倾向于相近的大小。然而人们在同一时间内对事件的关注度有限，事件受关注的程度也是趋向于power law分布的。这样，一些较小规模的事件不能被正确的检测出。因此，此类方法的特点是准确率高，但召回率低。进一步的究其本质，是timeUserLDA、BBTM等方法没有能够准确的训练网络空间的正常状态，较小的bursty event会被吸收进正常状态中。
-另一类方法是以EDCoW[6]为代表的对词频的正常状态进行训练的工作，判断the degree of burstiness of terms，然而cyberspace中常用词频率变化并不明显，因此由这类词构成的事件往往并不容易被检测到，这一结果也由[7]证实。
-与我们的工作最为相近的是Twevent[7]，Twevent采用三个阶段的方式进行：tweet segment, event segment detection, event segment clustering。
-Twevent 抽取tweet segment依赖于词典因而往往不能发现。。。
-正常状态训练部分的相关工作。
-Tedas[8], ESA[9], AIDR[10] 
-TwitterMonitor[11], EDCoW[6], TwitInfo[12], Twevent[7], Leadline[13], TwiCal[14], ESA[9], Redites[15] 
 
 Twitter Trending Topic Classification
 %\begin{figure}
@@ -496,7 +481,7 @@ Asymmetric-Prior-LDA
 \end{figure}
 
 \ \ Our theme modeling, want to learn the first \(k\) topics with Wikipedia Article \(k\) topics as close as possible, and we will be Wikipedia article \(k\) before 1000 words) was added to the theme of the word frequency word in the subject a priori distribution on the.
-Learning to be the first \(k\) Subject polynomial distribution of the word, referred to as \(\phi_k \), Wikipedia article \(k \) distribution of topics for \(\tau_k \), then this formalized process is expressed as: \(\ phi_k \sim Dir(\beta + \tau_k) \).
+Learning to be the first \(k\) Subject polynomial distribution of the word, referred to as \(\phi_k \), Wikipedia article \(k \) distribution of topics for \(\tau_k \), then this formalized process is expressed as: \(\ \phi_k \sim Dir(\beta + \tau_k) \).
 Formal presentation of the explanation is: With prior knowledge \(\tau_k \) after the theme \(\phi_k \) is no longer simply rely on symmetric priori \(\beta \), different words right is not the same weight , such as a discussion of "fashion" theme in Wikipedia, it will refer to "dress", "grand", "blue", "gold" and other words, with the asymmetric priori \(\beta + \tau_k \) after in microblogging "fashion" theme "dress" the proportion will be increased in this way so that microblogging corpus theme tends to Wikipedia topic.
 \(\tau_k \) in the first \(v \) words such as formula (\ref{eq: wikiPrior}).
 Where \(S_k \) as a set of candidate words: high-quality information to use Wikipedia, we extract the theme \(phi_k \ \) in the higher-word word frequency candidate set \(S_k \).
@@ -539,7 +524,7 @@ W \frac{n_{kv}}{\sum_{v\in S_{kv}}n_{kv}} &,v\in S_{k} \\
 &\ \ \propto \frac{n_{dk}+\alpha}{n_{d,.}+K\alpha}\frac{n_{kv}+\tau_{kv}+\beta}{n_{k,.}+\tau_{k,.}+V\beta}
 \end{aligned}
 \end{equation}
-
+\begin{comment}
 \begin{algorithm}[H]
     \caption{UPIETM batch learning algorithm} %title
     \label{alg:UPIETMbatch} %label
@@ -577,7 +562,7 @@ W \frac{n_{kv}}{\sum_{v\in S_{kv}}n_{kv}} &,v\in S_{k} \\
     \ENDFOR%end of i
     \end{algorithmic}
 \end{algorithm}
-
+\end{comment}
 
 \subsection{Detecting Events from Normal States}
 The state of attention of social issue k at time t in cyberspace is binary, namely at the peak or not at the peak. We denote it by hidden binary variable sk,t, which is 1 or 0. We do the inference for the hidden variable sk,t according to Poisson distribution according to Reference10,11. If the state of attention of social issue k at time t is "not at peak", then the probability density function is 
@@ -665,7 +650,7 @@ Ultimately, we can get the field \(k \) next time window \(t \) in the event the
 \label{my-label}
 \begin{tabular}{|cc|cc|cc|cc|}
 \hline
-\multicolumn{2}{|c|}{\textit{Security}} & \multicolumn{2}{c|}{\textit{Vehicles}} & \multicolumn{2}{c|}{\textit{Health}} & \multicolumn{2}{c|}{\textit{Sport}} \\ 
+\multicolumn{2}{|c|}{\textit{Military}} & \multicolumn{2}{c|}{\textit{Aviation}} & \multicolumn{2}{c|}{\textit{Health}} & \multicolumn{2}{c|}{\textit{Sport}} \\ 
 \begin{tabular}[c]{@{}c@{}}History\\ State\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ State\end{tabular} & \begin{tabular}[c]{@{}c@{}}History \\ State\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal \\ State\end{tabular} & \begin{tabular}[c]{@{}c@{}}History \\ State\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal \\ State\end{tabular} & \begin{tabular}[c]{@{}c@{}}History \\ State\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal \\ State\end{tabular} \\ \hline
 Army & killed & aircraft & air & medical & weight & league & season \\ 
 Battle & news & train & plane & patients & loss & season & win \\ 
@@ -748,7 +733,7 @@ Event number in Benchmark2 & 523 \\ \hline
 
 \begin{table*}[ht]
 \centering
-\caption{My caption}
+\caption{Events about \textit{military} detected by systems between 2011-07-20 and 2011-07-30}
 \label{my-label}
 \begin{tabular}{|l|L{3cm}|l|l|}
 \hline
@@ -767,6 +752,7 @@ Date & Event key words & Representative event tweet & \begin{tabular}[c]{@{}l@{}
 \begin{figure*}
     \label{fig:algorithm}
     \includegraphics[width=1.0\textwidth]{img/screenShot.png}
+    \caption{An illustration of the time series of Military related states on Twitter dataset from 2011-06-30 to 2011-09-15.}
 \end{figure*}
 
 \subsection{Data set}
