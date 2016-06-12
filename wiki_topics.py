@@ -6,7 +6,11 @@ def loadFeatures(filename):
     d=dict()
     sum=0
     for line in open(filename,"r"):
-        word,chi2=line.strip().split("\t")
+        if("\t" in line):
+            word,chi2=line.strip().split("\t")
+        else:
+            word,chi2=line.strip().split(" ")
+
         chi2=float(chi2)
         sum=sum+chi2
         d[word]=chi2

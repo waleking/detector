@@ -21,7 +21,7 @@ echo "vocabulary size is $vocabulary_size"
 
 #vocabulary_size=272472
 #wikiPortions="0 0.1 0.2 0.4 0.8 1.6 3.2 6.4 12.8 25.6 51.2"
-wikiPortions="3.2"
+wikiPortions="6.4"
 roundArray="0"
 for portion in ${wikiPortions}
 do 

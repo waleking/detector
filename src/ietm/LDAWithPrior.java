@@ -19,6 +19,7 @@ import usertagmodel.PrintUtil;
 import usertagmodel.UserInstancePlus;
 import waleking.util.MyFile;
 import cc.mallet.types.Alphabet;
+import cc.mallet.types.Dirichlet;
 import cc.mallet.util.Randoms;
 
 import common.LogUtil;
@@ -32,7 +33,8 @@ import common.LogUtil;
 public class LDAWithPrior implements Serializable {
 	private static final long serialVersionUID = -3335514051631979791L;
 	// prior parameters
-	public double alpha = 0.1;
+	public double[] alpha;
+    public double alphaSum=0;
 	public double beta = 0.005;
 
 	// dataset related
@@ -63,6 +65,15 @@ public class LDAWithPrior implements Serializable {
 	 */
 	public transient Zu[][][] z;// \vec{z}_{t,u,d}
 	public transient Ndk[][][] ndk;// \vec{n}_{t,u,d}
+
+    /**
+     * statistics for hyper parmaters' estimation
+     */
+    private int maxTokenNums=0;
+    private transient int[] oneDocTopicCounts;//temporal histogram of topic related token's number
+    private transient int[] docLengthCounts; // histogram of document sizes
+    private transient int[][] topicDocCounts; // histogram of document/topic counts
+
 
 	/**
 	 * hidden topic of user's tweets
@@ -154,7 +165,7 @@ public class LDAWithPrior implements Serializable {
 			}
 			interestTokenPerTopic[k] = toInitIETM.interestTokenPerTopic[k];
 		}
-
+        //update prior knowledge from wiki.topics
 		String filename = "wiki.topics";
 		MyFile reader = new MyFile(filename, "r");
 		String line = reader.readln();
@@ -220,6 +231,9 @@ public class LDAWithPrior implements Serializable {
 				for (int d = 0; d < tweetNum; d++) {
 					ArrayList<Integer> tweet = userInstance.getTweets().get(d).tweetContent;
 					int tweetLength = tweet.size();
+                    if(tweetLength>maxTokenNums){
+                        maxTokenNums=tweetLength;
+                    }
 					this.z[t][u][d] = new Zu(tweetLength);
 					this.ndk[t][u][d] = new Ndk(this.topicNumber);
 
@@ -237,473 +251,541 @@ public class LDAWithPrior implements Serializable {
 			}// end of user
 
 		}// end of t (timeWindowList.size())
+        
 	}// end of randomAssighHiddenTopics
 
-	public String traceICkv() {
-		int topic = 0;
-		StringBuffer sb = new StringBuffer();
-		for (int v = 0; v < 80; v++) {
-			sb.append(this.iCkv[topic][v]).append(" ");
-		}
-		return sb.toString().trim();
-	}
+    /**
+     * update hyper parameters' related statistics
+     */
+    public void updateHyperParameterStat(TimeWindowListPlus timeWindows){
+        //init docLengthCounts and topicDocCounts
+        if(this.docLengthCounts==null){
+            this.docLengthCounts=new int[maxTokenNums+1];
+        }else{
+            Arrays.fill(this.docLengthCounts,0);
+        }
+        if(this.topicDocCounts==null){
+            this.topicDocCounts=new int[this.topicNumber][maxTokenNums+1];
+        }
+        else{
+            for(int k=0;k<this.topicNumber;k++){
+                Arrays.fill(this.topicDocCounts[k],0);
+            }
+        }
+        for (int t = 0; t < timeWindows.timeWindowlist.size(); t++) {
+            SimpleUserInstanceListPlus ilist = timeWindows.timeWindowlist
+                .get(t);
+            for (int user = 0; user < ilist.size(); user++) {
+                UserInstancePlus userInstance = ilist.get(user);
+                int u = userInstance.getUserId();
+                int tweetNum = userInstance.getTweets().size();
+                for (int d = 0; d < tweetNum; d++) {
+                    ArrayList<Integer> tweet = userInstance.getTweets().get(d).tweetContent;
+                    int tweetLength = tweet.size();
+                    this.docLengthCounts[tweetLength]++;
+                    Arrays.fill(this.oneDocTopicCounts,0);
+                    for (int n = 0; n < tweetLength; n++) {
+                        int k=this.z[t][u][d].val[n];
+                        this.oneDocTopicCounts[k]++;
+                    }
+                    for(int k=0;k<this.topicNumber;k++){
+                        this.topicDocCounts[k][this.oneDocTopicCounts[k]]++;
+                    }
+                }
+            }
+        }
+    }
 
-	public LDAWithPrior(LDAWithPrior trainedIETM,
-			TimeWindowListPlus timeWindowList) {
+    /**
+     * call it after updateHyperParameterStat(**)
+     */
+    public void updateAlpha(){
+        for(int k=0;k<this.topicNumber;k++){
+            this.alpha[k]=this.alpha[k]/this.alphaSum;
+        }
+    }
 
-		// prior parameters
-		// this.alpha = iv.alpha;
-		this.alpha = trainedIETM.alpha;
+    public String traceICkv() {
+        int topic = 0;
+        StringBuffer sb = new StringBuffer();
+        for (int v = 0; v < 80; v++) {
+            sb.append(this.iCkv[topic][v]).append(" ");
+        }
+        return sb.toString().trim();
+    }
 
-		this.beta = trainedIETM.beta;
+    public LDAWithPrior(LDAWithPrior trainedIETM,
+            TimeWindowListPlus timeWindowList) {
 
-		// dataset related
-		this.tweetVSize = timeWindowList.tweetAlphabet.size();// specific
-		this.topicNumber = trainedIETM.topicNumber;
-		this.userNumber = timeWindowList.userAlphabet.size();// specific
-		this.timeWindowNum = timeWindowList.size();
+        // prior parameters
+        this.topicNumber = trainedIETM.topicNumber;
+        this.alpha = new double[this.topicNumber];
+        Arrays.fill(this.alpha,0.1);
+        for(int k=0;k<this.topicNumber;k++){
+            this.alphaSum=this.alphaSum+this.alpha[k];
+        }
 
-		/**
-		 * seven statistics
-		 */
-		// reuse the trained model, interest topic-token distribution
-		this.iCkv = new int[this.topicNumber][];
-		for (int k = 0; k < this.topicNumber; k++) {
-			this.iCkv[k] = new int[this.tweetVSize];
-			int v = 0;
-			for (v = 0; v < trainedIETM.tweetVSize; v++) {
-				this.iCkv[k][v] = trainedIETM.iCkv[k][v];
-			}
-			for (; v < this.tweetVSize; v++) {
-				this.iCkv[k][v] = 0;
-			}
-		}
-		// reuse the trained model, prior knowledge distribution
-		this.tau = new double[this.topicNumber][];
-		for (int k = 0; k < this.topicNumber; k++) {
-			this.tau[k] = new double[this.tweetVSize];
-			int v = 0;
-			for (v = 0; v < trainedIETM.tweetVSize; v++) {
-				this.tau[k][v] = trainedIETM.tau[k][v];
-			}
-			for (; v < this.tweetVSize; v++) {
-				this.tau[k][v] = 0;
-			}
-		}
-		this.interestTokenPerTopic = new int[this.topicNumber];
-		for (int k = 0; k < this.topicNumber; k++) {
-			this.interestTokenPerTopic[k] = trainedIETM.interestTokenPerTopic[k];
-		}
-		this.tauK = new double[this.topicNumber];
-		for (int k = 0; k < this.topicNumber; k++) {
-			this.tauK[k] = trainedIETM.tauK[k];
-		}
-		// init z
-		this.z = new Zu[this.timeWindowNum][this.userNumber][];
-		this.ndk = new Ndk[this.timeWindowNum][this.userNumber][];
+        this.beta = trainedIETM.beta;
 
-		// random assign tag's topic
-		double[] topicWeights = new double[this.topicNumber];
-		Arrays.fill(topicWeights, (double) 1 / (double) this.topicNumber);
+        // dataset related
+        this.tweetVSize = timeWindowList.tweetAlphabet.size();// specific
+        this.userNumber = timeWindowList.userAlphabet.size();// specific
+        this.timeWindowNum = timeWindowList.size();
 
-		randomAssignHiddenTopics(timeWindowList);
-	}
+        /**
+         * seven statistics
+         */
+        // reuse the trained model, interest topic-token distribution
+        this.iCkv = new int[this.topicNumber][];
+        for (int k = 0; k < this.topicNumber; k++) {
+            this.iCkv[k] = new int[this.tweetVSize];
+            int v = 0;
+            for (v = 0; v < trainedIETM.tweetVSize; v++) {
+                this.iCkv[k][v] = trainedIETM.iCkv[k][v];
+            }
+            for (; v < this.tweetVSize; v++) {
+                this.iCkv[k][v] = 0;
+            }
+        }
+        // reuse the trained model, prior knowledge distribution
+        this.tau = new double[this.topicNumber][];
+        for (int k = 0; k < this.topicNumber; k++) {
+            this.tau[k] = new double[this.tweetVSize];
+            int v = 0;
+            for (v = 0; v < trainedIETM.tweetVSize; v++) {
+                this.tau[k][v] = trainedIETM.tau[k][v];
+            }
+            for (; v < this.tweetVSize; v++) {
+                this.tau[k][v] = 0;
+            }
+        }
+        this.interestTokenPerTopic = new int[this.topicNumber];
+        for (int k = 0; k < this.topicNumber; k++) {
+            this.interestTokenPerTopic[k] = trainedIETM.interestTokenPerTopic[k];
+        }
+        this.tauK = new double[this.topicNumber];
+        for (int k = 0; k < this.topicNumber; k++) {
+            this.tauK[k] = trainedIETM.tauK[k];
+        }
+        // init z
+        this.z = new Zu[this.timeWindowNum][this.userNumber][];
+        this.ndk = new Ndk[this.timeWindowNum][this.userNumber][];
 
-	/**
-	 * initialize the model
-	 */
-	public void init(TimeWindowListPlus timeWindows, int topicNum) {
-		this.topicNumber = topicNum;// K
-		this.timeWindowNum = timeWindows.timeWindowlist.size();// T
-		this.userNumber = timeWindows.userAlphabet.size();// U
+        // random assign tag's topic
+        double[] topicWeights = new double[this.topicNumber];
+        Arrays.fill(topicWeights, (double) 1 / (double) this.topicNumber);
 
-		this.tweetVSize = timeWindows.tweetAlphabet.size();
+        randomAssignHiddenTopics(timeWindowList);
+    }
 
-		// init iCkv
-		this.iCkv = new int[this.topicNumber][];
-		for (int k = 0; k < this.topicNumber; k++) {
-			this.iCkv[k] = new int[this.tweetVSize];
-			Arrays.fill(this.iCkv[k], 0);
-		}
-		// init tau
-		this.tau = new double[this.topicNumber][];
-		this.tauK = new double[this.topicNumber];
-		for (int k = 0; k < this.topicNumber; k++) {
-			this.tau[k] = new double[this.tweetVSize];
-			Arrays.fill(this.tau[k], 0);
-		}
-		Arrays.fill(this.tauK, 0);
+    /**
+     * initialize the model
+     */
+    public void init(TimeWindowListPlus timeWindows, int topicNum) {
+        this.topicNumber = topicNum;// K
+        //alpha
+        this.alpha = new double[this.topicNumber];
+        Arrays.fill(this.alpha,0.1);
+        for(int k=0;k<this.topicNumber;k++){
+            this.alphaSum=this.alphaSum+this.alpha[k];
+        }
+        this.timeWindowNum = timeWindows.timeWindowlist.size();// T
+        this.userNumber = timeWindows.userAlphabet.size();// U
 
-		// init interestTokenPerTopic
-		this.interestTokenPerTopic = new int[this.topicNumber];
+        this.tweetVSize = timeWindows.tweetAlphabet.size();
 
-		// init zu
-		this.z = new Zu[this.timeWindowNum][this.userNumber][];
-		this.ndk = new Ndk[this.timeWindowNum][this.userNumber][];
+        // init iCkv
+        this.iCkv = new int[this.topicNumber][];
+        for (int k = 0; k < this.topicNumber; k++) {
+            this.iCkv[k] = new int[this.tweetVSize];
+            Arrays.fill(this.iCkv[k], 0);
+        }
+        // init tau
+        this.tau = new double[this.topicNumber][];
+        this.tauK = new double[this.topicNumber];
+        for (int k = 0; k < this.topicNumber; k++) {
+            this.tau[k] = new double[this.tweetVSize];
+            Arrays.fill(this.tau[k], 0);
+        }
+        Arrays.fill(this.tauK, 0);
 
-		randomAssignHiddenTopics(timeWindows);
-	}
+        // init interestTokenPerTopic
+        this.interestTokenPerTopic = new int[this.topicNumber];
+        // init temporal topic related words histogram
+        this.oneDocTopicCounts=new int[this.topicNumber];
 
-	/**
-	 * gibbs sweep for uer tweets
-	 */
-	public void gibbsSweepII(TimeWindowListPlus timeWindowList) {
-		for (int t = 0; t < timeWindowList.size(); t++) {
-			SimpleUserInstanceListPlus userList = timeWindowList.get(t);
-			for (int user = 0; user < userList.size(); user++) {
+        // init zu
+        this.z = new Zu[this.timeWindowNum][this.userNumber][];
+        this.ndk = new Ndk[this.timeWindowNum][this.userNumber][];
 
-				UserInstancePlus userInstance = userList.get(user);
-				int u = userInstance.getUserId();
-				/**
-				 * ------------------------------------------------------------
-				 * --- sample for tweets (joint sample for z)
-				 */
-				double[] topicWeights = new double[this.topicNumber];
+        randomAssignHiddenTopics(timeWindows);
+    }
 
-				double topicWeightSum = 0.0;
+    /**
+     * gibbs sweep for uer tweets
+     */
+    public void gibbsSweepII(TimeWindowListPlus timeWindowList) {
+        for (int t = 0; t < timeWindowList.size(); t++) {
+            SimpleUserInstanceListPlus userList = timeWindowList.get(t);
+            for (int user = 0; user < userList.size(); user++) {
 
-				for (int d = 0; d < userInstance.getTweets().size(); d++) {
-					ArrayList<Integer> tweet = userInstance.getTweets().get(d).tweetContent;
-					int tweetLength = tweet.size();
-					for (int n = 0; n < tweetLength; n++) {
-						int w = tweet.get(n);
-						int oldTopic = this.z[t][u][d].val[n];
-						// reset statistics
-						this.ndk[t][u][d].val[oldTopic]--;
-						this.iCkv[oldTopic][w]--;
-						this.interestTokenPerTopic[oldTopic]--;
-						assert this.iCkv[oldTopic][w] >= 0;
+                UserInstancePlus userInstance = userList.get(user);
+                int u = userInstance.getUserId();
+                /**
+                 * ------------------------------------------------------------
+                 * --- sample for tweets (joint sample for z)
+                 */
+                double[] topicWeights = new double[this.topicNumber];
 
-						// compute sampling distribution
-						topicWeightSum = 0.0;
-						for (int k = 0; k < this.topicNumber; k++) {
-							double numerator1 = this.ndk[t][u][d].val[k]
-									+ this.alpha;
-							double denumerator1 = tweetLength
-									+ this.topicNumber * this.alpha;
-							double numerator2 = this.iCkv[k][w] + this.beta
-									+ this.tau[k][w];
-							double denumerator2 = this.interestTokenPerTopic[k]
-									+ this.tweetVSize * this.beta
-									+ this.tauK[k];
-							topicWeights[k] = (numerator1 / denumerator1)
-									* (numerator2 / denumerator2);
-							topicWeightSum += topicWeights[k];
-						}
-						int sampleResult = rs.nextDiscrete(topicWeights,
-								topicWeightSum);
-						int k = sampleResult;
-						this.z[t][u][d].val[n] = k;
-						this.iCkv[k][w]++;
-						this.interestTokenPerTopic[k]++;
-						this.ndk[t][u][d].val[k]++;
-					}// end of sampling z_{t,u,d}
+                double topicWeightSum = 0.0;
 
-				}// end of sampling tweet's topic
-			}// end of sampling user u's information
-		}// end of sampling time window t's information
-		LogUtil.logger().error(traceICkv());
-	}
+                for (int d = 0; d < userInstance.getTweets().size(); d++) {
+                    ArrayList<Integer> tweet = userInstance.getTweets().get(d).tweetContent;
+                    int tweetLength = tweet.size();
+                    for (int n = 0; n < tweetLength; n++) {
+                        int w = tweet.get(n);
+                        int oldTopic = this.z[t][u][d].val[n];
+                        // reset statistics
+                        this.ndk[t][u][d].val[oldTopic]--;
+                        this.iCkv[oldTopic][w]--;
+                        this.interestTokenPerTopic[oldTopic]--;
+                        assert this.iCkv[oldTopic][w] >= 0;
 
-	/**
-	 * todo: compute perplexity
-	 * 
-	 * @param timeWindowList
-	 * @return
-	 */
-	public double computePerplexity(TimeWindowListPlus timeWindowList) {
-		double loglikelihood = 0.0;
-		double tokenNum = 0;
+                        // compute sampling distribution
+                        topicWeightSum = 0.0;
+                        for (int k = 0; k < this.topicNumber; k++) {
+                            double numerator1 = this.ndk[t][u][d].val[k]
+                            //    + this.alpha[k];
+                                +0.01;
+                            double numerator2 = this.iCkv[k][w] + this.beta
+                                + this.tau[k][w];
+                            double denumerator2 = this.interestTokenPerTopic[k]
+                                + this.tweetVSize * this.beta
+                                + this.tauK[k];
+                            topicWeights[k] = numerator1
+                                * (numerator2 / denumerator2);
+                            topicWeightSum += topicWeights[k];
+                        }
+                        int sampleResult = rs.nextDiscrete(topicWeights,
+                                topicWeightSum);
+                        int k = sampleResult;
+                        this.z[t][u][d].val[n] = k;
+                        this.iCkv[k][w]++;
+                        this.interestTokenPerTopic[k]++;
+                        this.ndk[t][u][d].val[k]++;
+                    }// end of sampling z_{t,u,d}
 
-		double[][] phi = new double[this.topicNumber][this.tweetVSize];
-		for (int k = 0; k < this.topicNumber; k++) {
-			for (int v = 0; v < this.tweetVSize; v++) {
-				phi[k][v] = (double) (this.iCkv[k][v] + this.beta + this.tau[k][v])
-						/ ((double) this.interestTokenPerTopic[k]
-								+ this.tweetVSize * this.beta + this.tauK[k]);
-			}
-		}
+                }// end of sampling tweet's topic
+            }// end of sampling user u's information
+        }// end of sampling time window t's information
+        LogUtil.logger().error(traceICkv());
+    }
 
-		int[] theta_freq = new int[this.topicNumber];
-		double[] theta = new double[this.topicNumber];
-		for (int t = 0; t < timeWindowList.size(); t++) {
-			// generate necessary statistics
+    /**
+     * todo: compute perplexity
+     * 
+     * @param timeWindowList
+     * @return
+     */
+    public double computePerplexity(TimeWindowListPlus timeWindowList) {
+        double loglikelihood = 0.0;
+        double tokenNum = 0;
 
-			SimpleUserInstanceListPlus userList = timeWindowList.get(t);
-			for (int user = 0; user < userList.size(); user++) {
+        double[][] phi = new double[this.topicNumber][this.tweetVSize];
+        for (int k = 0; k < this.topicNumber; k++) {
+            for (int v = 0; v < this.tweetVSize; v++) {
+                phi[k][v] = (double) (this.iCkv[k][v] + this.beta + this.tau[k][v])
+                    / ((double) this.interestTokenPerTopic[k]
+                            + this.tweetVSize * this.beta + this.tauK[k]);
+            }
+        }
 
-				UserInstancePlus userInstance = userList.get(user);
-				int u = userInstance.getUserId();
+        int[] theta_freq = new int[this.topicNumber];
+        double[] theta = new double[this.topicNumber];
+        for (int t = 0; t < timeWindowList.size(); t++) {
+            // generate necessary statistics
 
-				for (int d = 0; d < userInstance.getTweets().size(); d++) {
-					ArrayList<Integer> tweet = userInstance.getTweets().get(d).tweetContent;
-					int tweetLength = tweet.size();
-					Arrays.fill(theta_freq, 0);
-					for (int n = 0; n < this.z[t][u][d].val.length; n++) {
-						theta_freq[this.z[t][u][d].val[n]]++;
-					}
-					for (int k = 0; k < this.topicNumber; k++) {
-						theta[k] = ((double) theta_freq[k] + this.alpha)
-								/ ((double) tweetLength + this.topicNumber
-										* this.alpha);
-					}
-					double likelihood = likelihoodPerTweet(phi, theta, tweet);
-					loglikelihood += Math.log(likelihood);
-					tokenNum += tweet.size();
-				}
-			}
+            SimpleUserInstanceListPlus userList = timeWindowList.get(t);
+            for (int user = 0; user < userList.size(); user++) {
 
-		}
+                UserInstancePlus userInstance = userList.get(user);
+                int u = userInstance.getUserId();
 
-		// compute perplexity
-		return Math.exp(-loglikelihood / tokenNum);
-	}
+                for (int d = 0; d < userInstance.getTweets().size(); d++) {
+                    ArrayList<Integer> tweet = userInstance.getTweets().get(d).tweetContent;
+                    int tweetLength = tweet.size();
+                    Arrays.fill(theta_freq, 0);
+                    for (int n = 0; n < this.z[t][u][d].val.length; n++) {
+                        theta_freq[this.z[t][u][d].val[n]]++;
+                    }
+                    for (int k = 0; k < this.topicNumber; k++) {
+                        theta[k] = ((double) theta_freq[k] + this.alpha[k])
+                            / ((double) tweetLength + this.alphaSum);
+                    }
+                    double likelihood = likelihoodPerTweet(phi, theta, tweet);
+                    loglikelihood += Math.log(likelihood);
+                    tokenNum += tweet.size();
+                }
+            }
 
-	/**
-	 * It is called by computePerplexity()
-	 * 
-	 * @param pi_u
-	 * @param theta_u
-	 * @param phi
-	 * @param rho
-	 * @param eta
-	 * @param phiStopword
-	 * @param tweet
-	 * @return
-	 */
-	public double likelihoodPerTweet(double[][] phi, double[] theta,
-			ArrayList<Integer> tweet) {
-		double likelihood = 1.0;
+        }
 
-		int tweetLength = tweet.size();
-		for (int n = 0; n < tweetLength; n++) {
-			double partn = 0.0;
-			int w = tweet.get(n);
-			for (int k = 0; k < this.topicNumber; k++) {
-				partn += (phi[k][w] * theta[k]);
-			}
-			likelihood *= partn;
-		}
-		return likelihood;
-	}
+        // compute perplexity
+        return Math.exp(-loglikelihood / tokenNum);
+    }
 
-	public void output(TimeWindowListPlus timeWindowList) {
-		// output
-		String interestTopics = PrintUtil.printTopWords(
-				DefaultGlobalValueTweets.topKWordsToShow,
-				timeWindowList.getTweetAlphabet(), this.iCkv, "Interest");
-		for(int k=0;k<this.topicNumber;k++){
-			System.out.println("topic"+k+" "+this.interestTokenPerTopic[k]);
-		}
-		LogUtil.logger().info(interestTopics);
-	}
+    /**
+     * It is called by computePerplexity()
+     * 
+     * @param pi_u
+     * @param theta_u
+     * @param phi
+     * @param rho
+     * @param eta
+     * @param phiStopword
+     * @param tweet
+     * @return
+     */
+    public double likelihoodPerTweet(double[][] phi, double[] theta,
+            ArrayList<Integer> tweet) {
+        double likelihood = 1.0;
 
-	public void output(TimeWindowListPlus timeWindowList, String filename) {
-		MyFile writer = new MyFile(filename, "w");
-		String interestTopics = PrintUtil.printTopWords(
-				DefaultGlobalValueTweets.topKWordsToShow,
-				timeWindowList.getTweetAlphabet(), this.iCkv, "Interest");
-		writer.print(interestTopics);
-		for(int k=0;k<this.topicNumber;k++){
-			System.out.println("topic"+k+" "+this.interestTokenPerTopic[k]);
-		}
-		writer.close();
-	}
+        int tweetLength = tweet.size();
+        for (int n = 0; n < tweetLength; n++) {
+            double partn = 0.0;
+            int w = tweet.get(n);
+            for (int k = 0; k < this.topicNumber; k++) {
+                partn += (phi[k][w] * theta[k]);
+            }
+            likelihood *= partn;
+        }
+        return likelihood;
+    }
 
-	/**
-	 * get alphabet by wiki.topics
-	 * 
-	 * @return
-	 */
-	public static Alphabet buildWikiAlphabet(Alphabet alphabet) {
+    public void output(TimeWindowListPlus timeWindowList) {
+        // output
+        String interestTopics = PrintUtil.printTopWords(
+                DefaultGlobalValueTweets.topKWordsToShow,
+                timeWindowList.getTweetAlphabet(), this.iCkv, "Interest");
+        for(int k=0;k<this.topicNumber;k++){
+            System.out.println("topic"+k+" "+this.interestTokenPerTopic[k]);
+        }
+        LogUtil.logger().info(interestTopics);
+    }
 
-		MyFile reader = new MyFile("wiki.topics", "r");
-		String line = reader.readln();
-		int lineNum = 1;
+    public void output(TimeWindowListPlus timeWindowList, String filename) {
+        MyFile writer = new MyFile(filename, "w");
+        String interestTopics = PrintUtil.printTopWords(
+                DefaultGlobalValueTweets.topKWordsToShow,
+                timeWindowList.getTweetAlphabet(), this.iCkv, "Interest");
+        writer.print(interestTopics);
+        for(int k=0;k<this.topicNumber;k++){
+            System.out.println("topic"+k+" "+this.interestTokenPerTopic[k]);
+        }
+        writer.close();
+    }
 
-//		int thresholdLineNum = 100000;// There are 100,000 word types in
-										// wiki.topics
+    /**
+     * get alphabet by wiki.topics
+     * 
+     * @return
+     */
+    public static Alphabet buildWikiAlphabet(Alphabet alphabet) {
 
-//		while (line != null && lineNum <= thresholdLineNum) {
-		while (line != null ) {
-			line = line.trim();
-			if (!line.equals("")) {
-				String[] array = line.split("\t");
-				String word = array[1];
-				alphabet.lookupIndex(word);
-			}
-			line = reader.readln();
-			lineNum++;
-		}
+        MyFile reader = new MyFile("wiki.topics", "r");
+        String line = reader.readln();
+        int lineNum = 1;
 
-		return alphabet;
-	}
+        //		int thresholdLineNum = 100000;// There are 100,000 word types in
+        // wiki.topics
 
-	/**
-	 * train the model on training files, output:
-	 * ${portion}-${round}-lda-learned.topics
-	 */
-	public static void trainOnTweets(float wikiWeight, String fLearnedTopics) {
-		PreprocessorPlus pre = new PreprocessorPlus();
-		TimeWindowListPlus trainingData = pre.getTimeWindowList(
-				DefaultGlobalValueTweets.timeWindowFolder,
-				DefaultGlobalValueTweets.trainingFiles);
+        //		while (line != null && lineNum <= thresholdLineNum) {
+        while (line != null ) {
+            line = line.trim();
+            if (!line.equals("")) {
+                String[] array = line.split("\t");
+                String word = array[1];
+                alphabet.lookupIndex(word);
+            }
+            line = reader.readln();
+            lineNum++;
+        }
 
-		LDAWithPrior unInitedUserEventLDA = new LDAWithPrior();
-		unInitedUserEventLDA.init(trainingData,
-				DefaultGlobalValueTweets.topicNum);
-		LogUtil.logger().error(unInitedUserEventLDA.traceICkv());
+        return alphabet;
+    }
 
-		LDAWithPrior userEventLDA = unInitedUserEventLDA.initByWikipedia(
-				unInitedUserEventLDA, trainingData, wikiWeight);
+    /**
+     * train the model on training files, output:
+     * ${portion}-${round}-lda-learned.topics
+     */
+    public static void trainOnTweets(float wikiWeight, String fLearnedTopics) {
+        PreprocessorPlus pre = new PreprocessorPlus();
+        TimeWindowListPlus trainingData = pre.getTimeWindowList(
+                DefaultGlobalValueTweets.timeWindowFolder,
+                DefaultGlobalValueTweets.trainingFiles);
 
-		LogUtil.logger().error(userEventLDA.traceICkv());
+        LDAWithPrior unInitedUserEventLDA = new LDAWithPrior();
+        unInitedUserEventLDA.init(trainingData,
+                DefaultGlobalValueTweets.topicNum);
+        LogUtil.logger().error(unInitedUserEventLDA.traceICkv());
 
-		long start = System.currentTimeMillis();
-		for (int i = 0; i < DefaultGlobalValueTweets.trainIterationNum; i++) {
-			// userEventLDA.checkIfValid();
-			// userEventLDA.output(trainingData);
-			userEventLDA.gibbsSweepII(trainingData);
+        LDAWithPrior userEventLDA = unInitedUserEventLDA.initByWikipedia(
+                unInitedUserEventLDA, trainingData, wikiWeight);
 
-			double perplexity = userEventLDA.computePerplexity(trainingData);
-			LogUtil.logger()
-					.info("after " + i + " round training, perplexity ="
-							+ perplexity);
-		}
+        LogUtil.logger().error(userEventLDA.traceICkv());
 
-		long end = System.currentTimeMillis();
-		LogUtil.logger().info(
-				"gibbs sampling cost " + (end - start) + " seconds");
-		// serializeModel(userEventLDA, trainingData);
-		userEventLDA.output(trainingData, fLearnedTopics);
-	}
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < DefaultGlobalValueTweets.trainIterationNum; i++) {
+            // userEventLDA.checkIfValid();
+            // userEventLDA.output(trainingData);
+            userEventLDA.gibbsSweepII(trainingData);
+            if(i>=20 && i%8==0){
+                userEventLDA.updateHyperParameterStat(trainingData);
+                userEventLDA.alphaSum=Dirichlet.learnParameters(userEventLDA.alpha, 
+                        userEventLDA.topicDocCounts, userEventLDA.docLengthCounts);
+                LogUtil.logger().info("alpha="+Arrays.toString(userEventLDA.alpha));
+                userEventLDA.updateAlpha();
+            }
 
-	public static void serializeModel(LDAWithPrior userEventLDA,
-			TimeWindowListPlus trainingData) {
-		// output the trained model
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(
-					new FileOutputStream("ietm2.model"));
-			oos.writeObject(userEventLDA);
-			oos.close();
-			LogUtil.logger().info("serialization model done!");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(
-					new FileOutputStream("trainedData.alphabet"));
-			oos.writeObject(trainingData);
-			oos.close();
-			LogUtil.logger()
-					.info("serialization trained data's alphebet done!");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            double perplexity = userEventLDA.computePerplexity(trainingData);
+            LogUtil.logger()
+                .info("after " + i + " round training, perplexity ="
+                        + perplexity);
+        }
 
-	/**
-	 * test the model on testing files
-	 */
-	public static void testOnTweets() {
-		PreprocessorPlus pre = new PreprocessorPlus();
-		// read in the model
-		LDAWithPrior trainedIETM4 = null;
-		try {
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
-					"ietm2.model"));
-			trainedIETM4 = (LDAWithPrior) in.readObject();
-			// do something here
-			in.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		// online learning
-		TimeWindowListPlus lastProcessedData = null;
-		try {
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
-					"trainedData.alphabet"));
-			lastProcessedData = (TimeWindowListPlus) in.readObject();
-			// do something here
-			in.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		for (int f = 0; f < DefaultGlobalValueTweets.testFiles.length; f++) {
-			String file = DefaultGlobalValueTweets.testFiles[f];
-			long start = System.currentTimeMillis();
-			LogUtil.logger().info(
-					"online learning for file " + file + " start at "
-							+ System.currentTimeMillis());
-			TimeWindowListPlus testData = pre.getTimeWindowList(
-					DefaultGlobalValueTweets.timeWindowFolder, file,
-					lastProcessedData.getTagAlphabet(),
-					lastProcessedData.getTweetAlphabet(),
-					lastProcessedData.getUserAlphabet());
-			LogUtil.logger()
-					.info("loading online file costs "
-							+ (System.currentTimeMillis() - start) + " seconds");
-			// OnlineTimeUserTagLDAIV onlineIV = new OnlineTimeUserTagLDAIV(iv,
-			// testData, allUsers);
-			LDAWithPrior onlineIETM = new LDAWithPrior(trainedIETM4, testData);
-			// onlineIETM.init(testData);
-			for (int i = 0; i < DefaultGlobalValueTweets.testInterationNum; i++) {
-				// sample for user tweets
-				onlineIETM.gibbsSweepII(testData);
+        long end = System.currentTimeMillis();
+        LogUtil.logger().info(
+                "gibbs sampling cost " + (end - start) + " seconds");
+        // serializeModel(userEventLDA, trainingData);
+        userEventLDA.output(trainingData, fLearnedTopics);
+    }
 
-				double memoryUsed = MemoryTest.getUsedMemory();
-				LogUtil.logger().info(
-						"f=" + file + " costs " + memoryUsed + "KB memory");
-				// String windowName = file;
-				onlineIETM.output(testData);
-			}
+    public static void serializeModel(LDAWithPrior userEventLDA,
+            TimeWindowListPlus trainingData) {
+        // output the trained model
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    new FileOutputStream("ietm2.model"));
+            oos.writeObject(userEventLDA);
+            oos.close();
+            LogUtil.logger().info("serialization model done!");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    new FileOutputStream("trainedData.alphabet"));
+            oos.writeObject(trainingData);
+            oos.close();
+            LogUtil.logger()
+                .info("serialization trained data's alphebet done!");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-			onlineIETM.output(testData);
-			double perplexity = onlineIETM.computePerplexity(testData);
-			long end = System.currentTimeMillis();
-			LogUtil.logger().info(
-					"f=" + file + "[testing] gibbs sampling cost "
-							+ (end - start) + " seconds");
-			LogUtil.logger().info("perplexity =" + perplexity);
+    /**
+     * test the model on testing files
+     */
+    public static void testOnTweets() {
+        PreprocessorPlus pre = new PreprocessorPlus();
+        // read in the model
+        LDAWithPrior trainedIETM4 = null;
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+                        "ietm2.model"));
+            trainedIETM4 = (LDAWithPrior) in.readObject();
+            // do something here
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        // online learning
+        TimeWindowListPlus lastProcessedData = null;
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+                        "trainedData.alphabet"));
+            lastProcessedData = (TimeWindowListPlus) in.readObject();
+            // do something here
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        for (int f = 0; f < DefaultGlobalValueTweets.testFiles.length; f++) {
+            String file = DefaultGlobalValueTweets.testFiles[f];
+            long start = System.currentTimeMillis();
+            LogUtil.logger().info(
+                    "online learning for file " + file + " start at "
+                    + System.currentTimeMillis());
+            TimeWindowListPlus testData = pre.getTimeWindowList(
+                    DefaultGlobalValueTweets.timeWindowFolder, file,
+                    lastProcessedData.getTagAlphabet(),
+                    lastProcessedData.getTweetAlphabet(),
+                    lastProcessedData.getUserAlphabet());
+            LogUtil.logger()
+                .info("loading online file costs "
+                        + (System.currentTimeMillis() - start) + " seconds");
+            // OnlineTimeUserTagLDAIV onlineIV = new OnlineTimeUserTagLDAIV(iv,
+            // testData, allUsers);
+            LDAWithPrior onlineIETM = new LDAWithPrior(trainedIETM4, testData);
+            // onlineIETM.init(testData);
+            for (int i = 0; i < DefaultGlobalValueTweets.testInterationNum; i++) {
+                // sample for user tweets
+                onlineIETM.gibbsSweepII(testData);
 
-			// finally, update the lastProcessedData
-			lastProcessedData = testData;
-			trainedIETM4 = onlineIETM;
-		}
-		serializeModel(trainedIETM4, lastProcessedData);
-	}
+                double memoryUsed = MemoryTest.getUsedMemory();
+                LogUtil.logger().info(
+                        "f=" + file + " costs " + memoryUsed + "KB memory");
+                // String windowName = file;
+                onlineIETM.output(testData);
+            }
 
-	public static void main(String[] args) {
-		// args = new String[] { "-test" };
-		if (args.length < 3) {
-			System.out
-					.println("usage: [-test] [-train] [-trainAndTest] wikiWeight fLearnedTopics");
-			return;
-		}
-		float wikiWeight = Float.parseFloat(args[1]);
-		String fLearnedTopics = args[2];
+            onlineIETM.output(testData);
+            double perplexity = onlineIETM.computePerplexity(testData);
+            long end = System.currentTimeMillis();
+            LogUtil.logger().info(
+                    "f=" + file + "[testing] gibbs sampling cost "
+                    + (end - start) + " seconds");
+            LogUtil.logger().info("perplexity =" + perplexity);
 
-		if (args[0].equals("-test")) {
-			testOnTweets();
-		} else if (args[0].equals("-train")) {
-			trainOnTweets(wikiWeight, fLearnedTopics);
-		} else if (args[0].equals("-trainAndTest")) {
-			trainOnTweets(wikiWeight, fLearnedTopics);
-			testOnTweets();
-		} else {
-			System.out.println("usage: [-test] [-train] [-trainAndTest]");
-		}
-	}
+            // finally, update the lastProcessedData
+            lastProcessedData = testData;
+            trainedIETM4 = onlineIETM;
+        }
+        serializeModel(trainedIETM4, lastProcessedData);
+    }
+
+    public static void main(String[] args) {
+        // args = new String[] { "-test" };
+        if (args.length < 3) {
+            System.out
+                .println("usage: [-test] [-train] [-trainAndTest] wikiWeight fLearnedTopics");
+            return;
+        }
+        float wikiWeight = Float.parseFloat(args[1]);
+        String fLearnedTopics = args[2];
+
+        if (args[0].equals("-test")) {
+            testOnTweets();
+        } else if (args[0].equals("-train")) {
+            trainOnTweets(wikiWeight, fLearnedTopics);
+        } else if (args[0].equals("-trainAndTest")) {
+            trainOnTweets(wikiWeight, fLearnedTopics);
+            testOnTweets();
+        } else {
+            System.out.println("usage: [-test] [-train] [-trainAndTest]");
+        }
+    }
 }
