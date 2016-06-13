@@ -400,11 +400,16 @@ public class LDAWithPrior implements Serializable {
         }
     }
 
-    public String traceICkv() {
+    public String traceICkv(TimeWindowListPlus timeWindowList) {
         int topic = 0;
         StringBuffer sb = new StringBuffer();
-        for (int v = 0; v < 80; v++) {
+        for (int v = 0; v < 200; v++) {
             sb.append(this.iCkv[topic][v]).append(" ");
+        }
+        for (int v=0;v<200;v++) {
+            if(this.iCkv[topic][v]>0){
+               sb.append(timeWindowList.tweetAlphabet.lookupObject(v)).append(" ");
+            }
         }
         return sb.toString().trim();
     }
@@ -570,7 +575,7 @@ public class LDAWithPrior implements Serializable {
                 }// end of sampling tweet's topic
             }// end of sampling user u's information
         }// end of sampling time window t's information
-        LogUtil.logger().error(traceICkv());
+        LogUtil.logger().error(traceICkv(timeWindowList));
     }
 
     /**
@@ -725,7 +730,7 @@ public class LDAWithPrior implements Serializable {
         LDAWithPrior unInitedUserEventLDA = new LDAWithPrior();
         unInitedUserEventLDA.init(trainingData,
                 DefaultGlobalValueTweets.topicNum);
-        LogUtil.logger().error(unInitedUserEventLDA.traceICkv());
+        LogUtil.logger().error(unInitedUserEventLDA.traceICkv(trainingData));
 
         LDAWithPrior userEventLDA = unInitedUserEventLDA.initByWikipedia(
                 unInitedUserEventLDA, trainingData, wikiWeight);
@@ -735,7 +740,7 @@ public class LDAWithPrior implements Serializable {
         userEventLDA.updateWordVecs(isInit,trainingData);
         userEventLDA.randomAssignHiddenTopics(trainingData);
 
-        LogUtil.logger().error(userEventLDA.traceICkv());
+        LogUtil.logger().error(userEventLDA.traceICkv(trainingData));
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < DefaultGlobalValueTweets.trainIterationNum; i++) {
