@@ -40,6 +40,7 @@ public class LDAWithPrior implements Serializable {
 	// dataset related
 	public int tweetVSize = 0;
 	public int topicNumber = 0;
+    public int wikiTopicNumber=0;
 	public int userNumber = 0;
 	public int timeWindowNum = 0;
 
@@ -50,6 +51,8 @@ public class LDAWithPrior implements Serializable {
 
 	// user interest related
 	public int[][] iCkv;// c^{0}_{k,v}
+    //word vector
+    public double[][] wordVecs;
 
 	// additional prior knowledge
 	public double[][] tau;
@@ -142,7 +145,9 @@ public class LDAWithPrior implements Serializable {
 				"Before adding wikipedia's alphabet. size(alphabet)="
 						+ trainingData.tweetAlphabet.size());
 
-		buildWikiAlphabet(trainingData.tweetAlphabet);
+        //the alphabet of background.topics includes the alphabet of wiki.topics
+        String[] extraFilesForTopics=new String[]{"wiki.topics","background.topics"};
+		buildExtraAlphabet(extraFilesForTopics,trainingData.tweetAlphabet);
 
 		LogUtil.logger().info(
 				"After adding wikipedia's alphabet. size(alphabet)="
@@ -178,6 +183,9 @@ public class LDAWithPrior implements Serializable {
 			if (!line.equals("")) {
 				String[] array = line.split("\t");
 				int topicId = Integer.parseInt(array[0].split("topic")[1]);
+                if(topicId+1>this.wikiTopicNumber){
+                    this.wikiTopicNumber=topicId+1;
+                }
 				String word = array[1];
 				float prob = Float.parseFloat(array[2]);
 
@@ -213,11 +221,59 @@ public class LDAWithPrior implements Serializable {
 		return toInitIETM;
 	}
 
-	public void randomAssignHiddenTopics(TimeWindowListPlus timeWindows) {
-		// random assign tag's topic
-		double[] topicWeights = new double[this.topicNumber];
-		Arrays.fill(topicWeights, (double) 1 / (double) this.topicNumber);
 
+	/**
+	 * init toInitIETM by background.topics
+	 * 
+	 * @param toInitIETM
+	 * @param alphabet
+	 */
+	public LDAWithPrior initByWikiBackgroundTopics(LDAWithPrior toInitIETM,TimeWindowListPlus trainingData,float wikiWeight) {
+
+        //update prior knowledge from wiki.topics
+		String filename = "background.topics";
+		MyFile reader = new MyFile(filename, "r");
+		String line = reader.readln();
+		int lineNum = 1;
+
+		while (line != null) {
+			line = line.trim();
+			if (!line.equals("")) {
+				String[] array = line.split("\t");
+				String word = array[0];
+				float prob = Float.parseFloat(array[1]);
+
+				int v = trainingData.tweetAlphabet.lookupIndex(word);
+				float wikiPart = (new Float(prob * wikiWeight));
+				if (wikiPart < 0) {
+					LogUtil.logger().error("NEGATIVE v: " + v + " " + wikiPart);
+				}
+				try {
+		            for (int k = this.wikiTopicNumber; k < toInitIETM.topicNumber; k++) {
+					    toInitIETM.tau[k][v] = toInitIETM.tau[k][v] + wikiPart;// IMPORTANT
+                        toInitIETM.tauK[k]=toInitIETM.tauK[k]+wikiPart;
+		            }
+				} catch (Exception e) {
+					e.printStackTrace();
+					LogUtil.logger().error(line);
+					LogUtil.logger().error("error happened in initByWikiBackgroundTopics on world" + v);
+					LogUtil.logger().error("trainingData.tweetAlphabet.size"+trainingData.tweetAlphabet.size());
+					System.exit(0);
+				}
+			}
+			line = reader.readln();
+			lineNum++;
+			if (lineNum % 1000000 == 0) {
+				LogUtil.logger().info(
+						"processed " + lineNum + " lines in wiki.topics");
+			}
+		}
+
+		LogUtil.logger().info("finish init by wikipedia background topic");
+		return toInitIETM;
+	}
+
+	public void randomAssignHiddenTopics(TimeWindowListPlus timeWindows) {
 		// random assign tweet's topic
 		for (int t = 0; t < timeWindows.timeWindowlist.size(); t++) {
 			SimpleUserInstanceListPlus ilist = timeWindows.timeWindowlist
@@ -238,11 +294,12 @@ public class LDAWithPrior implements Serializable {
 					this.ndk[t][u][d] = new Ndk(this.topicNumber);
 
 					for (int n = 0; n < tweetLength; n++) {
-						int k = rs.nextDiscrete(topicWeights);
+						int w = tweet.get(n);
+                        double[] vec=this.wordVecs[w];
+						int k = rs.nextDiscrete(vec);
 						// user interest
 						this.z[t][u][d].val[n] = k;
 						this.ndk[t][u][d].val[k]++;
-						int w = tweet.get(n);
 
 						this.iCkv[k][w]++;
 						this.interestTokenPerTopic[k]++;// iCkv[k]=\sum_{v=1}^{V}iCkv[k][v];
@@ -253,6 +310,44 @@ public class LDAWithPrior implements Serializable {
 		}// end of t (timeWindowList.size())
         
 	}// end of randomAssighHiddenTopics
+
+
+    public void normalizeVec(double[] vec){
+        double sum=0;
+        for(int i=0;i<vec.length;i++){
+            sum=sum+vec[i];
+        }
+        if(sum!=0){
+            for(int i=0;i<vec.length;i++){
+                vec[i]=vec[i]/sum;
+            }
+        }else{
+            for(int k=this.wikiTopicNumber;k<this.topicNumber;k++){
+                vec[k]=1.0/(this.topicNumber-this.wikiTopicNumber);
+            }
+        }
+    }
+
+    public void updateWordVecs(boolean isInit,TimeWindowListPlus trainingData){
+       if(isInit==true){
+           int alphabetSize=trainingData.tweetAlphabet.size();
+           this.wordVecs=new double[alphabetSize][];
+           for(int v=0;v<alphabetSize;v++){
+               this.wordVecs[v]=new double[this.topicNumber];
+               Arrays.fill(this.wordVecs[v],0);
+           }
+           for(int k=0;k<this.topicNumber;k++){
+               for(int v=0;v<alphabetSize;v++){
+                   this.wordVecs[v][k]=this.tau[k][v];
+               }
+           }
+           for(int v=0;v<alphabetSize;v++){
+               normalizeVec(this.wordVecs[v]);
+           }
+       } else{
+
+       }
+    }
 
     /**
      * update hyper parameters' related statistics
@@ -375,7 +470,6 @@ public class LDAWithPrior implements Serializable {
         double[] topicWeights = new double[this.topicNumber];
         Arrays.fill(topicWeights, (double) 1 / (double) this.topicNumber);
 
-        randomAssignHiddenTopics(timeWindowList);
     }
 
     /**
@@ -417,8 +511,6 @@ public class LDAWithPrior implements Serializable {
         // init zu
         this.z = new Zu[this.timeWindowNum][this.userNumber][];
         this.ndk = new Ndk[this.timeWindowNum][this.userNumber][];
-
-        randomAssignHiddenTopics(timeWindows);
     }
 
     /**
@@ -590,25 +682,31 @@ public class LDAWithPrior implements Serializable {
      * 
      * @return
      */
-    public static Alphabet buildWikiAlphabet(Alphabet alphabet) {
+    public static Alphabet buildExtraAlphabet(String[] filenames, Alphabet alphabet) {
+        for(int i=0;i<filenames.length;i++){
+            String filename=filenames[i];
+            MyFile reader = new MyFile(filename, "r");
+            String line = reader.readln();
+            int lineNum = 1;
 
-        MyFile reader = new MyFile("wiki.topics", "r");
-        String line = reader.readln();
-        int lineNum = 1;
-
-        //		int thresholdLineNum = 100000;// There are 100,000 word types in
-        // wiki.topics
-
-        //		while (line != null && lineNum <= thresholdLineNum) {
-        while (line != null ) {
-            line = line.trim();
-            if (!line.equals("")) {
-                String[] array = line.split("\t");
-                String word = array[1];
-                alphabet.lookupIndex(word);
+        
+            while (line != null ) {
+                line = line.trim();
+                if (!line.equals("")) {
+                    String[] array = line.split("\t");
+                    if(filename=="wiki.topics"){
+                        String word = array[1];
+                        alphabet.lookupIndex(word);
+                    }
+                    if(filename=="background.topics"){
+                        String word = array[0];
+                        alphabet.lookupIndex(word);
+                    }
+                    line = reader.readln();
+                    lineNum++;
+                }
             }
-            line = reader.readln();
-            lineNum++;
+            reader.close();
         }
 
         return alphabet;
@@ -631,6 +729,11 @@ public class LDAWithPrior implements Serializable {
 
         LDAWithPrior userEventLDA = unInitedUserEventLDA.initByWikipedia(
                 unInitedUserEventLDA, trainingData, wikiWeight);
+        //userEventLDA = unInitedUserEventLDA.initByWikiBackgroundTopics(
+        //        userEventLDA, trainingData, wikiWeight);
+        boolean isInit=true;
+        userEventLDA.updateWordVecs(isInit,trainingData);
+        userEventLDA.randomAssignHiddenTopics(trainingData);
 
         LogUtil.logger().error(userEventLDA.traceICkv());
 
