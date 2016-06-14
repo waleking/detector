@@ -409,7 +409,8 @@ We use PageRank-HITS\cite{Yan:2015wq} algorithm to update score of categories in
 
 
 
-\section{Method}
+\section{Proposed Method}
+\subsection{Initialization of Normal States}
 \textbf{User profile.} User usually describes herself or himself by a piece of short text on microblog platform.
 This short text can be a continuous string or an array of hash tags, e.g., "\textit{Co-founder of Twitter, Medium, and now Co-founder and CEO of Askjelly.com}" of Biz Stone or "\textit{\#Cloud}, \textit{\#YARN}" of @hadoopchina.
 Though it's easy to estimate Biz Stone's interests by his self-description text, it's not always capable of doing so because some users' are very short.
@@ -511,7 +512,7 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 \begin{aligned}
 \tau_{kv}=
 \left\{ \begin{aligned}
-W \frac{n_{kv}}{\sum_{v\in S_{kv}}n_{kv}} &,v\in S_{k} \\
+W \frac{f_{kv}}{\sum_{v\in S_{kv}}f_{kv}} &,v\in S_{k} \\
 0&,v \notin S_{k}\\
 \end{aligned}\right.
 \end{aligned}
@@ -600,7 +601,7 @@ In this paper, the phrase indicates that the event is due to the fact that: the 
 In fact, the state of emergency three words is to publish a new system "mac os lion" event caused by Apple, in order to find the association between words and events, we use spectral clustering based search methods.
 
 As shown in Figure \ref{fig: windowsBurstyWordGraph} below, we will one area, a hot word of the time window and hot words between to diagram.
-Hot words set \(\ mathcal {B}_{k, t} \) formed in FIG using \textbf{hot word graph} \(\mathcal {G}_{k, t} = (\mathcal{B}_{k, t}, \mathcal{E}_{k, t}) \) indicates,
+Hot words set \(\ mathcal{B}_{k, t} \) formed in FIG using \textbf{hot word graph} \(\mathcal {G}_{k, t} = (\mathcal{B}_{k, t}, \mathcal{E}_{k, t}) \) indicates,
 \(\mathcal{E}_{k, t} = \{(a, b) | a \in \mathcal{B}_{k, t}, b \in \mathcal {B} _ {k, t }, PMI (\mathcal{D}_{k, t}, a, b)> 0 \} \), where \(PMI (\mathcal{D}_{k, t}, a, b) \) the field \(k \) time window \(t \) related microblog \(\ mathcal {D} _ {k, t} \) on the word \(a \) and the word \(b \) point metric information between each other.
 % Refer to bursty.py getSimGraph () function
 
