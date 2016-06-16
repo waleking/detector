@@ -49,8 +49,7 @@
 \usepackage{subfigure}
 \usepackage{enumitem}
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\usepackage{algorithm}
-\usepackage{algorithmic}
+%\usepackage{algorithm}
 \usepackage{bm}
 
 \usepackage{array}
@@ -196,11 +195,12 @@ email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
 \maketitle
 \begin{abstract}
 In the news value theory, the \textit{news unexpectedness} expects the journalists to report the events that are different from the routine things, a.k.a., the normal states. 
-For humanbeing, normal states are knowledge learned from news streams and the external environment, and can describe what happened and help to identify what is happening.
-In this paper, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumalation of happened things. 
-In \textsc{NSDetector}, 1) balanced for effectiveness and efficiency, normal states are trained as topical words and their frequencies; 2) historical topical word frequencies are initialized from knowledge base with chi-squared test; 3) topical word frequencies on targeted corpus are maintened by KB-Prior-LDA, using the normal states in knowledge base as prior; 4) events are detected by monitoring the change of topical word frequencies. 
+For human being, normal states are knowledge learned from news streams and the external environment, and can describe what happened and help to identify what is happening.
+In this paper, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
+%TODO
+In \textsc{NSDetector}, 1) balanced for effectiveness and efficiency, normal states are trained as topical words and their chi-squared scores, and initialized by knowledge base; 2) topical word frequencies on targeted corpus within the time window are learned by NS-Prior-LDA, using the normal states as prior; 3) events are detected by monitoring the change of topical word frequencies; 4) normal states are further maintained by detected events incrementally.
 Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{NSDetector}.
-And further experiments on \textit{reddit} and \textit{arXiv} also demonstrate that \textsc{NSDetector} can be easily adapted on other cyberspace datasets.
+And further experiments on \textit{reddit} also demonstrate that \textsc{NSDetector} can be easily adapted on other cyberspace datasets.
 %\textsc{NSDetector} imitates this process automatically in the event detection task, and further verify that the key to improve the accuracy of event detection lies in training the normal states well. 
 \end{abstract}
 
@@ -298,7 +298,7 @@ In this paper, we demonstrate that the better normal states  are learned, the be
 
 \begin{figure}
     \label{fig:modelDesc}
-    \includegraphics[height=7.0cm]{img/systemExample.pdf}
+    \includegraphics[width=1.0\columnwidth]{img/NSDetectorExample.pdf}
     \caption{\textsc{NSDetector}'s process flow, taking \textbf{military} related events in cyberspace as an example. \textsc{FullReader} initializes the normal states as topical word frequencies from full history information about military, updates them further at the specific corpus day by day, and detects events finally.}
 \end{figure}
 
@@ -410,6 +410,21 @@ We use PageRank-HITS\cite{Yan:2015wq} algorithm to update score of categories in
 
 
 \section{Proposed Method}
+\begin{algorithm}
+\caption{Overview of \textsc{NSDetector}}
+\label{alg:overviewNSDetector}
+\KwIn{Knowledge Base's structure \(G^{(0)}\), \(G^{(1)}\), and content \(G^{(2)}\), }
+\KwOut{Events}
+\(n_{k,t}\)=number of connected component in \(\mathcal{G}_{k,t}\)\\
+\For{\(n \in \{ n_{k,t}, \cdots, |\mathcal{G}_{k,t}|\}\) }{
+    \(\mathcal{C}_{k,t}=SpectralClustering(\mathcal{G}_{k,t},n)\)\\
+    \If{\(min_{i\in \{1,\cdots,n\}} Density(\mathcal{C}_{k,t,i},\mathcal{G}_{k,t})>\tau\)}{
+        return \(\mathcal{C}_{k,t}\)
+    }
+}
+\end{algorithm}
+
+
 \subsection{Initialization of Normal States}
 \textbf{User profile.} User usually describes herself or himself by a piece of short text on microblog platform.
 This short text can be a continuous string or an array of hash tags, e.g., "\textit{Co-founder of Twitter, Medium, and now Co-founder and CEO of Askjelly.com}" of Biz Stone or "\textit{\#Cloud}, \textit{\#YARN}" of @hadoopchina.
@@ -435,10 +450,30 @@ The task of event detection is to find out all the events in corpus.
 Different methods treat the above properties in different ways: LSH based methods\cite{petrovic2010streaming} treat the difference and simliarity in word vector space; while the topic model based methods\cite{timeUserLDA2012finding} take the semantic meaning into consideration.
 Under the framework of topic model, we divide the topics into user interest related topics and bursty event related topics, and further promote an online learning model UMIETM.
 \subsection{Normal States' Initialization}
+\begin{algorithm}
+\caption{Normal States' Initialization from Knowledge Base}
+\label{alg:normalStatesInit}
+\KwIn{Taxonomy's Directed Acyclic Graph \(G^{(0)}\), Category-Page Bipartite Graph \(G^{(1)}\), Page-Content Bipartite Graph \(G^{(2)}\), topic related category node \(c\)}
+\KwOut{Normal states \(\bm{f}_c\) on topic \(c\)}
+\(Pages(c)\leftarrow \varnothing\)\\
+\(SuccessorNodes(c) \leftarrow \) Breadth-first-search(\(G^{(0)},c\))\\
+\For{\(node \in SuccessorNodes(c)\)}{
+    \(Pages(c) \leftarrow Pages(c) \cup G^{(1)}.neighbours(node)\)\\
+}
+\(WordFrequencyTable(c) \leftarrow \) do word count on the text contents of \(Pages(c)\) \\
+\(WordFrequencyTable(All) \leftarrow \) do word count on the text contents of all pages in \(G^{(2)}\).\\
+\For{word \(w\) in WordFrequencyTable(All).keys()}{
+    \(\tau_{c,w} \leftarrow \) \(w\)'s chi-square score on \(WordFrequencyTable(c)\) and \(WordFrequencyTable(All)\).
+}
+\Return{\(\bm{f}_c\)}
+\end{algorithm}
+
+\cite{faralli2015large} propose the Twixonomy Graph. 
+
 %TODO
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\columnwidth]{img/normalStatesFromHistoryInfo.pdf}  
+    \includegraphics[width=1.0\columnwidth]{img/initializationExample.pdf}  
     \caption{Illustration on how to train normal states from wikipedia,( an approximation to the full history information).}
     \label{fig:modelDesc}
 \end{figure}
@@ -489,81 +524,87 @@ Where \(S_k \) as a set of candidate words: high-quality information to use Wiki
 We can control set \(S_k \) in size, the size of the control is usually set for 1000.
 The number of frequency \(n_{kv} \) for the word \(v \) (\ k) appears in the Wikipedia article themes of: (\ref{wikiPrior eq}).
 If the word \(v \) does not appear in the candidate set \(S_k \), and then set a priori knowledge \(\tau_{kv} = 0 \), otherwise, the word frequency is proportional to \(n_{kv} \) with the prior knowledge of weight \(W\).
-In the latter experiment, we will be on a priori knowledge of weights \(W \) will be discussed.
+In the latter experiment, we will be on a priori knowledge of weights \(W \) will be discussed. 
 
-\begin{enumerate}[noitemsep]
-    \item for each topic \(k \in \{1,\cdots,K\}\)，
-    \begin{enumerate}
-        \item word distribution on the topic \(\phi_k \sim Dirichlet(\beta+\tau_k)\).
-    \end{enumerate}
-    \item for each document \(d \in D\)，
-    \begin{enumerate}
-        \item topic distribution on the document \(\theta_d \sim Dir(\alpha)\)
-        \item for each word index \(n \in \{1,\cdots,N_d\}\)，
-        \begin{enumerate}
-            \item word's topic assignment \(z_{dn} \sim Multinomial(\theta_d)\)，
-            \item word \(w_{dn} \sim Multinomial(\phi_{z_{dn}})\)
-        \end{enumerate}
-    \end{enumerate}
-\end{enumerate}
+\begin{table}[!htbp]
+\begin{tabular}{l}
+1. Draw corpus prior distribution \(\bm{m} \sim Dir(\alpha \bm{u})\), where \(\bm{u}\)\\
+ \ \ \ \ is the uniform distribution. \\
+2. For each topic \(k \in \{1,\cdots,K\}\),\\
+\ \ \ \ (a) word distribution on the topic \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\). \\
+    
+3. For each document index \(d \in \{1,...,D\}\), \\
+\ \ \ \ (a) topic distribution on the document \(\theta_d \sim Dir(\bm{m})\), \\
+\ \ \ \ (b) for each word index \(n \in \{1,\cdots,N_d\}\),\\
+\ \ \ \ \ \ \ \ i. word's topic assignment \(z_{dn} \sim Multinomial(\theta_d)\), \\
+\ \ \ \ \ \ \ \ ii. word \(w_{dn} \sim Multinomial(\phi_{z_{dn}})\). \\
+\end{tabular}
+\end{table}
 
 \begin{equation}
 \label{eq:wikiPrior}
 \begin{aligned}
 \tau_{kv}=
 \left\{ \begin{aligned}
-W \frac{f_{kv}}{\sum_{v\in S_{kv}}f_{kv}} &,v\in S_{k} \\
-0&,v \notin S_{k}\\
+\lambda \frac{f_{kv}}{\sum_{v\in S_{kv}}f_{kv}} &,v\in S_{k}\ and  \ k \leq K_{\bm{KB}} \\
+0&,v \notin S_{k} \ or \ k > K_{\bm{KB}} \\
 \end{aligned}\right.
 \end{aligned}
 \end{equation}
 
 \begin{equation}
-\label{eq:LDAgibbs}
+\label{eq:initProbability}
 \begin{aligned}
-&p(z_{dn}=k|w_{dn}=v,z_{\neg{dn}},w_{\neg{dn}},\alpha,\beta,\tau)\\
-&\ \ \propto (n_{dk}+\alpha)\frac{n_{kv}+\tau_{kv}+\beta}{n_{k,.}+\tau_{k,.}+V\beta}
+\hat{q}_{k|v}=
+\left\{ \begin{aligned}
+\frac{\tau_{kv}}{\sum_{k=1}^{K}\tau_{kv}} &,\sum_{k}\tau_{kv}>0 \\
+0&, \sum_{k}\tau_{kv}=0 \ and \ k \leq K_{\bm{KB}} \\
+1/(K-K_{\bm{KB}})&,\sum_{k}\tau_{kv}=0 \ and \ k > K_{\bm{KB}}
+\end{aligned}\right.
 \end{aligned}
 \end{equation}
-\begin{comment}
-\begin{algorithm}[H]
-    \caption{UPIETM batch learning algorithm} %title
-    \label{alg:UPIETMbatch} %label
-    \begin{algorithmic}[1] %this 1 means the showing of line number in algorithm
-    \STATE initiate the topic label and the statistics
-    \FOR {\(i=1:I_1\)}
-        \FOR{\(u\) in  user set U}
-            \FOR{\(n\) = \(1:P_u\)}
-                \STATE sample profile's hidden topic \(s_{un}\) by (\ref{timeUserTagLDAIVsamplingForS})
-                \STATE update \(s_{un}\), \(c^{(p)}_{u,k}\) and \(c^{(p)}_{k,v}\)
-            \ENDFOR%end of n
-        \ENDFOR%end of u
-    \ENDFOR%end of i
-    \FOR{iteration \(i=1:I_2\)}
-        \FOR{\(t=1:T\)}
-            \FOR{\(u\) in  user set \(U_t\)}
-                \FOR{\(d\) = \(1: D_u\) }
-                    \STATE{sample \(y_{ud}\) and \(z_{ud}\) by (\ref{timeUserTagLDAIVJointSamplingForY0Z}), (\ref{timeUserTagLDAIVJointSamplingForY1Z}) }
-                    \IF{\(y_{ud}=0\)}
-                        \STATE{update \(z_{ud}\), \(y_{ud}\), \(c^{(0)}_u\), \(c^{(0)}_{u,k}\), \(c^{(0)}_{k,v}\)}
-                    \ELSE
-                        \STATE{update \(z_{ud}\), \(y_{ud}\), \(c^{(1)}_u\), \(c^{(1)}_{t,k}\), \(c^{(1)}_{t,k,v}\)}
-                    \ENDIF
-                    \FOR{\(n\) in \(1,\cdots,N_{ud}\)}
-                        \STATE{sample \(x_{udn}\) by (\ref{timeUserTagLDAIVsamplingX0}), (\ref{timeUserTagLDAIVsamplingX1}})
-                        \IF{\(x_{udn}=0\)}
-                            \STATE{update \(x_{udn}\), \(M^{\rho}_0\), \(c^{(B)}_v\)}
-                        \ELSE
-                            \STATE{update \(x_{udn}\), \(M^{\rho}_1\), \(c^{(0)}_{k,v}\), \(c^{(1)}_{t,k,v}\) }
-                        \ENDIF
-                    \ENDFOR%end of n
-                \ENDFOR%end of d
-            \ENDFOR%end of u
-        \ENDFOR%end of t
-    \ENDFOR%end of i
-    \end{algorithmic}
+
+\begin{equation}
+\label{eq:KBPriorLDAgibbs}
+\begin{aligned}
+&p(z_{dn}=k|w_{dn}=v,z_{\neg{dn}},w_{\neg{dn}},\alpha,\beta,\tau)\\
+&\ \ \propto (n^{(d)}_{dk}+\alpha m_k)\frac{n^{(w)}_{kv}+\tau_{kv}+\beta}{n^{(w)}_{k,.}+\tau_{k,.}+V\beta}
+\end{aligned}
+\end{equation}
+
+\begin{algorithm}
+\caption{NS-Prior-LDA Learning Algorithm}
+\label{alg:gibbsSamplingKBPriorLDA}
+\KwIn{Document sequences \(\bm{w_{1:D}}\), and normal states \(\bm{f}_{1:K_{\bm{KB}}}\)}
+\KwOut{The sufficient statistics \(\bm{n^{(d)}}\), \(\bm{n^{(w)}}\)}
+\medskip
+\tcc{Initialization of NS-Prior-LDA Learning}
+\For{\(d=1:D\)}{
+    \For{\(n=1:N_d\)}{
+        \(v=w_{dn}\), sample \(z_{dn}=k\) accroding to Eq(\ref{eq:wikiPrior})(\ref{eq:initProbability}).\\
+        Update the sufficient statistics \(n^{(d)}_{d,k}\), \(n^{(w)}_{k,v}\).\\
+            }
+        }
+\medskip
+\For{\(i= 1:I\)}{
+    \tcc{E-Step of NS-Prior-LDA Learning}
+    \For{\(i=1:I_E\)}{
+        \For{\(d=1:D\)}{
+            \For{\(n=1:N_d\)}{
+                Set \(v=w_{dn}\), and reset the sufficient statistics \(n^{(d)}_{d,z_{dn}}\), \(n^{(w)}_{z_{dn},v}\).\\
+                Resample \(z_{dn}=k\) accroding to Eq(\ref{eq:wikiPrior})(\ref{eq:KBPriorLDAgibbs}).\\
+                Update the sufficient statistics \(n^{(d)}_{d,k}\), \(n^{(w)}_{k,v}\).\\
+            }
+        }
+    }
+    \medskip
+    \tcc{M-Step of NS-Prior-LDA Learning}
+    Optimize \(\alpha \bm{m}\) by the fixed-point iteration\cite{wallach2008structured}. 
+}
+\Return{\(\bm{n^{(d)}}\), \(\bm{n^{(w)}}\)}
 \end{algorithm}
-\end{comment}
+
+\cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}
 
 \subsection{Detecting Events from Normal States}
 The state of attention of social issue k at time t in cyberspace is binary, namely at the peak or not at the peak. We denote it by hidden binary variable sk,t, which is 1 or 0. We do the inference for the hidden variable sk,t according to Poisson distribution according to Reference10,11. If the state of attention of social issue k at time t is "not at peak", then the probability density function is 
