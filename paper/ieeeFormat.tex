@@ -1,63 +1,19 @@
-% This is "sig-alternate.tex" V2.1 April 2013
-% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
-%
-% This example file demonstrates the use of the 'sig-alternate.cls'
-% V2.5 LaTeX2e document class file. It is for those submitting
-% articles to ACM Conference Proceedings WHO DO NOT WISH TO
-% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
-% The 'sig-alternate.cls' file will produce a similar-looking,
-% albeit, 'tighter' paper resulting in, invariably, fewer pages.
-%
-% ----------------------------------------------------------------------------------------------------------------
-% This .tex file (and associated .cls V2.5) produces:
-%       1) The Permission Statement
-%       2) The Conference (location) Info information
-%       3) The Copyright Line with ACM data
-%       4) NO page numbers
-%
-% as against the acm_proc_article-sp.cls file which
-% DOES NOT produce 1) thru' 3) above.
-%
-% Using 'sig-alternate.cls' you have control, however, from within
-% the source .tex file, over both the CopyrightYear
-% (defaulted to 200X) and the ACM Copyright Data
-% (defaulted to X-XXXXX-XX-X/XX/XX).
-% e.g.
-% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
-% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
-%
-% ---------------------------------------------------------------------------------------------------------------
-% This .tex source is an example which *does* use
-% the .bib file (from which the .bbl file % is produced).
-% REMEMBER HOWEVER: After having produced the .bbl file,
-% and prior to final submission, you *NEED* to 'insert'
-% your .bbl file into your source .tex file so as to provide
-% ONE 'self-contained' source file.
-%
-% ================= IF YOU HAVE QUESTIONS =======================
-% Questions regarding the SIGS styles, SIGS policies and
-% procedures, Conferences etc. should be sent to
-% Adrienne Griscti (griscti@acm.org)
-%
-% Technical questions _only_ to
-% Gerald Murray (murray@hq.acm.org)
-% ===============================================================
-%
-% For tracking purposes - this is V2.0 - May 2012
-
-%\documentclass{sig-alternate-05-2015}
 \documentclass[conference,compsoc]{IEEEtran}
 \usepackage{comment}
 \usepackage{subfigure}
 \usepackage{enumitem}
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 %\usepackage{algorithm}
-\usepackage{bm}
+\usepackage{bm}%used for bm
 \usepackage{graphics}
 \usepackage{graphicx}
-\usepackage{amsmath} 
-\usepackage{amssymb}
+\usepackage{amsmath} %used for maths symbols
+\usepackage{amssymb}%used for empty set symbol
 
+%used for quotes
+\usepackage{epigraph}
+\setlength\epigraphwidth{\columnwidth}
+\setlength\epigraphrule{0pt}
 
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -84,7 +40,11 @@ And further experiments on \textit{reddit} also demonstrate that \textsc{NSDetec
 %\textsc{NSDetector} imitates this process automatically in the event detection task, and further verify that the key to improve the accuracy of event detection lies in training the normal states well. 
 
 \section{Introduction}
-Improving the accuracy of event detection in cyberspace can benefit many tasks, but it's nontrivial due to the rapid changing nature of cyberspace.
+%\textit{``To study the abnormal is the best way of understanding the normal."}---William James
+%\textit{``The unpredictable or the rare is more newsworthy than the routine."}---Allan Bell
+
+%The event detection task always tries to find out the newsworthy messages from cyberspace. 
+With the increasing of cyberspace data nowadays, there is a growing need for detecting events accurately. Detecting events can mainly benifit the following three folds: (1) understanding what happened in the corpus without checking every single document manually, and generating the timeline to get a bird's eye view of the corpus\cite{ge2015bring}; (2) being aware what is happening currently, which helps to deal with emergencies\cite{hughes2009twitter}\cite{sakaki2010earthquake}; (3) adding detected events and their types as extra structured data information to organize the unstructured text corpus\cite{ritter2012open}.  
 
 In our study, we find out that the key to improve the accuracy of event detection lies in training the normal states of the focused media/site/domain. Based on training normal states accurately, event detection task can be treated as finding terms, articles, or topics which are different from the normal states. 
 
@@ -92,25 +52,8 @@ Our intuition is inspired from the news value theory\cite{galtung1965structure}\
 Following this guideline, if the journalist knew the normal states, aka, the "routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
 We suppose that the ideal event detection system performs like a journalist who can find news from cyberspace with the knowledge of the normal states. 
 
-To train the normal states, the methods of existing systems can be grouped into two categories: \textit{unsupervised normal states training} and \textit{classification based normal states training}, which is illustrated by Figure \ref{fig:modelDesc:a}.
-
-In the first category, the methods treat the normal states as clustered articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topics\cite{Diao:2012wj}\cite{Yan:2015wm}. 
-Taking the clustering of articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq} as an example, they model the occured events as clusters, and link the incoming article with an existing event cluster or assign it as the new detected event.
-The decision is based on whether the dissimilarity between the incoming article and existing event clusters is over the user-specified threshold. 
-
-And in the second category, the methods learn the normal states by given the knowledge of \textit{event trigger}\cite{Li2013JointEE}\cite{Nguyen2015EventDA} (usually a single verb or entity mentions). The normal states are trained by the labeled data appeared in a fixed time window.
-
-Both categories of methods have achieved good performance on formal texts, but are hamppered by the diverse and rapid changing nature of cyberspace data (e.g., twitter\cite{Asur:2011tc} and reddit\cite{singer2014evolution}).
-In the journalist metaphor of news value theory, they have the limited knowledge of normal states (aka "routine things") due to the limited history information used. 
-More specifically, 
-
-
-It's difficult to represent the 
-the low threshold leads to , while the high threshold leads to 
-
 They build the normal states in the evolving training window
 %TODO
-The second category, train the triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA}(\textit{But it has some problems here, these methods are used in event extraction, so what's the relationship between event extraction and event detection? and the fired example in \cite{Li2013JointEE}?}). 
 
 They are hamppered by the rapid changing nature of cyberspace, e.g. twitter and reddit(\textit{find out the sentences to describe the rapid changing nature}). 
 
@@ -125,7 +68,7 @@ In this paper, we demonstrate that the better normal states  are learned, the be
 \begin{figure}
     \label{fig:modelDesc}
     \includegraphics[width=1.0\columnwidth]{img/NSDetectorExample.pdf}
-    \caption{\textsc{NSDetector}'s process flow, taking \textbf{military} related events in cyberspace as an example. \textsc{FullReader} initializes the normal states as topical word frequencies from full history information about military, updates them further at the specific corpus day by day, and detects events finally.}
+    \caption{\textsc{NSDetector}'s process flow, taking \textbf{military} related events in cyberspace as an example. \textsc{NSDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events, and updates the normal states incrementally by the detected events.}
 \end{figure}
 
 For example, in ideal conditions an event detection system for anti-terrorism has the knowledge about the normal state such as “the words ISIS and Syria are both high-frequent, while the word Russia is not so frequent as them”. 
@@ -135,6 +78,22 @@ After detection, the ideal event detection system also updates the normal state 
 
 
 \section{Related Works}
+
+To train the normal states, the methods of existing systems can be grouped into two categories: \textit{unsupervised normal states training} and \textit{classification based normal states training}, which is illustrated by Figure \ref{fig:modelDesc:a}.
+
+In the first category, the methods treat the normal states as clustered articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topics\cite{Diao:2012wj}\cite{Yan:2015wm}. 
+Taking the clustering of articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq} as an example, they model the occured events as clusters, and link the incoming article with an existing event cluster or assign it as the new detected event.
+The decision is based on whether the dissimilarity between the incoming article and existing event clusters is over the user-specified threshold. 
+
+And in the second category, the methods learn the normal states by given the knowledge of \textit{event trigger}\cite{Li2013JointEE}\cite{Nguyen2015EventDA} (usually a single verb or entity mentions). The normal states are trained by the labeled data appeared in a fixed time window.
+
+Both categories of methods have achieved good performance on formal texts, but are hamppered by the diverse and rapid changing nature of cyberspace data (e.g., twitter\cite{Asur:2011tc} and reddit\cite{singer2014evolution}).
+In the journalist metaphor of news value theory, they have the limited knowledge of normal states (aka "routine things") due to the limited history information used. 
+More specifically, 
+
+The second category, train the triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA}(\textit{But it has some problems here, these methods are used in event extraction, so what's the relationship between event extraction and event detection? and the fired example in \cite{Li2013JointEE}?}). 
+
+
 Although \cite{Wurzer:2015wq} points out that UMass\cite{Allan:2000wu} and its variants\cite{Petrovic:2010uj}\cite{petrovic2012using}\cite{Wurzer:2015wq} are the state-of-art systems on the Event Detection task for the newswire data, these systems still suffers from the lack of accuracy to applied on more general cyberspace data, such as tweets, emails, and reddit posts. 
 The underlying reason is that the normalized Topic Weighted Minimum Cost metric (\(C_{min}\)) used in the Event Detection keep balance between miss and false alarm, which cannot work well on the .
 Usually these traditional systems set the ratio of cost between miss alarm and false alarm to 10, preferring recall to precision on detecting events.
@@ -252,30 +211,6 @@ We use PageRank-HITS\cite{Yan:2015wq} algorithm to update score of categories in
 
 
 \subsection{Initialization of Normal States}
-\textbf{User profile.} User usually describes herself or himself by a piece of short text on microblog platform.
-This short text can be a continuous string or an array of hash tags, e.g., "\textit{Co-founder of Twitter, Medium, and now Co-founder and CEO of Askjelly.com}" of Biz Stone or "\textit{\#Cloud}, \textit{\#YARN}" of @hadoopchina.
-Though it's easy to estimate Biz Stone's interests by his self-description text, it's not always capable of doing so because some users' are very short.
-To overcome this limitation, we define \textbf{user profile} \(\bm{p_u}\) as combining user \(u\)'s self-description text with the texts provided by \(u\)'s followings. 
-Taking Biz Stone as an example, he follows 696 accounts, in which there are 60 founders, 27 CEOs, 21 Google related, and 9 medium related accounts, etc. 
-This example demonstrates that user profile \(p_u\) can be augmented by gathering the followings' information.
-
-\textbf{User modeling.} 
-User modeling is used to capturing user's long term interests. 
-For each user profile token, .
-For example, Biz Stone's long term interests can be inferred as \textit{Social Media}, \textit{Business}, and \textit{Technology} from his user profile \textit{Medium}, \textit{CEO}, and \textit{Google} respectively.
-
-The notations used in this paper are summarized in Table \ref{symbolsInModel}.
-We consider \(u\)'s user timeline as  the triple \(\{uid, \bm{p_u},\bm{w_u}\} \), where \(\bm{p_u}\) represents user \(u\)'s profile and \(\bm{w_u}=\{(tweetid, t_{ud},w_{ud})\}\) means the set of tweets posted by user \(u\).
-The element of \(\bm{w_u}\) is a triple of tweet id, time stamp \(t_{ud}\) and tweet content \(\bm{w_{ud}}\).
-
-
-
-\textbf{Event.} We define the event in the given time window \(t\) as the set of tweets denoted by \( \{ \bm{w_{te}}\}\).
-The event related tweets in set \( \{ \bm{w_{te}}\}\)  hold two properties: (1) it is different from user \(u\)'s long term interests and (2) it is similar with other tweets in the set.
-The task of event detection is to find out all the events in corpus.
-Different methods treat the above properties in different ways: LSH based methods\cite{petrovic2010streaming} treat the difference and simliarity in word vector space; while the topic model based methods\cite{timeUserLDA2012finding} take the semantic meaning into consideration.
-Under the framework of topic model, we divide the topics into user interest related topics and bursty event related topics, and further promote an online learning model UMIETM.
-\subsection{Normal States' Initialization}
 \begin{algorithm}
 \caption{Normal States' Initialization from Knowledge Base}
 \label{alg:normalStatesInit}
@@ -374,33 +309,30 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 \begin{algorithm}
 \caption{NS-Prior-LDA Learning Algorithm}
 \label{alg:gibbsSamplingKBPriorLDA}
-\KwIn{Document sequences \(\bm{w_{1:D}}\), and normal states \(\bm{f}_{1:K_{\bm{KB}}}\)}
+\KwIn{Documents \(\mathcal{D}\) (a.k.a., \(\bm{w_{1:D}}\)), and normal states \(\bm{f}_{1:K_{\bm{KB}}}\)}
 \KwOut{The sufficient statistics \(\bm{n^{(d)}}\), \(\bm{n^{(w)}}\)}
-\medskip
-\tcc{Initialization of NS-Prior-LDA Learning}
+\tcc{Initialization of NS-Prior-LDA}
 \For{\(d=1:D\)}{
     \For{\(n=1:N_d\)}{
-        \(v=w_{dn}\), sample \(z_{dn}=k\) accroding to Eq(\ref{eq:wikiPrior})(\ref{eq:initProbability}).\\
+        \(v=w_{dn}\), sample \(z_{dn}=k\) as Eq(\ref{eq:wikiPrior})(\ref{eq:initProbability}).\\
         Update the sufficient statistics \(n^{(d)}_{d,k}\), \(n^{(w)}_{k,v}\).\\
             }
         }
-\medskip
 \For{\(i= 1:I\)}{
-    \tcc{E-Step of NS-Prior-LDA Learning}
+    \tcc{E-Step of NS-Prior-LDA}
     \For{\(i=1:I_E\)}{
         \For{\(d=1:D\)}{
             \For{\(n=1:N_d\)}{
                 Set \(v=w_{dn}\), and reset the sufficient statistics \(n^{(d)}_{d,z_{dn}}\), \(n^{(w)}_{z_{dn},v}\).\\
-                Resample \(z_{dn}=k\) accroding to Eq(\ref{eq:wikiPrior})(\ref{eq:KBPriorLDAgibbs}).\\
+                Resample \(z_{dn}=k\) as Eq(\ref{eq:wikiPrior})(\ref{eq:KBPriorLDAgibbs}).\\
                 Update the sufficient statistics \(n^{(d)}_{d,k}\), \(n^{(w)}_{k,v}\).\\
             }
         }
     }
-    \medskip
-    \tcc{M-Step of NS-Prior-LDA Learning}
+    \tcc{M-Step of NS-Prior-LDA}
     Optimize \(\alpha \bm{m}\) by the fixed-point iteration\cite{wallach2008structured}. 
 }
-\Return{\(\bm{n^{(d)}}\), \(\bm{n^{(w)}}\)}
+\Return{\(\bm{n^{(w)}}\)}
 \end{algorithm}
 
 \cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}
@@ -473,7 +405,7 @@ Ultimately, we can get the field \(k \) next time window \(t \) in the event the
 \centering
 \caption{Normal State Training Performance}
 \label{my-label}
-\scalebox{0.8}{
+\scalebox{1.0}{
     \begin{tabular}{|l|l|l|}
     \hline
     Model & History State & PMI \\ \hline
@@ -716,19 +648,7 @@ We further treat the arriving data as stream and run the detection in online lea
 The experiments demonstrates that our method is effective and efficient for online event detection in microblogs.
 
 
-%
-% The following two commands are all you need in the
-% initial runs of your .tex file to
-% produce the bibliography for the citations in your paper.
-\bibliographystyle{abbrv}
-\bibliography{paperbib}  % sigproc.bib is the name of the Bibliography in this case
-% You must have a proper ".bib" file
-%  and remember to run:
-% latex bibtex latex latex
-% to resolve all references
-%
-% ACM needs 'a single self-contained file'!
-%
-%APPENDICES are optional
-%\balancecolumns
+\bibliographystyle{unsrt}
+\bibliography{paperbib}  
+
 \end{document}
