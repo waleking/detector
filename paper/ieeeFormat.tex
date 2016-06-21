@@ -11,6 +11,7 @@
 \usepackage{amsmath} %used for maths symbols
 \usepackage{amssymb}%used for empty set symbol
 \usepackage{url}
+\usepackage{xcolor}% or package color
 
 %used for quotes
 \usepackage{epigraph}
@@ -45,7 +46,7 @@ Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets
 %\textit{``The unpredictable or the rare is more newsworthy than the routine."}---Allan Bell
 
 %The event detection task always tries to find out the newsworthy messages from cyberspace. 
-With the increasing of cyberspace data, there is a growing need for detecting events accurately. Detecting events can mainly benifit the following three folds: (1) understanding what happened in the corpus without checking every single document manually, and generating the timeline to get a bird's eye view of the corpus\cite{ge2015bring}; (2) being aware what is happening currently, which helps to deal with emergencies\cite{hughes2009twitter}\cite{sakaki2010earthquake}; (3) adding detected events and their types as extra structured data information to organize the unstructured text corpus\cite{ritter2012open}.  
+With the increasing of cyberspace data, there is a growing need for detecting events accurately. Detecting events can mainly benefit the following three folds: (1) understanding what happened in the corpus without checking every single document manually, and generating the timeline to get a bird's eye view of the corpus\cite{ge2015bring}; (2) being aware what is happening currently, which helps to deal with emergencies\cite{hughes2009twitter}\cite{sakaki2010earthquake}; (3) adding detected events and their types as extra structured data information to organize the unstructured text corpus\cite{ritter2012open}.  
 
 Considering the importance of event detection on the cyberspace data, researchers have have made many efforts, including checking the and the . Therefore, the existing methods are ... and 
 
@@ -73,12 +74,12 @@ After detection, the ideal event detection system also updates the normal state 
 To train the normal states, the methods of existing systems can be grouped into unsupervised methods and supervised methods based on whether they .
 
 In the first category, the methods treat the normal states as clustered articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topics\cite{Diao:2012wj}\cite{Yan:2015wm}. 
-Taking the clustering of articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq} as an example, they model the occured events as clusters, and link the incoming article with an existing event cluster or assign it as the new detected event.
+Taking the clustering of articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq} as an example, they model the occurred events as clusters, and link the incoming article with an existing event cluster or assign it as the new detected event.
 The decision is based on whether the dissimilarity between the incoming article and existing event clusters is over the user-specified threshold. 
 
 And in the second category, the methods learn the normal states by given the knowledge of \textit{event trigger}\cite{Li2013JointEE}\cite{Nguyen2015EventDA} (usually a single verb or entity mentions). The normal states are trained by the labeled data appeared in a fixed time window.
 
-Both categories of methods have achieved good performance on formal texts, but are hamppered by the diverse and rapid changing nature of cyberspace data (e.g., twitter\cite{Asur:2011tc} and reddit\cite{singer2014evolution}).
+Both categories of methods have achieved good performance on formal texts, but are hampered by the diverse and rapid changing nature of cyberspace data (e.g., twitter\cite{Asur:2011tc} and reddit\cite{singer2014evolution}).
 In the journalist metaphor of news value theory, they have the limited knowledge of normal states (aka "routine things") due to the limited history information used. 
 More specifically, 
 
@@ -93,10 +94,9 @@ Study of event detection on text stream can be divided into three ways: word fre
 
 Several word frequency methods have been developed for event detection such as Discrete Fourier Transform\cite{he2007analyzingDFT}, wavelet analysis \cite{weng2011eventWavelet}.
 They treat the word's document frequency along timeline as time series and do the analysis in frequency domain. 
-DFT method suffers the problem that it can not locate the time point for bursty.
-Wavelet analysis based method's complexity is very high, so its scalability is limited. 
+DFT method suffers the problem that it can not locate the time point for bursty, while wavelet analysis based method's complexity is very high, which limits its scalability. 
 
- Text similarity based online event detection methods\cite{petrovic2010streaming}\cite{mccreadiescalable}  suffer from the lexical variation which means different words describe the same events.
+ Text similarity based online event detection methods\cite{petrovic2010streaming}\cite{mccreadie2013scalable}  suffer from the lexical variation which means different words describe the same events.
  Similarity based method can successfully detect the tweet which is retweeted by many times, but fails to find out the event which is described from many different perspectives.
  As a result, many events are duplicately detected due to their popularities, which may bury other events and overwhelm users with duplicated unwanted content.
 
@@ -109,7 +109,7 @@ It can deal with a massive of tweets, but it doesn't filter out the tweets relat
 Diao\cite{timeUserLDA2012finding}\cite{diao2013unified} show that event detection can benefit from filtering out user interest related tweets. 
 And Yan\cite{Yan:2015wm} models the bursty topic by incorporating burstiness of biterms as prior knowledge.
 But they are different from ours.
-As these models need the whole dataset as the input, they are offline detections, which is not scalability for large dynamic dataset such as micorblogs.
+As these models need the whole dataset as the input, they are offline detections, which is not scalability for large dynamic dataset such as microblogs.
 \subsection{Knowledge Base}
 
 
@@ -122,54 +122,54 @@ As these models need the whole dataset as the input, they are offline detections
         \centering
         \label{fig:subfig} %% label for entire figure
         \subfigure[\((0.25,0.25,0.25)\)]{
-                \label{fig:subfig:a} %% label for first subfigure
+                \label{fig:subfig:a} %% label for first subfigure a
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph0.pdf}
         }
         \subfigure[\((0.5,0.5,0.5)\)]{
-                \label{fig:subfig:b} %% label for second subfigure
+                \label{fig:subfig:b} %% label for second subfigure b
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph1.pdf}
         } 
-        \subfigure[\((1.5,1.5,1.5)\)]{
-                \label{fig:subfig:c} %% label for third subfigure
+        \subfigure[\((0.25,0.25,0.75)\)]{
+                \label{fig:subfig:c} %% label for third subfigure c
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph4.pdf}
         }
-        \subfigure[\((2.5,2.5,2.5)\)]{
-                \label{fig:subfig:a} %% label for first subfigure
+        \subfigure[\((0.5,0.5,1.5)\)]{
+                \label{fig:subfig:a} %% label for first subfigure d
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph5.pdf}
         }
-        \subfigure[\((0.25,0.25,0.75)\)]{
-                \label{fig:subfig:d} %% label for third subfigure
+        \subfigure[\((0.25,0.75,0.75)\)]{
+                \label{fig:subfig:d} %% label for third subfigure e
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph8.pdf}
         }
-        \subfigure[\((0.5,0.5,1.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure
+        \subfigure[\((0.5,1.5,1.5)\)]{
+                \label{fig:subfig:d} %% label for third subfigure f
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph9.pdf}
         }\hspace{1in}
-        \subfigure[\((1.5,1.5,2.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure
+        \subfigure[\((1.5,1.5,1.5)\)]{
+                \label{fig:subfig:d} %% label for third subfigure g
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph2.pdf}
         }
-        \subfigure[\((2.5,2.5,3.5)\)]{
-                \label{fig:subfig:a} %% label for first subfigure
+        \subfigure[\((2.5,2.5,2.5)\)]{
+                \label{fig:subfig:a} %% label for first subfigure h
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph3.pdf}
         }
-        \subfigure[\((0.25,0.75,0.75)\)]{
-                \label{fig:subfig:d} %% label for third subfigure
+        \subfigure[\((1.5,1.5,2.5)\)]{
+                \label{fig:subfig:d} %% label for third subfigure i
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph6.pdf}
         }
-        \subfigure[\((0.5,1.5,1.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure
+        \subfigure[\((2.5,2.5,3.5)\)]{
+                \label{fig:subfig:d} %% label for third subfigure j
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph7.pdf}
         }
         \subfigure[\((1.5,2.5,2.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure
+                \label{fig:subfig:d} %% label for third subfigure k
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph10.pdf}
         }
         \subfigure[\((2.5,3.5,3.5)\)]{
-                \label{fig:subfig:a} %% label for first subfigure
+                \label{fig:subfig:a} %% label for first subfigure l
                 \includegraphics[height=2.14cm]{img/croppedDirichletGraph11.pdf}
         }\hspace{1in}
-        \caption{Illustration of Drichlet distribution's probabilistic density on the 3-dimensional simplex when given different priors. (a-d) (e-h) (i-l)}
+        \caption{Illustration of Dirichlet distribution's probabilistic density on the 3-dimensional simplex when given different priors. (a,b,g,h) the left four subfigures illustrate the probabilistic density when given the symetric priors for Dirichlet distribution; (c,d,i,j) the central subfigures illustrate the probablistic density given ; (e,f,k,l) }
 \end{figure*}
 
 
@@ -191,9 +191,11 @@ As these models need the whole dataset as the input, they are offline detections
 
 
 \subsection{Initialization of Normal States}
+In this part, we discuss in detail how to initialize the normal states from the given knowledge base. 
 \begin{algorithm}
 \caption{Normal States' Initialization from Knowledge Base}
 \label{alg:normalStatesInit}
+
 \KwIn{Taxonomy's Directed Acyclic Graph \(G^{(0)}\), Category-Page Bipartite Graph \(G^{(1)}\), Page-Content Bipartite Graph \(G^{(2)}\), topic related category node \(c\)}
 \KwOut{Normal states \(\bm{f}_c\) on topic \(c\)}
 \(Pages(c)\leftarrow \varnothing\)\\
@@ -287,7 +289,7 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 \begin{equation}
 \label{eq:KBPriorLDAgibbs}
 \begin{aligned}
-&p(z_{dn}=k|w_{dn}=v,z_{\neg{dn}},w_{\neg{dn}},\alpha,\beta,\tau)\\
+&p(z_{dn}=k|w_{dn}=v,z_{\neg{dn}},w_{\neg{dn}},\alpha\bm{m},\beta,\tau)\\
 &\ \ \propto (n^{(d)}_{dk}+\alpha m_k)\frac{n^{(w)}_{kv}+\tau_{kv}+\beta}{n^{(w)}_{k,.}+\tau_{k,.}+V\beta}
 \end{aligned}
 \end{equation}
@@ -391,14 +393,14 @@ Ultimately, we can get the field \(k \) next time window \(t \) in the event the
 
 \begin{table}
 \centering
-\caption{NS-Prior-LDA's Performance on the evaluation metric PMI}
-    \begin{tabular}{|l|l|l|}
+\caption{The PMI of twitter topics learned by NS-Prior-LDA, its variant, and other baselines}
+    \begin{tabular}{|l|l|c|}
     \hline
-    Model & History State & PMI \\ \hline
+    Model & Prior Knowledge & PMI \\ \hline
     LDA & None  & 1.265 \(\pm\) 0.013     \\ \hline
     BBTM\cite{Yan:2015wm} & None    & 1.467 \(\pm\) 0.017     \\ \hline
-    NS-Prior-LDA\(^{(-)}\)   &   \begin{tabular}[c]{@{}l@{}}\footnotesize{Learned by LDA}\\ \footnotesize{from Wikipedia}\end{tabular} & 1.439 \(\pm\) 0.010     \\ \hline
-    NS-Prior-LDA         & \begin{tabular}[c]{@{}l@{}}\footnotesize{Derived from Categories} \\\footnotesize{of Wikipedia}\end{tabular} & 1.523 \(\pm\) 0.017     \\ \hline
+    NS-Prior-LDA\(^{(-)}\)   &   \begin{tabular}[c]{@{}l@{}}\footnotesize{Words in categories simply}\\ \footnotesize{extracted from Wikipedia}\end{tabular} & 1.439 \(\pm\) 0.010     \\ \hline
+    NS-Prior-LDA         & \begin{tabular}[c]{@{}l@{}}\footnotesize{Normal states initialized} \\\footnotesize{from wikipedia}\end{tabular} & 1.523 \(\pm\) 0.017     \\ \hline
     \end{tabular}
 \label{tbl:NS-Prior-LDA}
 \end{table}
@@ -407,31 +409,35 @@ Ultimately, we can get the field \(k \) next time window \(t \) in the event the
 \centering
 \caption{My caption}
 \label{my-label}
-\begin{tabular}{|cc|cc|cc|cc|}
+\scalebox{0.88}{
+\begin{tabular}{|cc|cc|cc|cc|cc|cc|}
 \hline
-\multicolumn{2}{|c|}{\textit{Military}} & \multicolumn{2}{c|}{\textit{Aviation}} & \multicolumn{2}{c|}{\textit{Health}} & \multicolumn{2}{c|}{\textit{Sport}} \\ 
-\begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} \\ \hline
-Army & killed & aircraft & air & medical & weight & league & season \\ 
-Battle & news & train & plane & patients & loss & season & win \\ 
-military & \#libya & airport & flight & treatment & diet & club & team \\ 
-Forces & libya & station & time & disease & pain & cup & deal \\ 
-attacks & rebels & flight & ship & health & cancer & football & year \\ 
-terrorist & people & pilot & news & brain & health & game & sign \\ 
-troops & police & aviation & boat & cancer & lose & games & jagr \\ 
-Killed & war & gear & airport & patient & tips & round & richards \\ 
-soldiers & libyan & passenger & force & blood & treatment & championship & cup \\ 
-commander & attack & drive & fly & body & fat & player & time \\ 
-Front & u.s. & navigation & hurricane & clinical & hair & match & arsenal \\ 
-Units & gaddafi & departure & navy & care & skin & division & fans \\ 
-captured & army & takeoff & coast & surgery & body & win & nasri \\ 
-campaign & forces & aviator & home & research & healthy & goals & city \\ 
-fighting & pakistan & navigator & crash & type & surgery & teams & league \\ 
-siege & afghanistan & runaway & irene & syndrome & blood & play & players \\ 
-officers & military & departure & train & system & brain & stadium & player \\ 
-guards & attacks & airbus & sea & medicine & acne & coach & signed \\ 
-allied & troops & miles & aircraft & eye & diabetes & players & contract \\ 
-lieutenant & dead & landing & jet & physician & eye & record & run \\ \hline
+\multicolumn{2}{|c|}{\textit{Aviation}} & \multicolumn{2}{c|}{\textit{Health}} & \multicolumn{2}{c|}{\textit{Middle East}} & \multicolumn{2}{c|}{\textit{Military}} & \multicolumn{2}{c|}{\textit{Mobile Phones}} & \multicolumn{2}{c|}{\textit{Video Games}} \\
+\begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} \\ 
+\hline
+aircraft & air\scriptsize(3253) & health & weight\scriptsize(16344) & al & \textcolor{red}{\textit{\#syria}}\scriptsize(4212) & army & killed\scriptsize(4055)  & android & iphone\scriptsize (13674) & game & games\scriptsize(8812) \\ 
+air & plane & patients & loss & israel & \textcolor{red}{\textit{\#bahrain}} & military & news & mobile & apple & player & liked \\ 
+airport & flight & medical & diet & iran & people & air & \textcolor{red}{\textit{\#libya}}\scriptsize(3503) & nokia & android & playstation & free \\ 
+flight & time & disease & health & arab & israel & command & libya & ios & app & gameplay & xbox \\
+airline & airlines & treatment & cancer & israeli & police & force & rebels & phone & ipad & nintendo & 360 \\
+airlines & news & hospital & lose & egypt & \textcolor{red}{\textit{\#libya}}\scriptsize(2557) & regiment & people & samsung & samsung & games & playing \\
+aviation & boat & patient & fat & egyptian & \#egypt & forces & police & game & mobile & players & played \\
+flying & airport & clinical & tips & ibn & news & squadron & war & app & blackberry & xbox &iphone\scriptsize(2820)\\
+pilot & force & symptoms & treatment & jerusalem & \#israel & infantry & libyan & iphone & tablet & mode & time\\
+squadron & fly & cancer & body & syria & world & battle & attack & htc & apps & arcade & \textcolor{red}{\textit{ps3}}\\
+flights & hurricane & cells & healthy & iraq & syria & commander & u.s. & smartphone & free & wii & trailer\\
+pilots & navy & blood & study & palestinian & protest & ship & gaddafi & phones & \#android & multiplayer & online\\
+raf & flying & therapy & pain & syrian & israeli & corps & army & blackberry & htc & sega & hours\\
+airways & aircraft & drug & exercise & iranian & egypt & navy & forces & apps & google & console & ipad\\
+fighter & \textcolor{red}{\textit{irene}} & medicine & \#health & ottoman & al & brigade & pakistan & ipad & galaxy & enemies & app\\
+boeing & crew & brain & natural & islamic & syrian & battalion & afghanistan & gsm & ios & characters & player\\
+runway & sky & care & disease & iraqi & protesters & lieutenant & military & lte & store & playable & wii\\
+force & crash & syndrome & acne & abu & arab & aircraft & attacks & symbian & windows & character & ops\\
+crashed & jet & infection & hair & jewish & rights & officer & troops & devices & mac & video & download\\
+flew & pilot & disorder & surgery & persian & libya & naval & dead & smartphones & phones & graphics & nintendo\\
+\hline
 \end{tabular}
+}
 \end{table*}
 
 \begin{table*}[ht]
@@ -462,17 +468,6 @@ Tweet Number & 36,627,434 \\ \hline
 }
 \end{table*}
 
-% \begin{table}[]
-% \centering
-% \caption{My caption}
-% \label{my-label}
-% \begin{tabular}{|l|l|l|l|}
-% \hline
-% \multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}Time \\ range\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Tweet \\ number\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Event number \\ in Benchmark1\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Event number \\ in Benchmark2\end{tabular}} \\ \hline
-% \begin{tabular}[c]{@{}l@{}}2011/06/30-\\ 2011/09/15\end{tabular} & 36,627,434 & 17 & 523 \\ \hline
-% \end{tabular}
-% \end{table}
-
 \begin{table*}[ht]
 \centering
 \caption{Events about \textit{vehicles} detected by systems between 2011-07-20 and 2011-07-30}
@@ -480,11 +475,10 @@ Tweet Number & 36,627,434 \\ \hline
 \begin{tabular}{|l|L{3cm}|l|c|}
 \hline
 \multicolumn{1}{|c|}{Date} & \multicolumn{1}{c|}{Event key words} & \multicolumn{1}{c|}{Representative event tweet} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Number of \\ event tweet\end{tabular}} \\ \hline
-7/20/11 & \begin{tabular}[c]{@{}l@{}}American, Airlines, \\ order, planes\end{tabular} & \begin{tabular}[c]{@{}l@{}}NDTV: American Airlines orders 460 new planes from \\ Boeing, Airbus http://bit.ly/p1ZgYG\end{tabular} & 31 \\ \hline
-7/23/11 & \begin{tabular}[c]{@{}l@{}}China, bullet, train, \\ collision\end{tabular} & \begin{tabular}[c]{@{}l@{}}China Bullet Train Collision: 33 Dead, 190 Injured \\ http://huff.to/qEq6Yx\end{tabular} & 67 \\ \hline
+7/20/11 & \begin{tabular}[c]{@{}l@{}}American, airlines, \\ order, planes\end{tabular} & \begin{tabular}[c]{@{}l@{}}NDTV: American Airlines orders 460 new planes from \\ Boeing, Airbus http://bit.ly/p1ZgYG\end{tabular} & 31 \\ \hline
 7/26/11 & \begin{tabular}[c]{@{}l@{}}Morocco, military, \\ plane, crash\end{tabular} & \begin{tabular}[c]{@{}l@{}}BBC News - Morocco military plane crash kills 78 \\ http://t.co/uwnLv8L\end{tabular} & 36 \\ \hline
-7/27/11 & Air, Canada & \begin{tabular}[c]{@{}l@{}}Smoke in galley forces Air Canada flight back to airport. \\ Plane landed safely in Sydney, Australia after dumping fuel\end{tabular} & 48 \\ \hline
-7/30/11 & \begin{tabular}[c]{@{}l@{}}Caribbean, Airlines, \\ crashes, Guyana\end{tabular} & \begin{tabular}[c]{@{}l@{}}Caribbean Airlines Jet Crash-Lands In Guyana All 163 \\ Passengers, Crew Survive http://t.co/qPVD3WJ\end{tabular} & 57 \\ \hline
+7/27/11 & air, Canada & \begin{tabular}[c]{@{}l@{}}Smoke in galley forces Air Canada flight back to airport. \\ Plane landed safely in Sydney, Australia after dumping fuel\end{tabular} & 48 \\ \hline
+7/30/11 & \begin{tabular}[c]{@{}l@{}}Caribbean, airlines, \\ crashes, Guyana\end{tabular} & \begin{tabular}[c]{@{}l@{}}Caribbean Airlines Jet Crash-Lands In Guyana All 163 \\ Passengers, Crew Survive http://t.co/qPVD3WJ\end{tabular} & 57 \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -512,32 +506,60 @@ Date & Event key words & Representative event tweet & \begin{tabular}[c]{@{}l@{}
     \caption{An illustration of the time series of Military related states on Twitter dataset from 2011-06-30 to 2011-09-15.}
 \end{figure*}
 
-\subsection{Data set}
-Dataset
-We conduct the empirical analysis on a twitter dataset which is constructed by \cite{petrovic2012using} and widely used by previous event detection researches \cite{petrovic2013can} \cite{Wurzer:2015wq}. 
+\subsection{Data set and experiment settings}
+\textbf{Data set.} We conduct the empirical analysis on a twitter dataset which is constructed by \cite{petrovic2012using} and widely used by previous event detection researches \cite{petrovic2013can} \cite{Wurzer:2015wq}. 
 Due to the developer policy of Twitter\footnote{https://dev.twitter.com/overview/terms/policy}, \cite{petrovic2012using} only redistributes tweets' IDs\footnote{http://demeter.inf.ed.ac.uk/cross/docs/fsd\_corpus.tar.gz}.
 We collected the tweets' contents according to the IDs with the help of Twitter API. 
-Though it's mentioned that there are 90 million tweets, due to the limit of twitter API w
-The dataset contains 36,627,434 tweets which spans from 2011/06/30 to 2011/09/15.
 
 %TODO
-The benchmark of Edinburgh contains 27 manually labeled events\cite{petrovic2013can}\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/Newswire_Events.tar.gz}}. 
+The benchmark \textit{Edinburgh twitter corpus} contains 27 manually labeled events\cite{petrovic2013can}\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/Newswire_Events.tar.gz}} and 90 million tweets. Though we cannot get the whole dataset due to the limit of Twitter API, after neccessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which spans identically from 2011/06/30 to 2011/09/15, and also covers 27 labeled events.
+More details of the original dataset are described in \cite{petrovic2010edinburgh}.
+
+20-newsgroup\footnote{http://qwone.com/~jason/20Newsgroups/}
+
+\textbf{Benchmark1} The first set of the ground truth about events in the corpus are provided by \cite{petrovic2013can}, which is mentioned above. 
+And 27 events ...
+
+\textbf{Benchmark2} here.
+
+\textbf{Normal States Initialization} here.
+
+\textbf{Baseline}
+
+UMass System
+
+LSH
+
+TimeUserLDA
+
+Twevent
+
+EDCoW
+
+BBTM
+
+\textbf{Model Setting}
+
+\subsection{Validity of Normal States}
+\textbf{Topic Coherence} \cite{roder2015exploring}
+\subsection{Topical Words Learned by NS-Prior-LDA}
+\textbf{PMI}
+\subsection{Evaluation of Detected Events}
+\textbf{Precision} Precision@Benchmark1, Precision@Benchmark2
+
+\textbf{Recall}
+
+\textbf{Accuracy}
+
+\textbf{DERate(Duplicate Event Rate)}
+\subsection{Case Study}
+
 
 Here we present the effectiveness of our proposed algorithm UMIETM and the efficiency of its online performance.
 We evaluate the efficiency by perplexity, precision for event detection. 
 We check the time cost and complete likelihood for efficiency.
-% We are going to design the experiment to show the effectiveness of distinguishing user interests and events.
-% Firstly, user profile can help to model user interests.
-% In this experiment we compare to the baseline of user interest modeling\cite{sun2013serendipity}.
-% Secondly, event detection can be enhanced by filtering out user interests.
-%\subsection{Experiment Settings}
-%We demonstrate our method can work very well on real dataset.
 
-Weibo is a popular Chinese microblogging service\footnote{http://en.wikipedia.org/wiki/Sina\_Weibo/}.
-We crawl weibo data by  its public API\footnote{http://open.weibo.com/} from Jan 2012 to Dec 2012.
-To improve the quality of analyzing on tweets, we do necessary pre-processing: (1) splitting dataset by week, (2) segmenting Chinese words, (3) removing stop words and low frequency words whose document frequency in its time window is less than 3, (4) removing tweets whose token number is less than 3.
-To model user interests better,  we remove users from dataset who has less than 2 hashtags in profile.
-After pre-processing we get 252 thousand users, 16 million tweets and 251 million tweet tokens listed in Table \ref{statisticsOfDataset}.
+To improve the quality of analyzing on tweets, we do necessary pre-processing: (1) splitting dataset by week, (2) segmenting Chinese words, (3) removing stop words and low frequency words whose document frequency in its time window is less than 3.
 
 We compare our model UMIETM with twitterLDA, timeUserLDA, Author-LDA, and our model's variant IETM.
 Author-LDA combines the tweets posted by same author into a single document, then run standard LDA on the assembled tweets.
@@ -546,10 +568,6 @@ We compare with Author-LDA and TwitterLDA for confirming the significance of dis
 TimeUserLDA is designed for retrospective event detection in microblog, and considers to distinguish events from user interests.
 We compare with timeUserLDA to show the impact of user profile.
 The variant IETM (\textit{Interest and Event Topic Model}) models user's interests and events without the help of user profiles.
-%UMIETM benifits from modeling user profiles.
-
-%To demonstrate the necessary of user profiles, we compare it to its variant IETM (Interest and Event Topic Model) which only consider the tweets shown in figure \ref{fig:IETM}.
-%IETM also run in online learning way.
 
 We set the asymmetric \(\alpha\) and symmetric \(\beta=0.01\) for UMIETM, where \(\alpha\) will be optimized by Gibbs EM algorithm\cite{wallach2008structured}.
 \(\alpha=0.1\), \(\beta=0.01\) are set for all remaining models. 
@@ -600,14 +618,8 @@ We stop UMIETM after 50 iterations since the complete log likelihood only increa
 It will take LDA(asymmetric priors) 300 minutes to run 1000 iterations, and 20 minutes per 10 iterations for UMIETM.
 There is a trade-off between the effectiveness by more iterations and efficiency by less,  we set the iteration number as 10 in online setting.
 After 10 iterations the UMIETM's complete log likelihood will increase no more than 0.2\%.
-% \subsubsection{Soundness}
-% As the online learning for UMIETM is an approximated version of batch learning for UMIETM, the soundness should be confirmed before applying it in the real enviroment.
-%[todo] We also want to show that online learning for UMIETM does not  sacrifice the accuracy. 
-%Comapring the held out perplexity.
 
 \textbf{Online Performance.}
-%Figure \ref{fig:completeLoglikelihood} shows that the log likelihood increases less than 0.1\% after 12 iterations.
-%Our experiment shows UMIETM has good convergence that the complete log likelihood increases less than 0.15\% after 10 iterations.
 As verified in the above subsection \textit{Convergence}, we run 10 Gibbs sweeps for each time window in online learning phase.
 When UMIETM is implemented in online way, it doesn't have to revisit the tweets in previous windows. 
 So its time cost in each window is proportional to the data size of current window  as shown in Figure \ref{fig:onlinelearningResult}.
