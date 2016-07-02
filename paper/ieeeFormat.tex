@@ -385,6 +385,38 @@ For the case of a third cluster cluster contains only a hot word, we only need t
 Ultimately, we can get the field \(k \) next time window \(t \) in the event the phrase relating to events microblogging \(\{(\mathcal{C}_{k, t, i}, \mathcal{D}_{k, t, i}) \}_{i=1}^{| \mathcal{C}_{k, t} |} \).
 
 \section{Experiments}
+\subsection{Effects of Normal States Initialization}
+We use 20newsgroups\cite{lang1995newsweeder} dataset\footnote{http://qwone.com/~jason/20Newsgroups} to check the effects of normal states initialization.
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+comp.graphics            & Category:Computer graphics      \\ \hline
+comp.os.ms-windows.misc  & Category:Microsoft Windows      \\ \hline
+comp.sys.ibm.pc.hardware & Category:IBM personal computers \\ \hline
+comp.sys.mac.hardware    & Category:Macintosh computers    \\ \hline
+comp.windows.x           & Category:X Window System        \\ \hline
+rec.autos                & Category:Automobiles            \\ \hline
+rec.motorcycles          & Category:Motorcycles            \\ \hline
+rec.sport.baseball       & Category:Baseball               \\ \hline
+rec.sport.hockey         & Category:Hockey                 \\ \hline
+sci.crypt                & Category:Cryptography           \\ \hline
+sci.electronics          & Category:Electronics            \\ \hline
+sci.med                  & Category:Medicine               \\ \hline
+sci.space                & Category:Outer space            \\ \hline
+misc.forsale             & Category:Sales                  \\ \hline
+talk.politics.misc       & Category:Politics               \\ \hline
+talk.politics.guns       & Category:Gun politics          \\ \hline
+talk.politics.mideast    & Category:Middle East           \\ \hline
+talk.religion.misc       & Category:Religion               \\ \hline
+alt.atheism              & Category:Atheism                \\ \hline
+soc.religion.christian   & Category:Christians             \\ \hline
+\end{tabular}
+\end{table}
+
+
 \begin{figure}
         \centering
         \includegraphics[height=4.0cm]{img/pmi.pdf}
