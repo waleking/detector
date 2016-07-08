@@ -387,6 +387,9 @@ Ultimately, we can get the field \(k \) next time window \(t \) in the event the
 \section{Experiments}
 \subsection{Effects of Normal States Initialization}
 We use 20newsgroups\cite{lang1995newsweeder} dataset\footnote{http://qwone.com/~jason/20Newsgroups} to check the effects of normal states initialization.
+
+
+What's NPMI? maybe can refer to \cite{Aletras2013EvaluatingTC}\cite{Rder2015ExploringTS}\footnote{https://github.com/AKSW/Palmetto}.
 \begin{table}[]
 \centering
 \caption{My caption}
@@ -422,6 +425,14 @@ soc.religion.christian   & Category:Christians             \\ \hline
         \includegraphics[height=4.0cm]{img/pmi.pdf}
         \caption{The quality of all twitter topics learned by NS-Prior-LDA increases with normal states weight (\(\lambda\)) before \(\lambda=12.8\). The optimized PMI is gained with moderate normal states weight when considering topics \(k\leq K_{\bm{KB}}\) and topics \(k > K_{\bm{KB}}\) together.}
 \end{figure}
+
+\begin{figure}
+        \centering
+        \includegraphics[width=1.0\columnwidth]{img/NPMI.pdf}
+        \caption{NPMI}
+\end{figure}
+
+
 
 \begin{table}
 \centering
@@ -587,89 +598,6 @@ BBTM
 \subsection{Case Study}
 
 
-Here we present the effectiveness of our proposed algorithm UMIETM and the efficiency of its online performance.
-We evaluate the efficiency by perplexity, precision for event detection. 
-We check the time cost and complete likelihood for efficiency.
-
-To improve the quality of analyzing on tweets, we do necessary pre-processing: (1) splitting dataset by week, (2) segmenting Chinese words, (3) removing stop words and low frequency words whose document frequency in its time window is less than 3.
-
-We compare our model UMIETM with twitterLDA, timeUserLDA, Author-LDA, and our model's variant IETM.
-Author-LDA combines the tweets posted by same author into a single document, then run standard LDA on the assembled tweets.
-TwitterLDA is designed for topic modeling on twitter.
-We compare with Author-LDA and TwitterLDA for confirming the significance of distinguishing user interests from events in microblog.
-TimeUserLDA is designed for retrospective event detection in microblog, and considers to distinguish events from user interests.
-We compare with timeUserLDA to show the impact of user profile.
-The variant IETM (\textit{Interest and Event Topic Model}) models user's interests and events without the help of user profiles.
-
-We set the asymmetric \(\alpha\) and symmetric \(\beta=0.01\) for UMIETM, where \(\alpha\) will be optimized by Gibbs EM algorithm\cite{wallach2008structured}.
-\(\alpha=0.1\), \(\beta=0.01\) are set for all remaining models. 
-After cross validation we find that UMIETM and IETM perform best on \(K=90\) and \(E=30\), \(\kappa=0.01\).
-To compare equally, we set the same topic number for Author-LDA, twitterLDA, timeUserLDA (which means when we run models offline on 1 time window, we shall set 120 topics for all, and 150 topics on 2 time windows and so on).
-
-To verify the role of user profiles played, we set UMIETM(-) as the degradation of UMIETM, which take symmetric prior \(\alpha\).
-
-In this subsection, we illustrate the performance of UMIETM in which user profile is considered.
-
-\textbf{Quantitative Measure.}
-We initialize UMIETM and IETM by batch learning on data from first week to third week, then run them in online learning way from fourth week to ninth week.
-On each week we calculate their perplexities\cite{wallach2009evaluation}, where \(perplexity(D_{test})=\exp{\{-\frac{\sum_{u=1}^{U}\sum_{d=1}^{D_u}\log{p(w_{ud})}}{\sum_{u=1}^{U}\sum_{d=1}^{D_u}N_{ud}}\}}\) and \(p(w_{ud})=(1-\pi_u)\sum_{k=1}^{K}\theta_{uk}\prod_{n=1}^{N_{ud}}(\phi_{s,w_{udn}}(1-\rho)+\phi_{k,w_{udn}}\rho)+\pi_u \sum_{k=1}^{K}\eta_{t,k}\prod_{n=1}^{N_{ud}}(\phi_{s,w_{udn}}(1-\rho)+\phi_{k,w_{udn}}\rho)\).
-The others are trained from first week to third week, and the held out perplexities are calculated on data from fourth week to ninth week.
-TimeUserLDA and IETM's perplexities are smaller than User-LDA, twitterLDA as they both consider distinguishing user interests from events.
-
-In Table \ref{tab:heldoutPerplexity} the perplexity of UMIETM is 3107.8, and much smaller than others. It demonstrates that user profile is significant for tweet stream's modeling.
-
-In Table \ref{tab:metrics}, we evaluate the events detected by models. We asked the annotators to label the event with score 1, and non-event related topic as 0. 
-The precision and recall is illustrated, where UMIETM(-) performs slightly better than IETM. 
-And UMIETM outperforms UMIETM(-) in detecting high quality event. 
-A reasonable analysis is that UMIETM uses the profile information sufficiently by asymmetric priors. 
-In this way, we also prove that the well exploiting of user profile information is important to model user interests and events on tweets. 
-%\subsubsection{Precision of Event Detection}
-
-\textbf{Case Study} 
-Some events detected by our UMIETM model are shown in Table \ref{fig:event}.
-Comparing with UMIETM, timeUserLDA fails to discover the \textit{shoddy construction} event in the second week, while IETM reports this event as \textit{bi, women, elegant, adoption, engineering, reed}. Obviously IETM fails to distinguish this event from user interests.
-UMIETM filters users' interests like \textit{bi, women, elegant, adoption} using their profile {\#baby, \#women}, and detect the event.
-\subsection{Efficiency}
-We implement our methods on mallet\footnote{http://mallet.cs.umass.edu/dist/mallet-2.0.7.tar.gz}, and run them on Linux server with 8 cores(2.00GHz) and 64GB memory.
-In this subsection, we verify the convergence and online performance of our online learning algorithm. 
-
-\textbf{Convergence.}
-The convergence of algorithm is vital in real time streaming environment. 
-UMIETM needs several Gibbs sweeps to find out the optimal parameters of model.
-But the size of data is usually large even spitted into time windows.
-The time complexity of UMIETM is \(O(I_1K|P|+I_2K|W|+I_2E|W|)\) given in section \ref{subsec:online}.
-It suggests that the more iterations Gibbs sampling have to do, the less efficiently our model performs. 
-Fortunately UMIETM is very economic to its stable state and does not need so much iterations.
-As suggested by \cite{wallach2009rethinking} and \cite{jian2014factorOfTopicModel}, we choose LDA with asymmetric priors as baseline, which is much more comparable than standard LDA on microblog dataset.
-We run UMIETM on the first three time windows. 
-Correspondingly we only use the tweets in these time windows for LDA with asymmetric priors.
-Burn-in period is set to 20 and optimize interval also 20, which means the priors are optimized every 20 iterations as the red curve in Fig \ref{fig:completeLoglikelihood}.
-
-One of the criteria for stopping Gibbs sampling is that the complete log likelihood is stabilized.
-We stop UMIETM after 50 iterations since the complete log likelihood only increases 0.02\% in last iteration.
-It will take LDA(asymmetric priors) 300 minutes to run 1000 iterations, and 20 minutes per 10 iterations for UMIETM.
-There is a trade-off between the effectiveness by more iterations and efficiency by less,  we set the iteration number as 10 in online setting.
-After 10 iterations the UMIETM's complete log likelihood will increase no more than 0.2\%.
-
-\textbf{Online Performance.}
-As verified in the above subsection \textit{Convergence}, we run 10 Gibbs sweeps for each time window in online learning phase.
-When UMIETM is implemented in online way, it doesn't have to revisit the tweets in previous windows. 
-So its time cost in each window is proportional to the data size of current window  as shown in Figure \ref{fig:onlinelearningResult}.
-In average, online UMIETM can process five thousand tokens per second.
-%Memory cost grows slightly and the increased memory cost only depends on the size of vocabulary.
-
-LSH based event detection on microblogs is used by \cite{petrovic2010streaming},\cite{mccreadiescalable}. 
-The former one detects events as the cluster of tweets by LSH, and the latter one extends this method on distributed machines. 
-They both only use the cosine similarity without considering semantic meaning of words. 
-So LSH based method may split the same event into clusters of similar tweets.
-However LSH based method reports 10578 events in 7th time window, and 10901 events in 8th window. 
-The other problem of LSH based event detection method is that the bad design may lead unstable performance. 
-The tweets are mapped into LSH defined space in a skew way which is illustrated in Fig \ref{fig:onlinelearningResult}.
-The other comparison is timeUserLDA which is designed for retrospective event detction. 
-The purple line in Fig \ref{fig:onlinelearningResult} goes up straightly as timeUserLDA has to revisit previous tweets to make a decision whether the tweet is event related. 
-The perplexity of online UMIETM on the 11 time window in Fig \ref{fig:onlinelearningResult} is \(3036.44\pm397.14\). 
-And the average precision of detecting high quality event is 0.22.
-Both indicators demonstrate that UMIETM can perform well in online learning way. 
 \subsection{Application on Reddit}
 
 \section{Conclusions \& Future Work}
