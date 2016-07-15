@@ -27,6 +27,14 @@
 \usepackage{amssymb}%used for empty set symbol
 \usepackage{amsmath} %used for maths symbols
 
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
 
 %\setlength\titlebox{5cm}
 
@@ -297,40 +305,230 @@ To this end, we have designed events phrase search algorithm \ref{alg:eventKeywo
 As the above process algorithm \ref{alg:eventKeywordsSearchMethod} description line 2 to line 5, we use in practice \(\rho = 0.6 \).
 We call \(\mathcal{C}_{k, t} \) results in each cluster to cluster \textbf{event} phrase.
 
-\section*{Acknowledgements}
+\section{Experiments}
+\subsection{Effects of Normal States Initialization}
+We use 20newsgroups\cite{lang1995newsweeder} dataset\footnote{http://qwone.com/~jason/20Newsgroups} to check the effects of normal states initialization.
 
-\begin{thebibliography}{}
 
-\bibitem[\protect\citename{Aho and Ullman}1972]{Aho:72}
-Alfred~V. Aho and Jeffrey~D. Ullman.
-\newblock 1972.
-\newblock {\em The Theory of Parsing, Translation and Compiling}, volume~1.
-\newblock Prentice-{Hall}, Englewood Cliffs, NJ.
+What's NPMI? maybe can refer to \cite{Aletras2013EvaluatingTC}\cite{Rder2015ExploringTS}\footnote{https://github.com/AKSW/Palmetto}.
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+comp.graphics            & Category:Computer graphics      \\ \hline
+comp.os.ms-windows.misc  & Category:Microsoft Windows      \\ \hline
+comp.sys.ibm.pc.hardware & Category:IBM personal computers \\ \hline
+comp.sys.mac.hardware    & Category:Macintosh computers    \\ \hline
+comp.windows.x           & Category:X Window System        \\ \hline
+rec.autos                & Category:Automobiles            \\ \hline
+rec.motorcycles          & Category:Motorcycles            \\ \hline
+rec.sport.baseball       & Category:Baseball               \\ \hline
+rec.sport.hockey         & Category:Hockey                 \\ \hline
+sci.crypt                & Category:Cryptography           \\ \hline
+sci.electronics          & Category:Electronics            \\ \hline
+sci.med                  & Category:Medicine               \\ \hline
+sci.space                & Category:Outer space            \\ \hline
+misc.forsale             & Category:Sales                  \\ \hline
+talk.politics.misc       & Category:Politics               \\ \hline
+talk.politics.guns       & Category:Gun politics          \\ \hline
+talk.politics.mideast    & Category:Middle East           \\ \hline
+talk.religion.misc       & Category:Religion               \\ \hline
+alt.atheism              & Category:Atheism                \\ \hline
+soc.religion.christian   & Category:Christians             \\ \hline
+\end{tabular}
+\end{table}
 
-\bibitem[\protect\citename{{American Psychological Association}}1983]{APA:83}
-{American Psychological Association}.
-\newblock 1983.
-\newblock {\em Publications Manual}.
-\newblock American Psychological Association, Washington, DC.
 
-\bibitem[\protect\citename{{Association for Computing Machinery}}1983]{ACM:83}
-{Association for Computing Machinery}.
-\newblock 1983.
-\newblock {\em Computing Reviews}, 24(11):503--512.
+\begin{figure}
+        \centering
+        \includegraphics[height=4.0cm]{img/pmi.pdf}
+        \caption{The quality of all twitter topics learned by NS-Prior-LDA increases with normal states weight (\(\lambda\)) before \(\lambda=12.8\). The optimized PMI is gained with moderate normal states weight when considering topics \(k\leq K_{\bm{KB}}\) and topics \(k > K_{\bm{KB}}\) together.}
+\end{figure}
 
-\bibitem[\protect\citename{Chandra \bgroup et al.\egroup }1981]{Chandra:81}
-Ashok~K. Chandra, Dexter~C. Kozen, and Larry~J. Stockmeyer.
-\newblock 1981.
-\newblock Alternation.
-\newblock {\em Journal of the Association for Computing Machinery},
-  28(1):114--133.
+\begin{figure}
+        \centering
+        \includegraphics[width=1.0\columnwidth]{img/NPMI.pdf}
+        \caption{NPMI}
+\end{figure}
 
-\bibitem[\protect\citename{Gusfield}1997]{Gusfield:97}
-Dan Gusfield.
-\newblock 1997.
-\newblock {\em Algorithms on Strings, Trees and Sequences}.
-\newblock Cambridge University Press, Cambridge, UK.
 
-\end{thebibliography}
+
+\begin{table}
+\centering
+\caption{The PMI of twitter topics learned by NS-Prior-LDA, its variant, and other baselines}
+    \begin{tabular}{|l|l|c|}
+    \hline
+    Model & Prior Knowledge & PMI \\ \hline
+    LDA & None  & 1.265 \(\pm\) 0.013     \\ \hline
+    BBTM\cite{Yan:2015wm} & None    & 1.467 \(\pm\) 0.017     \\ \hline
+    NS-Prior-LDA\(^{(-)}\)   &   \begin{tabular}[c]{@{}l@{}}\footnotesize{Words in categories simply}\\ \footnotesize{extracted from Wikipedia}\end{tabular} & 1.439 \(\pm\) 0.010     \\ \hline
+    NS-Prior-LDA         & \begin{tabular}[c]{@{}l@{}}\footnotesize{Normal states initialized} \\\footnotesize{from wikipedia}\end{tabular} & 1.523 \(\pm\) 0.017     \\ \hline
+    \end{tabular}
+\label{tbl:NS-Prior-LDA}
+\end{table}
+
+\begin{table*}[ht]
+\centering
+\caption{My caption}
+\label{my-label}
+\scalebox{0.88}{
+\begin{tabular}{|cc|cc|cc|cc|cc|cc|}
+\hline
+\multicolumn{2}{|c|}{\textit{Aviation}} & \multicolumn{2}{c|}{\textit{Health}} & \multicolumn{2}{c|}{\textit{Middle East}} & \multicolumn{2}{c|}{\textit{Military}} & \multicolumn{2}{c|}{\textit{Mobile Phones}} & \multicolumn{2}{c|}{\textit{Video Games}} \\
+\begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} & \begin{tabular}[c]{@{}c@{}}Normal\\ States\end{tabular} & \begin{tabular}[c]{@{}c@{}}Topical\\ Words\end{tabular} \\ 
+\hline
+aircraft & air\scriptsize(3253) & health & weight\scriptsize(16344) & al & \textcolor{red}{\textit{\#syria}}\scriptsize(4212) & army & killed\scriptsize(4055)  & android & iphone\scriptsize (13674) & game & games\scriptsize(8812) \\ 
+air & plane & patients & loss & israel & \textcolor{red}{\textit{\#bahrain}} & military & news & mobile & apple & player & liked \\ 
+airport & flight & medical & diet & iran & people & air & \textcolor{red}{\textit{\#libya}}\scriptsize(3503) & nokia & android & playstation & free \\ 
+flight & time & disease & health & arab & israel & command & libya & ios & app & gameplay & xbox \\
+airline & airlines & treatment & cancer & israeli & police & force & rebels & phone & ipad & nintendo & 360 \\
+airlines & news & hospital & lose & egypt & \textcolor{red}{\textit{\#libya}}\scriptsize(2557) & regiment & people & samsung & samsung & games & playing \\
+aviation & boat & patient & fat & egyptian & \#egypt & forces & police & game & mobile & players & played \\
+flying & airport & clinical & tips & ibn & news & squadron & war & app & blackberry & xbox &iphone\scriptsize(2820)\\
+pilot & force & symptoms & treatment & jerusalem & \#israel & infantry & libyan & iphone & tablet & mode & time\\
+squadron & fly & cancer & body & syria & world & battle & attack & htc & apps & arcade & \textcolor{red}{\textit{ps3}}\\
+flights & hurricane & cells & healthy & iraq & syria & commander & u.s. & smartphone & free & wii & trailer\\
+pilots & navy & blood & study & palestinian & protest & ship & gaddafi & phones & \#android & multiplayer & online\\
+raf & flying & therapy & pain & syrian & israeli & corps & army & blackberry & htc & sega & hours\\
+airways & aircraft & drug & exercise & iranian & egypt & navy & forces & apps & google & console & ipad\\
+fighter & \textcolor{red}{\textit{irene}} & medicine & \#health & ottoman & al & brigade & pakistan & ipad & galaxy & enemies & app\\
+boeing & crew & brain & natural & islamic & syrian & battalion & afghanistan & gsm & ios & characters & player\\
+runway & sky & care & disease & iraqi & protesters & lieutenant & military & lte & store & playable & wii\\
+force & crash & syndrome & acne & abu & arab & aircraft & attacks & symbian & windows & character & ops\\
+crashed & jet & infection & hair & jewish & rights & officer & troops & devices & mac & video & download\\
+flew & pilot & disorder & surgery & persian & libya & naval & dead & smartphones & phones & graphics & nintendo\\
+\hline
+\end{tabular}
+}
+\end{table*}
+
+\begin{table*}[ht]
+\centering
+\caption{My caption}
+\label{my-label}
+\subtable[Twitter Dataset Statistics]{
+\begin{tabular}{|l|r|}
+\hline
+Time range & \begin{tabular}[c]{@{}l@{}}2011/06/30\\ -2011/09/15\end{tabular} \\ \hline
+Tweet Number & 36,627,434 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Event Number \\ in Benchmark1\end{tabular} & 27 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Event Number \\ in Benchmark2\end{tabular} & 523 \\ \hline
+\end{tabular}
+}\quad \quad
+\subtable[Event Detection Results]{
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Method & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark1\end{tabular} & \begin{tabular}[c]{@{}l@{}}Precision@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}DERate(Duplicate \\ Event Rate)\end{tabular} \\ \hline
+    UMass System & 0.882 & 0.138 & 0.941 & 0.071 \\ \hline
+    LSH & 0.824 & 0.095 & 0.803 & 0.302 \\ \hline
+    TimeUserLDA & 0.353 & 0.536 & 0.071 & 0.054 \\ \hline
+    Twevent & 0.824 & 0.697 & 0.641 & 0.113 \\ \hline
+    EDCoW & 0.412 & 0.756 & 0.119 & 0.290 \\ \hline
+    BBTM & 0.647 & 0.809 & 0.170 & 0.045 \\ \hline
+    \textsc{NSDetector} & 1.000 & 0.894 & 0.950 & 0.042 \\ \hline
+    \end{tabular}
+}
+\end{table*}
+
+\begin{table*}[ht]
+\centering
+\caption{Events about \textit{vehicles} detected by systems between 2011-07-20 and 2011-07-30}
+\label{my-label}
+\begin{tabular}{|l|L{3cm}|l|c|}
+\hline
+\multicolumn{1}{|c|}{Date} & \multicolumn{1}{c|}{Event key words} & \multicolumn{1}{c|}{Representative event tweet} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Number of \\ event tweet\end{tabular}} \\ \hline
+7/20/11 & \begin{tabular}[c]{@{}l@{}}American, airlines, \\ order, planes\end{tabular} & \begin{tabular}[c]{@{}l@{}}NDTV: American Airlines orders 460 new planes from \\ Boeing, Airbus http://bit.ly/p1ZgYG\end{tabular} & 31 \\ \hline
+7/26/11 & \begin{tabular}[c]{@{}l@{}}Morocco, military, \\ plane, crash\end{tabular} & \begin{tabular}[c]{@{}l@{}}BBC News - Morocco military plane crash kills 78 \\ http://t.co/uwnLv8L\end{tabular} & 36 \\ \hline
+7/27/11 & air, Canada & \begin{tabular}[c]{@{}l@{}}Smoke in galley forces Air Canada flight back to airport. \\ Plane landed safely in Sydney, Australia after dumping fuel\end{tabular} & 48 \\ \hline
+7/30/11 & \begin{tabular}[c]{@{}l@{}}Caribbean, airlines, \\ crashes, Guyana\end{tabular} & \begin{tabular}[c]{@{}l@{}}Caribbean Airlines Jet Crash-Lands In Guyana All 163 \\ Passengers, Crew Survive http://t.co/qPVD3WJ\end{tabular} & 57 \\ \hline
+\end{tabular}
+\end{table*}
+
+\begin{table*}[ht]
+\centering
+\caption{Events about \textit{military} detected by systems between 2011-07-20 and 2011-07-30}
+\label{my-label}
+\begin{tabular}{|l|L{3cm}|l|l|}
+\hline
+Date & Event key words & Representative event tweet & \begin{tabular}[c]{@{}l@{}}Number of \\ event tweet\end{tabular} \\ \hline
+7/20/11 & \begin{tabular}[c]{@{}l@{}}Serbia, crimes, \\ fugitive, arrests\end{tabular} & Serbia: Serbia arrests last war crimes fugitive-TV- Reuters & 27 \\ \hline
+7/20/11 & Somalia, famine & \begin{tabular}[c]{@{}l@{}}UN declares famine in Somalia. What can we do to save \\ 3.7million lives? http://bit.ly/r1Rq7R\end{tabular} & 89 \\ \hline
+7/21/11 & \begin{tabular}[c]{@{}l@{}}U.S., military, \\accept, gay, \\lesbian, openly\end{tabular} & \begin{tabular}[c]{@{}l@{}}RT @cnnbrk: Pentagon is set to certify that the U.S. military \\ is prepared to accept openly gay and lesbian service members \\ \#dadt\end{tabular} & 20 \\ \hline
+7/22/11 & \begin{tabular}[c]{@{}l@{}}Norway, Oslo,\\ attacks, bombing\end{tabular} & \begin{tabular}[c]{@{}l@{}}Terror Attacks Devastate Norway: A bomb ripped through \\ government offices in Oslo and a gunman...˙http://dlvr.it/cLbk8\end{tabular} & 557 \\ \hline
+7/23/11 & Gunman, rink & \begin{tabular}[c]{@{}l@{}}Gunman Kills Self, 5 Others at Texas Roller Rink \\ http://dlvr.it/cLcTH\end{tabular} & 43 \\ \hline
+7/26/11 & \begin{tabular}[c]{@{}l@{}}Kandahar, mayor, \\ suicide, attack\end{tabular} & \begin{tabular}[c]{@{}l@{}}TELEGRAPH{]}: Kandahar mayor killed by Afghan suicide \\ bomber: The mayor of Kandahar, the biggest city in south \_\end{tabular} & 25 \\ \hline
+7/28/11 & Ft., Hood, attack & Possible Ft. Hood Attack Thwarted http://t.co/BSJ33hk & 20 \\ \hline
+7/28/11 & \begin{tabular}[c]{@{}l@{}}Libyan, rebel, \\ gunned\end{tabular} & \begin{tabular}[c]{@{}l@{}}Libyan rebel chief gunned down in Benghazi \\ http://sns.mx/prfvy1\end{tabular} & 44 \\ \hline
+\end{tabular}
+\end{table*}
+
+\begin{figure*}
+    \label{fig:algorithm}
+    \includegraphics[width=1.0\textwidth]{img/screenShot.png}
+    \caption{An illustration of the time series of Military related states on Twitter dataset from 2011-06-30 to 2011-09-15.}
+\end{figure*}
+
+\subsection{Data set and experiment settings}
+\textbf{Data set.} We conduct the empirical analysis on a twitter dataset which is constructed by \cite{petrovic2012using} and widely used by previous event detection researches \cite{petrovic2013can} \cite{Wurzer:2015wq}. 
+Due to the developer policy of Twitter\footnote{https://dev.twitter.com/overview/terms/policy}, \cite{petrovic2012using} only redistributes tweets' IDs\footnote{http://demeter.inf.ed.ac.uk/cross/docs/fsd\_corpus.tar.gz}.
+We collected the tweets' contents according to the IDs with the help of Twitter API. 
+
+%TODO
+The benchmark \textit{Edinburgh twitter corpus} contains 27 manually labeled events\cite{petrovic2013can}\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/Newswire_Events.tar.gz}} and 90 million tweets. Though we cannot get the whole dataset due to the limit of Twitter API, after neccessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which spans identically from 2011/06/30 to 2011/09/15, and also covers 27 labeled events.
+More details of the original dataset are described in \cite{petrovic2010edinburgh}.
+
+20-newsgroup\footnote{http://qwone.com/~jason/20Newsgroups/}
+
+\textbf{Benchmark1} The first set of the ground truth about events in the corpus are provided by \cite{petrovic2013can}, which is mentioned above. 
+And 27 events ...
+
+\textbf{Benchmark2} here.
+
+\textbf{Normal States Initialization} here.
+
+\textbf{Baseline}
+
+UMass System
+
+LSH
+
+TimeUserLDA
+
+Twevent
+
+EDCoW
+
+BBTM
+
+\textbf{Model Setting}
+
+\subsection{Validity of Normal States}
+\textbf{Topic Coherence} \cite{roder2015exploring}
+\subsection{Topical Words Learned by NS-Prior-LDA}
+\textbf{PMI}
+\subsection{Evaluation of Detected Events}
+\textbf{Precision} Precision@Benchmark1, Precision@Benchmark2
+
+\textbf{Recall}
+
+\textbf{Accuracy}
+
+\textbf{DERate(Duplicate Event Rate)}
+\subsection{Case Study}
+
+
+\subsection{Application on Reddit}
+
+\section{Conclusions \& Future Work}
+Microbiolog is mixed with user interests and external events.
+The quality of event detection in microblog depends on how we distinguish them.
+We exploit user profile to discover events by filtering out user interest-related tweets.
+We further treat the arriving data as stream and run the detection in online learning style.
+The experiments demonstrates that our method is effective and efficient for online event detection in microblogs.
+
+\bibliographystyle{unsrt}
+\bibliography{paperbib}  
 
 \end{document}
