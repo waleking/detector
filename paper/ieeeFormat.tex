@@ -13,6 +13,8 @@
 \usepackage{url}
 \usepackage{xcolor}% or package color
 
+\usepackage{multirow}% for table
+
 %used for quotes
 \usepackage{epigraph}
 \setlength\epigraphwidth{\columnwidth}
@@ -177,29 +179,32 @@ As these models need the whole dataset as the input, they are offline detections
 
 \section{Proposed Method}
 \begin{table}
-\begin{tabular}{|p{0.1\columnwidth}|p{0.8\columnwidth}|} \hline
-\(G^{(0)}\) & Taxonomy's Graph in Knowledge Base\\ \hline
-\(G^{(1)}\) & Category-Page Bipartite Graph in Knowledge Base\\ \hline
-\(G^{(2)}\) & Page-Content Bipartite Graph in Knowledge Base\\ \hline
-\(c\) & topic related category node in \(G^{(0)}\) and \(G^{(1)}\) \\ \hline
-\(K_{\bm{KB}}\) & number of pre-defined topics by Knowledge Base \\ \hline
-\(f_{c,w}\) & word \(w\)'s normal state (chi-square score) in category \(c\) \\ \hline
-\(\lambda\) & normal state weight in  NS-Prior-LDA\\ \hline
-\(\tau_{c,w}\) & word \(w\)'s prior knowledge confidence for topic \(c\) in NS-Prior-LDA\\ \hline
-\(S_c\) & topic \(c\)'s all normal states related words \\ \hline
-\(K\) & number of topics in NS-Prior-LDA such as \(K>K_{\bm{KB}}\)\\ \hline
-\(\mathcal{B}_{c, t}\)  & hot words set detected from topic \(k\) at time \(t\)  \\ \hline
-\(\mathcal{G}_{c, t}\)  & hot word graph constructed from \(\mathcal{B}_{c, t}\) \\ \hline
-\(\mathcal{C}_{c,t,i}\) & event \(i\)-th related words in topic \(c\) at time \(t\) \\ \hline
-\(\mathcal{D}_{c,t,i}\) & event \(i\)-th related tweets in topic \(c\) at time \(t\) \\ \hline
-\(\rho\) & density threshold for the sub-graph constructed by event words  \\ \hline
+\begin{tabular}{|c|p{0.1\columnwidth}|p{0.55\columnwidth}|} \hline
+%first part: normalization initialization
+\multirow{5}{0.18\columnwidth}{Normalization Initialization} & \(G^{(0)}\) & Taxonomy's Graph in Knowledge Base\\ \cline{2-3}
+& \(G^{(1)}\) & Category-Page Bipartite Graph in Knowledge Base\\ \cline{2-3}
+& \(G^{(2)}\) & Page-Content Bipartite Graph in Knowledge Base\\ \cline{2-3}
+& \(c\) & topic related category node in \(G^{(0)}\) and \(G^{(1)}\) \\ \cline{2-3}
+& \(K_{\bm{KB}}\) & number of pre-defined topics by Knowledge Base \\ \cline{2-3}
+& \(f_{c,w}\) & word \(w\)'s normal state (chi-square score) in category \(c\) \\ \hline
+%second part: normalization maintenance
+\multirow{4}{0.18\columnwidth}{Normalization Maintenance} & \(\lambda\) & normal state weight in  NS-Prior-LDA\\ \cline{2-3}
+& \(\tau_{c,w}\) & word \(w\)'s prior knowledge confidence for topic \(c\) in NS-Prior-LDA\\ \cline{2-3}
+& \(S_c\) & topic \(c\)'s all normal states related words \\ \cline{2-3}
+& \(K\) & number of topics in NS-Prior-LDA such as \(K>K_{\bm{KB}}\)\\ \hline
+%third part: event detection
+\multirow{5}{0.18\columnwidth}{Event Detection} & \(\mathcal{B}_{c, t}\)  & hot words set detected from topic \(k\) at time \(t\)  \\ \cline{2-3}
+& \(\mathcal{G}_{c, t}\)  & hot word graph constructed from \(\mathcal{B}_{c, t}\) \\ \cline{2-3}
+& \(\mathcal{C}_{c,t,i}\) & event \(i\)-th related words in topic \(c\) at time \(t\) \\ \cline{2-3}
+& \(\mathcal{D}_{c,t,i}\) & event \(i\)-th related tweets in topic \(c\) at time \(t\) \\ \cline{2-3}
+& \(\rho\) & density threshold for the sub-graph constructed by event words  \\ \hline
 
 \end{tabular}
 \label{symbolsInModel}
 \end{table}
 
 
-\subsection{Initialization of Normal States}
+\subsection{Normal States Initialization}
 In this part, we discuss in detail how to initialize the normal states from the given knowledge base. 
 \begin{algorithm}
 \caption{Normal States Initialization from Knowledge Base}
