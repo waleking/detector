@@ -15,6 +15,8 @@
 
 \usepackage{multirow}% for table
 
+\newtheorem{rmk}{Definition}% definition
+
 %used for quotes
 \usepackage{epigraph}
 \setlength\epigraphwidth{\columnwidth}
@@ -29,10 +31,11 @@
 
 
 %主动感知的
-\title{Normal States Training for High Accuracy Event Detection}
+\title{Is That Enough to Only Use the Recent Data to Detect Events?}
 
 \maketitle
 \begin{abstract}
+
 In the news value theory, the \textit{news unexpectedness} expects the journalists to report the events that are different from the routine things, a.k.a., the normal states. 
 For human being, normal states are knowledge learned from news streams and the external environment, and can describe what happened and help to identify what is happening.
 In this paper, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
@@ -49,6 +52,11 @@ Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets
 %\textit{``The unpredictable or the rare is more newsworthy than the routine."}---Allan Bell
 
 %The event detection task always tries to find out the newsworthy messages from cyberspace. 
+In big data era, event detection is a profound, popular, but still challenging task. 
+The existing methods include 
+
+
+
 With the increasing of cyberspace data, there is a growing need for detecting events accurately. Detecting events can mainly benefit the following three folds: (1) understanding what happened in the corpus without checking every single document manually, and generating the timeline to get a bird's eye view of the corpus\cite{ge2015bring}; (2) being aware what is happening currently, which helps to deal with emergencies\cite{hughes2009twitter}\cite{sakaki2010earthquake}; (3) adding detected events and their types as extra structured data information to organize the unstructured text corpus\cite{ritter2012open}.  
 
 Considering the importance of event detection on the cyberspace data, researchers have have made many efforts, including checking the and the . Therefore, the existing methods are ... and 
@@ -115,6 +123,8 @@ But they are different from ours.
 As these models need the whole dataset as the input, they are offline detections, which is not scalability for large dynamic dataset such as microblogs.
 \subsection{Knowledge Base}
 
+\cite{faralli2015large} propose the Twixonomy Graph. 
+
 
 %Twitter Trending Topic Classification
 %We use PageRank-HITS\cite{Yan:2015wq} algorithm to update score of categories in wikipedia.
@@ -178,6 +188,10 @@ As these models need the whole dataset as the input, they are offline detections
 
 
 \section{Proposed Method}
+\begin{rmk}[Normal States] 
+The normal states of the specific category is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(f(c,w^{(c)}_{i})\) under the category. And we denote the normal states of category \(c\) as \(\bm{f}_c=\{<w^{(c)}_i,f(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
+\end{rmk}
+
 \begin{table}
 \begin{tabular}{|c|p{0.1\columnwidth}|p{0.55\columnwidth}|} \hline
 %first part: normalization initialization
@@ -206,6 +220,17 @@ As these models need the whole dataset as the input, they are offline detections
 
 \subsection{Normal States Initialization}
 In this part, we discuss in detail how to initialize the normal states from the given knowledge base. 
+The knowledge base such as Wikipedia has the structure of classes, subclasses, instances, and the edges between them. 
+This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia.  
+But the existing computation on the RDF graph is often time consuming. To overcome this obtacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
+\begin{enumerate}[labelindent=\parindent,leftmargin=*]
+\item Taxonomy. Indicates that the classification relationship, for example, Society this classification page contains Politics classification page, further contains Military, and Society itself is included in the topic classifications Main;
+\item Category-Page Bipartite graph.
+\item Page-Content Maps.
+\end{enumerate}
+
+
+
 \begin{algorithm}
 \caption{Normal States Initialization from Knowledge Base}
 \label{alg:normalStatesInit}
@@ -226,7 +251,6 @@ DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank
 \Return{\(\bm{f}_c\)}
 \end{algorithm}
 
-\cite{faralli2015large} propose the Twixonomy Graph. 
 
 %TODO
 
@@ -620,11 +644,6 @@ BBTM
 \subsection{Application on Reddit}
 
 \section{Conclusions \& Future Work}
-Microbiolog is mixed with user interests and external events.
-The quality of event detection in microblog depends on how we distinguish them.
-We exploit user profile to discover events by filtering out user interest-related tweets.
-We further treat the arriving data as stream and run the detection in online learning style.
-The experiments demonstrates that our method is effective and efficient for online event detection in microblogs.
 
 
 \bibliographystyle{unsrt}
