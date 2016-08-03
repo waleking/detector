@@ -31,15 +31,25 @@
 
 
 %主动感知的
-\title{Is That Enough to Only Use the Recent Data to Detect Events?}
+\title{Is That Enough to Use the Recent Data to Detect Events?}
+Revealing the Important Factors on the High Accuracy Event Detection
+%点明factor是什么——能准确描述历史知识的model，该model的表述能力起码能够model概念和概念之间的联系；model应该有一个实时自学习功能，即在历史知识的基础上，能在不断到来的新数据流上更新自己的知识。（“支持”恐怖组织，“打击”恐怖组织）打击恐怖组织的topic中，通常是美国和英国、法国；但是俄罗斯突然出现在该topic的列表中，说明俄罗斯参与打击恐怖组织应该被判别为一个新的事件。需要一个精确描述历史数据中概念之间联系的例子——（找到一个立场发生变化的例子，如果能在叙利亚问题上找到很好，如果不能考虑别的例子）。
 
 \maketitle
 \begin{abstract}
+Event detection is an important task to understand what already happened and what is currently happening in the rapid evolving text stream. 
+% what happened不需要了
+% 诸多互联网的应用都迫切需要实时准确的事件检测技术。
+% 由于需要实时监测最新发生的事件，人们通常实时分析最新的数据流来检测可能发生的事件，但很遗憾这种技术的准确率远远不能支撑应用的要求。
 
-In the news value theory, the \textit{news unexpectedness} expects the journalists to report the events that are different from the routine things, a.k.a., the normal states. 
-For human being, normal states are knowledge learned from news streams and the external environment, and can describe what happened and help to identify what is happening.
-In this paper, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
-%TODO
+%举例之后,1这个例子说明需要哪些新技术支持——需要对历史知识有准确的描述，充分体现概念与概念之间的联系；并且能够利用新数据来更新相应的知识，以解决知识库的更新滞后于新数据的问题 2 列举related works，这些技术无法解决这个问题
+%我们的工作。
+
+%在Related Works 之前说明我们这是一个amazing的工作，同时将precision和recall都进行了提升，而一般的工作很难兼顾这一点。
+But existing methods cannot achieve high precision and high recall simultaneously. 
+The reason lies in that they only use the recent data and lack the accumulation of history knowledge. 
+We further find out that the ideal event detection method should have two properties: \textit{organizing history data well} and \textit{self-updating}.
+According to this guideline, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of history data. 
 In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
 Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{NSDetector}.
 %\textsc{NSDetector} imitates this process automatically in the event detection task, and further verify that the key to improve the accuracy of event detection lies in training the normal states well. 
@@ -52,37 +62,67 @@ Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets
 %\textit{``The unpredictable or the rare is more newsworthy than the routine."}---Allan Bell
 
 %The event detection task always tries to find out the newsworthy messages from cyberspace. 
-In big data era, event detection is a profound, popular, but still challenging task. 
-The existing methods include 
+In big data era, event detection is an important task to understand what already happened\cite{ge2015bring} and what is currently happening\cite{hughes2009twitter}\cite{sakaki2010earthquake} within the rapid evolving text stream. 
+Although many efforts have been made, the performance still needs to be enhanced as the existing methods cannot achieve high precision and high recall simultaneously, only sacrificing the precision for the recall (such as UMass\cite{Allan:2000wu}), or otherwise (such as BBTM\cite{yan2015probabilistic}).
+To analyze the reason, we go deep into the existing two kinds of methods.
 
+The first category of methods, including UMass\cite{Allan:2000wu} and BBTM\cite{yan2015probabilistic}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
+This kind methods can be implemented by clustering of articles\cite{Allan:2000wu}\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topic modeling\cite{Diao:2012wj}\cite{Yan:2015wm} in the recent time windows. 
+Taking the clustering of articles as an example, they model the occurred events as clusters, and link the incoming article with an already existed event cluster or assign it as the new detected event.
+The decision is based on whether the dissimilarity between the incoming article and existed event clusters is over the user-specified threshold. 
 
+The reason why this kind methods cannot achive high precision and high recall simultaneously lies in that they lack the accumulation of history knowledge. 
+This kind methods ``understand" the document only by the recent data and the frequencies of the data, but the ``understanding" is not so confident that they still need the specific threshold to help to make decision. 
+On the one hand, UMass\cite{Allan:2000wu} prefers the lower threshold to enlarge the recall but suffers the precision. 
+On the other hand, BBTM needs the appropriate number of topics to run the topic modelling, and detects the ``large" events that associate with many articles but ignores the ``small" ones. 
 
-With the increasing of cyberspace data, there is a growing need for detecting events accurately. Detecting events can mainly benefit the following three folds: (1) understanding what happened in the corpus without checking every single document manually, and generating the timeline to get a bird's eye view of the corpus\cite{ge2015bring}; (2) being aware what is happening currently, which helps to deal with emergencies\cite{hughes2009twitter}\cite{sakaki2010earthquake}; (3) adding detected events and their types as extra structured data information to organize the unstructured text corpus\cite{ritter2012open}.  
+The second category of methods thouroughly relies on the \textit{history data}. 
+The typical implementation is to train the event triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA} from history labeled data, then apply the trained model to detect the event related articles, which contain the triggers such as the word \textit{attacked} for the \textit{public security} events. 
+This kind methods suffer from the loss of recall. 
+There are two reasons. 
+%没有对历史数据进行很好的组织
+(1) The model does not utilize the history data sufficiently. 
+Usually, the event trigger based method mainly focus on the event related verbs, but often ignores the other word types.
+(2) The model lacks the update mechanism. 
+It only restores the history knowledge but without updating. 
+Some new event related articles may be mistakenly filtered out because not containing previous trained triggers. 
+For example, the tweet ``Russia's intervention in Syria began in September 2015" without an event trigger, which is really related to a \textit{public security} event, may be omitted by the system. 
 
-Considering the importance of event detection on the cyberspace data, researchers have have made many efforts, including checking the and the . Therefore, the existing methods are ... and 
+Based on the above analysis, we can make a conclusion that it's not enough to use the recent data to detect events, but not enough to only use the history data for this task either.
+We believe that the ideal event detection method should have two properties: (1) having a good mechanism to organize the history data, and being aware of what happened; (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
 
-In our study, we find out that the key to improve the accuracy of event detection lies in training the normal states of the focused media/site/domain. Based on training normal states accurately, event detection task can be treated as finding terms, articles, or topics which are different from the normal states. 
+%In our study, we find out that the key to improve the accuracy of event detection lies in training the normal states of the focused media/site/domain. Based on training normal states accurately, event detection task can be treated as finding terms, articles, or topics which are different from the normal states. 
 
-Our intuition is inspired from the news value theory\cite{galtung1965structure}\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- "the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}, and "routine events are difficult to assimilate to the news, which favours the novel, the atypical and the unusual"\cite{montgomery2007discourse}.
-Following this guideline, if the journalist knew the normal states, aka, the "routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
+The properties of the ideal event detection method also coincide with the news value theory\cite{galtung1965structure}\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}, and ``routine events are difficult to assimilate to the news, which favours the novel, the atypical and the unusual"\cite{montgomery2007discourse}.
+Following this guideline, if the journalist knew the normal states, aka, the ``routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
 We suppose that the ideal event detection system performs like a journalist who can find news from cyberspace with the knowledge of the normal states. 
+For example, a journalist had the knowledge about the anti-terrorism as ``the words \textit{ISIS}, \textit{Syria}, \textit{America}, and \textit{France} were both high-frequent and co-occurred, while the word \textit{Russia} was not so frequent as them'' before August 2015, because ``America led the allies, including France, Germany, and United Kindom etc., to counter ISIS"\footnote{\url{https://en.wikipedia.org/wiki/American-led_intervention_in_Syria}}.
+With this knowledge about what happened and what is happening normally, the journalist can detect the event of ``Russia's anti-ISIS operation in Syria"\footnote{\url{https://en.wikipedia.org/wiki/Russian_military_intervention_in_the_Syrian_Civil_War}} when \textit{Russia} appeared more frequent than the normal and appeared with \textit{ISIS} and \textit{Syria} in September 2015. 
+After detection, the journalist would update his knowledge about what happened and what's happening for anti-terrorism.
+Comparing to the other journalists who don't have the history knowledge of anti-terrorism, the journalist with that is more likely to report the above mentioned event accurately in time. 
+%Taking another example in our study for example, the tweet ``UN declares famine in Somalia (7/20/2011)"\footnote{\url{https://en.wikipedia.org/wiki/2011_East_Africa_drought}} is related to a \textit{public security} event as the famine has the potential of relating to a war.
+%Being aware of the history knowledge, such as \textit{Vietnamese Famine of 1945}\footnote{\url{https://en.wikipedia.org/wiki/Vietnamese_Famine_of_1945}}, \textit{Dutch famine of 1944-45}\footnote{\url{https://en.wikipedia.org/wiki/Dutch_famine_of_1944-45}} caused by World War II, it's possible to detect it accurately. 
+
+It's very close for the ideal event detection method, which holds the previous mentioned two properties (\textit{organizing history data well} and \textit{self-updating}), to perform like the journalist who follows the news value theory. To implement the ideal event detection method, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
+In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
+
+%The experiments verifed that the 
+
 
 \begin{figure}
     \label{fig:modelDesc}
     \includegraphics[width=1.0\columnwidth]{img/NSDetectorExample.pdf}
-    \caption{\textsc{NSDetector}'s process flow, taking \textbf{military} related events in cyberspace as an example. \textsc{NSDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events, and updates the normal states incrementally by the detected events.}
+    \caption{\textsc{NSDetector}'s process flow, taking \textit{public security} related events in cyberspace as an example. \textsc{NSDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events, and updates the normal states incrementally by the detected events.}
 \end{figure}
 
-For example, in ideal conditions an event detection system for anti-terrorism has the knowledge about the normal state such as “the words ISIS and Syria are both high-frequent, while the word Russia is not so frequent as them”. 
-With the knowledge of normal state, the system for anti-terrorism can detect the event of “Russia's anti-ISIS op in Syria” as Russia appeared more frequent than the normal state and appeared with ISIS and Syria. 
-After detection, the ideal event detection system also updates the normal state by considering the new coming data.
-
+The contribution of this paper is mainly in three aspects:
+(1) it points out that the effective way to improve the accuracy of event detection is not only to use the recent data, but also need the historical data to support. And found that the introduction of historical data, can significantly improve the accuracy of event detection.
+(2) the a combination of historical data and recent data of the probability model NSDetector. The model can combines the historical data and recent events, used to determine the arrival of a new document is a new event, and update the knowledge of new events to the NSDetector, realize what happened and what is happening on the knowledge of the incremental updating.
+(3) we experiment with 30 million tweets benchmark Edinburgh twitter corpus show that our model and accuracy model is the highest compared to will improve the accuracy rate of 9\%; and the recall rate is the highest model compared to the accurate rate was increased by 1\%.
 
 
 \section{Related Works}
-\subsection{Event Detection}
-
-To train the normal states, the methods of existing systems can be grouped into unsupervised methods and supervised methods based on whether they .
+\textbf{Event Detection.} To train the normal states, the methods of existing systems can be grouped into unsupervised methods and supervised methods based on whether they .
 
 In the first category, the methods treat the normal states as clustered articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topics\cite{Diao:2012wj}\cite{Yan:2015wm}. 
 Taking the clustering of articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq} as an example, they model the occurred events as clusters, and link the incoming article with an existing event cluster or assign it as the new detected event.
@@ -92,10 +132,6 @@ And in the second category, the methods learn the normal states by given the kno
 
 Both categories of methods have achieved good performance on formal texts, but are hampered by the diverse and rapid changing nature of cyberspace data (e.g., twitter\cite{Asur:2011tc} and reddit\cite{singer2014evolution}).
 In the journalist metaphor of news value theory, they have the limited knowledge of normal states (aka "routine things") due to the limited history information used. 
-More specifically, 
-
-The second category, train the triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA}(\textit{But it has some problems here, these methods are used in event extraction, so what's the relationship between event extraction and event detection? and the fired example in \cite{Li2013JointEE}?}). 
-
 
 Although \cite{Wurzer:2015wq} points out that UMass\cite{Allan:2000wu} and its variants\cite{Petrovic:2010uj}\cite{petrovic2012using}\cite{Wurzer:2015wq} are the state-of-art systems on the Event Detection task for the newswire data, these systems still suffers from the lack of accuracy to applied on more general cyberspace data, such as tweets, emails, and reddit posts. 
 The underlying reason is that the normalized Topic Weighted Minimum Cost metric (\(C_{min}\)) used in the Event Detection keep balance between miss and false alarm, which cannot work well on the .
@@ -107,6 +143,7 @@ Several word frequency methods have been developed for event detection such as D
 They treat the word's document frequency along timeline as time series and do the analysis in frequency domain. 
 DFT method suffers the problem that it can not locate the time point for bursty, while wavelet analysis based method's complexity is very high, which limits its scalability. 
 
+\begin{comment}
  Text similarity based online event detection methods\cite{petrovic2010streaming}\cite{mccreadie2013scalable}  suffer from the lexical variation which means different words describe the same events.
  Similarity based method can successfully detect the tweet which is retweeted by many times, but fails to find out the event which is described from many different perspectives.
  As a result, many events are duplicately detected due to their popularities, which may bury other events and overwhelm users with duplicated unwanted content.
@@ -121,9 +158,9 @@ Diao\cite{timeUserLDA2012finding}\cite{diao2013unified} show that event detectio
 And Yan\cite{Yan:2015wm} models the bursty topic by incorporating burstiness of biterms as prior knowledge.
 But they are different from ours.
 As these models need the whole dataset as the input, they are offline detections, which is not scalability for large dynamic dataset such as microblogs.
-\subsection{Knowledge Base}
+\end{comment}
 
-\cite{faralli2015large} propose the Twixonomy Graph. 
+\textbf{Knowledge Base}. \cite{faralli2015large} propose the Twixonomy Graph. 
 
 
 %Twitter Trending Topic Classification
@@ -543,7 +580,7 @@ Tweet Number & 36,627,434 \\ \hline
     \begin{tabular}{|l|l|l|l|l|}
     \hline
     Method & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark1\end{tabular} & \begin{tabular}[c]{@{}l@{}}Precision@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}DERate(Duplicate \\ Event Rate)\end{tabular} \\ \hline
-    UMass System & 0.882 & 0.138 & 0.941 & 0.071 \\ \hline
+    UMass System\cite{Allan:2000wu} & 0.882 & 0.138 & 0.941 & 0.071 \\ \hline
     LSH & 0.824 & 0.095 & 0.803 & 0.302 \\ \hline
     TimeUserLDA & 0.353 & 0.536 & 0.071 & 0.054 \\ \hline
     Twevent & 0.824 & 0.697 & 0.641 & 0.113 \\ \hline
@@ -612,7 +649,7 @@ And 27 events ...
 
 \textbf{Baseline}
 
-UMass System
+UMass System\cite{Allan:2000wu}
 
 LSH
 
@@ -622,7 +659,7 @@ Twevent
 
 EDCoW
 
-BBTM
+BBTM\cite{yan2015probabilistic}
 
 \textbf{Model Setting}
 
