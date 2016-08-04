@@ -13,6 +13,9 @@
 \usepackage{url}
 \usepackage{xcolor}% or package color
 
+\usepackage{makecell}
+
+
 \usepackage{multirow}% for table
 
 \newtheorem{rmk}{Definition}% definition
@@ -31,8 +34,8 @@
 
 
 %主动感知的
-\title{Is That Enough to Use the Recent Data to Detect Events?}
-Revealing the Important Factors on the High Accuracy Event Detection
+%\title{Is That Enough to Use the Recent Data to Detect Events?}
+\title{Revealing the Important Factors on the High Accuracy Event Detection}
 %点明factor是什么——能准确描述历史知识的model，该model的表述能力起码能够model概念和概念之间的联系；model应该有一个实时自学习功能，即在历史知识的基础上，能在不断到来的新数据流上更新自己的知识。（“支持”恐怖组织，“打击”恐怖组织）打击恐怖组织的topic中，通常是美国和英国、法国；但是俄罗斯突然出现在该topic的列表中，说明俄罗斯参与打击恐怖组织应该被判别为一个新的事件。需要一个精确描述历史数据中概念之间联系的例子——（找到一个立场发生变化的例子，如果能在叙利亚问题上找到很好，如果不能考虑别的例子）。
 
 \maketitle
@@ -65,28 +68,6 @@ Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets
 In big data era, event detection is an important task to understand what already happened\cite{ge2015bring} and what is currently happening\cite{hughes2009twitter}\cite{sakaki2010earthquake} within the rapid evolving text stream. 
 Although many efforts have been made, the performance still needs to be enhanced as the existing methods cannot achieve high precision and high recall simultaneously, only sacrificing the precision for the recall (such as UMass\cite{Allan:2000wu}), or otherwise (such as BBTM\cite{yan2015probabilistic}).
 To analyze the reason, we go deep into the existing two kinds of methods.
-
-The first category of methods, including UMass\cite{Allan:2000wu} and BBTM\cite{yan2015probabilistic}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
-This kind methods can be implemented by clustering of articles\cite{Allan:2000wu}\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topic modeling\cite{Diao:2012wj}\cite{Yan:2015wm} in the recent time windows. 
-Taking the clustering of articles as an example, they model the occurred events as clusters, and link the incoming article with an already existed event cluster or assign it as the new detected event.
-The decision is based on whether the dissimilarity between the incoming article and existed event clusters is over the user-specified threshold. 
-
-The reason why this kind methods cannot achive high precision and high recall simultaneously lies in that they lack the accumulation of history knowledge. 
-This kind methods ``understand" the document only by the recent data and the frequencies of the data, but the ``understanding" is not so confident that they still need the specific threshold to help to make decision. 
-On the one hand, UMass\cite{Allan:2000wu} prefers the lower threshold to enlarge the recall but suffers the precision. 
-On the other hand, BBTM needs the appropriate number of topics to run the topic modelling, and detects the ``large" events that associate with many articles but ignores the ``small" ones. 
-
-The second category of methods thouroughly relies on the \textit{history data}. 
-The typical implementation is to train the event triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA} from history labeled data, then apply the trained model to detect the event related articles, which contain the triggers such as the word \textit{attacked} for the \textit{public security} events. 
-This kind methods suffer from the loss of recall. 
-There are two reasons. 
-%没有对历史数据进行很好的组织
-(1) The model does not utilize the history data sufficiently. 
-Usually, the event trigger based method mainly focus on the event related verbs, but often ignores the other word types.
-(2) The model lacks the update mechanism. 
-It only restores the history knowledge but without updating. 
-Some new event related articles may be mistakenly filtered out because not containing previous trained triggers. 
-For example, the tweet ``Russia's intervention in Syria began in September 2015" without an event trigger, which is really related to a \textit{public security} event, may be omitted by the system. 
 
 Based on the above analysis, we can make a conclusion that it's not enough to use the recent data to detect events, but not enough to only use the history data for this task either.
 We believe that the ideal event detection method should have two properties: (1) having a good mechanism to organize the history data, and being aware of what happened; (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
@@ -122,45 +103,35 @@ The contribution of this paper is mainly in three aspects:
 
 
 \section{Related Works}
-\textbf{Event Detection.} To train the normal states, the methods of existing systems can be grouped into unsupervised methods and supervised methods based on whether they .
+The first category of methods, including UMass\cite{Allan:2000wu} and BBTM\cite{yan2015probabilistic}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
+This kind methods can be implemented by clustering of articles\cite{Allan:2000wu}\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topic modeling\cite{Diao:2012wj}\cite{Yan:2015wm} in the recent time windows. 
+Taking the clustering of articles as an example, they model the occurred events as clusters, and link the incoming article with an already existed event cluster or assign it as the new detected event.
+The decision is based on whether the dissimilarity between the incoming article and existed event clusters is over the user-specified threshold. 
 
-In the first category, the methods treat the normal states as clustered articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topics\cite{Diao:2012wj}\cite{Yan:2015wm}. 
-Taking the clustering of articles\cite{Petrovic:2010uj}\cite{Wurzer:2015wq} as an example, they model the occurred events as clusters, and link the incoming article with an existing event cluster or assign it as the new detected event.
-The decision is based on whether the dissimilarity between the incoming article and existing event clusters is over the user-specified threshold. 
+The reason why this kind methods cannot achive high precision and high recall simultaneously lies in that they lack the accumulation of history knowledge. 
+This kind methods ``understand" the document only by the recent data and the frequencies of the data, but the ``understanding" is not so confident that they still need the specific threshold to help to make decision. In the journalist metaphor of news value theory, they have the limited knowledge of normal states (aka "routine things") due to the limited history information used. 
+On the one hand, UMass\cite{Allan:2000wu} prefers the lower threshold to enlarge the recall but suffers the precision. 
+On the other hand, BBTM needs the appropriate number of topics to run the topic modelling, and detects the ``large" events that associate with many articles but ignores the ``small" ones. 
 
-And in the second category, the methods learn the normal states by given the knowledge of \textit{event trigger}\cite{Li2013JointEE}\cite{Nguyen2015EventDA} (usually a single verb or entity mentions). The normal states are trained by the labeled data appeared in a fixed time window.
+The second category of methods thouroughly relies on the \textit{history data}. 
+The typical implementation is to train the event triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA} from history labeled data, then apply the trained model to detect the event related articles, which contain the triggers such as the word \textit{attacked} for the \textit{public security} events. 
+This kind methods suffer from the loss of recall. 
+There are two reasons. 
+%没有对历史数据进行很好的组织
+(1) The model does not utilize the history data sufficiently. 
+Usually, the event trigger based method mainly focus on the event related verbs, but often ignores the other word types.
+(2) The model lacks the update mechanism. 
+It only restores the history knowledge but without updating. 
+Some new event related articles may be mistakenly filtered out because not containing previous trained triggers. 
+For example, the tweet ``Russia's intervention in Syria began in September 2015" without an event trigger, which is really related to a \textit{public security} event, may be omitted by the system. 
 
-Both categories of methods have achieved good performance on formal texts, but are hampered by the diverse and rapid changing nature of cyberspace data (e.g., twitter\cite{Asur:2011tc} and reddit\cite{singer2014evolution}).
-In the journalist metaphor of news value theory, they have the limited knowledge of normal states (aka "routine things") due to the limited history information used. 
+
 
 Although \cite{Wurzer:2015wq} points out that UMass\cite{Allan:2000wu} and its variants\cite{Petrovic:2010uj}\cite{petrovic2012using}\cite{Wurzer:2015wq} are the state-of-art systems on the Event Detection task for the newswire data, these systems still suffers from the lack of accuracy to applied on more general cyberspace data, such as tweets, emails, and reddit posts. 
 The underlying reason is that the normalized Topic Weighted Minimum Cost metric (\(C_{min}\)) used in the Event Detection keep balance between miss and false alarm, which cannot work well on the .
 Usually these traditional systems set the ratio of cost between miss alarm and false alarm to 10, preferring recall to precision on detecting events.
 
-Study of event detection on text stream can be divided into three ways: word frequency based, text similarity based and topic model based.
-
-Several word frequency methods have been developed for event detection such as Discrete Fourier Transform\cite{he2007analyzingDFT}, wavelet analysis \cite{weng2011eventWavelet}.
-They treat the word's document frequency along timeline as time series and do the analysis in frequency domain. 
-DFT method suffers the problem that it can not locate the time point for bursty, while wavelet analysis based method's complexity is very high, which limits its scalability. 
-
-\begin{comment}
- Text similarity based online event detection methods\cite{petrovic2010streaming}\cite{mccreadie2013scalable}  suffer from the lexical variation which means different words describe the same events.
- Similarity based method can successfully detect the tweet which is retweeted by many times, but fails to find out the event which is described from many different perspectives.
- As a result, many events are duplicately detected due to their popularities, which may bury other events and overwhelm users with duplicated unwanted content.
-
-
-In contrast, topic model can handle the lexical variation problem with word co-occurrence\cite{blei2003latent}.
-%After \cite{blei2006dynamic} and \cite{wang2006topics} introducing time factor into topic model, a number of temporal model has been developed to different tasks.
-As many events are highly related to topics, a number of methods based on topic model have been proposed for event detection, including online detection and offline detection.
-Lau\cite{lau2012line} introduces an online topic model to track emerging events in microblogs.
-It can deal with a massive of tweets, but it doesn't filter out the tweets related to user interests.
-Diao\cite{timeUserLDA2012finding}\cite{diao2013unified} show that event detection can benefit from filtering out user interest related tweets. 
-And Yan\cite{Yan:2015wm} models the bursty topic by incorporating burstiness of biterms as prior knowledge.
-But they are different from ours.
-As these models need the whole dataset as the input, they are offline detections, which is not scalability for large dynamic dataset such as microblogs.
-\end{comment}
-
-\textbf{Knowledge Base}. \cite{faralli2015large} propose the Twixonomy Graph. 
+%\textbf{Knowledge Base}. \cite{faralli2015large} propose the Twixonomy Graph. 
 
 
 %Twitter Trending Topic Classification
@@ -229,25 +200,39 @@ As these models need the whole dataset as the input, they are offline detections
 The normal states of the specific category is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(f(c,w^{(c)}_{i})\) under the category. And we denote the normal states of category \(c\) as \(\bm{f}_c=\{<w^{(c)}_i,f(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
 \end{rmk}
 
+\begin{rmk}[The Set of Events' Candidate Words] 
+The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the words that belong to the category \(c\) in time \(t\), but are different from the normal states \(\bm{f}_c\). 
+\end{rmk}
+
+\begin{rmk}[Event Phrase] 
+Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occured in the set of events' cadidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happend in time \(t\) under the category \(c\).
+\end{rmk}
+
+\begin{rmk}[Event Related Articles] Event related articles \(\mathcal{D}_{c,t,i}\) are articles that relate to the \(i\)-th event in time \(t\) under the category \(c\), and correspond to the event phrase \(\mathcal{C}_{c,t,i}\).
+\end{rmk}
+
+
 \begin{table}
-\begin{tabular}{|c|p{0.1\columnwidth}|p{0.55\columnwidth}|} \hline
+\caption{Notations used by \textsc{NSDetector}}
+\label{tbl:notations}
+\begin{tabular}{|c|p{0.06\columnwidth}|p{0.64\columnwidth}|} \hline
 %first part: normalization initialization
-\multirow{5}{0.18\columnwidth}{Normalization Initialization} & \(G^{(0)}\) & Taxonomy's Graph in Knowledge Base\\ \cline{2-3}
+\multirow{5}{0.15\columnwidth}{Normal States Initialization} & \(G^{(0)}\) & Taxonomy's Graph in Knowledge Base\\ \cline{2-3}
 & \(G^{(1)}\) & Category-Page Bipartite Graph in Knowledge Base\\ \cline{2-3}
-& \(G^{(2)}\) & Page-Content Bipartite Graph in Knowledge Base\\ \cline{2-3}
-& \(c\) & topic related category node in \(G^{(0)}\) and \(G^{(1)}\) \\ \cline{2-3}
-& \(K_{\bm{KB}}\) & number of pre-defined topics by Knowledge Base \\ \cline{2-3}
+& \(G^{(2)}\) & Page-Content Map in Knowledge Base\\ \cline{2-3}
+& \(c\) & topic related category node in \(G^{(0)}\), \(G^{(1)}\) \\ \cline{2-3}
+& \(K_{\bm{KB}}\) & number of pre-defined topics in Knowledge Base \\ \cline{2-3}
 & \(f_{c,w}\) & word \(w\)'s normal state (chi-square score) in category \(c\) \\ \hline
 %second part: normalization maintenance
-\multirow{4}{0.18\columnwidth}{Normalization Maintenance} & \(\lambda\) & normal state weight in  NS-Prior-LDA\\ \cline{2-3}
+\multirow{4}{0.15\columnwidth}{Normal States Maintenance} & \(\lambda\) & normal state weight in  NS-Prior-LDA\\ \cline{2-3}
 & \(\tau_{c,w}\) & word \(w\)'s prior knowledge confidence for topic \(c\) in NS-Prior-LDA\\ \cline{2-3}
 & \(S_c\) & topic \(c\)'s all normal states related words \\ \cline{2-3}
 & \(K\) & number of topics in NS-Prior-LDA such as \(K>K_{\bm{KB}}\)\\ \hline
 %third part: event detection
-\multirow{5}{0.18\columnwidth}{Event Detection} & \(\mathcal{B}_{c, t}\)  & hot words set detected from topic \(k\) at time \(t\)  \\ \cline{2-3}
+\multirow{5}{0.15\columnwidth}{Event Detection} & \(\mathcal{B}_{c, t}\)  & event words set detected from topic \(c\) at time \(t\)  \\ \cline{2-3}
 & \(\mathcal{G}_{c, t}\)  & hot word graph constructed from \(\mathcal{B}_{c, t}\) \\ \cline{2-3}
 & \(\mathcal{C}_{c,t,i}\) & event \(i\)-th related words in topic \(c\) at time \(t\) \\ \cline{2-3}
-& \(\mathcal{D}_{c,t,i}\) & event \(i\)-th related tweets in topic \(c\) at time \(t\) \\ \cline{2-3}
+& \(\mathcal{D}_{c,t,i}\) & event \(i\)-th related articles in topic \(c\) at time \(t\) \\ \cline{2-3}
 & \(\rho\) & density threshold for the sub-graph constructed by event words  \\ \hline
 
 \end{tabular}
@@ -261,7 +246,10 @@ The knowledge base such as Wikipedia has the structure of classes, subclasses, i
 This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia.  
 But the existing computation on the RDF graph is often time consuming. To overcome this obtacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
 \begin{enumerate}[labelindent=\parindent,leftmargin=*]
-\item Taxonomy. Indicates that the classification relationship, for example, Society this classification page contains Politics classification page, further contains Military, and Society itself is included in the topic classifications Main;
+\item Taxonomy Graph \(G^{(0)}\). The directed edges \(G^{(0)}\) represent the class-subclass relations in the knowledge base. 
+Taking Wikipedia for example (Figure \ref{fig:NSinitializaton}), the node \textit{Main topic classifications}\footnote{\url{https://en.wikipedia.org/wiki/Category:Main_topic_classifications}} has the subclass \textit{Society}, further contains the subclass \textit{Politics}, which is the ancestor of the subclass \textit{Military}.
+This graph is constructed by Wikipedia users, and still contain
+PageRank-HITS\cite{Yan:2015wq}. 
 \item Category-Page Bipartite graph.
 \item Page-Content Maps.
 \end{enumerate}
@@ -294,28 +282,30 @@ DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank
 \begin{figure}
     \centering
     \includegraphics[width=.85\columnwidth]{img/initializationExample.pdf}  
-    \caption{Illustration on how to train normal states from wikipedia,( an approximation to the full history information).}
-    \label{fig:modelDesc}
+    \caption{Illustration on how to initialize normal states from wikipedia (an example on the initialization of the normal states about \textit{military}).}
+    \label{fig:NSinitializaton}
 \end{figure}
 
 
 \subsection{Normal States' Maintenance}
-KB-Prior-LDA
+
+\begin{comment}
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.75\columnwidth]{model/lda_tikz.pdf}
     \caption{Probabilistic model for training normal states by using history information.}
     %The convolution neural network for extracting character-level representations of words. Dashed arrows indicate a dropout layer applied before character embeddings are input to CNN.}
-    \label{fig:cnn}
+    \label{fig:NS-Prior-LDA}
 \end{figure}
+\end{comment}
 
-\ \ Our theme modeling, want to learn the first \(k\) topics with Wikipedia Article \(k\) topics as close as possible, and we will be Wikipedia article \(k\) before 1000 words) was added to the theme of the word frequency word in the subject a priori distribution on the.
+\ \ Our topic modeling, want to learn the first \(k\) topics with Wikipedia Article \(k\) topics as close as possible, and we will be Wikipedia article \(k\) before 1000 words) was added to the theme of the word frequency word in the subject a priori distribution on the.
 Learning to be the first \(k\) Subject polynomial distribution of the word, referred to as \(\phi_k \), Wikipedia article \(k \) distribution of topics for \(\tau_k \), then this formalized process is expressed as: \(\ \phi_k \sim Dir(\beta + \tau_k) \).
 Formal presentation of the explanation is: With prior knowledge \(\tau_k \) after the theme \(\phi_k \) is no longer simply rely on symmetric priori \(\beta \), different words right is not the same weight , such as a discussion of "fashion" theme in Wikipedia, it will refer to "dress", "grand", "blue", "gold" and other words, with the asymmetric priori \(\beta + \tau_k \) after in microblogging "fashion" theme "dress" the proportion will be increased in this way so that microblogging corpus theme tends to Wikipedia topic.
-\(\tau_k \) in the first \(v \) words such as formula (\ref{eq: wikiPrior}).
+\(\tau_k \) in the first \(v \) words such as formula (\ref{eq:wikiPrior}).
 Where \(S_k \) as a set of candidate words: high-quality information to use Wikipedia, we extract the theme \(\phi_k \ \) in the higher-word word frequency candidate set \(S_k \).
 We can control set \(S_k \) in size, the size of the control is usually set for 1000.
-The number of frequency \(n_{kv} \) for the word \(v \) (\ k) appears in the Wikipedia article themes of: (\ref{wikiPrior eq}).
+The number of frequency \(n_{kv} \) for the word \(v \) (\ k) appears in the Wikipedia article themes.
 If the word \(v \) does not appear in the candidate set \(S_k \), and then set a priori knowledge \(\tau_{kv} = 0 \), otherwise, the word frequency is proportional to \(n_{kv} \) with the prior knowledge of weight \(W\).
 In the latter experiment, we will be on a priori knowledge of weights \(W \) will be discussed. 
 
@@ -400,7 +390,7 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 \Return{\(\bm{n^{(w)}}\)}
 \end{algorithm}
 
-\cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}
+The line 12 in Algorithm \ref{alg:gibbsSamplingKBPriorLDA} is implemented according to \cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}, which can optimize \(\alpha \bm{m}\) for promoting NS-Prior-LDA's fitting to documents \(\mathcal{D}\). 
 
 \subsection{Detecting Events from Normal States}
 The state of attention of social issue k at time t in cyberspace is binary, namely at the peak or not at the peak. We denote it by hidden binary variable \(s_{k,t}\), which is 1 or 0. We do the inference for the hidden variable \(s_{k,t}\) according to Poisson distribution according to Reference\cite{Diao:2012wj} 10,11. If the state of attention of social issue k at time t is "not at peak", then the probability density function is 
@@ -425,7 +415,7 @@ In the above functions the symbol \(x_{k,t}\) denotes the attention of social is
 }
 \end{algorithm}
 
-
+\begin{comment}
 \begin{figure}
 \centering
 \includegraphics[height=3cm]{img/wordClusterGraph.eps}
@@ -433,7 +423,7 @@ In the above functions the symbol \(x_{k,t}\) denotes the attention of social is
 \caption{Hot words between the heat pattern forming word time window edge weight calculated by the PMI obtained between words, to obtain spectral clustering clustering clustering}
 \label{fig: windowsBurstyWordGraph}
 \end{figure}
-
+\end{comment}
 \textbf{event} phrase Mining
 % Refer to bursty.py
 \ \ Microblogging mining events can be represented by a variety of ways, a single word, phrase, or topic.
@@ -465,14 +455,13 @@ For the case of a third cluster cluster contains only a hot word, we only need t
 Ultimately, we can get the field \(k \) next time window \(t \) in the event the phrase relating to events microblogging \(\{(\mathcal{C}_{k, t, i}, \mathcal{D}_{k, t, i}) \}_{i=1}^{| \mathcal{C}_{k, t} |} \).
 
 \section{Experiments}
-\subsection{Effects of Normal States Initialization}
+\subsection{Effects of Normal States}
 We use 20newsgroups\cite{lang1995newsweeder} dataset\footnote{http://qwone.com/~jason/20Newsgroups} to check the effects of normal states initialization.
 
 
-What's NPMI? maybe can refer to \cite{Aletras2013EvaluatingTC}\cite{Rder2015ExploringTS}\footnote{https://github.com/AKSW/Palmetto}.
 \begin{table}[]
 \centering
-\caption{My caption}
+\caption{Normal State's cateogries corresponding to the 20-newsgroups corpus, and the F1 score on the classification task}
 \label{my-label}
 \begin{tabular}{|l|l|}
 \hline
@@ -495,7 +484,11 @@ talk.politics.guns       & Category:Gun politics          \\ \hline
 talk.politics.mideast    & Category:Middle East           \\ \hline
 talk.religion.misc       & Category:Religion               \\ \hline
 alt.atheism              & Category:Atheism                \\ \hline
-soc.religion.christian   & Category:Christians             \\ \hline
+soc.religion.christian   & Category:Christians             \\ \Xhline{3\arrayrulewidth}
+LDA & 0.74\\ \hline
+BOW & 0.84\\ \hline
+doc2vec & 0.73\\ \hline
+NS-Prior-LDA & 0.89\\ \hline
 \end{tabular}
 \end{table}
 
@@ -509,7 +502,7 @@ soc.religion.christian   & Category:Christians             \\ \hline
 \begin{figure}
         \centering
         \includegraphics[width=1.0\columnwidth]{img/NPMI.pdf}
-        \caption{NPMI}
+        \caption{The comparison on NPMI\cite{Aletras2013EvaluatingTC}\cite{Rder2015ExploringTS} between LDA's topics and normal states initialized from Wikipedia}
 \end{figure}
 
 
@@ -530,7 +523,7 @@ soc.religion.christian   & Category:Christians             \\ \hline
 
 \begin{table*}[ht]
 \centering
-\caption{My caption}
+\caption{Normal States initialized from Wikipedia and topical words learned from NS-Prior-LDA}
 \label{my-label}
 \scalebox{0.88}{
 \begin{tabular}{|cc|cc|cc|cc|cc|cc|}
@@ -565,9 +558,9 @@ flew & pilot & disorder & surgery & persian & libya & naval & dead & smartphones
 
 \begin{table*}[ht]
 \centering
-\caption{My caption}
-\label{my-label}
-\subtable[Twitter Dataset Statistics]{
+\caption{Event Detection Results on Edinburgh Twitter Corpus}
+\label{tbl:edinburgh_results}
+\subtable[Edinburgh Twitter Corpus Statistics]{
 \begin{tabular}{|l|r|}
 \hline
 Time range & \begin{tabular}[c]{@{}l@{}}2011/06/30\\ -2011/09/15\end{tabular} \\ \hline
@@ -590,7 +583,7 @@ Tweet Number & 36,627,434 \\ \hline
     \end{tabular}
 }
 \end{table*}
-
+\begin{comment}
 \begin{table*}[ht]
 \centering
 \caption{Events about \textit{vehicles} detected by systems between 2011-07-20 and 2011-07-30}
@@ -604,6 +597,7 @@ Tweet Number & 36,627,434 \\ \hline
 7/30/11 & \begin{tabular}[c]{@{}l@{}}Caribbean, airlines, \\ crashes, Guyana\end{tabular} & \begin{tabular}[c]{@{}l@{}}Caribbean Airlines Jet Crash-Lands In Guyana All 163 \\ Passengers, Crew Survive http://t.co/qPVD3WJ\end{tabular} & 57 \\ \hline
 \end{tabular}
 \end{table*}
+\end{comment}
 
 \begin{table*}[ht]
 \centering
@@ -623,13 +617,15 @@ Date & Event key words & Representative event tweet & \begin{tabular}[c]{@{}l@{}
 \end{tabular}
 \end{table*}
 
+\begin{comment}
 \begin{figure*}
     \label{fig:algorithm}
     \includegraphics[width=1.0\textwidth]{img/screenShot.png}
     \caption{An illustration of the time series of Military related states on Twitter dataset from 2011-06-30 to 2011-09-15.}
 \end{figure*}
+\end{comment}
 
-\subsection{Data set and experiment settings}
+\subsection{Quantitive Study}
 \textbf{Data set.} We conduct the empirical analysis on a twitter dataset which is constructed by \cite{petrovic2012using} and widely used by previous event detection researches \cite{petrovic2013can} \cite{Wurzer:2015wq}. 
 Due to the developer policy of Twitter\footnote{https://dev.twitter.com/overview/terms/policy}, \cite{petrovic2012using} only redistributes tweets' IDs\footnote{http://demeter.inf.ed.ac.uk/cross/docs/fsd\_corpus.tar.gz}.
 We collected the tweets' contents according to the IDs with the help of Twitter API. 
@@ -637,8 +633,10 @@ We collected the tweets' contents according to the IDs with the help of Twitter 
 %TODO
 The benchmark \textit{Edinburgh twitter corpus} contains 27 manually labeled events\cite{petrovic2013can}\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/Newswire_Events.tar.gz}} and 90 million tweets. Though we cannot get the whole dataset due to the limit of Twitter API, after neccessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which spans identically from 2011/06/30 to 2011/09/15, and also covers 27 labeled events.
 More details of the original dataset are described in \cite{petrovic2010edinburgh}.
-
+\begin{comment}
 20-newsgroup\footnote{http://qwone.com/~jason/20Newsgroups/}
+
+NPMI\cite{Aletras2013EvaluatingTC}\cite{Rder2015ExploringTS}\footnote{https://github.com/AKSW/Palmetto}.
 
 \textbf{Benchmark1} The first set of the ground truth about events in the corpus are provided by \cite{petrovic2013can}, which is mentioned above. 
 And 27 events ...
@@ -662,12 +660,12 @@ EDCoW
 BBTM\cite{yan2015probabilistic}
 
 \textbf{Model Setting}
-
-\subsection{Validity of Normal States}
-\textbf{Topic Coherence} \cite{roder2015exploring}
-\subsection{Topical Words Learned by NS-Prior-LDA}
-\textbf{PMI}
-\subsection{Evaluation of Detected Events}
+\end{comment}
+%\textbf{Topic Coherence} \cite{roder2015exploring}
+\subsection{Qualitative Study}
+%\textbf{PMI}
+%\subsection{Evaluation of Detected Events}
+\begin{comment}
 \textbf{Precision} Precision@Benchmark1, Precision@Benchmark2
 
 \textbf{Recall}
@@ -675,10 +673,11 @@ BBTM\cite{yan2015probabilistic}
 \textbf{Accuracy}
 
 \textbf{DERate(Duplicate Event Rate)}
-\subsection{Case Study}
+\end{comment}
+%\subsection{Case Study}
 
 
-\subsection{Application on Reddit}
+%\subsection{Application on Reddit}
 
 \section{Conclusions \& Future Work}
 
