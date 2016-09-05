@@ -285,12 +285,12 @@ The knowledge base such as Wikipedia has the structure of classes, subclasses, i
 This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia.  
 But The RDF and other methods often 
 
-\begin{enumerate}[labelindent=\parindent,leftmargin=*]
-\item Taxonomy Graph \(G^{(0)}\). The directed edges in \(G^{(0)}\) represent the class-subclass relations in the knowledge base. 
+\textbf{Taxonomy Graph \(G^{(0)}\)}. The directed edges in \(G^{(0)}\) represent the class-subclass relations in the knowledge base. 
 Taking Wikipedia for example (Figure \ref{fig:NSinitializaton}), the node \textit{Main topic classifications}\footnote{\url{https://en.wikipedia.org/wiki/Category:Main_topic_classifications}} has the subclass \textit{Society}, further contains the subclass \textit{Politics}, which is the ancestor of the subclass \textit{Military}.
-\item Category-Page Bipartite Graph \(G^{(1)}\). 
-\item Page-Content Maps \(G^{(2)}\).
-\end{enumerate}
+
+\textbf{Category-Page Bipartite Graph \(G^{(1)}\)}. 
+
+\textbf{Page-Content Maps \(G^{(2)}\)}.
 
 As \(G^{(0)}\) is not a Directed Acyclic Graph originally\cite{faralli2015large}, we need to remove the , PageRank-HITS\cite{Yan:2015wq}. 
 
