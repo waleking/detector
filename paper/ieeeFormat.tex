@@ -101,6 +101,11 @@ In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is propos
 
 But the existing computation on the RDF graph is often time consuming. To overcome this obtacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
 
+\begin{figure}[h]
+    \includegraphics[width=1.0\columnwidth]{img/NSDetectorExample.pdf}
+    \caption{\textsc{NSDetector}'s process flow, taking \textit{public security} related events in cyberspace as an example. \textsc{NSDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events, and updates the normal states incrementally by the detected events.}
+    \label{fig:modelDesc}
+\end{figure}
 
 
 The contribution of this paper is mainly in three aspects.
@@ -212,13 +217,13 @@ With the help of knowledge base's structure (detailed in sec \ref{subsec:hs_init
 
 \textit{History state} is the proposed data structure to restore the information about what happened. 
 Initially, \textit{history state} extracts category-related history data into a set of tuples, which weighs the importance of given words to the specific category, defined in Definition 1 formally. 
-Taking the \textit{military} category in  Figure \ref{fig:NSinitializaton} as an example, the history state of \textit{military} contain the words \textit{army}, \textit{military}, and \textit{shootings} etc. 
+Taking the \textit{military} category in Figure \ref{fig:modelDesc} as an example, the history state of \textit{military} contain the words \textit{army}, \textit{military}, and \textit{shootings} etc. 
 
 \textit{Recent state} is the proposed data structure to maintain the information about what's happening.
 It extracts category-related words from incoming text stream, for each time window.
-Still taking the \textit{military} category in  Figure \ref{fig:NSinitializaton} as an example, based on extracted history states, our proposed probabilistic continuous learning model \textsc{HS-Prior-LDA} can recognize the words \textit{libyan} and \textit{rebel} in the time window 2011-07-28 in the text stream are related to the category \textit{military}. 
+Still taking the \textit{military} category in  Figure \ref{fig:modelDesc} as an example, based on extracted history states, our proposed probabilistic continuous learning model \textsc{HS-Prior-LDA} can recognize the words \textit{libyan} and \textit{rebel} in the time window 2011-07-28 in the text stream are related to the category \textit{military}. 
 Furthermore the time series analysis on the neighboring recent states can recognize the set of events' candidate words, and finally detects the events in the text stream. 
-In the example of Figure 1, the words \textit{libyan} and \textit{rebel} are related to the \textit{military} event ``\#libya Libyan rebels chief is killed (2011-07-28)''.
+In the example of Figure \ref{fig:modelDesc}, the words \textit{libyan} and \textit{rebel} are related to the \textit{military} event ``\#libya Libyan rebels chief is killed (2011-07-28)''.
 
 After processing each time window's data, the history states can be incrementally updated by the recent state. 
 In this way, the proposed model utilizes the rich history data in knowledge base, and performes continous learning on the incoming text stream, which can promote the accuracy of event detection significantly. 
@@ -282,8 +287,9 @@ And section \ref{subsec:detection} interprets the high accuracy event detection 
 \subsection{History States Initialization}\label{subsec:hs_initialization}
 In this part, we discuss in detail how to initialize the normal states from the given knowledge base. 
 The knowledge base such as Wikipedia has the structure of classes, subclasses, instances, and the edges between them. 
-This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia.  
-But The RDF and other methods often 
+This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia. 
+%但是，往往在图上的计算是非常费时的。
+%But The RDF and other methods often 
 
 \textbf{Taxonomy Graph \(G^{(0)}\)}. The directed edges in \(G^{(0)}\) represent the class-subclass relations in the knowledge base. 
 Taking Wikipedia for example (Figure \ref{fig:NSinitializaton}), the node \textit{Main topic classifications}\footnote{\url{https://en.wikipedia.org/wiki/Category:Main_topic_classifications}} has the subclass \textit{Society}, further contains the subclass \textit{Politics}, which is the ancestor of the subclass \textit{Military}.
@@ -327,11 +333,7 @@ DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank
     \label{fig:NSinitializaton}
 \end{figure}
 
-\begin{figure}
-    \label{fig:modelDesc}
-    \includegraphics[width=1.0\columnwidth]{img/NSDetectorExample.pdf}
-    \caption{\textsc{NSDetector}'s process flow, taking \textit{public security} related events in cyberspace as an example. \textsc{NSDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events, and updates the normal states incrementally by the detected events.}
-\end{figure}
+
 
 
 \subsection{Recent States' Maintenance}
