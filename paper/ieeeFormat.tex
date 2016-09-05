@@ -35,11 +35,31 @@
 
 %主动感知的
 %\title{Is That Enough to Use the Recent Data to Detect Events?}
-\title{Revealing the Important Factors on the High Accuracy Event Detection}
+%\title{Revealing the Important Factors on the High Accuracy Event Detection}
+
+\title{Knowledge Base Enhanced Continous Learning for High Accuracy Event Detection}
+%基于历史的 adoptable continous learning 连续学习for high accuracy event detection
+%长轴：military方面的，三个切片，每个切片top10的词都进行展示。起始是维基的导入，连续学习产生了一个长轴。
+%关注于重要事件的积累：1，变化很大，2，相当长的稳定性。长轴上的例子，第三个切片需要第一个切片的知识。第三个切片自身产生的很准确。
+%两个例子：（1）之前学习的结果对事件检测有帮助（类似于张学良的case）；（2）可以扩展词表时新性很好，很准确；
+
 %点明factor是什么——能准确描述历史知识的model，该model的表述能力起码能够model概念和概念之间的联系；model应该有一个实时自学习功能，即在历史知识的基础上，能在不断到来的新数据流上更新自己的知识。（“支持”恐怖组织，“打击”恐怖组织）打击恐怖组织的topic中，通常是美国和英国、法国；但是俄罗斯突然出现在该topic的列表中，说明俄罗斯参与打击恐怖组织应该被判别为一个新的事件。需要一个精确描述历史数据中概念之间联系的例子——（找到一个立场发生变化的例子，如果能在叙利亚问题上找到很好，如果不能考虑别的例子）。
 
 \maketitle
 \begin{abstract}
+
+Many web applications need the real time event detection technique. But the accuracy of existing methods are still far from meeting the application requirements. 
+%should be met, 这个词应该被强化，vital
+We reaveal that the two important factors should be met, (1) having a good mechanism to organize the history data, and (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
+%NSDetector的特性应该被
+According to this guideline, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of history data. 
+In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
+Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{NSDetector}.
+\textsc{NSDetector} promotes the accuracy rate by 9\% without  sacrificing the recall rate.
+%在不牺牲召回率的情况下，将准确率相比于state-of-art提升了9%。
+
+
+\begin{comment}
 Event detection is an important task to understand what already happened and what is currently happening in the rapid evolving text stream. 
 % what happened不需要了
 % 诸多互联网的应用都迫切需要实时准确的事件检测技术。
@@ -56,50 +76,39 @@ According to this guideline, we propose \textsc{NSDetector}, a high accuracy eve
 In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
 Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{NSDetector}.
 %\textsc{NSDetector} imitates this process automatically in the event detection task, and further verify that the key to improve the accuracy of event detection lies in training the normal states well. 
+\end{comment}
 \end{abstract}
 
 %\textsc{NSDetector} imitates this process automatically in the event detection task, and further verify that the key to improve the accuracy of event detection lies in training the normal states well. 
 
 \section{Introduction}
-%\textit{``To study the abnormal is the best way of understanding the normal."}---William James
-%\textit{``The unpredictable or the rare is more newsworthy than the routine."}---Allan Bell
+Many web applications\cite{ge2015bring}\cite{hughes2009twitter}\cite{sakaki2010earthquake} need the real time event detection technique. 
+But the accuracy of existing methods are still far from meeting the application requirements. 
+The main stream of existing methods focus on monitoring the changes of the recent data\cite{Allan:2000wu}\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, and some others use the history data by word frequencies\cite{Li2013JointEE}\cite{Nguyen2015EventDA} and dictionary\cite{Twevent2012}. 
+A typical example the existing methods cannot handle well is that ``Russia's anti-ISIS operation in Syria". The word Russia, ISIS, and Syria are trivial, while Russia's anti ISIS is nontrivial because US and other Europe countries but not Russia are the countries that anti ISIS  before September 2015. 
+%这个例子应该
 
-%The event detection task always tries to find out the newsworthy messages from cyberspace. 
-In big data era, event detection is an important task to understand what already happened\cite{ge2015bring} and what is currently happening\cite{hughes2009twitter}\cite{sakaki2010earthquake} within the rapid evolving text stream. 
-Although many efforts have been made, the performance still needs to be enhanced as the existing methods cannot achieve high precision and high recall simultaneously, only sacrificing the precision for the recall (such as UMass\cite{Allan:2000wu}), or otherwise (such as BBTM\cite{yan2015probabilistic}).
-To analyze the reason, we go deep into the existing two kinds of methods.
-
-Based on the above analysis, we can make a conclusion that it's not enough to use the recent data to detect events, but not enough to only use the history data for this task either.
-We believe that the ideal event detection method should have two properties: (1) having a good mechanism to organize the history data, and being aware of what happened; (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
-
-%In our study, we find out that the key to improve the accuracy of event detection lies in training the normal states of the focused media/site/domain. Based on training normal states accurately, event detection task can be treated as finding terms, articles, or topics which are different from the normal states. 
+To handle this challenge, the important factors on the high accuracy event detection are needed: (1) having a good mechanism to organize the history data, and being aware of what happened; (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
 
 The properties of the ideal event detection method also coincide with the news value theory\cite{galtung1965structure}\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}, and ``routine events are difficult to assimilate to the news, which favours the novel, the atypical and the unusual"\cite{montgomery2007discourse}.
 Following this guideline, if the journalist knew the normal states, aka, the ``routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
 We suppose that the ideal event detection system performs like a journalist who can find news from cyberspace with the knowledge of the normal states. 
-For example, a journalist had the knowledge about the anti-terrorism as ``the words \textit{ISIS}, \textit{Syria}, \textit{America}, and \textit{France} were both high-frequent and co-occurred, while the word \textit{Russia} was not so frequent as them'' before August 2015, because ``America led the allies, including France, Germany, and United Kindom etc., to counter ISIS"\footnote{\url{https://en.wikipedia.org/wiki/American-led_intervention_in_Syria}}.
-With this knowledge about what happened and what is happening normally, the journalist can detect the event of ``Russia's anti-ISIS operation in Syria"\footnote{\url{https://en.wikipedia.org/wiki/Russian_military_intervention_in_the_Syrian_Civil_War}} when \textit{Russia} appeared more frequent than the normal and appeared with \textit{ISIS} and \textit{Syria} in September 2015. 
-After detection, the journalist would update his knowledge about what happened and what's happening for anti-terrorism.
-Comparing to the other journalists who don't have the history knowledge of anti-terrorism, the journalist with that is more likely to report the above mentioned event accurately in time. 
 %Taking another example in our study for example, the tweet ``UN declares famine in Somalia (7/20/2011)"\footnote{\url{https://en.wikipedia.org/wiki/2011_East_Africa_drought}} is related to a \textit{public security} event as the famine has the potential of relating to a war.
 %Being aware of the history knowledge, such as \textit{Vietnamese Famine of 1945}\footnote{\url{https://en.wikipedia.org/wiki/Vietnamese_Famine_of_1945}}, \textit{Dutch famine of 1944-45}\footnote{\url{https://en.wikipedia.org/wiki/Dutch_famine_of_1944-45}} caused by World War II, it's possible to detect it accurately. 
 
-It's very close for the ideal event detection method, which holds the previous mentioned two properties (\textit{organizing history data well} and \textit{self-updating}), to perform like the journalist who follows the news value theory. To implement the ideal event detection method, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
+It's very close for the ideal event detection method, which holds the previous mentioned two properties (\textit{organizing history data well} and \textit{self-updating}). To implement the ideal event detection method, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
 In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
 
-%The experiments verifed that the 
+But the existing computation on the RDF graph is often time consuming. To overcome this obtacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
 
 
-\begin{figure}
-    \label{fig:modelDesc}
-    \includegraphics[width=1.0\columnwidth]{img/NSDetectorExample.pdf}
-    \caption{\textsc{NSDetector}'s process flow, taking \textit{public security} related events in cyberspace as an example. \textsc{NSDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events, and updates the normal states incrementally by the detected events.}
-\end{figure}
 
-The contribution of this paper is mainly in three aspects:
-(1) it points out that the effective way to improve the accuracy of event detection is not only to use the recent data, but also need the historical data to support. And found that the introduction of historical data, can significantly improve the accuracy of event detection.
-(2) the a combination of historical data and recent data of the probability model NSDetector. The model can combines the historical data and recent events, used to determine the arrival of a new document is a new event, and update the knowledge of new events to the NSDetector, realize what happened and what is happening on the knowledge of the incremental updating.
-(3) we experiment with 30 million tweets benchmark Edinburgh twitter corpus show that our model and accuracy model is the highest compared to will improve the accuracy rate of 9\%; and the recall rate is the highest model compared to the accurate rate was increased by 1\%.
+The contribution of this paper is mainly in three aspects.
+(1) We reveal that there are two important factors for high accuracy event detection-- a comprehensive model that can organize history data well, and updating the model well.
+(2) We propose the probability model \textsc{NSDetector}. 
+The model can combine the history data and the recent data, further determine the arrival new document whether it represents a new event. 
+More than that, \textsc{NSDetector} has the capability to update the knowledge of what happend.
+(3) The experiment on the Edinburgh twitter corpus which contains 30 million tweets show that \textsc{NSDetector} promotes the accuracy rate by 9\% without sacrificing the recall rate.
 
 
 \section{Related Works}
@@ -139,6 +148,7 @@ Usually these traditional systems set the ratio of cost between miss alarm and f
 
 %3*4 figures, 0-11 is reorganized in the following order: 0, 1, 4, 5, 8, 9;
 %2, 3, 6, 7, 10, 11;
+\begin{comment}
 \begin{figure*}[ht]
         \centering
         \label{fig:subfig} %% label for entire figure
@@ -192,16 +202,41 @@ Usually these traditional systems set the ratio of cost between miss alarm and f
         }\hspace{1in}
         \caption{Illustration of Dirichlet distribution's probabilistic density on the 3-dimensional simplex when given different priors. (a,b,g,h) the left four subfigures illustrate the probabilistic density when given the symetric priors for Dirichlet distribution; (c,d,i,j) the central subfigures illustrate the probablistic density given ; (e,f,k,l) }
 \end{figure*}
-
+\end{comment}
 
 
 \section{Proposed Method}
-\begin{rmk}[Normal States] 
-The normal states of the specific category is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(f(c,w^{(c)}_{i})\) under the category. And we denote the normal states of category \(c\) as \(\bm{f}_c=\{<w^{(c)}_i,f(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
+Knowledge base often contains much information about what happened. 
+But the exisiting RDF model\cite{klyne2006rdf} on knowledge base lacks the mechanism to maintain the information about what's happening, especially when applied on text stream.  
+With the help of knowledge base's structure (detailed in sec \ref{subsec:hs_initialization}), we provide a  lightweight model for organizing the data in knowledge base and the data in text stream simultaneously.
+
+\textit{History state} is the proposed data structure to restore the information about what happened. 
+Initially, \textit{history state} extracts category-related history data into a set of tuples, which weighs the importance of given words to the specific category, defined in Definition 1 formally. 
+Taking the \textit{military} category in  Figure \ref{fig:NSinitializaton} as an example, the history state of \textit{military} contain the words \textit{army}, \textit{military}, and \textit{shootings} etc. 
+
+\textit{Recent state} is the proposed data structure to maintain the information about what's happening.
+It extracts category-related words from incoming text stream, for each time window.
+Still taking the \textit{military} category in  Figure \ref{fig:NSinitializaton} as an example, based on extracted history states, our proposed probabilistic continuous learning model \textsc{HS-Prior-LDA} can recognize the words \textit{libyan} and \textit{rebel} in the time window 2011-07-28 in the text stream are related to the category \textit{military}. 
+Furthermore the time series analysis on the neighboring recent states can recognize the set of events' candidate words, and finally detects the events in the text stream. 
+In the example of Figure 1, the words \textit{libyan} and \textit{rebel} are related to the \textit{military} event ``\#libya Libyan rebels chief is killed (2011-07-28)''.
+
+After processing each time window's data, the history states can be incrementally updated by the recent state. 
+In this way, the proposed model utilizes the rich history data in knowledge base, and performes continous learning on the incoming text stream, which can promote the accuracy of event detection significantly. 
+The followings definitions are the concepts used by the continous learning model \textsc{HS-Detector}. 
+
+
+\begin{rmk}[History State] 
+The history state of the specific category is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(chi(c,w^{(c)}_{i})\) under the category \(c\). 
+And we denote the history states of category \(c\) as \(\bm{h}_c=\{<w^{(c)}_i,chi(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
 \end{rmk}
 
+\begin{rmk}[Recent State] 
+The recent state at time \(t\) of the specific category \(c\) is defined by a set of tuples, and detenoted as \(\bm{r}_{c,t}=\{<w^{(c)}_i,n(c,t,w^{(c)}_{i})>\}_{i=1,...,N_c}\), in which word \(w^{(c)}_{i}\) is related to the category \(c\), and \(n(c,t,w^{(c)}_{i})\) is its document frequency in the time window \(t\).
+\end{rmk}
+
+
 \begin{rmk}[The Set of Events' Candidate Words] 
-The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the words that belong to the category \(c\) in time \(t\), but are different from the normal states \(\bm{f}_c\). 
+The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the bursty words in recent state \(\bm{r}_{c,t}\).
 \end{rmk}
 
 \begin{rmk}[Event Phrase] 
@@ -211,25 +246,29 @@ Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which 
 \begin{rmk}[Event Related Articles] Event related articles \(\mathcal{D}_{c,t,i}\) are articles that relate to the \(i\)-th event in time \(t\) under the category \(c\), and correspond to the event phrase \(\mathcal{C}_{c,t,i}\).
 \end{rmk}
 
+Section \ref{subsec:hs_initialization} explains the details of how to initialize history states from knowledge base.
+Section \ref{subsec:rs_initialization} shows how to perform continous learning for updating history states and recent states.
+And section \ref{subsec:detection} interprets the high accuracy event detection based on the processed recent states.
 
 \begin{table}
+\scriptsize
 \caption{Notations used by \textsc{NSDetector}}
 \label{tbl:notations}
-\begin{tabular}{|c|p{0.06\columnwidth}|p{0.64\columnwidth}|} \hline
+\begin{tabular}{|c|p{0.06\columnwidth}|p{0.66\columnwidth}|} \hline
 %first part: normalization initialization
-\multirow{5}{0.15\columnwidth}{Normal States Initialization} & \(G^{(0)}\) & Taxonomy's Graph in Knowledge Base\\ \cline{2-3}
+\multirow{5}{0.13\columnwidth}{History States' Initialization} & \(G^{(0)}\) & Taxonomy's Graph in Knowledge Base\\ \cline{2-3}
 & \(G^{(1)}\) & Category-Page Bipartite Graph in Knowledge Base\\ \cline{2-3}
 & \(G^{(2)}\) & Page-Content Map in Knowledge Base\\ \cline{2-3}
 & \(c\) & topic related category node in \(G^{(0)}\), \(G^{(1)}\) \\ \cline{2-3}
 & \(K_{\bm{KB}}\) & number of pre-defined topics in Knowledge Base \\ \cline{2-3}
-& \(f_{c,w}\) & word \(w\)'s normal state (chi-square score) in category \(c\) \\ \hline
+& \(h_{c,w}\) & word \(w\)'s history state (chi-square score) in category \(c\) \\ \hline
 %second part: normalization maintenance
-\multirow{4}{0.15\columnwidth}{Normal States Maintenance} & \(\lambda\) & normal state weight in  NS-Prior-LDA\\ \cline{2-3}
+\multirow{4}{0.13\columnwidth}{Normal States Maintenance} & \(\lambda\) & normal state weight in  NS-Prior-LDA\\ \cline{2-3}
 & \(\tau_{c,w}\) & word \(w\)'s prior knowledge confidence for topic \(c\) in NS-Prior-LDA\\ \cline{2-3}
 & \(S_c\) & topic \(c\)'s all normal states related words \\ \cline{2-3}
 & \(K\) & number of topics in NS-Prior-LDA such as \(K>K_{\bm{KB}}\)\\ \hline
 %third part: event detection
-\multirow{5}{0.15\columnwidth}{Event Detection} & \(\mathcal{B}_{c, t}\)  & event words set detected from topic \(c\) at time \(t\)  \\ \cline{2-3}
+\multirow{5}{0.13\columnwidth}{Event Detection} & \(\mathcal{B}_{c, t}\)  & event words set detected from topic \(c\) at time \(t\)  \\ \cline{2-3}
 & \(\mathcal{G}_{c, t}\)  & hot word graph constructed from \(\mathcal{B}_{c, t}\) \\ \cline{2-3}
 & \(\mathcal{C}_{c,t,i}\) & event \(i\)-th related words in topic \(c\) at time \(t\) \\ \cline{2-3}
 & \(\mathcal{D}_{c,t,i}\) & event \(i\)-th related articles in topic \(c\) at time \(t\) \\ \cline{2-3}
@@ -240,23 +279,25 @@ Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which 
 \end{table}
 
 
-\subsection{Normal States Initialization}
+\subsection{History States Initialization}\label{subsec:hs_initialization}
 In this part, we discuss in detail how to initialize the normal states from the given knowledge base. 
 The knowledge base such as Wikipedia has the structure of classes, subclasses, instances, and the edges between them. 
 This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia.  
-But the existing computation on the RDF graph is often time consuming. To overcome this obtacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
+But The RDF and other methods often 
+
 \begin{enumerate}[labelindent=\parindent,leftmargin=*]
-\item Taxonomy Graph \(G^{(0)}\). The directed edges \(G^{(0)}\) represent the class-subclass relations in the knowledge base. 
+\item Taxonomy Graph \(G^{(0)}\). The directed edges in \(G^{(0)}\) represent the class-subclass relations in the knowledge base. 
 Taking Wikipedia for example (Figure \ref{fig:NSinitializaton}), the node \textit{Main topic classifications}\footnote{\url{https://en.wikipedia.org/wiki/Category:Main_topic_classifications}} has the subclass \textit{Society}, further contains the subclass \textit{Politics}, which is the ancestor of the subclass \textit{Military}.
-This graph is constructed by Wikipedia users, and still contain
-PageRank-HITS\cite{Yan:2015wq}. 
-\item Category-Page Bipartite graph.
-\item Page-Content Maps.
+\item Category-Page Bipartite Graph \(G^{(1)}\). 
+\item Page-Content Maps \(G^{(2)}\).
 \end{enumerate}
+
+As \(G^{(0)}\) is not a Directed Acyclic Graph originally\cite{faralli2015large}, we need to remove the , PageRank-HITS\cite{Yan:2015wq}. 
 
 
 
 \begin{algorithm}
+\scriptsize
 \caption{Normal States Initialization from Knowledge Base}
 \label{alg:normalStatesInit}
 
@@ -286,8 +327,15 @@ DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank
     \label{fig:NSinitializaton}
 \end{figure}
 
+\begin{figure}
+    \label{fig:modelDesc}
+    \includegraphics[width=1.0\columnwidth]{img/NSDetectorExample.pdf}
+    \caption{\textsc{NSDetector}'s process flow, taking \textit{public security} related events in cyberspace as an example. \textsc{NSDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events, and updates the normal states incrementally by the detected events.}
+\end{figure}
 
-\subsection{Normal States' Maintenance}
+
+\subsection{Recent States' Maintenance}
+\label{subsec:rs_initialization}
 
 \begin{comment}
 \begin{figure}[t]
@@ -362,6 +410,7 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 \end{scriptsize}
 
 \begin{algorithm}
+\scriptsize
 \caption{NS-Prior-LDA Learning Algorithm}
 \label{alg:gibbsSamplingKBPriorLDA}
 \KwIn{Documents \(\mathcal{D}\) (a.k.a., \(\bm{w_{1:D}}\)), and normal states \(\bm{f}_{1:K_{\bm{KB}}}\)}
@@ -392,7 +441,8 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 
 The line 12 in Algorithm \ref{alg:gibbsSamplingKBPriorLDA} is implemented according to \cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}, which can optimize \(\alpha \bm{m}\) for promoting NS-Prior-LDA's fitting to documents \(\mathcal{D}\). 
 
-\subsection{Detecting Events from Normal States}
+\subsection{Detecting Events from Recent States}
+\label{subsec:detection}
 The state of attention of social issue k at time t in cyberspace is binary, namely at the peak or not at the peak. We denote it by hidden binary variable \(s_{k,t}\), which is 1 or 0. We do the inference for the hidden variable \(s_{k,t}\) according to Poisson distribution according to Reference\cite{Diao:2012wj} 10,11. If the state of attention of social issue k at time t is "not at peak", then the probability density function is 
 \(p(x_{k,t}|s_{k,t}=0)=e^{-\mu_0 }  \frac{\mu_0^{x_{k,t}}}{x_{k,t}!}\) otherwise the probability density function is \(p(x_{k,t}|s_{k,t}=0)=e^{-\mu_1 }  \frac{\mu_1^{x_{k,t}}}{x_{k,t}!}\)
 In the above functions the symbol \(x_{k,t}\) denotes the attention of social issue \(k\) at time \(t\) , the symbol A denotes the constant, \(\mu_0\) and \(\mu_1\) represent the average of \(x_{k,t}\) at peak and not at peak respectively. The state \(s_{k,t}\) is inferred from \(ratio=\frac{p(x_{k,t} |s_{k,t}=0)}{p(x_{k,t} |s_{k,t}=1)} \).In calculation, we use the log ratio to determine whether the attention is at peak as in equation (\ref{eq:logratio}). \(\log ratio>0 \) indicates that the attention of social issue \(k\) at time \(t\) is not at peak, otherwise at peak. \begin{equation}
@@ -401,6 +451,7 @@ In the above functions the symbol \(x_{k,t}\) denotes the attention of social is
 \end{equation}
 
 \begin{algorithm}
+\scriptsize
 \label{alg:eventKeywordsSearchMethod}
 \caption{Spectral Clustering Based Event Phrase Extraction}
 \label{alg:eventKeywordsSearchMethod}
@@ -458,40 +509,73 @@ Ultimately, we can get the field \(k \) next time window \(t \) in the event the
 \subsection{Effects of Normal States}
 We use 20newsgroups\cite{lang1995newsweeder} dataset\footnote{http://qwone.com/~jason/20Newsgroups} to check the effects of normal states initialization.
 
-
+\begin{comment}
 \begin{table}[]
+\scriptsize
 \centering
 \caption{Normal State's cateogries corresponding to the 20-newsgroups corpus, and the F1 score on the classification task}
 \label{my-label}
 \begin{tabular}{|l|l|}
 \hline
-comp.graphics            & Category:Computer graphics      \\ \hline
-comp.os.ms-windows.misc  & Category:Microsoft Windows      \\ \hline
-comp.sys.ibm.pc.hardware & Category:IBM personal computers \\ \hline
-comp.sys.mac.hardware    & Category:Macintosh computers    \\ \hline
-comp.windows.x           & Category:X Window System        \\ \hline
-rec.autos                & Category:Automobiles            \\ \hline
-rec.motorcycles          & Category:Motorcycles            \\ \hline
-rec.sport.baseball       & Category:Baseball               \\ \hline
-rec.sport.hockey         & Category:Hockey                 \\ \hline
-sci.crypt                & Category:Cryptography           \\ \hline
-sci.electronics          & Category:Electronics            \\ \hline
-sci.med                  & Category:Medicine               \\ \hline
-sci.space                & Category:Outer space            \\ \hline
-misc.forsale             & Category:Sales                  \\ \hline
-talk.politics.misc       & Category:Politics               \\ \hline
-talk.politics.guns       & Category:Gun politics          \\ \hline
-talk.politics.mideast    & Category:Middle East           \\ \hline
-talk.religion.misc       & Category:Religion               \\ \hline
-alt.atheism              & Category:Atheism                \\ \hline
-soc.religion.christian   & Category:Christians             \\ \Xhline{3\arrayrulewidth}
+comp.graphics            & Computer graphics      \\ \hline
+comp.os.ms-windows.misc  & Microsoft Windows      \\ \hline
+comp.sys.ibm.pc.hardware & IBM personal computers \\ \hline
+comp.sys.mac.hardware    & Macintosh computers    \\ \hline
+comp.windows.x           & X Window System        \\ \hline
+rec.autos                & Automobiles            \\ \hline
+rec.motorcycles          & Motorcycles            \\ \hline
+rec.sport.baseball       & Baseball               \\ \hline
+rec.sport.hockey         & Hockey                 \\ \hline
+sci.crypt                & Cryptography           \\ \hline
+sci.electronics          & Electronics            \\ \hline
+sci.med                  & Medicine               \\ \hline
+sci.space                & Outer space            \\ \hline
+misc.forsale             & Sales                  \\ \hline
+talk.politics.misc       & Politics               \\ \hline
+talk.politics.guns       & Gun politics          \\ \hline
+talk.politics.mideast    & Middle East           \\ \hline
+talk.religion.misc       & Religion               \\ \hline
+alt.atheism              & Atheism                \\ \hline
+soc.religion.christian   & Christians             \\ \Xhline{3\arrayrulewidth}
 LDA & 0.74\\ \hline
 BOW & 0.84\\ \hline
 doc2vec & 0.73\\ \hline
 NS-Prior-LDA & 0.89\\ \hline
 \end{tabular}
 \end{table}
+\end{comment}
 
+\begin{table}[]
+\tiny
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ &  & LDA & BOW & doc2vec & \begin{tabular}[c]{@{}l@{}}NS-Prior-\\ LDA\end{tabular} \\ \hline
+comp.graphics & Computer graphics &  &  &  &  \\ \hline
+comp.os.ms-windows.misc & Microsoft Windows &  &  &  &  \\ \hline
+comp.sys.ibm.pc.hardware & IBM personal computers &  &  &  &  \\ \hline
+comp.sys.mac.hardware & Macintosh computers &  &  &  &  \\ \hline
+comp.windows.x & X Window System &  &  &  &  \\ \hline
+rec.autos & Automobiles &  &  &  &  \\ \hline
+rec.motorcycles & Motorcycles &  &  &  &  \\ \hline
+rec.sport.baseball & Baseball &  &  &  &  \\ \hline
+rec.sport.hockey & Hockey &  &  &  &  \\ \hline
+sci.crypt & Cryptography &  &  &  &  \\ \hline
+sci.electronics & Electronics &  &  &  &  \\ \hline
+sci.med & Medicine &  &  &  &  \\ \hline
+sci.space & Outer space &  &  &  &  \\ \hline
+misc.forsale & Sales &  &  &  &  \\ \hline
+talk.politics.misc & Politics &  &  &  &  \\ \hline
+talk.politics.guns & Gun politics &  &  &  &  \\ \hline
+talk.politics.mideast & Middle East &  &  &  &  \\ \hline
+talk.religion.misc & Religion &  &  &  &  \\ \hline
+alt.atheism & Atheism &  &  &  &  \\ \hline
+soc.religion.christian & Christians &  &  &  &  \\ \hline
+In total & &  &  &  & \\ \hline
+\end{tabular}
+\end{table}
 
 \begin{figure}
         \centering
@@ -556,6 +640,30 @@ flew & pilot & disorder & surgery & persian & libya & naval & dead & smartphones
 }
 \end{table*}
 
+
+
+\begin{table}
+
+\scriptsize
+\centering
+\caption{Normal States initialized from Wikipedia and topical words learned from NS-Prior-LDA}
+\scalebox{0.95}{
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Method & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark1\end{tabular} & \begin{tabular}[c]{@{}l@{}}Precision@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}DERate\\(Duplicate \\ Event Rate)\end{tabular} \\ \hline
+    UMass System\cite{Allan:2000wu} & 0.882 & 0.138 & 0.941 & 0.071 \\ \hline
+    LSH & 0.824 & 0.095 & 0.803 & 0.302 \\ \hline
+    TimeUserLDA & 0.353 & 0.536 & 0.071 & 0.054 \\ \hline
+    Twevent & 0.824 & 0.697 & 0.641 & 0.113 \\ \hline
+    EDCoW & 0.412 & 0.756 & 0.119 & 0.290 \\ \hline
+    BBTM & 0.647 & 0.809 & 0.170 & 0.045 \\ \hline
+    \textsc{NSDetector} & 1.000 & 0.894 & 0.950 & 0.042 \\ \hline
+    \end{tabular}
+}
+\end{table}
+
+
+\begin{comment}
 \begin{table*}[ht]
 \centering
 \caption{Event Detection Results on Edinburgh Twitter Corpus}
@@ -583,7 +691,9 @@ Tweet Number & 36,627,434 \\ \hline
     \end{tabular}
 }
 \end{table*}
-\begin{comment}
+\end{comment}
+
+%\begin{comment}
 \begin{table*}[ht]
 \centering
 \caption{Events about \textit{vehicles} detected by systems between 2011-07-20 and 2011-07-30}
@@ -597,7 +707,7 @@ Tweet Number & 36,627,434 \\ \hline
 7/30/11 & \begin{tabular}[c]{@{}l@{}}Caribbean, airlines, \\ crashes, Guyana\end{tabular} & \begin{tabular}[c]{@{}l@{}}Caribbean Airlines Jet Crash-Lands In Guyana All 163 \\ Passengers, Crew Survive http://t.co/qPVD3WJ\end{tabular} & 57 \\ \hline
 \end{tabular}
 \end{table*}
-\end{comment}
+%\end{comment}
 
 \begin{table*}[ht]
 \centering
