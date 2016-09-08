@@ -267,7 +267,7 @@ Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which 
 Section \ref{subsec:hs_initialization} explains the details of how to initialize history states from knowledge base.
 Section \ref{subsec:rs_initialization} shows how to perform continous learning for updating history states and recent states.
 And section \ref{subsec:detection} interprets the high accuracy event detection based on the processed recent states.
-
+\begin{comment}
 \begin{table}
 \scriptsize
 \caption{Notations used by \textsc{NSDetector}}
@@ -295,59 +295,71 @@ And section \ref{subsec:detection} interprets the high accuracy event detection 
 \end{tabular}
 \label{symbolsInModel}
 \end{table}
+\end{comment}
 
 
 \subsection{History States Initialization}\label{subsec:hs_initialization}
-In this part, we discuss in detail how to initialize the normal states from the given knowledge base. 
+In this part, we discuss in detail how to initialize the history states from the given knowledge base. 
 The knowledge base such as Wikipedia has the structure of classes, subclasses, instances, and the edges between them. 
 This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia. 
-%但是，往往在图上的计算是非常费时的。
-%But The RDF and other methods often 
+But the reasoning and maintainence of knowledge on the graph is usually expensive\cite{broekstra2003inferencing}\cite{bursztyn2015reasoning}. 
+To make a trade-off between cost and performance, we use the lightweight data struture \textit{history state} to represent the knowledge about what happend, which is extracted from the knowledge base.
+And the knowledge base's threefold structure \(G^{(0)}\), \(G^{(1)}\), \(G^{(2)}\) benefits the extraction of history states. 
 
-\textbf{Taxonomy Graph \(G^{(0)}\)}. The directed edges in \(G^{(0)}\) represent the class-subclass relations in the knowledge base. 
+\textbf{Taxonomy Graph \(G^{(0)}\)}. The directed edges in \(G^{(0)}\) represent the \textit{class}\(\rightarrow\)\textit{subclass} relations in the knowledge base. 
 Taking Wikipedia for example (Figure \ref{fig:NSinitializaton}), the node \textit{Main topic classifications}\footnote{\url{https://en.wikipedia.org/wiki/Category:Main_topic_classifications}} has the subclass \textit{Society}, further contains the subclass \textit{Politics}, which is the ancestor of the subclass \textit{Military}.
-
-\textbf{Category-Page Bipartite Graph \(G^{(1)}\)}. 
-
-\textbf{Page-Content Maps \(G^{(2)}\)}.
-
-As \(G^{(0)}\) is not a Directed Acyclic Graph originally\cite{faralli2015large}, we need to remove the , PageRank-HITS\cite{Yan:2015wq}. 
-
-
-
-\begin{algorithm}
-\scriptsize
-\caption{Normal States Initialization from Knowledge Base}
-\label{alg:normalStatesInit}
-
-\KwIn{Taxonomy's Graph \(G^{(0)}\), Category-Page Bipartite Graph \(G^{(1)}\), Page-Content Bipartite Graph \(G^{(2)}\), topic related category node \(c\)}
-\KwOut{Normal states \(\bm{f}_c\) on topic \(c\)}
-\(Pages(c)\leftarrow \varnothing\)\\
-DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank scores. \\
-\(SuccessorNodes(c) \leftarrow \) Breadth-first-traverse(\(G^{(0)},c\))\\
-\For{\(node \in SuccessorNodes(c)\)}{
-    \(Pages(c) \leftarrow Pages(c) \cup G^{(1)}.neighbours(node)\)\\
-}
-\(WordFrequencyTable(c) \leftarrow \) do word count on the text contents of \(Pages(c)\) \\
-\(WordFrequencyTable(All) \leftarrow \) do word count on the text contents of all pages in \(G^{(2)}\).\\
-\For{word \(w\) in WordFrequencyTable(All).keys()}{
-    \(\tau_{c,w} \leftarrow \) \(w\)'s chi-square score on \(WordFrequencyTable(c)\) and \(WordFrequencyTable(All)\).
-}
-\Return{\(\bm{f}_c\)}
-\end{algorithm}
-
-
-%TODO
-
-\begin{figure}
+As \(G^{(0)}\) is not a Directed Acyclic Graph originally\cite{faralli2015large}, we remove the cycles according to nodes' PageRank-HITS\cite{Yan:2015wq} score.
+Specifically, the edges \textit{class}\(\rightarrow\)\textit{subclass} are preserved only when the node \textit{class} has the higher PageRank-HITS score than the node \textit{subclass}, which is shown in the line \ref{alg:line2inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
+After removing cycles, the taxonomy structure on the knowledge base is better represented by the directed acyclic graph \(G^{(0)'}\).
+As shown in line \ref{alg:line3inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}, by visiting the category \textit{military} in the DAG \(G^{(0)'}\), the breadth-first traverse can reach its successor sub-category nodes such as \textit{Firearms}, \textit{The World Wars}, and \textit{World War II}, etc. 
+\begin{figure}[h]
     \centering
-    \includegraphics[width=.85\columnwidth]{img/initializationExample.pdf}  
+    \includegraphics[width=.82\columnwidth]{img/initializationExample.pdf}  
     \caption{Illustration on how to initialize normal states from wikipedia (an example on the initialization of the normal states about \textit{military}).}
     \label{fig:NSinitializaton}
 \end{figure}
 
+\textbf{Category-Page Bipartite Graph \(G^{(1)}\)}. 
+The directed edges in \(G^{(1)}\) represent the \textit{class}\(\rightarrow\)\textit{instance} relations in the knowledge base.
+In wekipedia, by considering \(G^{(0)'}\) and \(G^{(1)}\) together as shown in line \ref{alg:line5inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}, we can get all the pages related to the given category. 
 
+\textbf{Page-Content Maps \(G^{(2)}\)}. 
+For a specific Wikipedia dumps version, the edges \textit{page}\(\rightarrow\)\textit{content} in \(G^{(2)}\) define a one-to-one mapping.
+There are a bulk of hisotry information restored in the wiki text content.
+In order to extract the key words in wiki page's content, which distinguish it from other pages, we use the chi-square statistics\cite{yang1997comparative}\cite{liu2009imbalanced} to measure the importance of each word for the specific page.
 
+For a given category in \(G^{(0)'}\), chi-square statistics also can evaluate the importance of each word appeared in text contents of category-related wiki pages. 
+For example, the chi-square statistic of the term \textit{shooting} under the category \textit{military} is 2888.7 which corresponds to the p-value 0.0001 of chi-square test with 1 degree of freedom.
+That means the term \textit{shooting} is highly related to the category \textit{military}.  
+To prevent the overclaim of rare word by chi-square statitistcs, the word frequency is introduced as a supplement\cite{liu2009imbalanced}, as shown in line \ref{alg:line10inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
+Finally, we can get the category's history state, which are  composed by the category related words and their corresponding importance.
+%history states衡量一个词在考虑完整历史信息的情况下，对于一个类别的重要程度，例如在military类别下面；从某种程度上讲，history state从knowledge base中抽取了对于该类别的重要特征，有助于我们将它应用到text stream当中。
+\begin{algorithm}[h]
+\scriptsize
+\caption{History State Initialization from Knowledge Base}
+\label{alg:normalStatesInit}
+
+\KwIn{Taxonomy's Graph \(G^{(0)}\), Category-Page Bipartite Graph \(G^{(1)}\), Page-Content Bipartite Graph \(G^{(2)}\), topic related category node \(c\)}
+\KwOut{History state \(\bm{h}_c\) on category \(c\)}
+\(Pages(c)\leftarrow \varnothing\)\\
+DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank scores. \label{alg:line2inNormalStatesInit}\\
+\(SuccessorNodes(c) \leftarrow \) Breadth-first-traverse(\(G^{(0)},c\))\label{alg:line3inNormalStatesInit}\\
+\For{\(node \in SuccessorNodes(c)\)}{
+    \(Pages(c) \leftarrow Pages(c) \cup G^{(1)}.neighbours(node)\) \label{alg:line5inNormalStatesInit}\\
+}
+Word frequency table \(n(c,.) \leftarrow \) do word count on the text contents of \(Pages(c)\) \\
+Word frequency table \(n(All,.) \leftarrow \) do word count on the text contents of all pages in \(G^{(2)}\).\\
+\For{word \(w\) in WordFrequencyTable(All).keys()}{
+    \(chi(c,w) \leftarrow \) \(w\)'s chi-square statistics on \(WordFrequencyTable(c)\) and \(WordFrequencyTable(All)\).\\
+    \(h_{c,w} \leftarrow n(c,w)*chi(c,w)\) \label{alg:line10inNormalStatesInit}\\
+}
+\Return{\(\bm{h}_c\)}
+\end{algorithm}
+
+Considering the full Wikipedia's contents, history state evaluates the importance of word to the concerned category accurately. 
+For example, in \textit{military}'s history state, the top  words are \textit{army}, \textit{military}, \textit{air}, \textit{command}, \textit{force}, and \textit{regiment}, etc. 
+The document which contains these words is related to the category \textit{military} with high probability. 
+We further discuss how to apply history states to the textstream on the following subsection \ref{subsec:rs_initialization}.
 
 \subsection{Recent States' Maintenance}
 \label{subsec:rs_initialization}
@@ -414,6 +426,16 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 \end{equation}
 \end{scriptsize}
 
+
+\begin{equation}
+\label{eq:KBPriorLDAgibbs}
+\begin{aligned}
+&p(z_{dn}=k|w_{dn}=v,z_{\neg{dn}},w_{\neg{dn}},\alpha\bm{m},\beta,\tau)\\
+&\ \ \propto (n^{(d)}_{dk}+\alpha m_k)\frac{n^{(w)}_{kv}+\tau_{kv}+\beta}{n^{(w)}_{k,.}+\tau_{k,.}+V\beta}
+\end{aligned}
+\end{equation}
+
+\begin{comment}
 \begin{scriptsize}
 \begin{equation}
 \label{eq:KBPriorLDAgibbs}
@@ -423,7 +445,9 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 \end{aligned}
 \end{equation}
 \end{scriptsize}
+\end{comment}
 
+\begin{comment}
 \begin{algorithm}
 \scriptsize
 \caption{NS-Prior-LDA Learning Algorithm}
@@ -453,6 +477,7 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 }
 \Return{\(\bm{n^{(w)}}\)}
 \end{algorithm}
+\end{comment}
 
 The line 12 in Algorithm \ref{alg:gibbsSamplingKBPriorLDA} is implemented according to \cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}, which can optimize \(\alpha \bm{m}\) for promoting NS-Prior-LDA's fitting to documents \(\mathcal{D}\). 
 
@@ -465,6 +490,7 @@ In the above functions the symbol \(x_{k,t}\) denotes the attention of social is
 \log ratio=-(\mu_0-\mu_1 )+x_{k,t}(\log \mu_0 -\log⁡ \mu_1)
 \end{equation}
 
+\begin{comment}
 \begin{algorithm}
 \scriptsize
 \label{alg:eventKeywordsSearchMethod}
@@ -480,6 +506,7 @@ In the above functions the symbol \(x_{k,t}\) denotes the attention of social is
     }
 }
 \end{algorithm}
+\end{comment}
 
 \begin{comment}
 \begin{figure}
@@ -607,7 +634,7 @@ In total & &  &  &  & \\ \hline
 \end{comment}
 
 
-
+\begin{comment}
 \begin{table}
 \centering
 \caption{The PMI of twitter topics learned by NS-Prior-LDA, its variant, and other baselines}
@@ -621,6 +648,7 @@ In total & &  &  &  & \\ \hline
     \end{tabular}
 \label{tbl:NS-Prior-LDA}
 \end{table}
+\end{comment}
 
 \begin{table*}[ht]
 \centering
@@ -710,7 +738,7 @@ Tweet Number & 36,627,434 \\ \hline
 \end{table*}
 \end{comment}
 
-%\begin{comment}
+\begin{comment}
 \begin{table*}[ht]
 \centering
 \caption{Events about \textit{vehicles} detected by systems between 2011-07-20 and 2011-07-30}
@@ -724,7 +752,7 @@ Tweet Number & 36,627,434 \\ \hline
 7/30/11 & \begin{tabular}[c]{@{}l@{}}Caribbean, airlines, \\ crashes, Guyana\end{tabular} & \begin{tabular}[c]{@{}l@{}}Caribbean Airlines Jet Crash-Lands In Guyana All 163 \\ Passengers, Crew Survive http://t.co/qPVD3WJ\end{tabular} & 57 \\ \hline
 \end{tabular}
 \end{table*}
-%\end{comment}
+\end{comment}
 
 \begin{table*}[ht]
 \centering
