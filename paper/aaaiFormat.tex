@@ -311,24 +311,24 @@ Taking Wikipedia for example (Figure \ref{fig:NSinitializaton}), the node \texti
 As \(G^{(0)}\) is not a Directed Acyclic Graph originally\cite{faralli2015large}, we remove the cycles according to nodes' PageRank-HITS\cite{Yan:2015wq} score.
 Specifically, the edges \textit{class}\(\rightarrow\)\textit{subclass} are preserved only when the node \textit{class} has the higher PageRank-HITS score than the node \textit{subclass}, which is shown in the line \ref{alg:line2inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
 After removing cycles, the taxonomy structure on the knowledge base is better represented by the directed acyclic graph \(G^{(0)'}\).
-As shown in line \ref{alg:line3inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}, by visiting the category \textit{military} in the DAG \(G^{(0)'}\), the breadth-first traverse can reach its successor sub-category nodes such as \textit{Firearms}, \textit{The World Wars}, and \textit{World War II}, etc. 
+As shown in line \ref{alg:line3inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}, by visiting the category \textit{Military} in the DAG \(G^{(0)'}\), the breadth-first traverse can reach its successor sub-category nodes such as \textit{Firearms}, \textit{The World Wars}, and \textit{World War II}, etc. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=.82\columnwidth]{img/initializationExample.pdf}  
-    \caption{Illustration on how to initialize normal states from wikipedia (an example on the initialization of the normal states about \textit{military}).}
+    \caption{Illustration on how to initialize history states from Wikipedia (an example on the initialization of the normal states about \textit{Military}).}
     \label{fig:NSinitializaton}
 \end{figure}
 
 \textbf{Category-Page Bipartite Graph \(G^{(1)}\)}. 
 The directed edges in \(G^{(1)}\) represent the \textit{class}\(\rightarrow\)\textit{instance} relations in the knowledge base.
-In wekipedia, by considering \(G^{(0)'}\) and \(G^{(1)}\) together as shown in line \ref{alg:line5inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}, we can get all the pages related to the given category. 
+In Wikipedia, by considering \(G^{(0)'}\) and \(G^{(1)}\) together as shown in line \ref{alg:line5inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}, we can get all the pages related to the given category. 
 
 \textbf{Page-Content Maps \(G^{(2)}\)}. 
 For a specific Wikipedia dumps version, the edges \textit{page}\(\rightarrow\)\textit{content} in \(G^{(2)}\) define a one-to-one mapping.
 There are a bulk of hisotry information restored in the wiki text content.
 In order to extract the key words in wiki page's content, which distinguish it from other pages, we use the chi-square statistics\cite{yang1997comparative}\cite{liu2009imbalanced} to measure the importance of each word for the specific page.
 
-For a given category in \(G^{(0)'}\), chi-square statistics also can evaluate the importance of each word appeared in text contents of category-related wiki pages. 
+For a given category in \(G^{(0)'}\), chi-square statistics also can evaluate the importance of each word appeared in text contents. 
 For example, the chi-square statistic of the term \textit{shooting} under the category \textit{military} is 2888.7 which corresponds to the p-value 0.0001 of chi-square test with 1 degree of freedom.
 That means the term \textit{shooting} is highly related to the category \textit{military}.  
 To prevent the overclaim of rare word by chi-square statitistcs, the word frequency is introduced as a supplement\cite{liu2009imbalanced}, as shown in line \ref{alg:line10inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
@@ -357,12 +357,59 @@ Word frequency table \(n(All,.) \leftarrow \) do word count on the text contents
 \end{algorithm}
 
 Considering the full Wikipedia's contents, history state evaluates the importance of word to the concerned category accurately. 
-For example, in \textit{military}'s history state, the top  words are \textit{army}, \textit{military}, \textit{air}, \textit{command}, \textit{force}, and \textit{regiment}, etc. 
-The document which contains these words is related to the category \textit{military} with high probability. 
-We further discuss how to apply history states to the textstream on the following subsection \ref{subsec:rs_initialization}.
+For example, in \textit{Military}'s history state, the top  words are \textit{army}, \textit{military}, \textit{air}, \textit{command}, \textit{force}, and \textit{regiment}, etc. 
+The document which contains these words is related to the category \textit{Military} with high probability. 
+We further discuss how to apply history states to the text stream on the following subsection \ref{subsec:rs_initialization}.
 
 \subsection{Recent States' Maintenance}
 \label{subsec:rs_initialization}
+In this subsection, we describe how the proposed probabilistic model \textsc{HS-Prior-LDA} utilizes the history states to learn the recent states from text stream.
+
+There are two facts inspiring \textsc{HS-Prior-LDA}. 
+(1) The topics in the document may contain history-state-like topics. 
+As an example, the tweet ``Libyan rebel chief gunned down in Benghazi (2011-07-28)'' contains the topic that is similar to the \textit{Military}'s history state.
+(2) The history-state-like topics can reuse the information  stored in the history states.
+The word \textit{libyan} in the aforementioned example tweet ranks much higher in the \textit{Military} and the \textit{Middle East} history states than the other categories' history states.
+After considering the relatedness between the remaining context and the history states, the learned topics of the example tweet include \textit{Military} and \textit{Middle East}. 
+
+The generative process of \textsc{HS-Prior-LDA} can be described as follows.
+
+\begin{enumerate}[itemsep=0mm]
+\item Draw corpus prior distribution \(\bm{m} \sim Dir(\alpha \bm{u})\), where \(\bm{u}\) is the uniform distribution.
+\item For each topic \(k \in \{1,\cdots,K\}\), 
+\begin{enumerate}[itemsep=0mm]
+\item word distribution on the topic \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\).
+\end{enumerate}
+\item For each document index \(d \in \{1,\cdots,D\}\),
+\begin{enumerate}[itemsep=0mm]
+\item topic distribution on the document \(\theta_d \sim Dir(\bm{m})\),
+\item for each word index \(n \in \{1,\cdots,N_d\}\),
+\begin{enumerate}[itemsep=0mm]
+\item word's topic assignment \(z_{dn} \sim Multinomial(\theta_d)\), 
+\item word \(w_{dn} \sim Multinomial(\phi_{z_{dn}})\). 
+\end{enumerate}
+\end{enumerate}
+
+\end{enumerate}
+
+In the above generative process, the line 2(a) is the key point to distinguish \textsc{HS-Prior-LDA} from LDA\cite{blei2003latent}, where \(\bm{\tau}_k\) is defined by Equation(\ref{eq:wikiPrior}).
+\(K_{KB}\) is the number of pre-defined history-state-like topics, and \(S_k\) is the set of words appeared in the \(k\)-th topic's history state.
+As \cite{wallach2008structured} mentioned that the asymmetric prior distribution can significantly improve the quality of topic modelling, \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\) incorporates history state into the asymmetric prior of the word distribution on topic. 
+The effect of \(\bm{\tau_k}\) is obvious, e.g., \(\tau_{Military,army}/\tau_{Military,basketball}=203\) leads to that topic \textit{Military} prefers to contain the word \textit{army} other than \textit{basketball}.
+The parameter \(\lambda\) controls how much the learned topics are similar to the history state, which can be chosen by cross-validated grid-search. 
+
+\begin{scriptsize}
+\begin{equation}
+\label{eq:wikiPrior}
+\begin{aligned}
+\tau_{kv}=
+\left\{ \begin{aligned}
+\lambda \frac{h_{kv}}{\sum_{v\in S_{k}}h_{kv}} &,v\in S_{k}\ and  \ k \leq K_{\bm{KB}} \\
+0&,v \notin S_{k} \ or \ k > K_{\bm{KB}} \\
+\end{aligned}\right.
+\end{aligned}
+\end{equation}
+\end{scriptsize}
 
 \begin{comment}
 \begin{figure}[t]
@@ -373,7 +420,7 @@ We further discuss how to apply history states to the textstream on the followin
     \label{fig:NS-Prior-LDA}
 \end{figure}
 \end{comment}
-
+\begin{comment}
 \ \ Our topic modeling, want to learn the first \(k\) topics with Wikipedia Article \(k\) topics as close as possible, and we will be Wikipedia article \(k\) before 1000 words) was added to the theme of the word frequency word in the subject a priori distribution on the.
 Learning to be the first \(k\) Subject polynomial distribution of the word, referred to as \(\phi_k \), Wikipedia article \(k \) distribution of topics for \(\tau_k \), then this formalized process is expressed as: \(\ \phi_k \sim Dir(\beta + \tau_k) \).
 Formal presentation of the explanation is: With prior knowledge \(\tau_k \) after the theme \(\phi_k \) is no longer simply rely on symmetric priori \(\beta \), different words right is not the same weight , such as a discussion of "fashion" theme in Wikipedia, it will refer to "dress", "grand", "blue", "gold" and other words, with the asymmetric priori \(\beta + \tau_k \) after in microblogging "fashion" theme "dress" the proportion will be increased in this way so that microblogging corpus theme tends to Wikipedia topic.
@@ -383,50 +430,30 @@ We can control set \(S_k \) in size, the size of the control is usually set for 
 The number of frequency \(n_{kv} \) for the word \(v \) (\ k) appears in the Wikipedia article themes.
 If the word \(v \) does not appear in the candidate set \(S_k \), and then set a priori knowledge \(\tau_{kv} = 0 \), otherwise, the word frequency is proportional to \(n_{kv} \) with the prior knowledge of weight \(W\).
 In the latter experiment, we will be on a priori knowledge of weights \(W \) will be discussed. 
+\end{comment}
 
-\begin{table}[!htbp]
-\begin{tabular}{l}
-1. Draw corpus prior distribution \(\bm{m} \sim Dir(\alpha \bm{u})\), where \(\bm{u}\)\\
- \ \ \ \ is the uniform distribution. \\
-2. For each topic \(k \in \{1,\cdots,K\}\),\\
-\ \ \ \ (a) word distribution on the topic \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\). \\
-    
-3. For each document index \(d \in \{1,...,D\}\), \\
-\ \ \ \ (a) topic distribution on the document \(\theta_d \sim Dir(\bm{m})\), \\
-\ \ \ \ (b) for each word index \(n \in \{1,\cdots,N_d\}\),\\
-\ \ \ \ \ \ \ \ i. word's topic assignment \(z_{dn} \sim Multinomial(\theta_d)\), \\
-\ \ \ \ \ \ \ \ ii. word \(w_{dn} \sim Multinomial(\phi_{z_{dn}})\). \\
-\end{tabular}
-\end{table}
-
-\begin{scriptsize}
-\begin{equation}
-\label{eq:wikiPrior}
-\begin{aligned}
-\tau_{kv}=
-\left\{ \begin{aligned}
-\lambda \frac{f_{kv}}{\sum_{v\in S_{kv}}f_{kv}} &,v\in S_{k}\ and  \ k \leq K_{\bm{KB}} \\
-0&,v \notin S_{k} \ or \ k > K_{\bm{KB}} \\
-\end{aligned}\right.
-\end{aligned}
-\end{equation}
-\end{scriptsize}
-
-\begin{scriptsize}
+To solve \textsc{HS-Prior-LDA}, the gibbs sampling is adopted to determine the hidden variable \(z_{dn}\) and the model parameter \(\phi_k\).
+In the initialization phrase of gibbs sampling for \textsc{HS-Prior-LDA}, the hidden variable \(z_{dn}\) is initialized to topic \(k\) with probability \(\hat{q}_{k|v}\) as Equation (\ref{eq:initProbability}).
+For the word \(v\) that belongs to any history state, \(\hat{q}_{k|v}\) is propotional to its importance in the history state \(\tau_{kv}\) as Eq\ref{eq:initProbability}(a). 
+For the new word \(v\) in text stream, \(\hat{q}_{k|v}\) is   set uniformly \(1/(K-K_{\bm{KB}})\) on the other topics as Eq\ref{eq:initProbability}(b,c). 
+The initialization makes sure that the learned topics are aligned to the pre-defined history states.
+\begin{scriptsize} 
 \begin{equation}
 \label{eq:initProbability}
 \begin{aligned}
 \hat{q}_{k|v}=
 \left\{ \begin{aligned}
-\frac{\tau_{kv}}{\sum_{k=1}^{K}\tau_{kv}} &,\sum_{k}\tau_{kv}>0 \\
-0&, \sum_{k}\tau_{kv}=0 \ and \ k \leq K_{\bm{KB}} \\
-1/(K-K_{\bm{KB}})&,\sum_{k}\tau_{kv}=0 \ and \ k > K_{\bm{KB}}
+\frac{\tau_{kv}}{\sum_{k=1}^{K}\tau_{kv}} &,\sum_{k}\tau_{kv}>0 & (a)\\
+0&, \sum_{k}\tau_{kv}=0 \ and \ k \leq K_{\bm{KB}} & (b)\\
+1/(K-K_{\bm{KB}})&,\sum_{k}\tau_{kv}=0 \ and \ k > K_{\bm{KB}} & (c)
 \end{aligned}\right.
 \end{aligned}
 \end{equation}
 \end{scriptsize}
 
-
+%采样公式p(z|.)，z有两部分。
+The sampling process uses the conditional probability \(p(z_{dn}=k|.)\propto (n^{(d)}_{dk}+\alpha m_k)(n^{(w)}_{kv}+\tau_{kv}+\beta)/(n^{(w)}_{k,.}+\tau_{k,.}+V\beta)\), where \(n^{(d)}_{dk}\) is the number of words in document \(d\) assigned to topic \(k\), and \(n^{(w)}_{kv}\) is the times of word \(v\) assigned to topic \(k\).
+We also optimize \(\alpha \bm{m}\) for promoting \textsc{HS-Prior-LDA}'s fitting to documents according to \cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}.\begin{comment}
 \begin{equation}
 \label{eq:KBPriorLDAgibbs}
 \begin{aligned}
@@ -434,6 +461,7 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 &\ \ \propto (n^{(d)}_{dk}+\alpha m_k)\frac{n^{(w)}_{kv}+\tau_{kv}+\beta}{n^{(w)}_{k,.}+\tau_{k,.}+V\beta}
 \end{aligned}
 \end{equation}
+\end{comment}
 
 \begin{comment}
 \begin{scriptsize}
@@ -479,73 +507,13 @@ In the latter experiment, we will be on a priori knowledge of weights \(W \) wil
 \end{algorithm}
 \end{comment}
 
-The line 12 in Algorithm \ref{alg:gibbsSamplingKBPriorLDA} is implemented according to \cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}, which can optimize \(\alpha \bm{m}\) for promoting NS-Prior-LDA's fitting to documents \(\mathcal{D}\). 
+After gibbs sampling on discrete time windows, \textsc{HS-Prior-LDA} learned all hidden topics of words.
+And for a specific word type \(w\) and its history-state-like topic assignment \(c\) in time window \(t\), its document frequency is counted as \(n(c,t,w^{(c)})\), which is the element of category \(c\)'s \(t\)-th recent state.
+Event detection on recent states is discussed in the following subsection.
 
-\subsection{Detecting Events from Recent States}
-\label{subsec:detection}
-The state of attention of social issue k at time t in cyberspace is binary, namely at the peak or not at the peak. We denote it by hidden binary variable \(s_{k,t}\), which is 1 or 0. We do the inference for the hidden variable \(s_{k,t}\) according to Poisson distribution according to Reference\cite{Diao:2012wj} 10,11. If the state of attention of social issue k at time t is "not at peak", then the probability density function is 
-\(p(x_{k,t}|s_{k,t}=0)=e^{-\mu_0 }  \frac{\mu_0^{x_{k,t}}}{x_{k,t}!}\) otherwise the probability density function is \(p(x_{k,t}|s_{k,t}=0)=e^{-\mu_1 }  \frac{\mu_1^{x_{k,t}}}{x_{k,t}!}\)
-In the above functions the symbol \(x_{k,t}\) denotes the attention of social issue \(k\) at time \(t\) , the symbol A denotes the constant, \(\mu_0\) and \(\mu_1\) represent the average of \(x_{k,t}\) at peak and not at peak respectively. The state \(s_{k,t}\) is inferred from \(ratio=\frac{p(x_{k,t} |s_{k,t}=0)}{p(x_{k,t} |s_{k,t}=1)} \).In calculation, we use the log ratio to determine whether the attention is at peak as in equation (\ref{eq:logratio}). \(\log ratio>0 \) indicates that the attention of social issue \(k\) at time \(t\) is not at peak, otherwise at peak. \begin{equation}
-\label{eq:logratio}
-\log ratio=-(\mu_0-\mu_1 )+x_{k,t}(\log \mu_0 -\log⁡ \mu_1)
-\end{equation}
+%Text stream evolves more quickly with time than knowledge base.
+%For example, recent state of Military contain .
 
-\begin{comment}
-\begin{algorithm}
-\scriptsize
-\label{alg:eventKeywordsSearchMethod}
-\caption{Spectral Clustering Based Event Phrase Extraction}
-\label{alg:eventKeywordsSearchMethod}
-\KwIn{\(\mathcal{B}_{k,t},\mathcal{G}_{k,t},\rho\)}
-\KwOut{\(\mathcal{C}_{k,t}\)}
-\(n_{k,t}\)=number of connected component in \(\mathcal{G}_{k,t}\)\\
-\For{\(n \in \{ n_{k,t}, \cdots, |\mathcal{G}_{k,t}|\}\) }{
-    \(\mathcal{C}_{k,t}=SpectralClustering(\mathcal{G}_{k,t},n)\)\\
-    \If{\(min_{i\in \{1,\cdots,n\}} Density(\mathcal{C}_{k,t,i},\mathcal{G}_{k,t})>\rho\)}{
-        return \(\mathcal{C}_{k,t}\)
-    }
-}
-\end{algorithm}
-\end{comment}
-
-\begin{comment}
-\begin{figure}
-\centering
-\includegraphics[height=3cm]{img/wordClusterGraph.eps}
-%todo
-\caption{Hot words between the heat pattern forming word time window edge weight calculated by the PMI obtained between words, to obtain spectral clustering clustering clustering}
-\label{fig: windowsBurstyWordGraph}
-\end{figure}
-\end{comment}
-\textbf{event} phrase Mining
-% Refer to bursty.py
-\ \ Microblogging mining events can be represented by a variety of ways, a single word, phrase, or topic.
-Here we use the form of phrase, said event.
-In this paper, the phrase indicates that the event is due to the fact that: the same period of time when there are multiple areas of internal hot words appear, a collection of hot words \(\mathcal{B}_{k, t} \) between the hot words great probability is interrelated. For example, observed "mac", "os", "lion" three words are in a state of emergency.
-In fact, the state of emergency three words is to publish a new system "mac os lion" event caused by Apple, in order to find the association between words and events, we use spectral clustering based search methods.
-
-As shown in Figure \ref{fig: windowsBurstyWordGraph} below, we will one area, a hot word of the time window and hot words between to diagram.
-Hot words set \(\mathcal{B}_{k, t} \) formed in FIG using \textbf{hot word graph} \(\mathcal{G}_{k, t} = (\mathcal{B}_{k, t}, \mathcal{E}_{k, t}) \) indicates,
-\(\mathcal{E}_{k, t} = \{(a, b) | a \in \mathcal{B}_{k, t}, b \in \mathcal{B}_{k, t }, PMI (\mathcal{D}_{k, t}, a, b)> 0 \} \), where \(PMI (\mathcal{D}_{k, t}, a, b) \) the field \(k \) time window \(t \) related microblog \(\mathcal{D}_{k, t} \) on the word \(a\) and the word \(b\) point metric information between each other.
-% Refer to bursty.py getSimGraph () function
-
-Given a field \(k\) and the time window \(t\), in which the number of events can not be determined in advance.
-The two most extreme situations are: events coarse granularity, said the event is equal to the number of Figure \(\mathcal{G}_{k, t} \) in the number of connected components; events finer granularity display, event number equal to \(\mathcal{G}_{k, t} \) the number of points.
-To do this, we use the Density to the degree of density of quantum graphs \(2 \#Edge / (\# Node \ cdot (\# Node-1)) \), the more the greater if the edge density in the range of Density in \((0,1] \).
-Density can be a good indicator to determine the size indicates the event: too many unrelated phrases to put together an event can not be represented, too fine particle size, such as a single word can represent only part of the event; only in close co-occurrence of the phrase to a reasonable It indicates that the event granularity.
-To this end, we have designed events phrase search algorithm \ref{alg:eventKeywordsSearchMethod}: We try to find a reasonable number of spectral clustering Clustering \(n \), let \(n \) from a smaller value ( event corresponds to coarser granularity representation) to start the search, then the most likely cluster cluster size is too large, its performance is the clustering results in one or more small Density indicators; continue to increase the number of clusters \(n \), the event represents reduced size, reduced the size of clusters of clusters, thus making the Density index increases; when all cluster clustering Density indicators are larger than the threshold \(\tau \), the search terminates, returning clustering results \(\mathcal{C}_{k, t}\).
-As the above process algorithm \ref{alg:eventKeywordsSearchMethod} description line 2 to line 5, we use in practice \(\rho = 0.6 \).
-We call \(\mathcal{C}_{k, t} \) results in each cluster to cluster \textbf{event} phrase.
-
-\textbf{detected events related to micro-blog}
-\ \
-By algorithm \ref{alg:eventKeywordsSearchMethod} find art \(k \) time window \ \(t \) within the \(| \mathcal{C}_{k, t} | \) events phrase later, you can also further find each event and the corresponding event phrase microblogging.
-We looked at the first \(i \) events phrase \(\mathcal{C}_{k, t, i} \),
-The phrase based on the number of elements distinguish the event, there are three situations: (1) the phrase event more than two hot words, he said while the event is not a phrase between any two words We have a very strong relationship between the co-occurrence, so just pay attention to the co-occurrence relationship stronger side; (2) event phrase has two hot words; (3) the event is only a hot word in the phrase.
-Weibo text length is shorter, not all of the microblogging event will include the phrase \(\mathcal{C}_{k, t, i} \) in all the words.
-Such as those on "Apple released the new system mac os lion" event, the event phrase "mac", "os", "lion" does not need to appear in all of the micro-Bo, just check the co-occurrence of a strong relationship between the two words appear together whether in an article in the field \(k \) time window \(t \) micro-Bo: If there is, then added to the events related to the collection \(\mathcal{D}_{k, t, i} \) in.
-For the case of a third cluster cluster contains only a hot word, we only need to identify areas \(k \) contains the hot word of all micro-blog, and add the event to the relevant set \(\mathcal{D}_{k, t, i} \) in.
-Ultimately, we can get the field \(k \) next time window \(t \) in the event the phrase relating to events microblogging \(\{(\mathcal{C}_{k, t, i}, \mathcal{D}_{k, t, i}) \}_{i=1}^{| \mathcal{C}_{k, t} |} \).
 
 \section{Experiments}
 \subsection{Effects of Normal States}
@@ -592,38 +560,40 @@ NS-Prior-LDA & 0.89\\ \hline
 \centering
 \caption{My caption}
 \label{my-label}
-\begin{tabular}{|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|}
 \hline
- &  & LDA & BOW & doc2vec & \begin{tabular}[c]{@{}l@{}}NS-Prior-\\ LDA\end{tabular} \\ \hline
-comp.graphics & Computer graphics &  &  &  &  \\ \hline
-comp.os.ms-windows.misc & Microsoft Windows &  &  &  &  \\ \hline
-comp.sys.ibm.pc.hardware & IBM personal computers &  &  &  &  \\ \hline
-comp.sys.mac.hardware & Macintosh computers &  &  &  &  \\ \hline
-comp.windows.x & X Window System &  &  &  &  \\ \hline
-rec.autos & Automobiles &  &  &  &  \\ \hline
-rec.motorcycles & Motorcycles &  &  &  &  \\ \hline
-rec.sport.baseball & Baseball &  &  &  &  \\ \hline
-rec.sport.hockey & Hockey &  &  &  &  \\ \hline
-sci.crypt & Cryptography &  &  &  &  \\ \hline
-sci.electronics & Electronics &  &  &  &  \\ \hline
-sci.med & Medicine &  &  &  &  \\ \hline
-sci.space & Outer space &  &  &  &  \\ \hline
-misc.forsale & Sales &  &  &  &  \\ \hline
-talk.politics.misc & Politics &  &  &  &  \\ \hline
-talk.politics.guns & Gun politics &  &  &  &  \\ \hline
-talk.politics.mideast & Middle East &  &  &  &  \\ \hline
-talk.religion.misc & Religion &  &  &  &  \\ \hline
-alt.atheism & Atheism &  &  &  &  \\ \hline
-soc.religion.christian & Christians &  &  &  &  \\ \hline
-In total & &  &  &  & \\ \hline
+ &  & LDA & BOW  & \begin{tabular}[c]{@{}l@{}}NS-Prior-\\ LDA\end{tabular} \\ \hline
+comp.graphics & Computer graphics &  &  &    \\ \hline
+comp.os.ms-windows.misc & Microsoft Windows &  &  &    \\ \hline
+comp.sys.ibm.pc.hardware & IBM personal computers &  &  &    \\ \hline
+comp.sys.mac.hardware & Macintosh computers &  &  &    \\ \hline
+comp.windows.x & X Window System &  &  &    \\ \hline
+rec.autos & Automobiles &  &  &    \\ \hline
+rec.motorcycles & Motorcycles &  &  &    \\ \hline
+rec.sport.baseball & Baseball &  &  &    \\ \hline
+rec.sport.hockey & Hockey &  &  &    \\ \hline
+sci.crypt & Cryptography &  &  &    \\ \hline
+sci.electronics & Electronics &  &  &    \\ \hline
+sci.med & Medicine &  &  &    \\ \hline
+sci.space & Outer space &  &  &    \\ \hline
+misc.forsale & Sales &  &  &    \\ \hline
+talk.politics.misc & Politics &  &  &    \\ \hline
+talk.politics.guns & Gun politics &  &  &    \\ \hline
+talk.politics.mideast & Middle East &  &  &   \\ \hline
+talk.religion.misc & Religion &  &  &    \\ \hline
+alt.atheism & Atheism &  &  &    \\ \hline
+soc.religion.christian & Christians &  &   &  \\ \hline
+In total &  &  &  & \\ \hline
 \end{tabular}
 \end{table}
 
+\begin{comment}
 \begin{figure}
         \centering
         \includegraphics[height=4.0cm]{img/pmi.pdf}
         \caption{The quality of all twitter topics learned by NS-Prior-LDA increases with normal states weight (\(\lambda\)) before \(\lambda=12.8\). The optimized PMI is gained with moderate normal states weight when considering topics \(k\leq K_{\bm{KB}}\) and topics \(k > K_{\bm{KB}}\) together.}
 \end{figure}
+\end{comment}
 
 \begin{comment}
 \begin{figure}
@@ -670,16 +640,6 @@ aviation & boat & patient & fat & egyptian & \#egypt & forces & police & game & 
 flying & airport & clinical & tips & ibn & news & squadron & war & app & blackberry & xbox &iphone\scriptsize(2820)\\
 pilot & force & symptoms & treatment & jerusalem & \#israel & infantry & libyan & iphone & tablet & mode & time\\
 squadron & fly & cancer & body & syria & world & battle & attack & htc & apps & arcade & \textcolor{red}{\textit{ps3}}\\
-flights & hurricane & cells & healthy & iraq & syria & commander & u.s. & smartphone & free & wii & trailer\\
-pilots & navy & blood & study & palestinian & protest & ship & gaddafi & phones & \#android & multiplayer & online\\
-raf & flying & therapy & pain & syrian & israeli & corps & army & blackberry & htc & sega & hours\\
-airways & aircraft & drug & exercise & iranian & egypt & navy & forces & apps & google & console & ipad\\
-fighter & \textcolor{red}{\textit{irene}} & medicine & \#health & ottoman & al & brigade & pakistan & ipad & galaxy & enemies & app\\
-boeing & crew & brain & natural & islamic & syrian & battalion & afghanistan & gsm & ios & characters & player\\
-runway & sky & care & disease & iraqi & protesters & lieutenant & military & lte & store & playable & wii\\
-force & crash & syndrome & acne & abu & arab & aircraft & attacks & symbian & windows & character & ops\\
-crashed & jet & infection & hair & jewish & rights & officer & troops & devices & mac & video & download\\
-flew & pilot & disorder & surgery & persian & libya & naval & dead & smartphones & phones & graphics & nintendo\\
 \hline
 \end{tabular}
 }
@@ -696,7 +656,7 @@ flew & pilot & disorder & surgery & persian & libya & naval & dead & smartphones
     \begin{tabular}{|l|l|l|l|l|}
     \hline
     Method & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark1\end{tabular} & \begin{tabular}[c]{@{}l@{}}Precision@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}DERate\\(Duplicate \\ Event Rate)\end{tabular} \\ \hline
-    UMass System\cite{Allan:2000wu} & 0.882 & 0.138 & 0.941 & 0.071 \\ \hline
+    UMass System & 0.882 & 0.138 & 0.941 & 0.071 \\ \hline
     LSH & 0.824 & 0.095 & 0.803 & 0.302 \\ \hline
     TimeUserLDA & 0.353 & 0.536 & 0.071 & 0.054 \\ \hline
     Twevent & 0.824 & 0.697 & 0.641 & 0.113 \\ \hline
@@ -706,7 +666,7 @@ flew & pilot & disorder & surgery & persian & libya & naval & dead & smartphones
     \end{tabular}
 }
 \end{table}
-
+\cite{Allan:2000wu}
 
 \begin{comment}
 \begin{table*}[ht]
@@ -756,14 +716,11 @@ Tweet Number & 36,627,434 \\ \hline
 
 \begin{table*}[ht]
 \centering
-\caption{Events about \textit{military} detected by systems between 2011-07-20 and 2011-07-30}
+\caption{Events about \textit{military} detected by systems between 2011-07-22 and 2011-07-30}
 \label{my-label}
 \begin{tabular}{|l|L{3cm}|l|l|}
 \hline
 Date & Event key words & Representative event tweet & \begin{tabular}[c]{@{}l@{}}Number of \\ event tweet\end{tabular} \\ \hline
-7/20/11 & \begin{tabular}[c]{@{}l@{}}Serbia, crimes, \\ fugitive, arrests\end{tabular} & Serbia: Serbia arrests last war crimes fugitive-TV- Reuters & 27 \\ \hline
-7/20/11 & Somalia, famine & \begin{tabular}[c]{@{}l@{}}UN declares famine in Somalia. What can we do to save \\ 3.7million lives? http://bit.ly/r1Rq7R\end{tabular} & 89 \\ \hline
-7/21/11 & \begin{tabular}[c]{@{}l@{}}U.S., military, \\accept, gay, \\lesbian, openly\end{tabular} & \begin{tabular}[c]{@{}l@{}}RT @cnnbrk: Pentagon is set to certify that the U.S. military \\ is prepared to accept openly gay and lesbian service members \\ \#dadt\end{tabular} & 20 \\ \hline
 7/22/11 & \begin{tabular}[c]{@{}l@{}}Norway, Oslo,\\ attacks, bombing\end{tabular} & \begin{tabular}[c]{@{}l@{}}Terror Attacks Devastate Norway: A bomb ripped through \\ government offices in Oslo and a gunman...˙http://dlvr.it/cLbk8\end{tabular} & 557 \\ \hline
 7/23/11 & Gunman, rink & \begin{tabular}[c]{@{}l@{}}Gunman Kills Self, 5 Others at Texas Roller Rink \\ http://dlvr.it/cLcTH\end{tabular} & 43 \\ \hline
 7/26/11 & \begin{tabular}[c]{@{}l@{}}Kandahar, mayor, \\ suicide, attack\end{tabular} & \begin{tabular}[c]{@{}l@{}}TELEGRAPH{]}: Kandahar mayor killed by Afghan suicide \\ bomber: The mayor of Kandahar, the biggest city in south \_\end{tabular} & 25 \\ \hline
