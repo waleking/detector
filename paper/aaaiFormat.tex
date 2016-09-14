@@ -44,7 +44,7 @@
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-\title{Knowledge Base Enhanced Continous Learning for High Accuracy Event Detection}
+\title{Lightweight Transfer Learning from Knowledge Base to Text Stream for High Accurate Event Detection}
 \maketitle
 
 
@@ -60,7 +60,6 @@
 %点明factor是什么——能准确描述历史知识的model，该model的表述能力起码能够model概念和概念之间的联系；model应该有一个实时自学习功能，即在历史知识的基础上，能在不断到来的新数据流上更新自己的知识。（“支持”恐怖组织，“打击”恐怖组织）打击恐怖组织的topic中，通常是美国和英国、法国；但是俄罗斯突然出现在该topic的列表中，说明俄罗斯参与打击恐怖组织应该被判别为一个新的事件。需要一个精确描述历史数据中概念之间联系的例子——（找到一个立场发生变化的例子，如果能在叙利亚问题上找到很好，如果不能考虑别的例子）。
 
 \begin{abstract}
-
 Many web applications need the real time event detection technique. But the accuracy of existing methods are still far from meeting the application requirements. 
 %should be met, 这个词应该被强化，vital
 We reaveal that the two important factors should be met, (1) having a good mechanism to organize the history data, and (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
@@ -225,7 +224,7 @@ Usually these traditional systems set the ratio of cost between miss alarm and f
 \section{Proposed Method}
 Knowledge base often contains much information about what happened. 
 But the exisiting RDF model\cite{klyne2006rdf} on knowledge base lacks the mechanism to maintain the information about what's happening, especially when applied on text stream.  
-With the help of knowledge base's structure (detailed in sec \ref{subsec:hs_initialization}), we provide a  lightweight model for organizing the data in knowledge base and the data in text stream simultaneously.
+With the help of knowledge base's structure (detailed in sec \ref{subsec:hs_initialization}), we provide a  lightweight model to transfer the information in knowledge base to text stream.
 
 \textit{History state} is the proposed data structure to restore the information about what happened. 
 Initially, \textit{history state} extracts category-related history data into a set of tuples, which weighs the importance of given words to the specific category, defined in Definition 1 formally. 
@@ -253,7 +252,7 @@ The recent state at time \(t\) of the specific category \(c\) is defined by a se
 
 
 Section \ref{subsec:hs_initialization} explains the details of how to initialize history states from knowledge base.
-Section \ref{subsec:rs_initialization} shows how to perform continous learning for updating history states and recent states.
+Section \ref{subsec:rs_initialization} shows how to perform transfer learning for recent states.
 And section \ref{subsec:detection} interprets the high accuracy event detection based on the processed recent states.
 \begin{comment}
 \begin{table}
@@ -303,7 +302,7 @@ As shown in line \ref{alg:line3inNormalStatesInit} of Algorithm \ref{alg:normalS
 \begin{figure}[h]
     \centering
     \includegraphics[width=.82\columnwidth]{img/initializationExample.pdf}  
-    \caption{Illustration on how to initialize history states from Wikipedia (an example on the initialization of the normal states about \textit{Military}).}
+    \caption{Illustration on how to initialize history states from Wikipedia, taking \textit{Military} as an example.}
     \label{fig:NSinitializaton}
 \end{figure}
 
@@ -331,7 +330,7 @@ Finally, we can get the category's history state, which are  composed by the cat
 \KwOut{History state \(\bm{h}_c\) on category \(c\)}
 \(Pages(c)\leftarrow \varnothing\)\\
 DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank scores. \label{alg:line2inNormalStatesInit}\\
-\(SuccessorNodes(c) \leftarrow \) Breadth-first-traverse(\(G^{(0)},c\))\label{alg:line3inNormalStatesInit}\\
+\(SuccessorNodes(c) \leftarrow \) Breadth-first-traverse(\(G^{(0)'},c\))\label{alg:line3inNormalStatesInit}\\
 \For{\(node \in SuccessorNodes(c)\)}{
     \(Pages(c) \leftarrow Pages(c) \cup G^{(1)}.neighbours(node)\) \label{alg:line5inNormalStatesInit}\\
 }
@@ -511,29 +510,22 @@ The remaining time series analysis and text stream mining includes three phases:
 The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the bursty words in recent state \(\bm{r}_{c,t}\).
 \end{rmk}
 
-\begin{rmk}[Event Phase] 
+\begin{rmk}[Event Phrase] 
 Event phase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occured in the set of events' cadidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happend in time \(t\) under the category \(c\).
 \end{rmk}
 
+\begin{comment}
 \begin{rmk}[Event Related Articles] Event related articles \(\mathcal{D}_{c,t,i}\) are articles that relate to the \(i\)-th event in time \(t\) under the category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
 \end{rmk}
-
-\textbf{detected events related to micro-blog}
-\ \
-By algorithm \ref{alg:eventKeywordsSearchMethod} find art \(k \) time window \ \(t \) within the \(| \mathcal{C}_{k, t} | \) events phrase later, you can also further find each event and the corresponding event phrase microblogging.
-We looked at the first \(i \) events phrase \(\mathcal{C}_{k, t, i} \),
-The phrase based on the number of elements distinguish the event, there are three situations: (1) the phrase event more than two hot words, he said while the event is not a phrase between any two words We have a very strong relationship between the co-occurrence, so just pay attention to the co-occurrence relationship stronger side; (2) event phrase has two hot words; (3) the event is only a hot word in the phrase.
-Weibo text length is shorter, not all of the microblogging event will include the phrase \(\mathcal{C}_{k, t, i} \) in all the words.
-Such as those on "Apple released the new system mac os lion" event, the event phrase "mac", "os", "lion" does not need to appear in all of the micro-Bo, just check the co-occurrence of a strong relationship between the two words appear together whether in an article in the field \(k \) time window \(t \) micro-Bo: If there is, then added to the events related to the collection \(\mathcal{D}_{k, t, i} \) in.
-For the case of a third cluster cluster contains only a hot word, we only need to identify areas \(k \) contains the hot word of all micro-blog, and add the event to the relevant set \(\mathcal{D}_{k, t, i} \) in.
-Ultimately, we can get the field \(k \) next time window \(t \) in the event the phrase relating to events microblogging \(\{(\mathcal{C}_{k, t, i}, \mathcal{D}_{k, t, i}) \}_{i=1}^{| \mathcal{C}_{k, t} |} \).
+\end{comment}
 
 
 
 
 \section{Experiments}
 \subsection{Effects of History States and Recent States}
-Firstly, we demonstrate the effectiveness of history states. 
+Firstly, we demonstrate the effectiveness of history states  initialized from knowledge base and recent states learned by transfer learning. 
+
 \textbf{Knowledge Base.} 
 We construct the taxonomy graph \(G^{(0)}\), the category-page bipartite graph \(G^{(1)}\) from the latest dump of category links\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-categorylinks.sql.gz}} and the page-content map \(G^{(2)}\) from Wikipedia pages\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles.xml.bz2 }}.
 We set \(K_{KB}=100\), which means 100 categories are selected manually to cover the topics of Wikipedia and the target corpus as widely as possible. 
@@ -543,7 +535,8 @@ And the mid categories, which reflect the main interests of the target corpus, a
 %Other knowledge bases which have the above mentioned threefold structure are also available for conducting.
 
 \textbf{Text Stream Dataset.} We conduct the empirical analysis on a text stream benchmark \textit{Edinburgh twitter corpus} which is constructed by \cite{petrovic2012using} and widely used by previous event detection researches \cite{petrovic2013can} \cite{Wurzer:2015wq}. 
-Due to the developer policy of Twitter\footnote{\url{https://dev.twitter.com/overview/terms/policy}}, \cite{petrovic2012using} only redistributes tweets' IDs\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/fsd_corpus.tar.gz}}.
+Due to the developer policy of Twitter, \cite{petrovic2012using} only redistributes tweets' IDs\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/fsd_corpus.tar.gz}}.
+%\footnote{\url{https://dev.twitter.com/overview/terms/policy}}
 We collected the tweets' contents according to the IDs with the help of Twitter API. 
 Though we cannot get the whole dataset due to the limit of Twitter API, after neccessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which spans identically from 2011/06/30 to 2011/09/15.
 More details of the original dataset are described in \cite{petrovic2010edinburgh}.
@@ -552,7 +545,14 @@ More details of the original dataset are described in \cite{petrovic2010edinburg
 The history states are initialized on the pre-defined categories on the knowledge base as Algorithm \ref{alg:normalStatesInit}.
 For \textsc{HS-Prior-LDA}, \(K\) is set to be 200, which means \textsc{HS-Prior-LDA} learned 100 history-state-like topics and 100 other topics.
 After cross-validated grid-search, \(\lambda\) is set to be 12.8. The other parameters are set as \(\alpha=0.1\), \(\beta=0.005\).
-We do continous learning on the 
+We run \textsc{HS-Prior-LDA} window by window on text stream, and learn specific categories' recent states.
+This process is illustrated by Table \ref{tbl:historyStates}. 
+
+We compare the topic coherence of history states with the topics learned from Wikipedia by LDA in terms of NPMI\cite{Rder2015ExploringTS}.
+Different from traditional experiments that only compute the topic coherence of top words, we want to check whether  it can hold for more words.
+Due to the limit of NPMI computing module\footnote{\url{https://github.com/AKSW/Palmetto}}, which computes the coherence of up to 10 words each time, we divide the top 100 words into 20 groups. 
+
+
 %如图（topic）中，能够从Military*中学习出tweet（20110728）话题中包含libyan。
 
 
@@ -641,7 +641,7 @@ In total &  &  &  & \\ \hline
 \begin{figure}
         \centering
         \includegraphics[width=1.0\columnwidth]{img/NPMI.pdf}
-        \caption{The comparison on NPMI\cite{Aletras2013EvaluatingTC}\cite{Rder2015ExploringTS} between LDA's topics and normal states initialized from Wikipedia}
+        \caption{The comparison on NPMI between LDA's topics and history states initialized from Wikipedia.}
 \end{figure}
 %\end{comment}
 
@@ -664,8 +664,7 @@ In total &  &  &  & \\ \hline
 
 \begin{table*}[ht]
 \centering
-\caption{Normal States initialized from Wikipedia and topical words learned from HS-Prior-LDA}
-\label{my-label}
+\caption{History States initialized from Wikipedia and topical words learned from HS-Prior-LDA}
 \scalebox{0.76}{
 \begin{tabular}{|cc|cc|cc|cc|cc|cc|}
 \hline
@@ -685,6 +684,7 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps & 
 \hline
 \end{tabular}
 }
+\label{tbl:historyStates}
 \end{table*}
 
 
@@ -739,6 +739,7 @@ Tweet Number & 36,627,434 \\ \hline
 \begin{table*}[ht]
 \centering
 \caption{Events about \textit{military} detected by systems between 2011-07-22 and 2011-07-28}
+\scalebox{0.76}{
 \label{my-label}
 \begin{tabular}{|l|L{3cm}|l|l|}
 \hline
@@ -749,6 +750,7 @@ Date & Event key words & Representative event tweet & \begin{tabular}[c]{@{}l@{}
 7/28/11 & Ft., Hood, attack & Possible Ft. Hood Attack Thwarted http://t.co/BSJ33hk & 20 \\ \hline
 7/28/11 & \begin{tabular}[c]{@{}l@{}}Libyan, rebel, \\ gunned\end{tabular} & \begin{tabular}[c]{@{}l@{}}Libyan rebel chief gunned down in Benghazi \\ http://sns.mx/prfvy1\end{tabular} & 44 \\ \hline
 \end{tabular}
+}
 \end{table*}
 
 \begin{comment}
@@ -773,14 +775,8 @@ As designed for First Story Detection task (one of the Topic Detection and Track
 \textbf{Evaluation Metrics.} 
 The first benchmark on \textit{Edinburgh twitter corpus} contains 27 manually labeled events\cite{petrovic2013can}\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/Newswire_Events.tar.gz}}, which all exist in our rebuilt dataset on the \textit{Edinburgh twitter}'s IDs.
 These labeled events focus on the events that are both mentioned in twitter and newswire,e.g. \textit{``Oslo Attacks"} and \textit{``US Increasing Debt Ceiling"}, but still miss many important events such as \textit{``Hurricane Irene"}, \textit{``Al-Qaida's No. 2 Leader Being Killed"}, and popular events such as \textit{``Harry Potter and the Deathly Hallows (Part 2)"}.
-To enlarge the realistic ground-truth .
-\textbf{TODO.}
-The dataset does not come with ground truth labels on all realistic events within the data collection period. 
-Because it is infeasible to manually label the over 4 million tweetsin the dataset, we choose to manually evaluate the detected events
-returned by Twevent. 
-We use precision and recall to evaluate the
-accuracy of the events detected.
-%为了扩大我们的标注数据集，我们
+To enlarge the ground truth of realistic events, we manually evaluate the candidate events detected by LTDetector, Twevent, EDCoW, BurstyBTM, and TimeUserLDA, and  use the labeled events as the second benchmark.
+We use precision and recall to evaluate each method on both benchmarks.
 \begin{table}[h]
 \scriptsize
 \centering
@@ -821,12 +817,7 @@ Because a tweet segment usually conveys very specific information,
 the tweets containing the tweet segment are all about the same
 topic (e.g., the event). Two tweet segments about the same event
 are therefore have higher chance to be clustered together.
-%首先，我们说明History states学习的有效性。我们人工选择了Wikipedia中100个category，即K_{KB}=100，对HS-PRIOR-LDA设置了200个topic即K=100，
 
-\subsection{Effects of Continous Learning}
-In this section, we prove the continuous learning char- acter of our model. We have three political events: CIA, Cuba and NYPD, and two Sport events: Bengals and Ra- jon. Firstly we learn the CIA event and then use its φA to initialize NYPD event, and save the combined φA of these two events as φ′A. Cuba/S represents the single Cuba event, while Cuba/L means the Cuba event with φ′A initialization. As parameter φA is mostly influence the extraction of aspects, we just list the metrics of aspects in Table 5.
-We can see that with the knowledge of previous event, our model can have a better performance with 2.5\% improvement. The promotion of sport event is tiny, because Rajon is about basketball and Bengals is about football. The words they shared is 16\% of Bengals, while the shared words of the three political events is 38\% of Cuba.
-Moreover, we compare the model labeled data with our manual annotations. We find many aspect words that do not discovered in Cuba/S, were discovered in the Cuba/L. For example, in tweet “agriculture big appetite cuba trade honolulu”, “honolulu” was labeled as background in Cuba/S while it is labeled as aspects in Cuba/L. What’s more, in NYPD event “honolulu” is an aspect discovered by our mod- el. Which is the reason why our model can have a better performance in the continuous learning model.
 
 \begin{comment}
 20-newsgroup\footnote{http://qwone.com/~jason/20Newsgroups/}
@@ -851,6 +842,10 @@ NPMI\cite{Aletras2013EvaluatingTC}\cite{Rder2015ExploringTS}\footnote{https://gi
 %\subsection{Application on Reddit}
 
 \section{Conclusions \& Future Work}
+Knowledge base is constructed elaborately and contains rich information, which can benefit the not-well-organized text stream. As a part of our future work, we will explore the effects of transfer learning from knowledge base to text stream for more tasks, such as text classification and key words extraction, especially for short texts. 
+%Another work what we are interested in is to utilize the knowledge base Microsoft Academic Graph, which also contains the taxonomy structure and text contents, to mine the research topics and trends from arXiv stream in fine grain. 
+
+\begin{comment}
 Twitter, as a new type of social media, has experienced an explosive growth in terms of both users and information volume in recent years. 
 The characteristics of tweets propose severe challenges to many tasks including event detection. 
 In this paper, we present a novel event detection system for Twitter stream, called Twevent, to tackle the adverse impacts of tweets: short and noisy content, diverse and dynamic topics, and large data volume. 
@@ -858,6 +853,7 @@ One of the key concept in Twevent is to use tweet segment instead of unigram for
 Twevent demonstrates outstanding performance in our experiments: effectiveness, informativeness, and efficiency. 
 As a part of our future work, we will investigate the effectiveness of utilizing more features from tweets (e.g., retweet rate and hashtags) in Twevent. 
 Another important task is to investigate the effectiveness of Twevent when none of the segments of an event is covered by Wikipedia.
+\end{comment}
 
 \newpage
 \bibliographystyle{named}
