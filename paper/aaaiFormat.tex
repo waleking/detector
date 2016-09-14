@@ -44,7 +44,7 @@
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-\title{Lightweight Transfer Learning from Knowledge Base to Text Stream for High Accurate Event Detection}
+\title{Lightweight Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
 \maketitle
 
 
@@ -93,6 +93,34 @@ Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets
 %\textsc{NSDetector} imitates this process automatically in the event detection task, and further verify that the key to improve the accuracy of event detection lies in training the normal states well. 
 
 \section{Introduction}
+Many web applications need the accurate event detection technique on microblog stream, such as public opinion analysis\cite{thelwall2011sentiment}, public security\cite{Li:2012gw}, and disaster response\cite{Yin:2012ht}, etc.
+Although event detection has been a research topic for a long while\cite{allan1998topic}, but event detection in microblog stream is still challenging\cite{atefeh2015survey}.
+According to \cite{huang2016probabilistic}, the characteristics of microblog is fast changing, high noise and short length.
+
+Different from the not-well-organized microblog stream, knowledge base (e.g. Wikipedia) is constructed elaborately and contains rich information. 
+For this reason, knowledge base can be a good supplementary for event detection on microblog stream.
+For example, the tweet ``''
+
+But it's non-trivial to perform transfer learning from knowledge base to microblog stream.
+
+Nowadays knowledge base and text stream are two important channels for people to gain information. 
+Usually people learn the facts from knowledge base (e.g. Wikipedia), and get informed the bursty events from text stream (e.g. Twitter).
+
+Existing event detection methods meet the challenges caused by characteristics of the not-well-organized text stream.
+Firstly, the posts in the text stream particular diverse.
+Second, the posts are noisy. 
+These problems can be cut down by incorporating knowledge base. 
+
+But the transfer learning from knowledge base to text stream for is non-trivial.
+RDF is expensive to apply to the text stream directly.
+What the most close method Twevent is designed for pos-precessing rather than incorporating them together.
+
+To handle this challenge, we propose a lightweight transfer learning method, specialized for event detection task. 
+There are two designed data structure to balance the performance and cost.  
+\textit{History states} are. 
+\textit{Recent states} are.
+
+\begin{comment}
 Many web applications\cite{ge2015bring}\cite{hughes2009twitter}\cite{sakaki2010earthquake} need the real time event detection technique. 
 But the accuracy of existing methods are still far from meeting the application requirements. 
 The main stream of existing methods focus on monitoring the changes of the recent data\cite{Allan:2000wu}\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, and some others use the history data by word frequencies\cite{Li2013JointEE}\cite{Nguyen2015EventDA} and dictionary\cite{Twevent2012}. 
@@ -100,6 +128,7 @@ A typical example the existing methods cannot handle well is that ``Russia's ant
 %这个例子应该
 
 To handle this challenge, the important factors on the high accuracy event detection are needed: (1) having a good mechanism to organize the history data, and being aware of what happened; (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
+\end{comment}
 
 The properties of the ideal event detection method also coincide with the news value theory\cite{galtung1965structure}\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}, and ``routine events are difficult to assimilate to the news, which favours the novel, the atypical and the unusual"\cite{montgomery2007discourse}.
 Following this guideline, if the journalist knew the normal states, aka, the ``routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
@@ -110,7 +139,9 @@ We suppose that the ideal event detection system performs like a journalist who 
 It's very close for the ideal event detection method, which holds the previous mentioned two properties (\textit{organizing history data well} and \textit{self-updating}). To implement the ideal event detection method, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
 In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
 
+\begin{comment}
 But the existing computation on the RDF graph is often time consuming. To overcome this obtacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
+\end{comment}
 
 \begin{figure}[h]
     \includegraphics[width=1.0\columnwidth]{img/NSDetectorExample.pdf}
@@ -524,7 +555,7 @@ Event phase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which o
 
 \section{Experiments}
 \subsection{Effects of History States and Recent States}
-Firstly, we demonstrate the effectiveness of history states  initialized from knowledge base and recent states learned by transfer learning. 
+In this subsection, we demonstrate the effectiveness of \textit{history states} initialized from knowledge base and \textit{recent states} learned by transfer learning. 
 
 \textbf{Knowledge Base.} 
 We construct the taxonomy graph \(G^{(0)}\), the category-page bipartite graph \(G^{(1)}\) from the latest dump of category links\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-categorylinks.sql.gz}} and the page-content map \(G^{(2)}\) from Wikipedia pages\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles.xml.bz2 }}.
