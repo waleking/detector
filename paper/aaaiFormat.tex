@@ -62,8 +62,8 @@
 \begin{abstract}
 Many web applications need the real time event detection technique. But the accuracy of existing methods are still far from meeting the application requirements. 
 %should be met, 这个词应该被强化，vital
-We reaveal that the two important factors should be met, (1) having a good mechanism to organize the history data, and (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
-According to this guideline, we propose a knowledge base enhanced continous learning method for high accuracy event detection. 
+We reveal that the two important factors should be met, (1) having a good mechanism to organize the history data, and (2) having the capability of self-updating, to accumulate the knowledge about what is happening.
+According to this guideline, we propose a knowledge base enhanced continuous learning method for high accuracy event detection. 
 In this proposed method, 1) the data structure\textit{history states} can be initialized by knowledge base to restore what happened; 2) \textit{recent states} are updated by \textit{history states} and upcoming text streams via our proposed probabilistic model HS-Prior-LDA to maintain what is happening; 3) events can be detected by recent states with high accuracy; 4) the \textit{history status} is 
 Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{NSDetector}.
 \textsc{NSDetector} promotes the accuracy rate by 9\% without  sacrificing the recall rate.
@@ -98,27 +98,23 @@ Knowledge base can be a good supplementary for event detection on microblog stre
 Different from the not-well-organized microblog stream, knowledge base (e.g. Wikipedia) is constructed elaborately and contains rich information. 
 For example, the microblog message ``libyan rebel chief gunned down in Benghazi (2011-07-28)'' is short, but still comprehensible because the words ``\textit{libyan}", ``\textit{Benghazi}'' are included in the wiki page ``\textit{Libya}", and the words ``\textit{rebel}'', ``\textit{gun}'' appeared in the wiki page ``\textit{Military}''.
 By reading these two wiki pages, readers easily understand the example tweet is talking about something related to \textit{Military} and \textit{Libya}.
-In other words, knowledge base enrichs the linkage
-Since transfer learning aims at , it provides a way to .
+In other words, knowledge base enriches the linkages between words, and provides more comprehensive context for microblogs.
+Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information restored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
 
-But it's non-trivial to perform transfer learning directly from knowledge base to microblog stream.
+But it's non-trivial to conduct transfer learning from knowledge base to microblog stream directly.
+The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and acuaretely detecting events.
+What most meet the efficiency demand is Twevent\cite{Twevent2012}, but it's limited to filtering out meaningless microblogs by looking up Wikipedia. Some event,  which may contains the sements not restored in Wikipedia, may be dropped incorrectly.
 
-Nowadays knowledge base and text stream are two important channels for people to gain information. 
-Usually people learn the facts from knowledge base (e.g. Wikipedia), and get informed the bursty events from text stream (e.g. Twitter).
+In our paper, to balance the performance and the cost of transfer learning, new data structure \textit{history states} is proposed. 
+It bases on the following facts. 
+The knowledge base's three fold structure includes the taxonomy graph (\textit{class} \(\rightarrow\) \textit{subclass}), the category-page bipartite graph (\textit{class} \(\rightarrow\) \textit{instance}), and the page-content map (\textit{instance} \(\rightarrow\) \textit{content}) relations in the knowledge base. 
+In terms of concept level, the latter part is finer than the former. 
+And the last page-content map goes into the detail at the word level. 
+By considering these three parts together, we can extract a class or category's highly related words (evaluated by chi-square score in Section \ref{subsec:hs_initialization}), and restore them in the newly proposed data structure \textit{history states}.
+In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base.
 
-Existing event detection methods meet the challenges caused by characteristics of the not-well-organized text stream.
-Firstly, the posts in the text stream particular diverse.
-Second, the posts are noisy. 
-These problems can be cut down by incorporating knowledge base. 
-
-But the transfer learning from knowledge base to text stream for is non-trivial.
-RDF is expensive to apply to the text stream directly.
-What the most close method Twevent is designed for pos-precessing rather than incorporating them together.
-
-To handle this challenge, we propose a lightweight transfer learning method, specialized for event detection task. 
-There are two designed data structure to balance the performance and cost.  
-\textit{History states} are. 
-\textit{Recent states} are.
+More than that, we propose a new quick and lightweight probabilistic model \textsc{HS-Prior-LDA} for transfer learning. 
+After deriving \textsc{HS-Prior-LDA} (detailed in Section), it reveals that whether a word in microblog links to a high-level category in knowledge base depends on three factors, the word's score in the category's \textit{history state}, and the microblogs' other words linkages, the time windows' same word types' linkages. All these statistics are easy to gain. 
 
 \begin{comment}
 Many web applications\cite{ge2015bring}\cite{hughes2009twitter}\cite{sakaki2010earthquake} need the real time event detection technique. 
@@ -130,21 +126,21 @@ A typical example the existing methods cannot handle well is that ``Russia's ant
 To handle this challenge, the important factors on the high accuracy event detection are needed: (1) having a good mechanism to organize the history data, and being aware of what happened; (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
 \end{comment}
 
-The properties of the ideal event detection method also coincide with the news value theory\cite{galtung1965structure}\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}.
+The properties of the ideal event detection method also coincide with the news value theory\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}.
 Following this guideline, if the journalist knew the normal states, aka, the ``routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
-We suppose that the ideal event detection system performs like a journalist who can find news from cyberspace with the knowledge of the normal states. 
+We suppose that the ideal event detection system performs like a journalist who can find news from cyberspace with the knowledge of the history states. 
 
-It's very close for the ideal event detection method, which holds the previous mentioned two properties (\textit{organizing history data well} and \textit{self-updating}). To implement the ideal event detection method, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
-In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
+%It's very close for the ideal event detection method, which holds the previous mentioned two properties (\textit{organizing history data well} and \textit{self-updating}). To implement the ideal event detection method, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
+%In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
 
 \begin{comment}
-But the existing computation on the RDF graph is often time consuming. To overcome this obtacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
+But the existing computation on the RDF graph is often time consuming. To overcome this obstacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
 \end{comment}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=.82\columnwidth]{img/NSDetectorExample.pdf}
-    \caption{\textsc{LTDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{LTDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events, and updates the normal states incrementally by the detected events.}
+    \caption{\textsc{LTDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{LTDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events.}
     \label{fig:modelDesc}
 \end{figure}
 
@@ -153,24 +149,26 @@ The contribution of this paper is mainly in three aspects.
 (1) We reveal that there are two important factors for high accuracy event detection-- a comprehensive model that can organize history data well, and updating the model well.
 (2) We propose the probability model \textsc{NSDetector}. 
 The model can combine the history data and the recent data, further determine the arrival new document whether it represents a new event. 
-More than that, \textsc{NSDetector} has the capability to update the knowledge of what happend.
+More than that, \textsc{NSDetector} has the capability to update the knowledge of what happened.
 (3) The experiment on the Edinburgh twitter corpus which contains 30 million tweets show that \textsc{NSDetector} promotes the accuracy rate by 9\% without sacrificing the recall rate.
 
 
 \section{Related Works}
 \label{sec:relatedWorks}
+\textbf{Event Detection.} 
+There are two kinds of .
 The first category of methods, including UMass\cite{Allan:2000wu} and BurstyBTM\cite{Yan:2015wm}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
-This kind methods can be implemented by clustering of articles\cite{Allan:2000wu}\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topic modeling\cite{Diao:2012wj}\cite{Yan:2015wm} in the recent time windows. 
+This kind methods can be implemented by clustering of articles\cite{Allan:2000wu;Petrovic:2010uj;Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topic modeling\cite{Diao:2012wj}\cite{Yan:2015wm} in the recent time windows. 
 Taking the clustering of articles as an example, they model the occurred events as clusters, and link the incoming article with an already existed event cluster or assign it as the new detected event.
 The decision is based on whether the dissimilarity between the incoming article and existed event clusters is over the user-specified threshold. 
 
-The reason why this kind methods cannot achive high precision and high recall simultaneously lies in that they lack the accumulation of history knowledge. 
+The reason why this kind methods cannot achieve high precision and high recall simultaneously lies in that they lack the accumulation of history knowledge. 
 This kind methods ``understand" the document only by the recent data and the frequencies of the data, but the ``understanding" is not so confident that they still need the specific threshold to help to make decision. In the journalist metaphor of news value theory, they have the limited knowledge of normal states (aka "routine things") due to the limited history information used. 
 On the one hand, UMass\cite{Allan:2000wu} prefers the lower threshold to enlarge the recall but suffers the precision. 
 On the other hand, BurstyBTM needs the appropriate number of topics to run the topic modelling, and detects the ``large" events that associate with many articles but ignores the ``small" ones. 
 
-\begin{comment}
-The second category of methods thouroughly relies on the \textit{history data}. 
+
+The second category of methods thoroughly relies on the \textit{history data}. 
 The typical implementation is to train the event triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA} from history labeled data, then apply the trained model to detect the event related articles, which contain the triggers such as the word \textit{attacked} for the \textit{public security} events. 
 This kind methods suffer from the loss of recall. 
 There are two reasons. 
@@ -181,22 +179,20 @@ Usually, the event trigger based method mainly focus on the event related verbs,
 It only restores the history knowledge but without updating. 
 Some new event related articles may be mistakenly filtered out because not containing previous trained triggers. 
 For example, the tweet ``Russia's intervention in Syria began in September 2015" without an event trigger, which is really related to a \textit{public security} event, may be omitted by the system. 
-\end{comment}
 
+\begin{comment}
 These methods work in four ways. 
 1) Based on topic model, BurstyBTM and TimeUserLDA detect bursty topics. 
-Although they are desinged for batch learning initially, we run them on the slide windows to adapt to the text stream environment.
+Although they are designed for batch learning initially, we run them on the slide windows to adapt to the text stream environment.
 2) Integrated with knowledge base, Twevent detects bursty segments, groups them into clusters, and then filters out the meaningless ones by Wikipedia.
 3) By clustering articles, UMass System and LSH decide whether the article belongs to the existing event or a new one.
 As designed for First Story Detection task (one of the Topic Detection and Tracking subtasks\cite{allan2012topic}) initially, they prefer to enlarge the recall of detected events. 
 4) By analyzing word frequencies, EDCoW clusters the bursty words into events.
+\end{comment}
 
 
 
-
-Although \cite{Wurzer:2015wq} points out that UMass\cite{Allan:2000wu} and its variants\cite{Petrovic:2010uj}\cite{petrovic2012using}\cite{Wurzer:2015wq} are the state-of-art systems on the Event Detection task for the newswire data, these systems still suffers from the lack of accuracy to applied on more general cyberspace data, such as tweets, emails, and reddit posts. 
-The underlying reason is that the normalized Topic Weighted Minimum Cost metric (\(C_{min}\)) used in the Event Detection keep balance between miss and false alarm, which cannot work well on the .
-Usually these traditional systems set the ratio of cost between miss alarm and false alarm to 10, preferring recall to precision on detecting events.
+%Although \cite{Wurzer:2015wq} points out that UMass\cite{Allan:2000wu} and its variants\cite{Petrovic:2010uj}\cite{petrovic2012using}\cite{Wurzer:2015wq} are the state-of-art systems on the Event Detection task for the newswire data, these systems still suffers from the lack of accuracy to applied on more general cyberspace data, such as tweets, emails, and reddit posts. 
 
 %\textbf{Knowledge Base}. \cite{faralli2015large} propose the Twixonomy Graph. 
 
@@ -265,7 +261,7 @@ Usually these traditional systems set the ratio of cost between miss alarm and f
 
 \section{Proposed Method}
 Knowledge base often contains much information about what happened. 
-But the exisiting RDF model\cite{klyne2006rdf} on knowledge base lacks the mechanism to maintain the information about what's happening, especially when applied on text stream.  
+But the existing RDF model\cite{klyne2006rdf} on knowledge base lacks an efficient mechanism to transfer the information from knowledge base to text stream.  
 With the help of knowledge base's structure (detailed in sec \ref{subsec:hs_initialization}), we provide a  lightweight model to transfer the information in knowledge base to text stream.
 
 \textit{History state} is the proposed data structure to restore the information about what happened. 
@@ -278,18 +274,13 @@ Still taking the \textit{military} category in  Figure \ref{fig:modelDesc} as an
 Furthermore the time series analysis on the neighboring recent states can recognize the set of events' candidate words, and finally detects the events in the text stream. 
 In the example of Figure \ref{fig:modelDesc}, the words \textit{libyan} and \textit{rebel} are related to the \textit{military} event ``\#libya Libyan rebels chief is killed (2011-07-28)''.
 
-After processing each time window's data, the history states can be incrementally updated by the recent state. 
-In this way, the proposed model utilizes the rich history data in knowledge base, and performes continous learning on the incoming text stream, which can promote the accuracy of event detection significantly. 
-The followings definitions are the concepts used by the continous learning model \textsc{HS-Detector}. 
-
-
 \begin{rmk}[History State] 
 The history state of the specific category is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(chi(c,w^{(c)}_{i})\) under the category \(c\). 
 And we denote the history states of category \(c\) as \(\bm{h}_c=\{<w^{(c)}_i,chi(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
 \end{rmk}
 
 \begin{rmk}[Recent State] 
-The recent state at time \(t\) of the specific category \(c\) is defined by a set of tuples, and detenoted as \(\bm{r}_{c,t}=\{<w^{(c)}_i,n(c,t,w^{(c)}_{i})>\}_{i=1,...,N_c}\), in which word \(w^{(c)}_{i}\) is related to the category \(c\), and \(n(c,t,w^{(c)}_{i})\) is its document frequency in the time window \(t\).
+The recent state at time \(t\) of the specific category \(c\) is defined by a set of tuples, and denoted as \(\bm{r}_{c,t}=\{<w^{(c)}_i,n(c,t,w^{(c)}_{i})>\}_{i=1,...,N_c}\), in which word \(w^{(c)}_{i}\) is related to the category \(c\), and \(n(c,t,w^{(c)}_{i})\) is its document frequency in the time window \(t\).
 \end{rmk}
 
 
@@ -327,12 +318,12 @@ And section \ref{subsec:detection} interprets the high accuracy event detection 
 \end{comment}
 
 
-\subsection{History States Initialization}\label{subsec:hs_initialization}
+\subsection{History States' Extraction}\label{subsec:hs_initialization}
 In this part, we discuss in detail how to initialize the history states from the given knowledge base. 
 The knowledge base such as Wikipedia has the structure of classes, subclasses, instances, and the edges between them. 
 This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia. 
-But the reasoning and maintainence of knowledge on the graph is usually expensive\cite{broekstra2003inferencing}\cite{bursztyn2015reasoning}. 
-To make a trade-off between cost and performance, we use the lightweight data struture \textit{history state} to represent the knowledge about what happend, which is extracted from the knowledge base.
+But the reasoning and maintenance of knowledge on the graph is usually expensive\cite{broekstra2003inferencing,bursztyn2015reasoning}. 
+To make a trade-off between cost and performance, we use the lightweight data structure \textit{history state} to represent the knowledge about what happened, which is extracted from the knowledge base.
 And the knowledge base's threefold structure \(G^{(0)}\), \(G^{(1)}\), \(G^{(2)}\) benefits the extraction of history states. 
 
 \textbf{Taxonomy Graph \(G^{(0)}\)}. The directed edges in \(G^{(0)}\) represent the \textit{class}\(\rightarrow\)\textit{subclass} relations in the knowledge base. 
@@ -354,13 +345,13 @@ In Wikipedia, by considering \(G^{(0)'}\) and \(G^{(1)}\) together as shown in l
 
 \textbf{Page-Content Map \(G^{(2)}\)}. 
 For a specific Wikipedia dumps version, the edges \textit{page}\(\rightarrow\)\textit{content} in \(G^{(2)}\) define a one-to-one mapping.
-There are a bulk of hisotry information restored in the wiki text content.
+There are a bulk of history information restored in the wiki text content.
 In order to extract the key words in wiki page's content, which distinguish it from other pages, we use the chi-square statistics\cite{yang1997comparative}\cite{liu2009imbalanced} to measure the importance of each word for the specific page.
 
 For a given category in \(G^{(0)'}\), chi-square statistics also can evaluate the importance of each word appeared in text contents. 
 For example, the chi-square statistic of the term \textit{shooting} under the category \textit{military} is 2888.7 which corresponds to the p-value 0.0001 of chi-square test with 1 degree of freedom.
 That means the term \textit{shooting} is highly related to the category \textit{military}.  
-To prevent the overclaim of rare word by chi-square statitistcs, the word frequency is introduced as a supplement\cite{liu2009imbalanced}, as shown in line \ref{alg:line10inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
+%To prevent the overclaim of rare word by chi-square statitistcs, the word frequency is introduced as a supplement\cite{liu2009imbalanced}, as shown in line \ref{alg:line10inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
 Finally, we can get the category's history state, which are  composed by the category related words and their corresponding importance.
 %history states衡量一个词在考虑完整历史信息的情况下，对于一个类别的重要程度，例如在military类别下面；从某种程度上讲，history state从knowledge base中抽取了对于该类别的重要特征，有助于我们将它应用到text stream当中。
 \begin{algorithm}[h]
@@ -370,7 +361,7 @@ Finally, we can get the category's history state, which are  composed by the cat
 
 \KwIn{Taxonomy's Graph \(G^{(0)}\), Category-Page Bipartite Graph \(G^{(1)}\), Page-Content Bipartite Graph \(G^{(2)}\), topic related category node \(c\)}
 \KwOut{History state \(\bm{h}_c\) on category \(c\)}
-\(Pages(c)\leftarrow \varnothing\)\\
+\(Pages(c)\leftarrow \varnothing\), \(\bm{h}_c \leftarrow \varnothing\)\\
 DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank scores. \label{alg:line2inNormalStatesInit}\\
 \(SuccessorNodes(c) \leftarrow \) Breadth-first-traverse(\(G^{(0)'},c\))\label{alg:line3inNormalStatesInit}\\
 \For{\(node \in SuccessorNodes(c)\)}{
@@ -380,7 +371,7 @@ Word frequency table \(n(c,.) \leftarrow \) do word count on the text contents o
 Word frequency table \(n(All,.) \leftarrow \) do word count on the text contents of all pages in \(G^{(2)}\).\\
 \For{word \(w\) in WordFrequencyTable(All).keys()}{
     \(chi(c,w) \leftarrow \) \(w\)'s chi-square statistics on \(WordFrequencyTable(c)\) and \(WordFrequencyTable(All)\).\\
-    \(h_{c,w} \leftarrow n(c,w)*chi(c,w)\) \label{alg:line10inNormalStatesInit}\\
+    \(h_{c,w} \leftarrow chi(c,w)\) \label{alg:line10inNormalStatesInit}\\
 }
 \Return{\(\bm{h}_c\)}
 \end{algorithm}
@@ -449,21 +440,10 @@ The parameter \(\lambda\) controls how much the learned topics are similar to th
     \label{fig:NS-Prior-LDA}
 \end{figure}
 \end{comment}
-\begin{comment}
-\ \ Our topic modeling, want to learn the first \(k\) topics with Wikipedia Article \(k\) topics as close as possible, and we will be Wikipedia article \(k\) before 1000 words) was added to the theme of the word frequency word in the subject a priori distribution on the.
-Learning to be the first \(k\) Subject polynomial distribution of the word, referred to as \(\phi_k \), Wikipedia article \(k \) distribution of topics for \(\tau_k \), then this formalized process is expressed as: \(\ \phi_k \sim Dir(\beta + \tau_k) \).
-Formal presentation of the explanation is: With prior knowledge \(\tau_k \) after the theme \(\phi_k \) is no longer simply rely on symmetric priori \(\beta \), different words right is not the same weight , such as a discussion of "fashion" theme in Wikipedia, it will refer to "dress", "grand", "blue", "gold" and other words, with the asymmetric priori \(\beta + \tau_k \) after in microblogging "fashion" theme "dress" the proportion will be increased in this way so that microblogging corpus theme tends to Wikipedia topic.
-\(\tau_k \) in the first \(v \) words such as formula (\ref{eq:wikiPrior}).
-Where \(S_k \) as a set of candidate words: high-quality information to use Wikipedia, we extract the theme \(\phi_k \ \) in the higher-word word frequency candidate set \(S_k \).
-We can control set \(S_k \) in size, the size of the control is usually set for 1000.
-The number of frequency \(n_{kv} \) for the word \(v \) (\ k) appears in the Wikipedia article themes.
-If the word \(v \) does not appear in the candidate set \(S_k \), and then set a priori knowledge \(\tau_{kv} = 0 \), otherwise, the word frequency is proportional to \(n_{kv} \) with the prior knowledge of weight \(W\).
-In the latter experiment, we will be on a priori knowledge of weights \(W \) will be discussed. 
-\end{comment}
 
 To solve \textsc{HS-Prior-LDA}, the gibbs sampling is adopted to determine the hidden variable \(z_{dn}\) and the model parameter \(\phi_k\).
-In the initialization phase of gibbs sampling for \textsc{HS-Prior-LDA}, the hidden variable \(z_{dn}\) is initialized to topic \(k\) with probability \(\hat{q}_{k|v}\) as Equation (\ref{eq:initProbability}).
-For the word \(v\) that belongs to any history state, \(\hat{q}_{k|v}\) is propotional to its importance in the history state \(\tau_{kv}\) as Eq\ref{eq:initProbability}(a). 
+In the initialization phase of Gibbs sampling for \textsc{HS-Prior-LDA}, the hidden variable \(z_{dn}\) is initialized to topic \(k\) with probability \(\hat{q}_{k|v}\) as Equation (\ref{eq:initProbability}).
+For the word \(v\) that belongs to any history state, \(\hat{q}_{k|v}\) is proportional to its importance in the history state \(\tau_{kv}\) as Eq\ref{eq:initProbability}(a). 
 For the new word \(v\) in text stream, \(\hat{q}_{k|v}\) is   set uniformly \(1/(K-K_{\bm{KB}})\) on the other topics as Eq\ref{eq:initProbability}(b,c). 
 The initialization makes sure that the learned topics are aligned to the pre-defined history states.
 \begin{scriptsize} 
@@ -536,7 +516,7 @@ We also optimize \(\alpha \bm{m}\) for promoting \textsc{HS-Prior-LDA}'s fitting
 \end{algorithm}
 \end{comment}
 
-After gibbs sampling on discrete time windows, \textsc{HS-Prior-LDA} learned all hidden topics of words.
+After Gibbs sampling on discrete time windows, \textsc{HS-Prior-LDA} learned all hidden topics of words.
 And for a specific word type \(w\) and its history-state-like topic assignment \(c\) in time window \(t\), its document frequency is counted as \(n(c,t,w^{(c)})\), which is the element of category \(c\)'s \(t\)-th recent state.
 Event detection on recent states is discussed in the following subsection.
 
@@ -553,7 +533,7 @@ The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the burs
 \end{rmk}
 
 \begin{rmk}[Event Phrase] 
-Event phase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occured in the set of events' cadidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happend in time \(t\) under the category \(c\).
+Event phase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occurred in the set of events' candidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happened in time \(t\) under the category \(c\).
 \end{rmk}
 
 \begin{comment}
@@ -580,7 +560,7 @@ And the mid categories, which reflect the main interests of the target corpus, a
 Due to the developer policy of Twitter, \cite{petrovic2012using} only redistributes tweets' IDs\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/fsd_corpus.tar.gz}}.
 %\footnote{\url{https://dev.twitter.com/overview/terms/policy}}
 We collected the tweets' contents according to the IDs with the help of Twitter API. 
-Though we cannot get the whole dataset due to the limit of Twitter API, after neccessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which spans identically from 2011/06/30 to 2011/09/15.
+Though we cannot get the whole dataset due to the limit of Twitter API, after necessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which spans identically from 2011/06/30 to 2011/09/15.
 More details of the original dataset are described in \cite{petrovic2010edinburgh}.
 
 \textbf{History States and Recent States.} 
@@ -837,28 +817,12 @@ the tweets containing the tweet segment are all about the same
 topic (e.g., the event). Two tweet segments about the same event
 are therefore have higher chance to be clustered together.
 
+\textbf{Discussions.} 
+
 
 \begin{comment}
 20-newsgroup\footnote{http://qwone.com/~jason/20Newsgroups/}
-
-NPMI\cite{Aletras2013EvaluatingTC}\cite{Rder2015ExploringTS}\footnote{https://github.com/AKSW/Palmetto}.
 \end{comment}
-%\textbf{Topic Coherence} \cite{roder2015exploring}
-%\textbf{PMI}
-%\subsection{Evaluation of Detected Events}
-\begin{comment}
-\textbf{Precision} Precision@Benchmark1, Precision@Benchmark2
-
-\textbf{Recall}
-
-\textbf{Accuracy}
-
-\textbf{DERate(Duplicate Event Rate)}
-\end{comment}
-%\subsection{Case Study}
-
-
-%\subsection{Application on Reddit}
 
 \section{Conclusions \& Future Work}
 Knowledge base is constructed elaborately and contains rich information, which can benefit the not-well-organized text stream. As a part of our future work, we will explore the effects of transfer learning from knowledge base to text stream for more tasks, such as text classification and key words extraction, especially for short texts. 
