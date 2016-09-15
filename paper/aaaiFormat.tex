@@ -158,6 +158,7 @@ More than that, \textsc{NSDetector} has the capability to update the knowledge o
 
 
 \section{Related Works}
+\label{sec:relatedWorks}
 The first category of methods, including UMass\cite{Allan:2000wu} and BurstyBTM\cite{Yan:2015wm}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
 This kind methods can be implemented by clustering of articles\cite{Allan:2000wu}\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topic modeling\cite{Diao:2012wj}\cite{Yan:2015wm} in the recent time windows. 
 Taking the clustering of articles as an example, they model the occurred events as clusters, and link the incoming article with an already existed event cluster or assign it as the new detected event.
@@ -168,6 +169,7 @@ This kind methods ``understand" the document only by the recent data and the fre
 On the one hand, UMass\cite{Allan:2000wu} prefers the lower threshold to enlarge the recall but suffers the precision. 
 On the other hand, BurstyBTM needs the appropriate number of topics to run the topic modelling, and detects the ``large" events that associate with many articles but ignores the ``small" ones. 
 
+\begin{comment}
 The second category of methods thouroughly relies on the \textit{history data}. 
 The typical implementation is to train the event triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA} from history labeled data, then apply the trained model to detect the event related articles, which contain the triggers such as the word \textit{attacked} for the \textit{public security} events. 
 This kind methods suffer from the loss of recall. 
@@ -179,6 +181,16 @@ Usually, the event trigger based method mainly focus on the event related verbs,
 It only restores the history knowledge but without updating. 
 Some new event related articles may be mistakenly filtered out because not containing previous trained triggers. 
 For example, the tweet ``Russia's intervention in Syria began in September 2015" without an event trigger, which is really related to a \textit{public security} event, may be omitted by the system. 
+\end{comment}
+
+These methods work in four ways. 
+1) Based on topic model, BurstyBTM and TimeUserLDA detect bursty topics. 
+Although they are desinged for batch learning initially, we run them on the slide windows to adapt to the text stream environment.
+2) Integrated with knowledge base, Twevent detects bursty segments, groups them into clusters, and then filters out the meaningless ones by Wikipedia.
+3) By clustering articles, UMass System and LSH decide whether the article belongs to the existing event or a new one.
+As designed for First Story Detection task (one of the Topic Detection and Tracking subtasks\cite{allan2012topic}) initially, they prefer to enlarge the recall of detected events. 
+4) By analyzing word frequencies, EDCoW clusters the bursty words into events.
+
 
 
 
@@ -580,7 +592,12 @@ We run \textsc{HS-Prior-LDA} window by window on text stream, and learn specific
 
 We compare the topic coherence of history states with the topics learned from Wikipedia by LDA in terms of NPMI\cite{Rder2015ExploringTS}.
 Different from traditional experiments that only compute the topic coherence of top words, we want to check whether  it can hold for more words.
-Due to the limit of NPMI computing module\footnote{\url{https://github.com/AKSW/Palmetto}}, which computes the coherence of up to 10 words each time, we compute NPMI on the combination of top five words and each next five words as Table \ref{tbl:NPMIDetails}.
+Due to the limit of NPMI computing module\footnote{\url{https://github.com/AKSW/Palmetto}}, which computes the coherence of up to 10 words each time, we compute NPMI on the combination of top five words with each next five words as Table \ref{tbl:NPMIDetails}.
+Observe that even for the combination of 96th to 100th words with the top five words in \textit{Aviation}'s history state, NPMI=0.131 shows that the topic coherence still holds well without drifting.
+More generally, Figure \ref{fig:NPMI} illustrates that the history states are much more stable than the topics learned by LDA.
+Taking the group 10 (the combination of 56th to 60th words with the top five words) as an example, the median one of history states performs better than all those learned by LDA. 
+
+Since the history states extracted from knowledge base is stable and topic coherence, 
 
 %如图（topic）中，能够从Military*中学习出tweet（20110728）话题中包含libyan。
 
@@ -688,7 +705,7 @@ In total &  &  &  & \\ \hline
 19 & 101-105 &accident engines iaf albatross rcaf &0.068\\ \hline
 \end{tabular}
 }
-\caption{Top words' topic coherence of \textit{Aviation}'s history state. * means the group also contains the five top words \textit{aircraft}, \textit{air}, \textit{airport}, \textit{flight}, and \textit{airline}, but we don't show them in table to save space. NPMI is computed on ten words (a combination of words in each row and the five top words).}
+\caption{Top words' topic coherence of \textit{Aviation}'s history state. * means the group also contains the five top words \textit{aircraft}, \textit{air}, \textit{airport}, \textit{flight}, and \textit{airline}, but we don't show them in table to save space. NPMI is computed on ten words (a combination of words in each row with the five top words).}
 \label{tbl:NPMIDetails}
 \end{table}
 
@@ -717,7 +734,7 @@ In total &  &  &  & \\ \hline
 \end{table}
 \end{comment}
 
-\begin{comment}
+%\begin{comment}
 \begin{table*}[ht]
 \centering
 \caption{History States initialized from Wikipedia and topical words learned from HS-Prior-LDA}
@@ -742,7 +759,7 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps & 
 }
 \label{tbl:historyStates}
 \end{table*}
-\end{comment}
+%\end{comment}
 
 
 \begin{table*}[ht]
@@ -771,15 +788,8 @@ Date & Event key words & Representative event tweet & \begin{tabular}[c]{@{}l@{}
 \end{comment}
 
 \subsection{Effects of Event Detection}
-\textbf{Baselines Methods.} We compare our proposed method against the following methods, Twevent\cite{Twevent2012}, BurstyBTM\cite{Yan:2015wm}, LSH\cite{Petrovic:2010uj}, EDCoW \cite{Weng:2011wz}, TimeUserLDA\cite{Diao:2012wj}, and UMass System\cite{Allan:2000wu}.
+\textbf{Baselines Methods.} We compare our proposed method against the following methods, Twevent\cite{Twevent2012}, BurstyBTM\cite{Yan:2015wm}, LSH\cite{Petrovic:2010uj}, EDCoW \cite{Weng:2011wz}, TimeUserLDA\cite{Diao:2012wj}, and UMass System\cite{Allan:2000wu}, which are mentioned in the Section \ref{sec:relatedWorks}.
 We implement these competing methods based on the open source community versions, e.g. EDCoW\footnote{\url{https://github.com/Falitokiniaina/EDCoW}}, or the authors' releases, e.g. BurstyBTM\footnote{\url{https://github.com/xiaohuiyan/BurstyBTM}}.
-These methods work in four ways. 
-1) Based on topic model, BurstyBTM and TimeUserLDA detect bursty topics. 
-Although they are desinged for batch learning initially, we run them on the slide windows to adapt to the text stream environment.
-2) Integrated with knowledge base, Twevent detects bursty segments, groups them into clusters, and then filters out the meaningless ones by Wikipedia.
-3) By clustering articles, UMass System and LSH decide whether the article belongs to the existing event or a new one.
-As designed for First Story Detection task (one of the Topic Detection and Tracking subtasks\cite{allan2012topic}) initially, they prefer to enlarge the recall of detected events. 
-4) By analyzing word frequencies, EDCoW clusters the bursty words into events.
 
 \textbf{Evaluation Metrics.} 
 The first benchmark on \textit{Edinburgh twitter corpus} contains 27 manually labeled events\cite{petrovic2013can}\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/Newswire_Events.tar.gz}}, which all exist in our rebuilt dataset on the \textit{Edinburgh twitter}'s IDs.
