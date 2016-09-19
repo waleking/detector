@@ -45,19 +45,23 @@
 % proceedings, working notes, and technical reports.
 %
 \title{Lightweight Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+%\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
 \maketitle
 
 \begin{abstract}
 Many web applications need the accurate event detection technique on microblog stream. 
 But the accuracy of existing methods are still challenged by microblog's short length and high noise. 
-We develop a novelty transfer learning method \textsc{LTDetector} to deal with the task.  
-1) \textsc{LTDetector} bases on the following fact, that microblog is short but it can be enriched by knowledge base semantically.
-Knowledge base can be a good supplementary for event detection on microblog stream.
-But it's non-trivial to conduct transfer learning from knowledge base to microblog stream directly.
-We propose a lightweight transfer learning method \textsc{LTDetector} for high accurate event detection.  
-In this proposed method, 1) the data structure \textit{history states} can be extracted from knowledge base to restore what happened; 2) \textit{recent states} are updated by \textit{history states} and upcoming text streams via our proposed probabilistic model HS-Prior-LDA to maintain what is happening; 3) events can be detected based on recent states with high accuracy.
-Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{LTDetector}.
-\textsc{LTDetector} promotes the accuracy rate by 9\% without  sacrificing the recall rate.
+We develop a novel lightweight transfer learning method \textsc{LTDetector} to deal with the task.  
+\textsc{LTDetector} bases on two facts, that microblog is short but can be enriched by knowledge base semantically with transfer learning; and to make the transfer efficiently and effectively, the scale of knowledge should shrink without degrading. 
+The following contributions are made in \textsc{LTDetector}.
+(1) We formalize the knowledge base's hierarchical structure into three parts including taxonomy graph, category-page bipartite graph, and page-content map; and further shrink the scale of knowledge to category-word level.
+The structure is utilized to condense category's highly related words and their chi-square scores, namely category's \textit{KB State}.
+%The knowledge base's hierarchical structure is formalized as three-part: taxonomy graph, category-page bipartite graph, and page-content map.
+%The structure is utilized to condense category's highly related words and their chi-square scores, namely category's \textit{KB State}, shrinking the scale of knowledge to category-word level.
+(2) Category's related words in microblog stream, namely category's \textit{Stream State}, are learned from our proposed KB-Prior-LDA, which exploits the word co-occurrences and transfers the condensed knowledge \textit{KB State} into microblogs. 
+(3) Events are further detected on meaningful categories' \textit{Stream States}, which filter out the noisy accurately. 
+(4) Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed transfer learning method.
+\textsc{LTDetector} achieves high accuracy, promoting the precision by 9\% without  sacrificing the recall rate.
 
 \end{abstract}
 
