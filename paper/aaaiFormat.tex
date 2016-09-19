@@ -47,46 +47,18 @@
 \title{Lightweight Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
 \maketitle
 
-
-%主动感知的
-%\title{Is That Enough to Use the Recent Data to Detect Events?}
-%\title{Revealing the Important Factors on the High Accuracy Event Detection}
-
-%基于历史的 adoptable continous learning 连续学习for high accuracy event detection
-%长轴：military方面的，三个切片，每个切片top10的词都进行展示。起始是维基的导入，连续学习产生了一个长轴。
-%关注于重要事件的积累：1，变化很大，2，相当长的稳定性。长轴上的例子，第三个切片需要第一个切片的知识。第三个切片自身产生的很准确。
-%两个例子：（1）之前学习的结果对事件检测有帮助（类似于张学良的case）；（2）可以扩展词表时新性很好，很准确；
-
-%点明factor是什么——能准确描述历史知识的model，该model的表述能力起码能够model概念和概念之间的联系；model应该有一个实时自学习功能，即在历史知识的基础上，能在不断到来的新数据流上更新自己的知识。（“支持”恐怖组织，“打击”恐怖组织）打击恐怖组织的topic中，通常是美国和英国、法国；但是俄罗斯突然出现在该topic的列表中，说明俄罗斯参与打击恐怖组织应该被判别为一个新的事件。需要一个精确描述历史数据中概念之间联系的例子——（找到一个立场发生变化的例子，如果能在叙利亚问题上找到很好，如果不能考虑别的例子）。
-
 \begin{abstract}
-Many web applications need the real time event detection technique. But the accuracy of existing methods are still far from meeting the application requirements. 
-%should be met, 这个词应该被强化，vital
-We reveal that the two important factors should be met, (1) having a good mechanism to organize the history data, and (2) having the capability of self-updating, to accumulate the knowledge about what is happening.
-According to this guideline, we propose a knowledge base enhanced continuous learning method for high accuracy event detection. 
-In this proposed method, 1) the data structure\textit{history states} can be initialized by knowledge base to restore what happened; 2) \textit{recent states} are updated by \textit{history states} and upcoming text streams via our proposed probabilistic model HS-Prior-LDA to maintain what is happening; 3) events can be detected by recent states with high accuracy; 4) the \textit{history status} is 
-Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{NSDetector}.
-\textsc{NSDetector} promotes the accuracy rate by 9\% without  sacrificing the recall rate.
-%在不牺牲召回率的情况下，将准确率相比于state-of-art提升了9%。
+Many web applications need the accurate event detection technique on microblog stream. 
+But the accuracy of existing methods are still challenged by microblog's short length and high noise. 
+We develop a novelty transfer learning method \textsc{LTDetector} to deal with the task.  
+1) \textsc{LTDetector} bases on the following fact, that microblog is short but it can be enriched by knowledge base semantically.
+Knowledge base can be a good supplementary for event detection on microblog stream.
+But it's non-trivial to conduct transfer learning from knowledge base to microblog stream directly.
+We propose a lightweight transfer learning method \textsc{LTDetector} for high accurate event detection.  
+In this proposed method, 1) the data structure \textit{history states} can be extracted from knowledge base to restore what happened; 2) \textit{recent states} are updated by \textit{history states} and upcoming text streams via our proposed probabilistic model HS-Prior-LDA to maintain what is happening; 3) events can be detected based on recent states with high accuracy.
+Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{LTDetector}.
+\textsc{LTDetector} promotes the accuracy rate by 9\% without  sacrificing the recall rate.
 
-
-\begin{comment}
-Event detection is an important task to understand what already happened and what is currently happening in the rapid evolving text stream. 
-% what happened不需要了
-% 诸多互联网的应用都迫切需要实时准确的事件检测技术。
-% 由于需要实时监测最新发生的事件，人们通常实时分析最新的数据流来检测可能发生的事件，但很遗憾这种技术的准确率远远不能支撑应用的要求。
-
-%举例之后,1这个例子说明需要哪些新技术支持——需要对历史知识有准确的描述，充分体现概念与概念之间的联系；并且能够利用新数据来更新相应的知识，以解决知识库的更新滞后于新数据的问题 2 列举related works，这些技术无法解决这个问题
-%我们的工作。
-
-%在Related Works 之前说明我们这是一个amazing的工作，同时将precision和recall都进行了提升，而一般的工作很难兼顾这一点。
-But existing methods cannot achieve high precision and high recall simultaneously. 
-The reason lies in that they only use the recent data and lack the accumulation of history knowledge. 
-We further find out that the ideal event detection method should have two properties: \textit{organizing history data well} and \textit{self-updating}.
-According to this guideline, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of history data. 
-In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
-Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed \textsc{NSDetector}.
-\end{comment}
 \end{abstract}
 
 \section{Introduction}
@@ -103,7 +75,7 @@ Since the transfer learning\cite{pan2010survey} aims at utilizing the extra info
 
 But it's non-trivial to conduct transfer learning from knowledge base to microblog stream directly.
 The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and acuaretely detecting events.
-What most meet the efficiency demand is Twevent\cite{Twevent2012}, but it's limited to filtering out meaningless microblogs by looking up Wikipedia. Some event,  which may contains the sements not restored in Wikipedia, may be dropped incorrectly.
+What most meet the efficiency demand is Twevent\cite{Twevent2012}, but it's limited to filtering out meaningless microblogs by looking up Wikipedia. Some event,  which may contains the segments not restored in Wikipedia, may be dropped incorrectly.
 
 In our paper, to balance the performance and the cost of transfer learning, new data structure \textit{history states} is proposed. 
 It bases on the following facts. 
@@ -114,28 +86,15 @@ By considering these three parts together, we can extract a class or category's 
 In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base.
 
 More than that, we propose a new quick and lightweight probabilistic model \textsc{HS-Prior-LDA} for transfer learning. 
-After deriving \textsc{HS-Prior-LDA} (detailed in Section), it reveals that whether a word in microblog links to a high-level category in knowledge base depends on three factors, the word's score in the category's \textit{history state}, and the microblogs' other words linkages, the time windows' same word types' linkages. All these statistics are easy to gain. 
+After deriving \textsc{HS-Prior-LDA} (detailed in Section \ref{subsec:rs_initialization}), it reveals that whether a word in microblog links to a high-level category in knowledge base depends on three factors, the word's score in the category's \textit{history state}, the linkages of microblogs' other words, the linkages of the word types in the same time window. 
+All these statistics are easy to gain, which leads the model efficient. 
+What \textsc{HS-Prior-LDA} learned is summarized as \textit{recent states}, shown in Figure \ref{fig:modelDesc}.
+Since the recent states have filtered out meaningless words, the detected events on recent states is much more accurate than other methods which don't do the transfer learning.
+\textsc{HS-Prior-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
+Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million tweets)} validates the effectiveness of our proposed method \textsc{LTDetector}.
 
-\begin{comment}
-Many web applications\cite{ge2015bring}\cite{hughes2009twitter}\cite{sakaki2010earthquake} need the real time event detection technique. 
-But the accuracy of existing methods are still far from meeting the application requirements. 
-The main stream of existing methods focus on monitoring the changes of the recent data\cite{Allan:2000wu}\cite{Petrovic:2010uj}\cite{Wurzer:2015wq}, and some others use the history data by word frequencies\cite{Li2013JointEE}\cite{Nguyen2015EventDA} and dictionary\cite{Twevent2012}. 
-A typical example the existing methods cannot handle well is that ``Russia's anti-ISIS operation in Syria". The word Russia, ISIS, and Syria are trivial, while Russia's anti ISIS is nontrivial because US and other Europe countries but not Russia are the countries that anti ISIS  before September 2015. 
-%这个例子应该
-
-To handle this challenge, the important factors on the high accuracy event detection are needed: (1) having a good mechanism to organize the history data, and being aware of what happened; (2) having the capability of self-updating, to accumlate the knowledge about what is happening.
-\end{comment}
-
-The properties of the ideal event detection method also coincide with the news value theory\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}.
-Following this guideline, if the journalist knew the normal states, aka, the ``routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
-We suppose that the ideal event detection system performs like a journalist who can find news from cyberspace with the knowledge of the history states. 
-
-%It's very close for the ideal event detection method, which holds the previous mentioned two properties (\textit{organizing history data well} and \textit{self-updating}). To implement the ideal event detection method, we propose \textsc{NSDetector}, a high accuracy event detection method that trains normal states better by using knowledge base, which can be treated as the accumulation of happened things. 
-%In \textsc{NSDetector}, 1) a new data structure \textit{normal states} is proposed to restore what happened; 2) \textit{normal states} can be initialized by knowledge base and further updated by upcoming text streams via our proposed probabilistic model NS-Prior-LDA; 3) events can be detected by normal states with high accuracy.
-
-\begin{comment}
-But the existing computation on the RDF graph is often time consuming. To overcome this obstacle, we propose the new data structure \textit{normal states}, which not only utilize the structure adequately but also maintain the information about what happened and what's happening more efficiently than RDF.  
-\end{comment}
+The transfer learning based event detection method \textsc{LTDetector} also coincides with the news value theory\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}.
+Following this guideline, if the journalist knew the history states, aka, the ``routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
 
 \begin{figure}[h]
     \centering
@@ -145,20 +104,21 @@ But the existing computation on the RDF graph is often time consuming. To overco
 \end{figure}
 
 
-The contribution of this paper is mainly in three aspects.
-(1) We reveal that there are two important factors for high accuracy event detection-- a comprehensive model that can organize history data well, and updating the model well.
-(2) We propose the probability model \textsc{NSDetector}. 
-The model can combine the history data and the recent data, further determine the arrival new document whether it represents a new event. 
-More than that, \textsc{NSDetector} has the capability to update the knowledge of what happened.
-(3) The experiment on the Edinburgh twitter corpus which contains 30 million tweets show that \textsc{NSDetector} promotes the accuracy rate by 9\% without sacrificing the recall rate.
+%The contribution of this paper is mainly in three aspects.
+%(1) We reveal that transfer learning from knowledge base to microblog stream can benefit event detection task.
+%(2) We propose the probability model \textsc{NSDetector}. 
+%The model can combine the history data and the recent data, further determine the arrival new document whether it represents a new event. 
+%More than that, \textsc{NSDetector} has the capability to update the knowledge of what happened.
+%(3) The experiment on the Edinburgh twitter corpus which contains 30 million tweets show that \textsc{NSDetector} promotes the accuracy rate by 9\% without sacrificing the recall rate.
 
 
 \section{Related Works}
 \label{sec:relatedWorks}
 \textbf{Event Detection.} 
-There are two kinds of .
-The first category of methods, including UMass\cite{Allan:2000wu} and BurstyBTM\cite{Yan:2015wm}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
-This kind methods can be implemented by clustering of articles\cite{Allan:2000wu;Petrovic:2010uj;Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topic modeling\cite{Diao:2012wj}\cite{Yan:2015wm} in the recent time windows. 
+There are two kinds of event detection methods based on how it utilize the history data, unsupervised and supervised learning.
+
+The unsupervised methods, including UMass\cite{Allan:2000wu} and BurstyBTM\cite{Yan:2015wm}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
+This kind methods can be implemented by clustering of articles\cite{Allan:2000wu,Petrovic:2010uj,Wurzer:2015wq}, word frequencies\cite{Mathioudakis:2010fc}\cite{Weng:2011wz}, or topic modelling\cite{Diao:2012wj}\cite{Yan:2015wm} in the recent time windows. 
 Taking the clustering of articles as an example, they model the occurred events as clusters, and link the incoming article with an already existed event cluster or assign it as the new detected event.
 The decision is based on whether the dissimilarity between the incoming article and existed event clusters is over the user-specified threshold. 
 
@@ -168,7 +128,7 @@ On the one hand, UMass\cite{Allan:2000wu} prefers the lower threshold to enlarge
 On the other hand, BurstyBTM needs the appropriate number of topics to run the topic modelling, and detects the ``large" events that associate with many articles but ignores the ``small" ones. 
 
 
-The second category of methods thoroughly relies on the \textit{history data}. 
+The supervised thoroughly relies on the \textit{history data}. 
 The typical implementation is to train the event triggers\cite{Li2013JointEE}\cite{Nguyen2015EventDA} from history labeled data, then apply the trained model to detect the event related articles, which contain the triggers such as the word \textit{attacked} for the \textit{public security} events. 
 This kind methods suffer from the loss of recall. 
 There are two reasons. 
@@ -180,15 +140,8 @@ It only restores the history knowledge but without updating.
 Some new event related articles may be mistakenly filtered out because not containing previous trained triggers. 
 For example, the tweet ``Russia's intervention in Syria began in September 2015" without an event trigger, which is really related to a \textit{public security} event, may be omitted by the system. 
 
-\begin{comment}
-These methods work in four ways. 
-1) Based on topic model, BurstyBTM and TimeUserLDA detect bursty topics. 
-Although they are designed for batch learning initially, we run them on the slide windows to adapt to the text stream environment.
-2) Integrated with knowledge base, Twevent detects bursty segments, groups them into clusters, and then filters out the meaningless ones by Wikipedia.
-3) By clustering articles, UMass System and LSH decide whether the article belongs to the existing event or a new one.
-As designed for First Story Detection task (one of the Topic Detection and Tracking subtasks\cite{allan2012topic}) initially, they prefer to enlarge the recall of detected events. 
-4) By analyzing word frequencies, EDCoW clusters the bursty words into events.
-\end{comment}
+\textbf{Knowledge Base} The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and accurately detecting events.
+
 
 
 
@@ -271,7 +224,7 @@ Taking the \textit{military} category in Figure \ref{fig:modelDesc} as an exampl
 \textit{Recent state} is the proposed data structure to maintain the information about what's happening.
 It extracts category-related words from incoming text stream, for each time window.
 Still taking the \textit{military} category in  Figure \ref{fig:modelDesc} as an example, based on extracted history states, our proposed probabilistic continuous learning model \textsc{HS-Prior-LDA} can recognize the words \textit{libyan} and \textit{rebel} in the time window 2011-07-28 in the text stream are related to the category \textit{military}. 
-Furthermore the time series analysis on the neighboring recent states can recognize the set of events' candidate words, and finally detects the events in the text stream. 
+Furthermore the time series analysis on the neighbouring recent states can recognize the set of events' candidate words, and finally detects the events in the text stream. 
 In the example of Figure \ref{fig:modelDesc}, the words \textit{libyan} and \textit{rebel} are related to the \textit{military} event ``\#libya Libyan rebels chief is killed (2011-07-28)''.
 
 \begin{rmk}[History State] 
@@ -349,7 +302,7 @@ There are a bulk of history information restored in the wiki text content.
 In order to extract the key words in wiki page's content, which distinguish it from other pages, we use the chi-square statistics\cite{yang1997comparative}\cite{liu2009imbalanced} to measure the importance of each word for the specific page.
 
 For a given category in \(G^{(0)'}\), chi-square statistics also can evaluate the importance of each word appeared in text contents. 
-For example, the chi-square statistic of the term \textit{shooting} under the category \textit{military} is 2888.7 which corresponds to the p-value 0.0001 of chi-square test with 1 degree of freedom.
+For example, the chi-square statistic of the term \textit{shooting} under the category \textit{military} is 2888.7 under chi-square test with 1 degree of freedom.
 That means the term \textit{shooting} is highly related to the category \textit{military}.  
 %To prevent the overclaim of rare word by chi-square statitistcs, the word frequency is introduced as a supplement\cite{liu2009imbalanced}, as shown in line \ref{alg:line10inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
 Finally, we can get the category's history state, which are  composed by the category related words and their corresponding importance.
@@ -717,7 +670,6 @@ In total &  &  &  & \\ \hline
 %\begin{comment}
 \begin{table*}[ht]
 \centering
-\caption{History States initialized from Wikipedia and topical words learned from HS-Prior-LDA}
 \scalebox{0.76}{
 \begin{tabular}{|cc|cc|cc|cc|cc|cc|}
 \hline
@@ -737,6 +689,7 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps & 
 \hline
 \end{tabular}
 }
+\caption{History States extracted from Wikipedia and topical words learned from HS-Prior-LDA}
 \label{tbl:historyStates}
 \end{table*}
 %\end{comment}
@@ -789,7 +742,7 @@ We use precision and recall to evaluate each method on both benchmarks.
     Twevent & 0.824 & 0.697 & 0.641 & 0.113 \\ \hline
     EDCoW & 0.412 & 0.756 & 0.119 & 0.290 \\ \hline
     BurstyBTM & 0.647 & 0.809 & 0.170 & 0.045 \\ \hline
-    \textsc{NSDetector} & 1.000 & 0.894 & 0.950 & 0.042 \\ \hline
+    \textsc{LTDetector} & 1.000 & 0.894 & 0.950 & 0.042 \\ \hline
     \end{tabular}
 }
 \caption{Overall Performance on Event Detection}
@@ -818,6 +771,13 @@ topic (e.g., the event). Two tweet segments about the same event
 are therefore have higher chance to be clustered together.
 
 \textbf{Discussions.} 
+These methods work in four ways. 
+1) Based on topic model, BurstyBTM and TimeUserLDA detect bursty topics. 
+Although they are designed for batch learning initially, we run them on the slide windows to adapt to the text stream environment.
+2) Integrated with knowledge base, Twevent detects bursty segments, groups them into clusters, and then filters out the meaningless ones by Wikipedia.
+3) By clustering articles, UMass System and LSH decide whether the article belongs to the existing event or a new one.
+As designed for First Story Detection task (one of the Topic Detection and Tracking subtasks\cite{allan2012topic}) initially, they prefer to enlarge the recall of detected events. 
+4) By analyzing word frequencies, EDCoW clusters the bursty words into events.
 
 
 \begin{comment}
