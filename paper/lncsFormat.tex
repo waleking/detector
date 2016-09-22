@@ -77,6 +77,13 @@ For example, the microblog message ``libyan rebel chief gunned down in Benghazi 
 By reading these two wiki pages, readers easily understand the example tweet is talking about something related to \textit{Military} and \textit{Libya}.
 In other words, knowledge base enriches the linkages between words, and provides more comprehensive context for microblogs.
 Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information restored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=1.0\columnwidth]{img/hood.pdf}
+        \caption{Hood\footnote{\url{https://en.wikipedia.org/wiki/Naser_Jason_Abdo#Arrest}}\footnote{\url{https://en.wikipedia.org/wiki/Fort_Hood#2011_attack_plot}}}
+        \label{fig:hood}
+\end{figure}
+
 
 But it's non-trivial to conduct transfer learning from knowledge base to microblog stream directly.
 The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and acuaretely detecting events.
