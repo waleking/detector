@@ -45,7 +45,7 @@
 % proceedings, working notes, and technical reports.
 %
 \title{Lightweight Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
-%\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+%构造（building）一个**词表（找一个词对它更合适的描述），for transfer learning in accurate event detection
 \maketitle
 
 \begin{abstract}
@@ -54,11 +54,14 @@ But the accuracy of existing methods are still challenged by microblog's short l
 We develop a novel lightweight transfer learning method \textsc{LTDetector} to deal with the task.  
 \textsc{LTDetector} bases on two facts, that microblog is short but can be enriched by knowledge base semantically with transfer learning; and to make the transfer efficiently and effectively, the scale of knowledge should shrink without degrading. 
 The following contributions are made in \textsc{LTDetector}.
+%我们的核心贡献应该是说，我们提出了一个方法（结构Guided的词表抽取方法），用这个方法可以从维基中学习出来了一个高度准确的词表，这个词表对于迁移学习非常有效。
 (1) We formalize the knowledge base's hierarchical structure into three parts including taxonomy graph, category-page bipartite graph, and page-content map; and further shrink the scale of knowledge to category-word level by utilizing the structure.
+%结构提取的方法(without degrading)
 Specifically, category's highly related words and their chi-square scores, namely category's \textit{KB State}, are condensed.
 %The knowledge base's hierarchical structure is formalized as three-part: taxonomy graph, category-page bipartite graph, and page-content map.
 %The structure is utilized to condense category's highly related words and their chi-square scores, namely category's \textit{KB State}, shrinking the scale of knowledge to category-word level.
 (2) Category's related words in microblog stream, namely category's \textit{Stream State}, are learned from our proposed KB-Prior-LDA, which exploits the word co-occurrences and transfers the condensed knowledge \textit{KB State} into microblogs. 
+%基于结构提取方法的迁移学习，学习到microblog的状态
 (3) Events are further detected on meaningful categories' \textit{Stream States}, which filter out the noise accurately. 
 (4) Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed transfer learning method.
 \textsc{LTDetector} achieves high accuracy, promoting the precision by 9\% without  sacrificing the recall rate.
@@ -73,10 +76,11 @@ According to \cite{huang2016probabilistic}, the characteristics of microblog, wh
 
 Knowledge base can be a good supplementary for event detection on microblog stream.
 Different from the not-well-organized microblog stream, knowledge base (e.g. Wikipedia) is constructed elaborately and contains rich information. 
-For example, the microblog message ``libyan rebel chief gunned down in Benghazi (2011-07-28)'' is short, but still comprehensible because the words ``\textit{libyan}", ``\textit{Benghazi}'' are included in the wiki page ``\textit{Libya}", and the words ``\textit{rebel}'', ``\textit{gun}'' appeared in the wiki page ``\textit{Military}''.
-By reading these two wiki pages, readers easily understand the example tweet is talking about something related to \textit{Military} and \textit{Libya}.
+For example, the microblog message ``Possible Ft. Hood Attack Thwarted (2011-07-28)'' is short, but still comprehensible because the words ``\textit{Ft. Hood}" is included in the wiki page ``\textit{Ft. Hood}", and belongs to the category ``\textit{Military}''.
+By reading these two wiki pages, the model easily understands the example tweet is talking about something related to \textit{Military}.
 In other words, knowledge base enriches the linkages between words, and provides more comprehensive context for microblogs.
 Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information restored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
+%拆成两个小图，中间说明这是transfer learning过后的
 \begin{figure}[h]
         \centering
         \includegraphics[width=1.0\columnwidth]{img/hood.pdf}
@@ -89,7 +93,7 @@ But it's non-trivial to conduct transfer learning from knowledge base to microbl
 The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and acuaretely detecting events.
 What most meet the efficiency demand is Twevent\cite{Twevent2012}, but it's limited to filtering out meaningless microblogs by looking up Wikipedia. Some event,  which may contains the segments not restored in Wikipedia, may be dropped incorrectly.
 
-In our paper, to balance the performance and the cost of transfer learning, new data structure \textit{history states} is proposed. 
+In our paper, to balance the performance and the cost of transfer learning, new data structure \textit{KB states} is proposed. 
 It bases on the following facts. 
 The knowledge base's three fold structure includes the taxonomy graph (\textit{class} \(\rightarrow\) \textit{subclass}), the category-page bipartite graph (\textit{class} \(\rightarrow\) \textit{instance}), and the page-content map (\textit{instance} \(\rightarrow\) \textit{content}) relations in the knowledge base. 
 In terms of concept level, the latter part is finer than the former. 
@@ -97,12 +101,12 @@ And the last page-content map goes into the detail at the word level.
 By considering these three parts together, we can extract a class or category's highly related words (evaluated by chi-square score in Section \ref{subsec:hs_initialization}), and restore them in the newly proposed data structure \textit{history states}.
 In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base.
 
-More than that, we propose a new quick and lightweight probabilistic model \textsc{HS-Prior-LDA} for transfer learning. 
-After deriving \textsc{HS-Prior-LDA} (detailed in Section \ref{subsec:rs_initialization}), it reveals that whether a word in microblog links to a high-level category in knowledge base depends on three factors, the word's score in the category's \textit{history state}, the linkages of microblogs' other words, the linkages of the word types in the same time window. 
+More than that, we propose a new quick and lightweight probabilistic model KB-Prior-LDA for transfer learning. 
+After deriving KB-Prior-LDA (detailed in Section \ref{subsec:rs_initialization}), it reveals that whether a word in microblog links to a high-level category in knowledge base depends on three factors, the word's score in the category's \textit{KB state}, the linkages of microblogs' other words, the linkages of the word types in the same time window. 
 All these statistics are easy to gain, which leads the model efficient. 
-What \textsc{HS-Prior-LDA} learned is summarized as \textit{recent states}, shown in Figure \ref{fig:modelDesc}.
+What KB-Prior-LDA learned is summarized as \textit{recent states}, shown in Figure \ref{fig:modelDesc}.
 Since the recent states have filtered out meaningless words, the detected events on recent states is much more accurate than other methods which don't do the transfer learning.
-\textsc{HS-Prior-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
+\textsc{KB-Prior-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
 Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million tweets)} validates the effectiveness of our proposed method \textsc{LTDetector}.
 
 The transfer learning based event detection method \textsc{LTDetector} also coincides with the news value theory\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}.
