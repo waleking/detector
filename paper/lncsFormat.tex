@@ -44,31 +44,23 @@
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-%\title{Lightweight Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
-%Category Pivot Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection
+\title{Category-Pivot Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
 %构造（building）一个**词表（找一个词对它更合适的描述），for transfer learning in accurate event detection
-\title{Constructing Knowledge Base's Category Topics for Transfer Learning in Accurate Microblog Event Detection}
+%\title{Constructing Knowledge Base's Category Topics for Transfer Learning in Accurate Microblog Event Detection}
 \maketitle
 
 \begin{abstract}
 Many web applications need the accurate event detection technique on microblog stream. 
 But the accuracy of existing methods are still challenged by microblog's short length and high noise. 
-We develop a novel lightweight transfer learning method \textsc{LTDetector} to deal with the task.  
-\textsc{LTDetector} bases on two facts, that microblog is short but can be enriched by knowledge base semantically with transfer learning; and to make the transfer efficiently and effectively, the scale of knowledge should shrink without degrading. 
-The following contributions are made in \textsc{LTDetector}.
-%我们的核心贡献应该是说，我们提出了一个方法（结构Guided的词表抽取方法），用这个方法可以从维基中学习出来了一个高度准确的词表，这个词表对于迁移学习非常有效。
-%Intrinsic
-(1) We formalize the knowledge base's hierarchical structure into three parts including taxonomy graph, category-page bipartite graph, and page-content map; and further shrink the scale of knowledge to category-word level by utilizing the structure.
-%结构提取的方法(without degrading)
-Specifically, category's highly related words and their chi-square scores, namely category's \textit{KB State}, are condensed.
-%The knowledge base's hierarchical structure is formalized as three-part: taxonomy graph, category-page bipartite graph, and page-content map.
-%The structure is utilized to condense category's highly related words and their chi-square scores, namely category's \textit{KB State}, shrinking the scale of knowledge to category-word level.
-%(2) Category's related words in microblog stream, namely category's \textit{Stream State}, are learned from our 
-(2) We propose CTrans-LDA for category pivot transfer learning, which exploits the word co-occurrences and transfers the knowledge base's category topics into microblogs. 
-%基于结构提取方法的迁移学习，学习到microblog的状态
-(3) Events are further detected on meaningful categories' \textit{Stream States}, which filter out the noise accurately. 
-(4) Experiments on the benchmark \textit{Edinburgh twitter corpus (30 million tweets)} validate the effectiveness of our proposed transfer learning method.
-\textsc{LTDetector} achieves high accuracy, promoting the precision by 9\% without  sacrificing the recall rate.
+We develop a novel category-pivot transfer learning method \textsc{TransDetector} to deal with the task.  
+\textsc{TransDetector} bases on two facts, that microblog is short but can be enriched by knowledge base semantically with transfer learning; and events can be detected more accurately on microblogs with richer semantics.
+The following contributions are made in \textsc{TransDetector}.
+(1) We propose a structure-guided category-pivot topics extraction method, which exploits the knowledge base's hierarchical structure to extract categories' highly correlated topics. 
+(2) We develop a probabilistic model CTrans-LDA for category-pivot transfer learning, which utilizes the word co-occurrences and transfers the knowledge base's category-pivot topics into microblogs. 
+%Hence, word time series are expanded as category-pivot word time series.
+(3) Events are detected accurately on category-pivot word time series, due to richer semantics and less noise. 
+(4) Experiment verifies the quality of category-pivot topics extracted from knowledge base, and the further study on the benchmark \textit{Edinburgh twitter corpus} validates the effectiveness of our proposed transfer learning method for event detection.
+\textsc{TransDetector} achieves high accuracy, promoting the precision by 9\% without  sacrificing the recall rate.
 %另外，我们还标注了事件，使其语义可理解。以及LTDetector是efficient的。
 
 \end{abstract}
