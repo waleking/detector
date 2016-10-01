@@ -95,7 +95,7 @@ The knowledge base's three fold structure includes the taxonomy graph (\textit{c
 In terms of concept level, the latter part is finer than the former. 
 And the last page-content map goes into the detail at the word level. 
 By considering these three parts together, we can extract a class or category's highly related words (evaluated by chi-square score in Section \ref{subsec:hs_initialization}), and restore them in the newly proposed data structure \textit{history states}.
-In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base.
+In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base. 
 
 More than that, we propose a new quick and lightweight probabilistic model KB-Prior-LDA for transfer learning. 
 After deriving KB-Prior-LDA (detailed in Section \ref{subsec:rs_initialization}), it reveals that whether a word in microblog links to a high-level category in knowledge base depends on three factors, the word's score in the category's \textit{KB state}, the linkages of microblogs' other words, the linkages of the word types in the same time window. 
@@ -104,9 +104,6 @@ What KB-Prior-LDA learned is summarized as \textit{recent states}, shown in Figu
 Since the recent states have filtered out meaningless words, the detected events on recent states is much more accurate than other methods which don't do the transfer learning.
 \textsc{KB-Prior-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
 Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million tweets)} validates the effectiveness of our proposed method \textsc{LTDetector}.
-
-The transfer learning based event detection method \textsc{LTDetector} also coincides with the news value theory\cite{caple2013delving}, which emphasizes the \textit{news unexpectedness} -- ``the unpredictable or the rare is more newsworthy than the routine"\cite{bell1991language}.
-Following this guideline, if the journalist knew the history states, aka, the ``routine things" of everyday better, he/she would tend to choose more unexpected news to report. 
 
 \begin{figure}[h]
     \centering
@@ -246,6 +243,17 @@ And we denote the history states of category \(c\) as \(\bm{h}_c=\{<w^{(c)}_i,ch
 
 \begin{rmk}[Recent State] 
 The recent state at time \(t\) of the specific category \(c\) is defined by a set of tuples, and denoted as \(\bm{r}_{c,t}=\{<w^{(c)}_i,n(c,t,w^{(c)}_{i})>\}_{i=1,...,N_c}\), in which word \(w^{(c)}_{i}\) is related to the category \(c\), and \(n(c,t,w^{(c)}_{i})\) is its document frequency in the time window \(t\).
+\end{rmk}
+
+\begin{rmk}[The Set of Events' Candidate Words] 
+The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the bursty words in recent state \(\bm{r}_{c,t}\).
+\end{rmk}
+
+\begin{rmk}[Event Phrase] 
+Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occurred in the set of events' candidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happened in time \(t\) under the category \(c\).
+\end{rmk}
+
+\begin{rmk}[Event Related Articles] Event related articles \(\mathcal{D}_{c,t,i}\) are articles that relate to the \(i\)-th event in time \(t\) under the category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
 \end{rmk}
 
 
@@ -487,28 +495,25 @@ Event detection on recent states is discussed in the following subsection.
 
 \subsection{Detecting Events from Recent States}
 \label{subsec:detection}
-Given the words' accurate meaning, events are  detected accurately as the patterns of words' time series are better exposed.
+After transfer learning, events are detected accurately because the word time series is refined as multiple corresponding (word, category) time series, and the bursty pattern is better exposed. 
 Taking the word \textit{hood} as an example, it belongs to the category \textit{Military} when it appeared in \textit{Ft Hood}, a US military establishment located in Texas.
-As shown in Figure \ref{fig:hood}, the bursty pattern of \textit{hood} is clearly exposed after distinguishing its \textit{Military} time series from the raw time series.
+As shown in Figure \ref{fig:hood}, the bursty pattern of \textit{hood} is clearly exposed after distinguishing its \textit{Military} time series from the raw one.
 %Therefore, the processing on each category's accurate stream states leads to the accurate event detection. 
 
-We take the detection in three sub-phases: (1) detecting events' candidate words; (2) generating event phrases; (3) linking event tweets with event phrases.
+Given (word, category) time series and microblogs in a time window, we take the detection in	 three sub-phases: (1) detecting events' candidate words; (2) generating event phrases; (3) linking event tweets with event phrases.
 %这里添加对这几个Definition的解释。
 
-\begin{rmk}[The Set of Events' Candidate Words] 
-The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the bursty words in recent state \(\bm{r}_{c,t}\).
-\end{rmk}
+\textbf{Detecting events' candidate words}. For a word \(w\) and a category \(c\), on its time series \(\{n(c,t,w^{(c)})\}_{t=1}^{T}\), many bursty detection methods can be applied to check if the word \(w\) is bursty in category \(c\) by given time \(t\). 
+We assume the document frequency of \(w^{(c)}\) follows a poisson distribution, which is also used in \cite{Diao:2012wj}.
+And the document frequency of nonbursting \(w^{(c)}\) has the possison distribution with the parameter \(\lambda=\mu_0\); while the bursting one with the parameter \(4\mu_0\) means the document frequency \(n(c,t,w^{(c)})\) is much higher when bursting.
+We empirically set \(\mu_0\) as the moving average \(\mu_0^{(t)}=\frac{1}{T}\sum_{\tau=t-T}^{t-1}n(c,\tau,w^{(c)})\), and set T=10.
+Hence, at time \(t\), bursty or not is determined by comparing the probabilities of above poisson distributions. 
+After bursty detection on the time series, we add each time \(t\)'s bursty word \(w^{(c)}\) into the set of event's candidate words \(\mathcal{B}_{c,t}\).
 
-\begin{rmk}[Event Phrase] 
-Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occurred in the set of events' candidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happened in time \(t\) under the category \(c\).
-\end{rmk}
+\textbf{Generating event phrases}.
 
-\begin{comment}
-\begin{rmk}[Event Related Articles] Event related articles \(\mathcal{D}_{c,t,i}\) are articles that relate to the \(i\)-th event in time \(t\) under the category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
-\end{rmk}
-\end{comment}
+\textbf{Linking event tweets with event phrases}. 
 
-For a specific word \(w\) and the category \(c\), as stream states have provided the time series \(\{n(c,t_{1},w^{(c)}), \cdots, n(c,t_{T},w^{(c)})\}\), many bursty detection methods on the time series can be applied to check if the word \(w\) is bursty in category \(c\).  
 %Text stream evolves more quickly with time than knowledge base.
 %For example, recent state of Military contain .
 %In other words, recent state is history-state-like topic timestamp.%在时间轴上的横截面。
