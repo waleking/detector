@@ -1,0 +1,8 @@
+
+*.class
+
+*.blg
+
+paper/tmp.pdf
+
+paper/tmp.tex

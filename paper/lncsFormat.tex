@@ -236,6 +236,10 @@ Still taking the \textit{military} category in  Figure \ref{fig:modelDesc} as an
 Furthermore the time series analysis on the neighbouring recent states can recognize the set of events' candidate words, and finally detects the events in the text stream. 
 In the example of Figure \ref{fig:modelDesc}, the words \textit{libyan} and \textit{rebel} are related to the \textit{military} event ``\#libya Libyan rebels chief is killed (2011-07-28)''.
 
+After processing each time window's data, the words in microblogs can be enriched semantically with knowledge base.
+In this way, the transfer learning model provides richer semantics and less noise for microblog stream, which promotes the accuracy of event detection significantly. 
+The following definitions are the concepts used by the transfer learning model \textsc{TransDetector}. 
+
 \begin{rmk}[History State] 
 The history state of the specific category is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(chi(c,w^{(c)}_{i})\) under the category \(c\). 
 And we denote the history states of category \(c\) as \(\bm{h}_c=\{<w^{(c)}_i,chi(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
