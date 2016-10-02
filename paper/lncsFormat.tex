@@ -15,7 +15,7 @@
 \usepackage{algorithmic}
 
 \usepackage{bm}%used for bm
-\usepackage{graphics}
+\usepackage{graphics} 
 \usepackage{graphicx}
 \usepackage{amsmath} %used for maths symbols
 \usepackage{amssymb}%used for empty set symbol
@@ -514,7 +514,14 @@ We empirically set \(\mu_0\) as the moving average \(\mu_0^{(t)}=\frac{1}{T}\sum
 Hence, at time \(t\), bursty or not is determined by comparing the probabilities of above poisson distributions. 
 After bursty detection on the time series, we add each time \(t\)'s bursty word \(w^{(c)}\) into the set of event's candidate words \(\mathcal{B}_{c,t}\).
 
-\textbf{Generating event phrases}.
+\textbf{Generating event phrases}. 
+In the set of event's candidate words \(\mathcal{B}_{c,t}\), some words appear together and should be grouped into event phrases.
+For example, there are six bursty words in \(\mathcal{B}_{military,2011-07-28}\) belonging to two event phrases \textit{``Ft, Hood, attack"} and \textit{``Libyan, rebel, gunned"} in the time window 2011-07-28 to represent the events happened to the US military establishment and the Libyan rebel respectively. 
+
+In order to group the bursty words together, we  construct the directed weighted graph \(\mathcal{G}_{c,t}=(\mathcal{B}_{c,t},\mathcal{E}_{c,t})\), where \(\mathcal{E}_{c,t}=\{(a,b,PMI(a,b))|a \in \mathcal{B}_{c,t}, b \in \mathcal{B}_{c,t}, PMI(a,b)>0 \}\). 
+The graph \(\mathcal{G}_{c,t}\) means the words in \(\mathcal{B}_{c,t}\) are connected if and only if their PMI score in the given time window's microblogs is over 0. 
+
+
 
 \textbf{Linking event tweets with event phrases}. 
 
@@ -696,7 +703,6 @@ In total &  &  &  & \\ \hline
 \end{table}
 \end{comment}
 
-%\begin{comment}
 \begin{table*}[ht]
 \centering
 \scalebox{0.76}{
@@ -721,7 +727,6 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps & 
 \caption{History States extracted from Wikipedia and topical words learned from HS-Prior-LDA}
 \label{tbl:historyStates}
 \end{table*}
-%\end{comment}
 
 
 \begin{table*}[ht]
