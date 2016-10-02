@@ -257,7 +257,7 @@ The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the burs
 Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occurred in the set of events' candidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happened in time \(t\) under the category \(c\).
 \end{rmk}
 
-\begin{rmk}[Event Related Articles] Event related articles \(\mathcal{D}_{c,t,i}\) are articles that relate to the \(i\)-th event in time \(t\) under the category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
+\begin{rmk}[Event Related Microblogs] Event related microblogs \(\mathcal{D}_{c,t,i}\) are articles that relate to the \(i\)-th event in time \(t\) under the category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
 \end{rmk}
 
 
@@ -499,12 +499,12 @@ Event detection on recent states is discussed in the following subsection.
 
 \subsection{Detecting Events from Recent States}
 \label{subsec:detection}
-After transfer learning, events are detected accurately because the word time series is refined as multiple corresponding (word, category) time series, and the bursty pattern is better exposed. 
+After transfer learning, events are detected accurately because the word time series is refined to finer grain as multiple corresponding (word, category) time series, and the bursty pattern is better exposed. 
 Taking the word \textit{hood} as an example, it belongs to the category \textit{Military} when it appeared in \textit{Ft Hood}, a US military establishment located in Texas.
 As shown in Figure \ref{fig:hood}, the bursty pattern of \textit{hood} is clearly exposed after distinguishing its \textit{Military} time series from the raw one.
 %Therefore, the processing on each category's accurate stream states leads to the accurate event detection. 
 
-Given (word, category) time series and microblogs in a time window, we take the detection in	 three sub-phases: (1) detecting events' candidate words; (2) generating event phrases; (3) linking event tweets with event phrases.
+Given (word, category) time series and microblogs in a time window, we take the detection in	 three sub-phases: (1) detecting events' candidate words; (2) generating event phrases; (3) retrieving event related microblogs.
 Note that these sub-phases are also available for the common text stream, but they performs better when words are enriched by category concepts of knowledge base.
 %这里添加对这几个Definition的解释。
 
@@ -517,7 +517,7 @@ After bursty detection on the time series, we add each time \(t\)'s bursty word 
 
 \textbf{Generating event phrases}. 
 In the set of event's candidate words \(\mathcal{B}_{c,t}\), some words appear together and should be grouped into event phrases.
-For example, there are six bursty words in \(\mathcal{B}_{military,2011-07-28}\) belonging to two event phrases \textit{``Ft, Hood, attack"} and \textit{``Libyan, rebel, gunned"} in the time window 2011-07-28 to represent the events happened to the US military establishment and the Libyan rebel respectively. 
+For example, there are six bursty words in \(\mathcal{B}_{military,2011-07-28}\) belonging to two event phrases \textit{``ft, hood, attack"} and \textit{``libyan, rebel, gunned"} in the time window 2011-07-28 to represent the events happened to the US military establishment and the Libyan rebel respectively. 
 
 In order to group the bursty words together, we  construct the directed weighted graph \(\mathcal{G}_{c,t}=(\mathcal{B}_{c,t},\mathcal{E}_{c,t},\mathcal{W}_{c,t})\), where \(\mathcal{E}_{c,t}=\{(a,b)|a \in \mathcal{B}_{c,t}, b \in \mathcal{B}_{c,t}, PMI(a,b)>0 \}\), and \(\mathcal{W}_{c,t}\) gives the PMI scores on the edges.
 The graph \(\mathcal{G}_{c,t}\) means the words in \(\mathcal{B}_{c,t}\) are connected if and only if their PMI score in the given time window's microblogs is over 0. 
@@ -525,11 +525,20 @@ The graph \(\mathcal{G}_{c,t}\) means the words in \(\mathcal{B}_{c,t}\) are con
 Given the graph \(\mathcal{G}_{c,t}\), spectral clustering\cite{von2007tutorial} is utilized for exploring the best partition of words. 
 To get the optimum cluster number, we use the graph density as the criteria.
 The graph density is the ratio of the number of edges to that of complete graph (the graph with all possible edges), and in practice all the sub-graphs in \(\mathcal{G}_{c,t}\) should have the densities over an empirical threshold. 
+And the empirical threshold is set to 0.6 in our setting.
 We run the spectral clustering with cluster number from 1 to \(|\mathcal{B}_{c,t}|\), and stop when all the resulting sub-graphs satisfy the criteria that the density is over the given threshold. 
 In this way, the generated event phrase combines the co-occurred bursty words and excludes the unrelated. 
 
 
-\textbf{Linking event tweets with event phrases}. 
+\textbf{Retrieving event related microblogs}. 
+To better understand the event, we retrieve the event microblogs \(\mathcal{D}_{c,t,i}\) by using the event phrase \(\mathcal{C}_{c,t,i}\).
+Generally, according to the number of bursting words in the event phrase \(\mathcal{C}_{c,t,i}\), there are two situations to be addressed. 
+(1) \(|\mathcal{C}_{c,t,i}|=1\), we directly add the microblog in time window \(t\), which contains the bursting category-word \(w^{(c)}\), into the set \(\mathcal{D}_{c,t,i}\).
+(2) \(|\mathcal{C}_{c,t,i}|\geq 2\), not all the bursting words are included in the event related microblog.
+For example, the tweet ``\textit{Soldier wanted to attack Fort Hood troops}" contains the bursting words \textit{attack} and \textit{hood}, not all the event phrase ``\textit{ft, hood, attack}". 
+To tackle this problem, we consider the microblog, that contains any pair of category-words in the event phrase, as the event related microblog.
+
+Finally, \textsc{TransDetector} gets the detected events \(\{(\mathcal{C}_{c,t,i},\mathcal{D}_{c,t,i})\}_{i=1}^{|\mathcal{C}_{c,t}|}\), containing the event phrase and the corresponding event related microblogs for the given category and the time window.
 
 %Text stream evolves more quickly with time than knowledge base.
 %For example, recent state of Military contain .
@@ -789,6 +798,7 @@ We use precision and recall to evaluate each method on both benchmarks.
 \end{table}
 
 \textbf{Overall Performances.}
+\begin{comment}
 Table 1 reports the number of events
 detected, the precision and recall, of the three methods respectively.
 The results of EDCoW are reproduced from [21]9
@@ -809,6 +819,7 @@ Because a tweet segment usually conveys very specific information,
 the tweets containing the tweet segment are all about the same
 topic (e.g., the event). Two tweet segments about the same event
 are therefore have higher chance to be clustered together.
+\end{comment}
 
 \textbf{Discussions.} 
 %An accurate recent states learning leads to accurate event detection.
