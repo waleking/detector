@@ -13,3 +13,15 @@ paper/model/.texpadtmp/
 application.log
 hood/hood.pdf
 paper/topics.csv
+
+paper/lncsFormat.bbl
+
+paper/lncsFormat.aux
+
+paper/lncsFormat.dvi
+
+paper/lncsFormat.log
+
+paper/lncsFormat.out
+
+paper/lncsFormat.tex.bbl

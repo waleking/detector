@@ -78,12 +78,14 @@ By reading these two wiki pages, the model easily understands the example tweet 
 In other words, knowledge base enriches the linkages between words, and provides more comprehensive context for microblogs.
 Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information restored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
 %拆成两个小图，中间说明这是transfer learning过后的
+\intextsep=3pt plus 3pt minus 1pt
 \begin{figure}[h]
         \centering
         \includegraphics[width=1.0\columnwidth]{img/hood.pdf}
         %\caption{Hood\footnote{\url{https://en.wikipedia.org/wiki/Naser_Jason_Abdo#Arrest}}\footnote{\url{https://en.wikipedia.org/wiki/Fort_Hood#2011_attack_plot}}}
         \label{fig:hood}
 \end{figure}
+
 
 
 But it's non-trivial to conduct transfer learning from knowledge base to microblog stream directly.
@@ -106,9 +108,13 @@ Since the recent states have filtered out meaningless words, the detected events
 \textsc{KB-Prior-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
 Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million tweets)} validates the effectiveness of our proposed method \textsc{LTDetector}.
 
+\intextsep=5pt plus 3pt minus 1pt
 \begin{figure}[h]
+	\setlength{\abovecaptionskip}{0.cm}
+	\setlength{\belowcaptionskip}{0.cm}
     \centering
     \includegraphics[width=.82\columnwidth]{img/NSDetectorExample.pdf}
+    \intextsep=0pt plus 3pt minus 1pt
     \caption{\textsc{LTDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{LTDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events.}
     \label{fig:modelDesc}
 \end{figure}
@@ -157,8 +163,22 @@ In a nutshell, existing works are different from ours, as we transfer the catego
 %The reason why this kind methods cannot achieve high precision and high recall simultaneously lies in that they lack the accumulation of history knowledge. 
 %This kind methods ``understand" the document only by the recent data and the frequencies of the data, but the ``understanding" is not so confident that they still need the specific threshold to help to make decision. 
 
-\textbf{Knowledge Base} The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and accurately detecting events.
+\textbf{Knowledge Base} Recently, many general knowledge bases and customized knowledge bases are constructed and utilized for different text mining tasks. 
+For example, Probase\cite{wu2012probase} constructs a large general probabilistic \textit{IsA} taxomomy from webpages, and is used for semantic web search, and text classification\cite{wang2014concept}.
+Such kind efforts are also made by DBPedia\cite{auer2007dbpedia}, Yago\cite{fabian2007yago}, and Freebase\cite{bollacker2008freebase}. 
+These works manages knowledge as tuples on graph. 
+However the query on large graph is very expensive\cite{huang2011scalable}, which is not very suitable for the scene of quickly and accurately detecting events.
 
+The customized knowledge bases such as EVIN\cite{kuzey2014evin}, Event Registry\cite{leban2014eventRegistry}, and Storybase\cite{wu2015storybase}, are designed for managing events.
+These knowledge bases are mainly built on news articles.
+EVIN maps the existing event-related news articles into semantic classes. 
+Event Registry collects the articles by the API of News Feed Service\cite{trampuvs2012newsfeed}, then detects events, and provides the structural information of the events, such as the related Wikipedia article, timestamp, and location etc. 
+Storybase introduces Wikipedia current events\footnote{\url{https://en.wikipedia.org/wiki/Portal:Current_events}} as the resources for constructing event-and-storyline knowledge base on news articles, which are provided by GDELT project\cite{leetaru2013gdelt}.
+As the news articles may lag behind the microblogs when the emergency of events, it's not enough to detect events from microblog stream by directly applying these customized knowledge bases. 
+
+
+
+%近年来，知识图谱也被广泛应用在了文本挖掘领域，TKDE的文章利用wikipedia将
 
 
 
@@ -863,7 +883,7 @@ Another important task is to investigate the effectiveness of Twevent when none 
 \end{comment}
 
 \newpage
-\bibliographystyle{named}
+\bibliographystyle{aaai}
 \small
 \bibliography{paperbib}
 
