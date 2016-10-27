@@ -25,3 +25,19 @@ paper/lncsFormat.log
 paper/lncsFormat.out
 
 paper/lncsFormat.tex.bbl
+
+classifier/data/tmp
+
+classifier/data/20newsgroup.all.txt
+
+classifier/data/20newsgroup.test
+
+classifier/data/20newsgroup.train
+
+classifier/result_fastText/20newsgroup.bin
+
+classifier/result_fastText/20newsgroup.test.predict
+
+classifier/data/label-class.dict
+
+classifier/data/class-label.dict
