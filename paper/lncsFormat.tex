@@ -124,11 +124,18 @@ Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million 
 \begin{figure}[h]
 	\setlength{\abovecaptionskip}{0.cm}
 	\setlength{\belowcaptionskip}{0.cm}
-    \centering
-    \includegraphics[width=.82\columnwidth]{img/NSDetectorExample.pdf}
-    \intextsep=0pt plus 3pt minus 1pt
-    \caption{\textsc{LTDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{LTDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events.}
-    \label{fig:modelDesc}
+	\centering
+    \label{fig:subfig} %% label for entire figure
+        \subfigure[]{
+                \includegraphics[width=.42\columnwidth]{img/NSDetectorExample.pdf}
+                \label{fig:modelDesc}
+
+        }
+        \subfigure[]{
+                \includegraphics[width=.42\columnwidth]{img/initializationExample.pdf}
+                \label{fig:NSinitializaton}
+        }
+        \caption{(a)\textsc{LTDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{LTDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events.;(b)Illustration on how to initialize history states from Wikipedia, taking \textit{Military} as an example.}
 \end{figure}
 
 
@@ -349,12 +356,6 @@ As \(G^{(0)}\) is not a Directed Acyclic Graph originally\cite{faralli2015large}
 Specifically, the edges \textit{class}\(\rightarrow\)\textit{subclass} are preserved only when the node \textit{class} has the higher PageRank-HITS score than the node \textit{subclass}, which is shown in the line \ref{alg:line2inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
 After removing cycles, the taxonomy structure on the knowledge base is better represented by the directed acyclic graph \(G^{(0)'}\).
 As shown in line \ref{alg:line3inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}, by visiting the category \textit{Military} in the DAG \(G^{(0)'}\), the breadth-first traverse can reach its successor sub-category nodes such as \textit{Firearms}, \textit{The World Wars}, and \textit{World War II}, etc. 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=.82\columnwidth]{img/initializationExample.pdf}  
-    \caption{Illustration on how to initialize history states from Wikipedia, taking \textit{Military} as an example.}
-    \label{fig:NSinitializaton}
-\end{figure}
 
 \textbf{Category-Page Bipartite Graph \(G^{(1)}\)}. 
 The directed edges in \(G^{(1)}\) represent the \textit{class}\(\rightarrow\)\textit{instance} relations in the knowledge base.
