@@ -1,7 +1,7 @@
 % !Mode:: "TeX:UTF-8"
-\def\year{2017}\relax
-\documentclass{article}
-\usepackage{aaai17}
+\documentclass[runningheads,a4paper]{llncs}
+
+%\usepackage{aaai17}
 \usepackage{times}
 \usepackage{helvet}
 \usepackage{courier}
@@ -49,9 +49,17 @@
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-\title{Category-Pivot Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+\titlerunning{Transfer Learning for Accurate Event Detection}
 %构造（building）一个**词表（找一个词对它更合适的描述），for transfer learning in accurate event detection
 %\title{Constructing Knowledge Base's Category Topics for Transfer Learning in Accurate Microblog Event Detection}
+\begin{comment}% for double blind
+\author{Weijing Huang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.}\and Tengjiao Wang\inst{1}}
+\institute{Key Laboratory of High Confidence Software Technologies (Ministry of Education), EECS, Peking University, Beijing, China \\ 
+\path{huangwaleking@gmail.com,{pekingchenwei,tjwang}@pku.edu.cn}\\ 
+}
+\end{comment}
+
 \maketitle
 
 \begin{abstract}
@@ -173,7 +181,7 @@ Such kind efforts are also made by DBPedia\cite{auer2007dbpedia}, Yago\cite{fabi
 These works manages knowledge as tuples on graph. 
 However the query on large graph is very expensive\cite{huang2011scalable}, which is not very suitable for the scene of quickly and accurately detecting events.
 
-The customized knowledge bases such as EVIN\cite{kuzey2014evin}, Event Registry\cite{leban2014eventRegistry}, and Storybase\cite{wu2015storybase}, are designed for managing events.
+The customized knowledge bases such as EVIN\cite{kuzey2014evin}, Event Registry\cite{leban2014eventRegistry}, and Story-base\cite{wu2015storybase}, are designed for managing events.
 These knowledge bases are mainly built on news articles.
 EVIN maps the existing event-related news articles into semantic classes. 
 Event Registry collects the articles by the API of News Feed Service\cite{trampuvs2012newsfeed}, then detects events, and provides the structural information of the events, such as the related Wikipedia article, timestamp, and location etc. 
@@ -893,7 +901,7 @@ Another important task is to investigate the effectiveness of Twevent when none 
 \end{comment}
 
 \newpage
-\bibliographystyle{aaai}
+\bibliographystyle{unsrt}
 \small
 \bibliography{paperbib}
 
