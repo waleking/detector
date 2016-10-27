@@ -41,3 +41,5 @@ classifier/result_fastText/20newsgroup.test.predict
 classifier/data/label-class.dict
 
 classifier/data/class-label.dict
+
+tmp.py
