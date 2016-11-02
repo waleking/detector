@@ -1,0 +1,4041 @@
+,topic,model,group,npmiscore
+0,58,Topics learned by LightLDA,0.0,0.10344
+1,58,Topics learned by LightLDA,1.0,0.04929
+2,58,Topics learned by LightLDA,2.0,0.04162
+3,58,Topics learned by LightLDA,3.0,-0.03117
+4,58,Topics learned by LightLDA,4.0,0.0168
+5,58,Topics learned by LightLDA,5.0,0.00921
+6,58,Topics learned by LightLDA,6.0,-0.02445
+7,58,Topics learned by LightLDA,7.0,0.03172
+8,58,Topics learned by LightLDA,8.0,0.03654
+9,58,Topics learned by LightLDA,9.0,0.00693
+10,58,Topics learned by LightLDA,10.0,0.05419
+11,58,Topics learned by LightLDA,11.0,0.0439
+12,58,Topics learned by LightLDA,12.0,-0.0024
+13,58,Topics learned by LightLDA,13.0,-0.01974
+14,58,Topics learned by LightLDA,14.0,-0.075
+15,58,Topics learned by LightLDA,15.0,-0.00403
+16,58,Topics learned by LightLDA,16.0,-0.03495
+17,58,Topics learned by LightLDA,17.0,0.01877
+18,58,Topics learned by LightLDA,18.0,-0.06235
+19,58,Topics learned by LightLDA,19.0,-0.03254
+20,58,Topics learned by LightLDA,20.0,0.0151
+21,58,Topics learned by LightLDA,21.0,0.03688
+22,58,Topics learned by LightLDA,22.0,0.0411
+23,58,Topics learned by LightLDA,23.0,0.02971
+24,58,Topics learned by LightLDA,24.0,-0.00204
+25,58,Topics learned by LightLDA,25.0,-0.05222
+26,58,Topics learned by LightLDA,26.0,-0.02117
+27,58,Topics learned by LightLDA,27.0,-0.00832
+28,58,Topics learned by LightLDA,28.0,-0.03187
+29,58,Topics learned by LightLDA,29.0,-0.01799
+30,58,Topics learned by LightLDA,30.0,-0.06262
+31,58,Topics learned by LightLDA,31.0,-0.05637
+32,58,Topics learned by LightLDA,32.0,-0.02729
+33,58,Topics learned by LightLDA,33.0,-0.03896
+34,58,Topics learned by LightLDA,34.0,0.0124
+35,58,Topics learned by LightLDA,35.0,-0.06624
+36,58,Topics learned by LightLDA,36.0,-0.05495
+37,58,Topics learned by LightLDA,37.0,-0.03341
+38,58,Topics learned by LightLDA,38.0,0.04156
+39,58,Topics learned by LightLDA,39.0,0.00394
+40,58,Topics learned by LightLDA,40.0,-0.02473
+41,58,Topics learned by LightLDA,41.0,-0.01278
+42,58,Topics learned by LightLDA,42.0,0.03519
+43,58,Topics learned by LightLDA,43.0,0.02297
+44,58,Topics learned by LightLDA,44.0,-0.04409
+45,58,Topics learned by LightLDA,45.0,-0.00088
+46,58,Topics learned by LightLDA,46.0,-0.0101
+47,58,Topics learned by LightLDA,47.0,0.00544
+48,58,Topics learned by LightLDA,48.0,-0.03372
+49,58,Topics learned by LightLDA,49.0,-0.0052
+50,58,Topics learned by LightLDA,50.0,-0.07565
+51,58,Topics learned by LightLDA,51.0,-0.02811
+52,58,Topics learned by LightLDA,52.0,-0.01456
+53,58,Topics learned by LightLDA,53.0,-0.04326
+54,58,Topics learned by LightLDA,54.0,0.00768
+55,58,Topics learned by LightLDA,55.0,0.00585
+56,58,Topics learned by LightLDA,56.0,0.0279
+57,58,Topics learned by LightLDA,57.0,-0.01522
+58,58,Topics learned by LightLDA,58.0,0.02065
+59,58,Topics learned by LightLDA,59.0,0.01207
+60,58,Topics learned by LightLDA,60.0,0.0143
+61,58,Topics learned by LightLDA,61.0,-0.044
+62,58,Topics learned by LightLDA,62.0,-0.04827
+63,58,Topics learned by LightLDA,63.0,-0.01047
+64,58,Topics learned by LightLDA,64.0,-0.05903
+65,58,Topics learned by LightLDA,65.0,-0.03796
+66,58,Topics learned by LightLDA,66.0,0.00828
+67,58,Topics learned by LightLDA,67.0,-0.02942
+68,58,Topics learned by LightLDA,68.0,-0.01947
+69,58,Topics learned by LightLDA,69.0,-0.07407
+70,58,Topics learned by LightLDA,70.0,-0.01019
+71,58,Topics learned by LightLDA,71.0,0.00342
+72,58,Topics learned by LightLDA,72.0,-0.00078
+73,58,Topics learned by LightLDA,73.0,-0.00561
+74,58,Topics learned by LightLDA,74.0,-0.01744
+75,58,Topics learned by LightLDA,75.0,-0.01285
+76,58,Topics learned by LightLDA,76.0,-0.02468
+77,58,Topics learned by LightLDA,77.0,0.00059
+78,58,Topics learned by LightLDA,78.0,-0.05845
+79,58,Topics learned by LightLDA,79.0,-0.07617
+80,58,Topics learned by LightLDA,80.0,-0.03462
+81,58,Topics learned by LightLDA,81.0,-0.03208
+82,58,Topics learned by LightLDA,82.0,-0.00782
+83,58,Topics learned by LightLDA,83.0,-0.04674
+84,58,Topics learned by LightLDA,84.0,-0.09054
+85,58,Topics learned by LightLDA,85.0,-0.01019
+86,58,Topics learned by LightLDA,86.0,-0.03824
+87,58,Topics learned by LightLDA,87.0,-0.01929
+88,58,Topics learned by LightLDA,88.0,-0.00802
+89,58,Topics learned by LightLDA,89.0,-0.01302
+90,58,Topics learned by LightLDA,90.0,-0.01559
+91,58,Topics learned by LightLDA,91.0,-0.0036
+92,58,Topics learned by LightLDA,92.0,-0.05562
+93,58,Topics learned by LightLDA,93.0,0.00034
+94,58,Topics learned by LightLDA,94.0,-0.04405
+95,58,Topics learned by LightLDA,95.0,-0.06998
+96,58,Topics learned by LightLDA,96.0,-0.01259
+97,58,Topics learned by LightLDA,97.0,-0.00023
+98,58,Topics learned by LightLDA,98.0,0.00492
+99,58,Topics learned by LightLDA,99.0,-0.04519
+100,58,Topics learned by LightLDA,100.0,0.00761
+101,86,Topics learned by LightLDA,0.0,-0.01044
+102,86,Topics learned by LightLDA,1.0,-0.0338
+103,86,Topics learned by LightLDA,2.0,-0.01234
+104,86,Topics learned by LightLDA,3.0,0.00244
+105,86,Topics learned by LightLDA,4.0,-0.07979
+106,86,Topics learned by LightLDA,5.0,-0.04641
+107,86,Topics learned by LightLDA,6.0,-0.03551
+108,86,Topics learned by LightLDA,7.0,-0.02369
+109,86,Topics learned by LightLDA,8.0,0.01706
+110,86,Topics learned by LightLDA,9.0,-0.03962
+111,86,Topics learned by LightLDA,10.0,-0.04925
+112,86,Topics learned by LightLDA,11.0,-0.0174
+113,86,Topics learned by LightLDA,12.0,-0.02183
+114,86,Topics learned by LightLDA,13.0,-0.04332
+115,86,Topics learned by LightLDA,14.0,-0.02631
+116,86,Topics learned by LightLDA,15.0,-0.07789
+117,86,Topics learned by LightLDA,16.0,-0.03059
+118,86,Topics learned by LightLDA,17.0,-0.02962
+119,86,Topics learned by LightLDA,18.0,-0.05519
+120,86,Topics learned by LightLDA,19.0,-0.06386
+121,86,Topics learned by LightLDA,20.0,-0.05397
+122,86,Topics learned by LightLDA,21.0,-0.04182
+123,86,Topics learned by LightLDA,22.0,-0.0742
+124,86,Topics learned by LightLDA,23.0,-0.06719
+125,86,Topics learned by LightLDA,24.0,-0.05288
+126,86,Topics learned by LightLDA,25.0,-0.05541
+127,86,Topics learned by LightLDA,26.0,-0.0501
+128,86,Topics learned by LightLDA,27.0,-0.07667
+129,86,Topics learned by LightLDA,28.0,-0.0582
+130,86,Topics learned by LightLDA,29.0,-0.01449
+131,86,Topics learned by LightLDA,30.0,-0.0634
+132,86,Topics learned by LightLDA,31.0,-0.06112
+133,86,Topics learned by LightLDA,32.0,-0.04846
+134,86,Topics learned by LightLDA,33.0,-0.0415
+135,86,Topics learned by LightLDA,34.0,-0.0978
+136,86,Topics learned by LightLDA,35.0,-0.06828
+137,86,Topics learned by LightLDA,36.0,-0.12195
+138,86,Topics learned by LightLDA,37.0,-0.01385
+139,86,Topics learned by LightLDA,38.0,-0.05748
+140,86,Topics learned by LightLDA,39.0,-0.05402
+141,86,Topics learned by LightLDA,40.0,-0.04516
+142,86,Topics learned by LightLDA,41.0,-0.09877
+143,86,Topics learned by LightLDA,42.0,-0.0736
+144,86,Topics learned by LightLDA,43.0,-0.01483
+145,86,Topics learned by LightLDA,44.0,-0.0517
+146,86,Topics learned by LightLDA,45.0,-0.09775
+147,86,Topics learned by LightLDA,46.0,-0.06717
+148,86,Topics learned by LightLDA,47.0,-0.08126
+149,86,Topics learned by LightLDA,48.0,-0.05322
+150,86,Topics learned by LightLDA,49.0,-0.06514
+151,86,Topics learned by LightLDA,50.0,-0.11455
+152,86,Topics learned by LightLDA,51.0,-0.07336
+153,86,Topics learned by LightLDA,52.0,-0.04408
+154,86,Topics learned by LightLDA,53.0,-0.05229
+155,86,Topics learned by LightLDA,54.0,-0.09142
+156,86,Topics learned by LightLDA,55.0,-0.08085
+157,86,Topics learned by LightLDA,56.0,-0.09419
+158,86,Topics learned by LightLDA,57.0,-0.05364
+159,86,Topics learned by LightLDA,58.0,-0.08472
+160,86,Topics learned by LightLDA,59.0,-0.07623
+161,86,Topics learned by LightLDA,60.0,-0.01373
+162,86,Topics learned by LightLDA,61.0,-0.05193
+163,86,Topics learned by LightLDA,62.0,-0.03811
+164,86,Topics learned by LightLDA,63.0,-0.07193
+165,86,Topics learned by LightLDA,64.0,-0.05921
+166,86,Topics learned by LightLDA,65.0,-0.09038
+167,86,Topics learned by LightLDA,66.0,-0.06314
+168,86,Topics learned by LightLDA,67.0,-0.07911
+169,86,Topics learned by LightLDA,68.0,-0.08245
+170,86,Topics learned by LightLDA,69.0,-0.11659
+171,86,Topics learned by LightLDA,70.0,-0.11246
+172,86,Topics learned by LightLDA,71.0,-0.03541
+173,86,Topics learned by LightLDA,72.0,-0.10778
+174,86,Topics learned by LightLDA,73.0,-0.0924
+175,86,Topics learned by LightLDA,74.0,-0.08351
+176,86,Topics learned by LightLDA,75.0,-0.10311
+177,86,Topics learned by LightLDA,76.0,-0.10011
+178,86,Topics learned by LightLDA,77.0,-0.05226
+179,86,Topics learned by LightLDA,78.0,-0.07385
+180,86,Topics learned by LightLDA,79.0,-0.054
+181,86,Topics learned by LightLDA,80.0,-0.09308
+182,86,Topics learned by LightLDA,81.0,-0.06013
+183,86,Topics learned by LightLDA,82.0,-0.07122
+184,86,Topics learned by LightLDA,83.0,-0.11663
+185,86,Topics learned by LightLDA,84.0,-0.06501
+186,86,Topics learned by LightLDA,85.0,-0.0892
+187,86,Topics learned by LightLDA,86.0,-0.06101
+188,86,Topics learned by LightLDA,87.0,-0.08481
+189,86,Topics learned by LightLDA,88.0,-0.0717
+190,86,Topics learned by LightLDA,89.0,-0.06591
+191,86,Topics learned by LightLDA,90.0,-0.0596
+192,86,Topics learned by LightLDA,91.0,-0.06253
+193,86,Topics learned by LightLDA,92.0,-0.08434
+194,86,Topics learned by LightLDA,93.0,-0.07464
+195,86,Topics learned by LightLDA,94.0,-0.09475
+196,86,Topics learned by LightLDA,95.0,-0.07629
+197,86,Topics learned by LightLDA,96.0,-0.10063
+198,86,Topics learned by LightLDA,97.0,-0.0438
+199,86,Topics learned by LightLDA,98.0,-0.06392
+200,86,Topics learned by LightLDA,99.0,-0.06854
+201,86,Topics learned by LightLDA,100.0,-0.07495
+202,16,Topics learned by LightLDA,0.0,0.06615
+203,16,Topics learned by LightLDA,1.0,0.0807
+204,16,Topics learned by LightLDA,2.0,0.08006
+205,16,Topics learned by LightLDA,3.0,0.08285
+206,16,Topics learned by LightLDA,4.0,0.05732
+207,16,Topics learned by LightLDA,5.0,0.03131
+208,16,Topics learned by LightLDA,6.0,0.07078
+209,16,Topics learned by LightLDA,7.0,0.03755
+210,16,Topics learned by LightLDA,8.0,0.03665
+211,16,Topics learned by LightLDA,9.0,-0.00798
+212,16,Topics learned by LightLDA,10.0,-0.03652
+213,16,Topics learned by LightLDA,11.0,0.03065
+214,16,Topics learned by LightLDA,12.0,-0.07169
+215,16,Topics learned by LightLDA,13.0,-0.01261
+216,16,Topics learned by LightLDA,14.0,0.03406
+217,16,Topics learned by LightLDA,15.0,-0.02853
+218,16,Topics learned by LightLDA,16.0,0.03198
+219,16,Topics learned by LightLDA,17.0,0.08103
+220,16,Topics learned by LightLDA,18.0,-0.01161
+221,16,Topics learned by LightLDA,19.0,0.02636
+222,16,Topics learned by LightLDA,20.0,0.03242
+223,16,Topics learned by LightLDA,21.0,-0.00766
+224,16,Topics learned by LightLDA,22.0,-0.021
+225,16,Topics learned by LightLDA,23.0,-0.01809
+226,16,Topics learned by LightLDA,24.0,-0.00499
+227,16,Topics learned by LightLDA,25.0,-0.02431
+228,16,Topics learned by LightLDA,26.0,0.04349
+229,16,Topics learned by LightLDA,27.0,-0.00788
+230,16,Topics learned by LightLDA,28.0,0.04427
+231,16,Topics learned by LightLDA,29.0,-0.00252
+232,16,Topics learned by LightLDA,30.0,-0.03801
+233,16,Topics learned by LightLDA,31.0,-0.00321
+234,16,Topics learned by LightLDA,32.0,0.02637
+235,16,Topics learned by LightLDA,33.0,0.03116
+236,16,Topics learned by LightLDA,34.0,0.0644
+237,16,Topics learned by LightLDA,35.0,-0.00126
+238,16,Topics learned by LightLDA,36.0,-0.0029
+239,16,Topics learned by LightLDA,37.0,0.04191
+240,16,Topics learned by LightLDA,38.0,-0.04259
+241,16,Topics learned by LightLDA,39.0,0.05048
+242,16,Topics learned by LightLDA,40.0,-0.02055
+243,16,Topics learned by LightLDA,41.0,-0.00295
+244,16,Topics learned by LightLDA,42.0,0.02877
+245,16,Topics learned by LightLDA,43.0,0.05358
+246,16,Topics learned by LightLDA,44.0,0.03951
+247,16,Topics learned by LightLDA,45.0,0.03134
+248,16,Topics learned by LightLDA,46.0,-0.01707
+249,16,Topics learned by LightLDA,47.0,-0.00465
+250,16,Topics learned by LightLDA,48.0,0.0207
+251,16,Topics learned by LightLDA,49.0,0.02138
+252,16,Topics learned by LightLDA,50.0,7e-05
+253,16,Topics learned by LightLDA,51.0,0.02718
+254,16,Topics learned by LightLDA,52.0,0.01873
+255,16,Topics learned by LightLDA,53.0,-0.03689
+256,16,Topics learned by LightLDA,54.0,-0.00075
+257,16,Topics learned by LightLDA,55.0,-0.03869
+258,16,Topics learned by LightLDA,56.0,0.03342
+259,16,Topics learned by LightLDA,57.0,-0.00661
+260,16,Topics learned by LightLDA,58.0,-0.02884
+261,16,Topics learned by LightLDA,59.0,0.02798
+262,16,Topics learned by LightLDA,60.0,-0.02852
+263,16,Topics learned by LightLDA,61.0,0.0422
+264,16,Topics learned by LightLDA,62.0,-0.02123
+265,16,Topics learned by LightLDA,63.0,-0.02511
+266,16,Topics learned by LightLDA,64.0,-0.01499
+267,16,Topics learned by LightLDA,65.0,0.03238
+268,16,Topics learned by LightLDA,66.0,-0.00496
+269,16,Topics learned by LightLDA,67.0,0.02977
+270,16,Topics learned by LightLDA,68.0,0.0325
+271,16,Topics learned by LightLDA,69.0,-0.03367
+272,16,Topics learned by LightLDA,70.0,-0.04867
+273,16,Topics learned by LightLDA,71.0,0.01225
+274,16,Topics learned by LightLDA,72.0,-0.01575
+275,16,Topics learned by LightLDA,73.0,0.02007
+276,16,Topics learned by LightLDA,74.0,0.01317
+277,16,Topics learned by LightLDA,75.0,-0.00431
+278,16,Topics learned by LightLDA,76.0,-0.00298
+279,16,Topics learned by LightLDA,77.0,0.03737
+280,16,Topics learned by LightLDA,78.0,0.02133
+281,16,Topics learned by LightLDA,79.0,-0.02301
+282,16,Topics learned by LightLDA,80.0,0.05112
+283,16,Topics learned by LightLDA,81.0,0.02143
+284,16,Topics learned by LightLDA,82.0,0.02344
+285,16,Topics learned by LightLDA,83.0,-0.02982
+286,16,Topics learned by LightLDA,84.0,-0.00537
+287,16,Topics learned by LightLDA,85.0,-0.00193
+288,16,Topics learned by LightLDA,86.0,0.03267
+289,16,Topics learned by LightLDA,87.0,0.02227
+290,16,Topics learned by LightLDA,88.0,0.01774
+291,16,Topics learned by LightLDA,89.0,0.01559
+292,16,Topics learned by LightLDA,90.0,0.05683
+293,16,Topics learned by LightLDA,91.0,0.00186
+294,16,Topics learned by LightLDA,92.0,0.02745
+295,16,Topics learned by LightLDA,93.0,-0.01483
+296,16,Topics learned by LightLDA,94.0,0.03168
+297,16,Topics learned by LightLDA,95.0,0.02709
+298,16,Topics learned by LightLDA,96.0,0.00295
+299,16,Topics learned by LightLDA,97.0,0.01422
+300,16,Topics learned by LightLDA,98.0,0.05498
+301,16,Topics learned by LightLDA,99.0,-0.03623
+302,16,Topics learned by LightLDA,100.0,0.00553
+303,7,Topics learned by LightLDA,0.0,0.18246
+304,7,Topics learned by LightLDA,1.0,0.17553
+305,7,Topics learned by LightLDA,2.0,0.10477
+306,7,Topics learned by LightLDA,3.0,0.02384
+307,7,Topics learned by LightLDA,4.0,0.18152
+308,7,Topics learned by LightLDA,5.0,0.02688
+309,7,Topics learned by LightLDA,6.0,0.13438
+310,7,Topics learned by LightLDA,7.0,0.00119
+311,7,Topics learned by LightLDA,8.0,0.11439
+312,7,Topics learned by LightLDA,9.0,-0.01531
+313,7,Topics learned by LightLDA,10.0,-0.03275
+314,7,Topics learned by LightLDA,11.0,0.03854
+315,7,Topics learned by LightLDA,12.0,-0.00579
+316,7,Topics learned by LightLDA,13.0,0.0447
+317,7,Topics learned by LightLDA,14.0,0.00757
+318,7,Topics learned by LightLDA,15.0,0.06919
+319,7,Topics learned by LightLDA,16.0,0.07523
+320,7,Topics learned by LightLDA,17.0,0.08557
+321,7,Topics learned by LightLDA,18.0,0.08885
+322,7,Topics learned by LightLDA,19.0,0.13783
+323,7,Topics learned by LightLDA,20.0,0.11357
+324,7,Topics learned by LightLDA,21.0,0.00322
+325,7,Topics learned by LightLDA,22.0,0.08891
+326,7,Topics learned by LightLDA,23.0,0.1065
+327,7,Topics learned by LightLDA,24.0,0.10535
+328,7,Topics learned by LightLDA,25.0,0.11333
+329,7,Topics learned by LightLDA,26.0,0.01268
+330,7,Topics learned by LightLDA,27.0,0.08668
+331,7,Topics learned by LightLDA,28.0,0.11637
+332,7,Topics learned by LightLDA,29.0,0.08048
+333,7,Topics learned by LightLDA,30.0,0.02215
+334,7,Topics learned by LightLDA,31.0,0.09884
+335,7,Topics learned by LightLDA,32.0,0.0394
+336,7,Topics learned by LightLDA,33.0,-0.02777
+337,7,Topics learned by LightLDA,34.0,0.02443
+338,7,Topics learned by LightLDA,35.0,0.12736
+339,7,Topics learned by LightLDA,36.0,0.10612
+340,7,Topics learned by LightLDA,37.0,0.08192
+341,7,Topics learned by LightLDA,38.0,0.03146
+342,7,Topics learned by LightLDA,39.0,0.04403
+343,7,Topics learned by LightLDA,40.0,0.01856
+344,7,Topics learned by LightLDA,41.0,0.05064
+345,7,Topics learned by LightLDA,42.0,0.03956
+346,7,Topics learned by LightLDA,43.0,0.12504
+347,7,Topics learned by LightLDA,44.0,0.03848
+348,7,Topics learned by LightLDA,45.0,0.02424
+349,7,Topics learned by LightLDA,46.0,0.03921
+350,7,Topics learned by LightLDA,47.0,0.03325
+351,7,Topics learned by LightLDA,48.0,0.09394
+352,7,Topics learned by LightLDA,49.0,-0.05266
+353,7,Topics learned by LightLDA,50.0,0.09112
+354,7,Topics learned by LightLDA,51.0,0.04091
+355,7,Topics learned by LightLDA,52.0,-0.00753
+356,7,Topics learned by LightLDA,53.0,0.08407
+357,7,Topics learned by LightLDA,54.0,0.07463
+358,7,Topics learned by LightLDA,55.0,0.03702
+359,7,Topics learned by LightLDA,56.0,0.0587
+360,7,Topics learned by LightLDA,57.0,0.04379
+361,7,Topics learned by LightLDA,58.0,0.03254
+362,7,Topics learned by LightLDA,59.0,0.1017
+363,7,Topics learned by LightLDA,60.0,0.01703
+364,7,Topics learned by LightLDA,61.0,0.00583
+365,7,Topics learned by LightLDA,62.0,0.01018
+366,7,Topics learned by LightLDA,63.0,0.06055
+367,7,Topics learned by LightLDA,64.0,0.08416
+368,7,Topics learned by LightLDA,65.0,-0.03729
+369,7,Topics learned by LightLDA,66.0,0.01927
+370,7,Topics learned by LightLDA,67.0,0.08268
+371,7,Topics learned by LightLDA,68.0,0.09115
+372,7,Topics learned by LightLDA,69.0,0.05183
+373,7,Topics learned by LightLDA,70.0,0.06346
+374,7,Topics learned by LightLDA,71.0,0.07397
+375,7,Topics learned by LightLDA,72.0,0.05943
+376,7,Topics learned by LightLDA,73.0,0.08394
+377,7,Topics learned by LightLDA,74.0,-0.03747
+378,7,Topics learned by LightLDA,75.0,0.07523
+379,7,Topics learned by LightLDA,76.0,-0.0059
+380,7,Topics learned by LightLDA,77.0,0.08456
+381,7,Topics learned by LightLDA,78.0,0.07408
+382,7,Topics learned by LightLDA,79.0,0.04131
+383,7,Topics learned by LightLDA,80.0,0.01429
+384,7,Topics learned by LightLDA,81.0,0.03479
+385,7,Topics learned by LightLDA,82.0,-0.08168
+386,7,Topics learned by LightLDA,83.0,0.02391
+387,7,Topics learned by LightLDA,84.0,0.04954
+388,7,Topics learned by LightLDA,85.0,0.05166
+389,7,Topics learned by LightLDA,86.0,0.07121
+390,7,Topics learned by LightLDA,87.0,0.05533
+391,7,Topics learned by LightLDA,88.0,0.04866
+392,7,Topics learned by LightLDA,89.0,0.10759
+393,7,Topics learned by LightLDA,90.0,0.06301
+394,7,Topics learned by LightLDA,91.0,-0.0584
+395,7,Topics learned by LightLDA,92.0,0.05638
+396,7,Topics learned by LightLDA,93.0,-0.01433
+397,7,Topics learned by LightLDA,94.0,0.01791
+398,7,Topics learned by LightLDA,95.0,-0.00674
+399,7,Topics learned by LightLDA,96.0,0.05751
+400,7,Topics learned by LightLDA,97.0,0.03067
+401,7,Topics learned by LightLDA,98.0,0.03055
+402,7,Topics learned by LightLDA,99.0,0.06404
+403,7,Topics learned by LightLDA,100.0,0.06712
+404,46,Topics learned by LightLDA,0.0,0.11171
+405,46,Topics learned by LightLDA,1.0,0.06234
+406,46,Topics learned by LightLDA,2.0,0.07158
+407,46,Topics learned by LightLDA,3.0,0.0353
+408,46,Topics learned by LightLDA,4.0,0.08469
+409,46,Topics learned by LightLDA,5.0,-0.00242
+410,46,Topics learned by LightLDA,6.0,0.08708
+411,46,Topics learned by LightLDA,7.0,0.0074
+412,46,Topics learned by LightLDA,8.0,0.09097
+413,46,Topics learned by LightLDA,9.0,-0.05116
+414,46,Topics learned by LightLDA,10.0,0.06908
+415,46,Topics learned by LightLDA,11.0,0.03655
+416,46,Topics learned by LightLDA,12.0,0.10115
+417,46,Topics learned by LightLDA,13.0,0.0387
+418,46,Topics learned by LightLDA,14.0,0.08139
+419,46,Topics learned by LightLDA,15.0,0.07442
+420,46,Topics learned by LightLDA,16.0,0.03385
+421,46,Topics learned by LightLDA,17.0,0.02284
+422,46,Topics learned by LightLDA,18.0,0.05934
+423,46,Topics learned by LightLDA,19.0,0.07684
+424,46,Topics learned by LightLDA,20.0,0.0468
+425,46,Topics learned by LightLDA,21.0,0.00648
+426,46,Topics learned by LightLDA,22.0,0.01167
+427,46,Topics learned by LightLDA,23.0,0.05356
+428,46,Topics learned by LightLDA,24.0,0.01866
+429,46,Topics learned by LightLDA,25.0,0.04497
+430,46,Topics learned by LightLDA,26.0,0.0062
+431,46,Topics learned by LightLDA,27.0,0.06994
+432,46,Topics learned by LightLDA,28.0,0.09512
+433,46,Topics learned by LightLDA,29.0,0.03953
+434,46,Topics learned by LightLDA,30.0,-0.03331
+435,46,Topics learned by LightLDA,31.0,0.00259
+436,46,Topics learned by LightLDA,32.0,0.03025
+437,46,Topics learned by LightLDA,33.0,0.03249
+438,46,Topics learned by LightLDA,34.0,-0.01551
+439,46,Topics learned by LightLDA,35.0,-0.01959
+440,46,Topics learned by LightLDA,36.0,-0.02664
+441,46,Topics learned by LightLDA,37.0,-0.01953
+442,46,Topics learned by LightLDA,38.0,0.04298
+443,46,Topics learned by LightLDA,39.0,0.05093
+444,46,Topics learned by LightLDA,40.0,0.04546
+445,46,Topics learned by LightLDA,41.0,0.01145
+446,46,Topics learned by LightLDA,42.0,0.03847
+447,46,Topics learned by LightLDA,43.0,0.00436
+448,46,Topics learned by LightLDA,44.0,0.00734
+449,46,Topics learned by LightLDA,45.0,0.06935
+450,46,Topics learned by LightLDA,46.0,0.05002
+451,46,Topics learned by LightLDA,47.0,-0.00411
+452,46,Topics learned by LightLDA,48.0,-0.00689
+453,46,Topics learned by LightLDA,49.0,0.01993
+454,46,Topics learned by LightLDA,50.0,0.04202
+455,46,Topics learned by LightLDA,51.0,-0.00674
+456,46,Topics learned by LightLDA,52.0,-0.00451
+457,46,Topics learned by LightLDA,53.0,0.05505
+458,46,Topics learned by LightLDA,54.0,0.02682
+459,46,Topics learned by LightLDA,55.0,0.04278
+460,46,Topics learned by LightLDA,56.0,0.01143
+461,46,Topics learned by LightLDA,57.0,-0.02496
+462,46,Topics learned by LightLDA,58.0,0.03171
+463,46,Topics learned by LightLDA,59.0,0.05263
+464,46,Topics learned by LightLDA,60.0,0.00782
+465,46,Topics learned by LightLDA,61.0,-0.02566
+466,46,Topics learned by LightLDA,62.0,-0.03267
+467,46,Topics learned by LightLDA,63.0,0.0614
+468,46,Topics learned by LightLDA,64.0,0.04599
+469,46,Topics learned by LightLDA,65.0,0.0479
+470,46,Topics learned by LightLDA,66.0,-0.0032
+471,46,Topics learned by LightLDA,67.0,0.02978
+472,46,Topics learned by LightLDA,68.0,-0.04184
+473,46,Topics learned by LightLDA,69.0,0.03473
+474,46,Topics learned by LightLDA,70.0,0.03208
+475,46,Topics learned by LightLDA,71.0,0.01556
+476,46,Topics learned by LightLDA,72.0,-0.01432
+477,46,Topics learned by LightLDA,73.0,-0.02933
+478,46,Topics learned by LightLDA,74.0,0.05522
+479,46,Topics learned by LightLDA,75.0,0.06877
+480,46,Topics learned by LightLDA,76.0,0.00834
+481,46,Topics learned by LightLDA,77.0,-0.03791
+482,46,Topics learned by LightLDA,78.0,0.05285
+483,46,Topics learned by LightLDA,79.0,0.00634
+484,46,Topics learned by LightLDA,80.0,0.07755
+485,46,Topics learned by LightLDA,81.0,-0.0087
+486,46,Topics learned by LightLDA,82.0,0.01931
+487,46,Topics learned by LightLDA,83.0,0.03437
+488,46,Topics learned by LightLDA,84.0,-0.07857
+489,46,Topics learned by LightLDA,85.0,-0.04426
+490,46,Topics learned by LightLDA,86.0,-0.00655
+491,46,Topics learned by LightLDA,87.0,0.05011
+492,46,Topics learned by LightLDA,88.0,0.0022
+493,46,Topics learned by LightLDA,89.0,0.02858
+494,46,Topics learned by LightLDA,90.0,0.056
+495,46,Topics learned by LightLDA,91.0,-0.02409
+496,46,Topics learned by LightLDA,92.0,-0.03001
+497,46,Topics learned by LightLDA,93.0,0.045
+498,46,Topics learned by LightLDA,94.0,-0.0301
+499,46,Topics learned by LightLDA,95.0,-0.04772
+500,46,Topics learned by LightLDA,96.0,0.02974
+501,46,Topics learned by LightLDA,97.0,0.02934
+502,46,Topics learned by LightLDA,98.0,0.0118
+503,46,Topics learned by LightLDA,99.0,0.0767
+504,46,Topics learned by LightLDA,100.0,-0.03134
+505,71,Topics learned by LightLDA,0.0,0.14479
+506,71,Topics learned by LightLDA,1.0,0.12696
+507,71,Topics learned by LightLDA,2.0,0.1152
+508,71,Topics learned by LightLDA,3.0,0.08815
+509,71,Topics learned by LightLDA,4.0,0.05802
+510,71,Topics learned by LightLDA,5.0,0.01122
+511,71,Topics learned by LightLDA,6.0,0.06742
+512,71,Topics learned by LightLDA,7.0,0.04043
+513,71,Topics learned by LightLDA,8.0,0.04182
+514,71,Topics learned by LightLDA,9.0,0.05361
+515,71,Topics learned by LightLDA,10.0,0.01457
+516,71,Topics learned by LightLDA,11.0,0.0568
+517,71,Topics learned by LightLDA,12.0,0.02652
+518,71,Topics learned by LightLDA,13.0,0.09466
+519,71,Topics learned by LightLDA,14.0,0.07123
+520,71,Topics learned by LightLDA,15.0,-0.01052
+521,71,Topics learned by LightLDA,16.0,0.09215
+522,71,Topics learned by LightLDA,17.0,-0.00474
+523,71,Topics learned by LightLDA,18.0,-0.00838
+524,71,Topics learned by LightLDA,19.0,0.0427
+525,71,Topics learned by LightLDA,20.0,0.07974
+526,71,Topics learned by LightLDA,21.0,0.06471
+527,71,Topics learned by LightLDA,22.0,0.00437
+528,71,Topics learned by LightLDA,23.0,0.02811
+529,71,Topics learned by LightLDA,24.0,-0.0422
+530,71,Topics learned by LightLDA,25.0,0.0498
+531,71,Topics learned by LightLDA,26.0,0.00269
+532,71,Topics learned by LightLDA,27.0,0.06004
+533,71,Topics learned by LightLDA,28.0,0.00238
+534,71,Topics learned by LightLDA,29.0,0.03164
+535,71,Topics learned by LightLDA,30.0,-0.03382
+536,71,Topics learned by LightLDA,31.0,0.07162
+537,71,Topics learned by LightLDA,32.0,0.05119
+538,71,Topics learned by LightLDA,33.0,0.05084
+539,71,Topics learned by LightLDA,34.0,0.04256
+540,71,Topics learned by LightLDA,35.0,0.06661
+541,71,Topics learned by LightLDA,36.0,0.04239
+542,71,Topics learned by LightLDA,37.0,-0.00281
+543,71,Topics learned by LightLDA,38.0,0.05385
+544,71,Topics learned by LightLDA,39.0,0.044
+545,71,Topics learned by LightLDA,40.0,0.04247
+546,71,Topics learned by LightLDA,41.0,0.01595
+547,71,Topics learned by LightLDA,42.0,0.0226
+548,71,Topics learned by LightLDA,43.0,0.09053
+549,71,Topics learned by LightLDA,44.0,0.00689
+550,71,Topics learned by LightLDA,45.0,-0.04077
+551,71,Topics learned by LightLDA,46.0,0.01146
+552,71,Topics learned by LightLDA,47.0,0.03538
+553,71,Topics learned by LightLDA,48.0,0.05902
+554,71,Topics learned by LightLDA,49.0,0.04551
+555,71,Topics learned by LightLDA,50.0,-0.03564
+556,71,Topics learned by LightLDA,51.0,-0.05105
+557,71,Topics learned by LightLDA,52.0,-0.04765
+558,71,Topics learned by LightLDA,53.0,0.0627
+559,71,Topics learned by LightLDA,54.0,0.01538
+560,71,Topics learned by LightLDA,55.0,0.05521
+561,71,Topics learned by LightLDA,56.0,-0.02129
+562,71,Topics learned by LightLDA,57.0,0.03127
+563,71,Topics learned by LightLDA,58.0,0.06047
+564,71,Topics learned by LightLDA,59.0,0.06549
+565,71,Topics learned by LightLDA,60.0,0.04617
+566,71,Topics learned by LightLDA,61.0,0.02054
+567,71,Topics learned by LightLDA,62.0,-0.02002
+568,71,Topics learned by LightLDA,63.0,0.03338
+569,71,Topics learned by LightLDA,64.0,0.05584
+570,71,Topics learned by LightLDA,65.0,0.02862
+571,71,Topics learned by LightLDA,66.0,0.04644
+572,71,Topics learned by LightLDA,67.0,-0.02389
+573,71,Topics learned by LightLDA,68.0,0.02348
+574,71,Topics learned by LightLDA,69.0,0.00762
+575,71,Topics learned by LightLDA,70.0,-0.00563
+576,71,Topics learned by LightLDA,71.0,0.03476
+577,71,Topics learned by LightLDA,72.0,0.06996
+578,71,Topics learned by LightLDA,73.0,-0.03943
+579,71,Topics learned by LightLDA,74.0,-0.02564
+580,71,Topics learned by LightLDA,75.0,0.036
+581,71,Topics learned by LightLDA,76.0,0.03477
+582,71,Topics learned by LightLDA,77.0,-0.00108
+583,71,Topics learned by LightLDA,78.0,0.01186
+584,71,Topics learned by LightLDA,79.0,0.01125
+585,71,Topics learned by LightLDA,80.0,-0.00387
+586,71,Topics learned by LightLDA,81.0,-0.0197
+587,71,Topics learned by LightLDA,82.0,0.00066
+588,71,Topics learned by LightLDA,83.0,-0.00189
+589,71,Topics learned by LightLDA,84.0,0.03196
+590,71,Topics learned by LightLDA,85.0,-0.00398
+591,71,Topics learned by LightLDA,86.0,0.02264
+592,71,Topics learned by LightLDA,87.0,0.027
+593,71,Topics learned by LightLDA,88.0,-0.02739
+594,71,Topics learned by LightLDA,89.0,-0.0077
+595,71,Topics learned by LightLDA,90.0,0.04038
+596,71,Topics learned by LightLDA,91.0,0.04393
+597,71,Topics learned by LightLDA,92.0,0.04857
+598,71,Topics learned by LightLDA,93.0,0.03171
+599,71,Topics learned by LightLDA,94.0,0.0027
+600,71,Topics learned by LightLDA,95.0,0.03664
+601,71,Topics learned by LightLDA,96.0,0.08205
+602,71,Topics learned by LightLDA,97.0,0.02079
+603,71,Topics learned by LightLDA,98.0,0.0025
+604,71,Topics learned by LightLDA,99.0,-0.00029
+605,71,Topics learned by LightLDA,100.0,0.05046
+606,31,Topics learned by LightLDA,0.0,0.08091
+607,31,Topics learned by LightLDA,1.0,0.05309
+608,31,Topics learned by LightLDA,2.0,0.03776
+609,31,Topics learned by LightLDA,3.0,0.03139
+610,31,Topics learned by LightLDA,4.0,0.06298
+611,31,Topics learned by LightLDA,5.0,0.01492
+612,31,Topics learned by LightLDA,6.0,0.0505
+613,31,Topics learned by LightLDA,7.0,0.01535
+614,31,Topics learned by LightLDA,8.0,0.01049
+615,31,Topics learned by LightLDA,9.0,-0.03974
+616,31,Topics learned by LightLDA,10.0,0.0158
+617,31,Topics learned by LightLDA,11.0,-0.04353
+618,31,Topics learned by LightLDA,12.0,0.00412
+619,31,Topics learned by LightLDA,13.0,0.04625
+620,31,Topics learned by LightLDA,14.0,0.02791
+621,31,Topics learned by LightLDA,15.0,0.02211
+622,31,Topics learned by LightLDA,16.0,-0.04949
+623,31,Topics learned by LightLDA,17.0,-0.02915
+624,31,Topics learned by LightLDA,18.0,0.04383
+625,31,Topics learned by LightLDA,19.0,0.01606
+626,31,Topics learned by LightLDA,20.0,-0.09362
+627,31,Topics learned by LightLDA,21.0,0.02321
+628,31,Topics learned by LightLDA,22.0,-0.01187
+629,31,Topics learned by LightLDA,23.0,-0.06436
+630,31,Topics learned by LightLDA,24.0,-0.0395
+631,31,Topics learned by LightLDA,25.0,0.0085
+632,31,Topics learned by LightLDA,26.0,0.00282
+633,31,Topics learned by LightLDA,27.0,-0.00343
+634,31,Topics learned by LightLDA,28.0,-0.0925
+635,31,Topics learned by LightLDA,29.0,0.01798
+636,31,Topics learned by LightLDA,30.0,-0.03561
+637,31,Topics learned by LightLDA,31.0,-0.01511
+638,31,Topics learned by LightLDA,32.0,-0.03822
+639,31,Topics learned by LightLDA,33.0,-0.07258
+640,31,Topics learned by LightLDA,34.0,-0.07457
+641,31,Topics learned by LightLDA,35.0,0.00089
+642,31,Topics learned by LightLDA,36.0,-0.0033
+643,31,Topics learned by LightLDA,37.0,-0.01463
+644,31,Topics learned by LightLDA,38.0,-0.05217
+645,31,Topics learned by LightLDA,39.0,-0.0282
+646,31,Topics learned by LightLDA,40.0,-0.02482
+647,31,Topics learned by LightLDA,41.0,-0.00878
+648,31,Topics learned by LightLDA,42.0,-0.0556
+649,31,Topics learned by LightLDA,43.0,-0.02566
+650,31,Topics learned by LightLDA,44.0,-0.08715
+651,31,Topics learned by LightLDA,45.0,-0.01166
+652,31,Topics learned by LightLDA,46.0,-0.07268
+653,31,Topics learned by LightLDA,47.0,-0.05124
+654,31,Topics learned by LightLDA,48.0,-0.02563
+655,31,Topics learned by LightLDA,49.0,-0.05619
+656,31,Topics learned by LightLDA,50.0,-0.0732
+657,31,Topics learned by LightLDA,51.0,-0.00122
+658,31,Topics learned by LightLDA,52.0,0.00051
+659,31,Topics learned by LightLDA,53.0,-0.00584
+660,31,Topics learned by LightLDA,54.0,-0.05154
+661,31,Topics learned by LightLDA,55.0,-0.03589
+662,31,Topics learned by LightLDA,56.0,-0.0052
+663,31,Topics learned by LightLDA,57.0,-0.00083
+664,31,Topics learned by LightLDA,58.0,0.01911
+665,31,Topics learned by LightLDA,59.0,-0.03052
+666,31,Topics learned by LightLDA,60.0,0.00997
+667,31,Topics learned by LightLDA,61.0,0.0008
+668,31,Topics learned by LightLDA,62.0,-0.00303
+669,31,Topics learned by LightLDA,63.0,-0.0679
+670,31,Topics learned by LightLDA,64.0,-0.0569
+671,31,Topics learned by LightLDA,65.0,0.0355
+672,31,Topics learned by LightLDA,66.0,-0.00973
+673,31,Topics learned by LightLDA,67.0,-0.001
+674,31,Topics learned by LightLDA,68.0,-0.00712
+675,31,Topics learned by LightLDA,69.0,0.01833
+676,31,Topics learned by LightLDA,70.0,-0.00409
+677,31,Topics learned by LightLDA,71.0,-0.02494
+678,31,Topics learned by LightLDA,72.0,-0.13155
+679,31,Topics learned by LightLDA,73.0,-0.04378
+680,31,Topics learned by LightLDA,74.0,-0.04711
+681,31,Topics learned by LightLDA,75.0,-0.02524
+682,31,Topics learned by LightLDA,76.0,-0.05694
+683,31,Topics learned by LightLDA,77.0,-0.0484
+684,31,Topics learned by LightLDA,78.0,-0.06131
+685,31,Topics learned by LightLDA,79.0,-0.04948
+686,31,Topics learned by LightLDA,80.0,-0.04452
+687,31,Topics learned by LightLDA,81.0,-0.01258
+688,31,Topics learned by LightLDA,82.0,0.00152
+689,31,Topics learned by LightLDA,83.0,-0.0808
+690,31,Topics learned by LightLDA,84.0,-0.02199
+691,31,Topics learned by LightLDA,85.0,-0.03939
+692,31,Topics learned by LightLDA,86.0,-0.01415
+693,31,Topics learned by LightLDA,87.0,-0.02071
+694,31,Topics learned by LightLDA,88.0,-0.04175
+695,31,Topics learned by LightLDA,89.0,-0.0575
+696,31,Topics learned by LightLDA,90.0,-0.00431
+697,31,Topics learned by LightLDA,91.0,-0.05118
+698,31,Topics learned by LightLDA,92.0,-0.01155
+699,31,Topics learned by LightLDA,93.0,-0.02494
+700,31,Topics learned by LightLDA,94.0,-0.0327
+701,31,Topics learned by LightLDA,95.0,-0.00062
+702,31,Topics learned by LightLDA,96.0,-0.01458
+703,31,Topics learned by LightLDA,97.0,-0.1252
+704,31,Topics learned by LightLDA,98.0,-0.0718
+705,31,Topics learned by LightLDA,99.0,-0.02674
+706,31,Topics learned by LightLDA,100.0,-0.09861
+707,81,Topics learned by LightLDA,0.0,0.01836
+708,81,Topics learned by LightLDA,1.0,0.07163
+709,81,Topics learned by LightLDA,2.0,0.01113
+710,81,Topics learned by LightLDA,3.0,-0.04591
+711,81,Topics learned by LightLDA,4.0,0.02677
+712,81,Topics learned by LightLDA,5.0,0.02871
+713,81,Topics learned by LightLDA,6.0,0.01068
+714,81,Topics learned by LightLDA,7.0,0.01949
+715,81,Topics learned by LightLDA,8.0,-0.04166
+716,81,Topics learned by LightLDA,9.0,0.06307
+717,81,Topics learned by LightLDA,10.0,0.03046
+718,81,Topics learned by LightLDA,11.0,0.05068
+719,81,Topics learned by LightLDA,12.0,0.03631
+720,81,Topics learned by LightLDA,13.0,0.02635
+721,81,Topics learned by LightLDA,14.0,0.01093
+722,81,Topics learned by LightLDA,15.0,0.03748
+723,81,Topics learned by LightLDA,16.0,0.01986
+724,81,Topics learned by LightLDA,17.0,0.00532
+725,81,Topics learned by LightLDA,18.0,5e-05
+726,81,Topics learned by LightLDA,19.0,0.01062
+727,81,Topics learned by LightLDA,20.0,0.0162
+728,81,Topics learned by LightLDA,21.0,-0.00546
+729,81,Topics learned by LightLDA,22.0,0.03539
+730,81,Topics learned by LightLDA,23.0,-0.0032
+731,81,Topics learned by LightLDA,24.0,0.03938
+732,81,Topics learned by LightLDA,25.0,-0.06117
+733,81,Topics learned by LightLDA,26.0,0.0002
+734,81,Topics learned by LightLDA,27.0,0.04803
+735,81,Topics learned by LightLDA,28.0,0.02493
+736,81,Topics learned by LightLDA,29.0,0.03114
+737,81,Topics learned by LightLDA,30.0,-0.0525
+738,81,Topics learned by LightLDA,31.0,0.02167
+739,81,Topics learned by LightLDA,32.0,0.04139
+740,81,Topics learned by LightLDA,33.0,-0.03106
+741,81,Topics learned by LightLDA,34.0,0.02995
+742,81,Topics learned by LightLDA,35.0,0.03185
+743,81,Topics learned by LightLDA,36.0,0.03063
+744,81,Topics learned by LightLDA,37.0,-0.00034
+745,81,Topics learned by LightLDA,38.0,0.03016
+746,81,Topics learned by LightLDA,39.0,-0.04665
+747,81,Topics learned by LightLDA,40.0,-0.01393
+748,81,Topics learned by LightLDA,41.0,0.01461
+749,81,Topics learned by LightLDA,42.0,0.01659
+750,81,Topics learned by LightLDA,43.0,-0.02988
+751,81,Topics learned by LightLDA,44.0,-0.05902
+752,81,Topics learned by LightLDA,45.0,-0.04837
+753,81,Topics learned by LightLDA,46.0,-0.01388
+754,81,Topics learned by LightLDA,47.0,-0.04069
+755,81,Topics learned by LightLDA,48.0,0.03313
+756,81,Topics learned by LightLDA,49.0,-0.02965
+757,81,Topics learned by LightLDA,50.0,0.01326
+758,81,Topics learned by LightLDA,51.0,0.01142
+759,81,Topics learned by LightLDA,52.0,-0.01998
+760,81,Topics learned by LightLDA,53.0,-0.04467
+761,81,Topics learned by LightLDA,54.0,-0.00607
+762,81,Topics learned by LightLDA,55.0,-0.04879
+763,81,Topics learned by LightLDA,56.0,-0.03499
+764,81,Topics learned by LightLDA,57.0,-0.05436
+765,81,Topics learned by LightLDA,58.0,0.00322
+766,81,Topics learned by LightLDA,59.0,-0.05949
+767,81,Topics learned by LightLDA,60.0,-0.07083
+768,81,Topics learned by LightLDA,61.0,0.01265
+769,81,Topics learned by LightLDA,62.0,-0.01436
+770,81,Topics learned by LightLDA,63.0,0.02158
+771,81,Topics learned by LightLDA,64.0,0.00212
+772,81,Topics learned by LightLDA,65.0,-0.053
+773,81,Topics learned by LightLDA,66.0,-0.0529
+774,81,Topics learned by LightLDA,67.0,-0.00622
+775,81,Topics learned by LightLDA,68.0,0.01213
+776,81,Topics learned by LightLDA,69.0,-0.00475
+777,81,Topics learned by LightLDA,70.0,0.00736
+778,81,Topics learned by LightLDA,71.0,-0.02994
+779,81,Topics learned by LightLDA,72.0,0.01287
+780,81,Topics learned by LightLDA,73.0,0.01467
+781,81,Topics learned by LightLDA,74.0,0.0193
+782,81,Topics learned by LightLDA,75.0,0.03501
+783,81,Topics learned by LightLDA,76.0,-0.04109
+784,81,Topics learned by LightLDA,77.0,-0.0402
+785,81,Topics learned by LightLDA,78.0,0.01844
+786,81,Topics learned by LightLDA,79.0,-0.01391
+787,81,Topics learned by LightLDA,80.0,-0.03205
+788,81,Topics learned by LightLDA,81.0,0.0515
+789,81,Topics learned by LightLDA,82.0,0.01486
+790,81,Topics learned by LightLDA,83.0,-0.05819
+791,81,Topics learned by LightLDA,84.0,-0.0043
+792,81,Topics learned by LightLDA,85.0,-0.04579
+793,81,Topics learned by LightLDA,86.0,-0.0203
+794,81,Topics learned by LightLDA,87.0,-0.01781
+795,81,Topics learned by LightLDA,88.0,-0.00575
+796,81,Topics learned by LightLDA,89.0,0.00982
+797,81,Topics learned by LightLDA,90.0,0.032
+798,81,Topics learned by LightLDA,91.0,-0.02234
+799,81,Topics learned by LightLDA,92.0,-0.01961
+800,81,Topics learned by LightLDA,93.0,-0.06001
+801,81,Topics learned by LightLDA,94.0,-0.03742
+802,81,Topics learned by LightLDA,95.0,0.00275
+803,81,Topics learned by LightLDA,96.0,-0.00285
+804,81,Topics learned by LightLDA,97.0,-0.01121
+805,81,Topics learned by LightLDA,98.0,-0.03293
+806,81,Topics learned by LightLDA,99.0,-0.02107
+807,81,Topics learned by LightLDA,100.0,-0.00015
+808,38,Topics learned by LightLDA,0.0,0.13778
+809,38,Topics learned by LightLDA,1.0,0.11981
+810,38,Topics learned by LightLDA,2.0,0.18143
+811,38,Topics learned by LightLDA,3.0,0.14749
+812,38,Topics learned by LightLDA,4.0,0.17771
+813,38,Topics learned by LightLDA,5.0,0.1235
+814,38,Topics learned by LightLDA,6.0,0.13187
+815,38,Topics learned by LightLDA,7.0,0.10051
+816,38,Topics learned by LightLDA,8.0,0.04722
+817,38,Topics learned by LightLDA,9.0,0.07954
+818,38,Topics learned by LightLDA,10.0,0.09227
+819,38,Topics learned by LightLDA,11.0,0.04197
+820,38,Topics learned by LightLDA,12.0,0.08892
+821,38,Topics learned by LightLDA,13.0,0.11152
+822,38,Topics learned by LightLDA,14.0,0.10336
+823,38,Topics learned by LightLDA,15.0,0.06471
+824,38,Topics learned by LightLDA,16.0,0.03903
+825,38,Topics learned by LightLDA,17.0,0.11003
+826,38,Topics learned by LightLDA,18.0,0.13175
+827,38,Topics learned by LightLDA,19.0,-0.01038
+828,38,Topics learned by LightLDA,20.0,0.02574
+829,38,Topics learned by LightLDA,21.0,0.11246
+830,38,Topics learned by LightLDA,22.0,0.05073
+831,38,Topics learned by LightLDA,23.0,0.12103
+832,38,Topics learned by LightLDA,24.0,0.00905
+833,38,Topics learned by LightLDA,25.0,0.00839
+834,38,Topics learned by LightLDA,26.0,0.08729
+835,38,Topics learned by LightLDA,27.0,-0.01683
+836,38,Topics learned by LightLDA,28.0,0.03484
+837,38,Topics learned by LightLDA,29.0,0.01398
+838,38,Topics learned by LightLDA,30.0,0.10056
+839,38,Topics learned by LightLDA,31.0,0.04523
+840,38,Topics learned by LightLDA,32.0,0.06518
+841,38,Topics learned by LightLDA,33.0,0.04388
+842,38,Topics learned by LightLDA,34.0,-0.00096
+843,38,Topics learned by LightLDA,35.0,0.04728
+844,38,Topics learned by LightLDA,36.0,0.07573
+845,38,Topics learned by LightLDA,37.0,0.0325
+846,38,Topics learned by LightLDA,38.0,0.08049
+847,38,Topics learned by LightLDA,39.0,0.06672
+848,38,Topics learned by LightLDA,40.0,0.0694
+849,38,Topics learned by LightLDA,41.0,0.0062
+850,38,Topics learned by LightLDA,42.0,-0.04644
+851,38,Topics learned by LightLDA,43.0,0.0825
+852,38,Topics learned by LightLDA,44.0,0.00302
+853,38,Topics learned by LightLDA,45.0,0.00941
+854,38,Topics learned by LightLDA,46.0,0.04419
+855,38,Topics learned by LightLDA,47.0,0.04192
+856,38,Topics learned by LightLDA,48.0,0.01007
+857,38,Topics learned by LightLDA,49.0,0.049
+858,38,Topics learned by LightLDA,50.0,0.0445
+859,38,Topics learned by LightLDA,51.0,0.00949
+860,38,Topics learned by LightLDA,52.0,0.06481
+861,38,Topics learned by LightLDA,53.0,0.03423
+862,38,Topics learned by LightLDA,54.0,0.00194
+863,38,Topics learned by LightLDA,55.0,0.05669
+864,38,Topics learned by LightLDA,56.0,0.08569
+865,38,Topics learned by LightLDA,57.0,0.03321
+866,38,Topics learned by LightLDA,58.0,-0.02062
+867,38,Topics learned by LightLDA,59.0,-0.00222
+868,38,Topics learned by LightLDA,60.0,0.05027
+869,38,Topics learned by LightLDA,61.0,0.07013
+870,38,Topics learned by LightLDA,62.0,-0.03563
+871,38,Topics learned by LightLDA,63.0,0.08246
+872,38,Topics learned by LightLDA,64.0,0.05352
+873,38,Topics learned by LightLDA,65.0,0.02095
+874,38,Topics learned by LightLDA,66.0,0.06568
+875,38,Topics learned by LightLDA,67.0,0.03473
+876,38,Topics learned by LightLDA,68.0,0.07256
+877,38,Topics learned by LightLDA,69.0,0.00702
+878,38,Topics learned by LightLDA,70.0,0.07694
+879,38,Topics learned by LightLDA,71.0,0.05912
+880,38,Topics learned by LightLDA,72.0,0.05403
+881,38,Topics learned by LightLDA,73.0,0.01069
+882,38,Topics learned by LightLDA,74.0,-0.01673
+883,38,Topics learned by LightLDA,75.0,0.01977
+884,38,Topics learned by LightLDA,76.0,0.06304
+885,38,Topics learned by LightLDA,77.0,0.03974
+886,38,Topics learned by LightLDA,78.0,0.0429
+887,38,Topics learned by LightLDA,79.0,0.04431
+888,38,Topics learned by LightLDA,80.0,0.06533
+889,38,Topics learned by LightLDA,81.0,0.01672
+890,38,Topics learned by LightLDA,82.0,0.08526
+891,38,Topics learned by LightLDA,83.0,0.03648
+892,38,Topics learned by LightLDA,84.0,0.05143
+893,38,Topics learned by LightLDA,85.0,-0.0024
+894,38,Topics learned by LightLDA,86.0,-0.0172
+895,38,Topics learned by LightLDA,87.0,0.01401
+896,38,Topics learned by LightLDA,88.0,0.04011
+897,38,Topics learned by LightLDA,89.0,0.05237
+898,38,Topics learned by LightLDA,90.0,0.06126
+899,38,Topics learned by LightLDA,91.0,0.03615
+900,38,Topics learned by LightLDA,92.0,-0.00143
+901,38,Topics learned by LightLDA,93.0,0.01983
+902,38,Topics learned by LightLDA,94.0,0.05713
+903,38,Topics learned by LightLDA,95.0,0.02386
+904,38,Topics learned by LightLDA,96.0,0.05965
+905,38,Topics learned by LightLDA,97.0,0.0545
+906,38,Topics learned by LightLDA,98.0,0.01742
+907,38,Topics learned by LightLDA,99.0,-0.01057
+908,38,Topics learned by LightLDA,100.0,0.03081
+909,29,Topics learned by LightLDA,0.0,0.18862
+910,29,Topics learned by LightLDA,1.0,0.13796
+911,29,Topics learned by LightLDA,2.0,0.1142
+912,29,Topics learned by LightLDA,3.0,0.03929
+913,29,Topics learned by LightLDA,4.0,0.1374
+914,29,Topics learned by LightLDA,5.0,0.18656
+915,29,Topics learned by LightLDA,6.0,0.0759
+916,29,Topics learned by LightLDA,7.0,0.07024
+917,29,Topics learned by LightLDA,8.0,0.06231
+918,29,Topics learned by LightLDA,9.0,0.02814
+919,29,Topics learned by LightLDA,10.0,0.02901
+920,29,Topics learned by LightLDA,11.0,0.11374
+921,29,Topics learned by LightLDA,12.0,0.07021
+922,29,Topics learned by LightLDA,13.0,0.09752
+923,29,Topics learned by LightLDA,14.0,0.068
+924,29,Topics learned by LightLDA,15.0,0.02935
+925,29,Topics learned by LightLDA,16.0,-0.02423
+926,29,Topics learned by LightLDA,17.0,0.03899
+927,29,Topics learned by LightLDA,18.0,0.02087
+928,29,Topics learned by LightLDA,19.0,0.05212
+929,29,Topics learned by LightLDA,20.0,0.00054
+930,29,Topics learned by LightLDA,21.0,0.01518
+931,29,Topics learned by LightLDA,22.0,0.0526
+932,29,Topics learned by LightLDA,23.0,0.05942
+933,29,Topics learned by LightLDA,24.0,0.08327
+934,29,Topics learned by LightLDA,25.0,-0.01283
+935,29,Topics learned by LightLDA,26.0,0.05713
+936,29,Topics learned by LightLDA,27.0,0.00188
+937,29,Topics learned by LightLDA,28.0,-0.00301
+938,29,Topics learned by LightLDA,29.0,0.06447
+939,29,Topics learned by LightLDA,30.0,0.02883
+940,29,Topics learned by LightLDA,31.0,-0.01865
+941,29,Topics learned by LightLDA,32.0,0.03291
+942,29,Topics learned by LightLDA,33.0,0.01417
+943,29,Topics learned by LightLDA,34.0,-0.00709
+944,29,Topics learned by LightLDA,35.0,0.06598
+945,29,Topics learned by LightLDA,36.0,-0.03304
+946,29,Topics learned by LightLDA,37.0,0.03381
+947,29,Topics learned by LightLDA,38.0,-0.00125
+948,29,Topics learned by LightLDA,39.0,-0.00015
+949,29,Topics learned by LightLDA,40.0,0.03722
+950,29,Topics learned by LightLDA,41.0,0.0327
+951,29,Topics learned by LightLDA,42.0,-0.03392
+952,29,Topics learned by LightLDA,43.0,0.0318
+953,29,Topics learned by LightLDA,44.0,0.02166
+954,29,Topics learned by LightLDA,45.0,-0.01005
+955,29,Topics learned by LightLDA,46.0,0.07323
+956,29,Topics learned by LightLDA,47.0,-0.00301
+957,29,Topics learned by LightLDA,48.0,-0.01244
+958,29,Topics learned by LightLDA,49.0,-0.00295
+959,29,Topics learned by LightLDA,50.0,0.01104
+960,29,Topics learned by LightLDA,51.0,0.03793
+961,29,Topics learned by LightLDA,52.0,0.05371
+962,29,Topics learned by LightLDA,53.0,-0.05083
+963,29,Topics learned by LightLDA,54.0,-0.03009
+964,29,Topics learned by LightLDA,55.0,-0.01133
+965,29,Topics learned by LightLDA,56.0,0.05314
+966,29,Topics learned by LightLDA,57.0,0.03475
+967,29,Topics learned by LightLDA,58.0,-0.01195
+968,29,Topics learned by LightLDA,59.0,0.0474
+969,29,Topics learned by LightLDA,60.0,0.01188
+970,29,Topics learned by LightLDA,61.0,0.04478
+971,29,Topics learned by LightLDA,62.0,0.04539
+972,29,Topics learned by LightLDA,63.0,-0.01156
+973,29,Topics learned by LightLDA,64.0,-0.11252
+974,29,Topics learned by LightLDA,65.0,0.00685
+975,29,Topics learned by LightLDA,66.0,-0.02633
+976,29,Topics learned by LightLDA,67.0,0.02327
+977,29,Topics learned by LightLDA,68.0,0.03716
+978,29,Topics learned by LightLDA,69.0,0.04079
+979,29,Topics learned by LightLDA,70.0,-0.0351
+980,29,Topics learned by LightLDA,71.0,-0.03833
+981,29,Topics learned by LightLDA,72.0,0.05255
+982,29,Topics learned by LightLDA,73.0,-0.00203
+983,29,Topics learned by LightLDA,74.0,0.02712
+984,29,Topics learned by LightLDA,75.0,0.02478
+985,29,Topics learned by LightLDA,76.0,-0.05131
+986,29,Topics learned by LightLDA,77.0,-0.0741
+987,29,Topics learned by LightLDA,78.0,0.06888
+988,29,Topics learned by LightLDA,79.0,-0.04022
+989,29,Topics learned by LightLDA,80.0,0.00847
+990,29,Topics learned by LightLDA,81.0,0.03267
+991,29,Topics learned by LightLDA,82.0,0.05106
+992,29,Topics learned by LightLDA,83.0,0.03214
+993,29,Topics learned by LightLDA,84.0,-0.01711
+994,29,Topics learned by LightLDA,85.0,0.04953
+995,29,Topics learned by LightLDA,86.0,0.01096
+996,29,Topics learned by LightLDA,87.0,0.00446
+997,29,Topics learned by LightLDA,88.0,0.0231
+998,29,Topics learned by LightLDA,89.0,0.0592
+999,29,Topics learned by LightLDA,90.0,-0.03517
+1000,29,Topics learned by LightLDA,91.0,-0.01535
+1001,29,Topics learned by LightLDA,92.0,0.03735
+1002,29,Topics learned by LightLDA,93.0,0.01345
+1003,29,Topics learned by LightLDA,94.0,0.02963
+1004,29,Topics learned by LightLDA,95.0,0.00575
+1005,29,Topics learned by LightLDA,96.0,0.06815
+1006,29,Topics learned by LightLDA,97.0,0.02942
+1007,29,Topics learned by LightLDA,98.0,0.02112
+1008,29,Topics learned by LightLDA,99.0,0.00275
+1009,29,Topics learned by LightLDA,100.0,0.01847
+1010,98,Topics learned by LightLDA,0.0,0.09805
+1011,98,Topics learned by LightLDA,1.0,0.06521
+1012,98,Topics learned by LightLDA,2.0,0.0831
+1013,98,Topics learned by LightLDA,3.0,0.06194
+1014,98,Topics learned by LightLDA,4.0,0.08703
+1015,98,Topics learned by LightLDA,5.0,0.06526
+1016,98,Topics learned by LightLDA,6.0,0.04046
+1017,98,Topics learned by LightLDA,7.0,0.08481
+1018,98,Topics learned by LightLDA,8.0,0.058
+1019,98,Topics learned by LightLDA,9.0,-0.03798
+1020,98,Topics learned by LightLDA,10.0,-0.00025
+1021,98,Topics learned by LightLDA,11.0,0.0303
+1022,98,Topics learned by LightLDA,12.0,-0.01521
+1023,98,Topics learned by LightLDA,13.0,0.03232
+1024,98,Topics learned by LightLDA,14.0,0.05929
+1025,98,Topics learned by LightLDA,15.0,-0.01053
+1026,98,Topics learned by LightLDA,16.0,-0.08459
+1027,98,Topics learned by LightLDA,17.0,0.0372
+1028,98,Topics learned by LightLDA,18.0,0.00623
+1029,98,Topics learned by LightLDA,19.0,0.02167
+1030,98,Topics learned by LightLDA,20.0,0.00306
+1031,98,Topics learned by LightLDA,21.0,0.02205
+1032,98,Topics learned by LightLDA,22.0,0.05611
+1033,98,Topics learned by LightLDA,23.0,-0.03265
+1034,98,Topics learned by LightLDA,24.0,-0.04421
+1035,98,Topics learned by LightLDA,25.0,0.05365
+1036,98,Topics learned by LightLDA,26.0,-0.0452
+1037,98,Topics learned by LightLDA,27.0,0.01642
+1038,98,Topics learned by LightLDA,28.0,-0.09327
+1039,98,Topics learned by LightLDA,29.0,0.01566
+1040,98,Topics learned by LightLDA,30.0,0.01778
+1041,98,Topics learned by LightLDA,31.0,0.03031
+1042,98,Topics learned by LightLDA,32.0,-0.05203
+1043,98,Topics learned by LightLDA,33.0,0.02951
+1044,98,Topics learned by LightLDA,34.0,0.02614
+1045,98,Topics learned by LightLDA,35.0,-0.07123
+1046,98,Topics learned by LightLDA,36.0,-0.03545
+1047,98,Topics learned by LightLDA,37.0,-0.01477
+1048,98,Topics learned by LightLDA,38.0,0.0465
+1049,98,Topics learned by LightLDA,39.0,-0.02329
+1050,98,Topics learned by LightLDA,40.0,0.01816
+1051,98,Topics learned by LightLDA,41.0,0.05159
+1052,98,Topics learned by LightLDA,42.0,-0.06981
+1053,98,Topics learned by LightLDA,43.0,-0.00237
+1054,98,Topics learned by LightLDA,44.0,-0.0181
+1055,98,Topics learned by LightLDA,45.0,0.03538
+1056,98,Topics learned by LightLDA,46.0,0.03564
+1057,98,Topics learned by LightLDA,47.0,0.01302
+1058,98,Topics learned by LightLDA,48.0,0.01628
+1059,98,Topics learned by LightLDA,49.0,0.01038
+1060,98,Topics learned by LightLDA,50.0,-0.0025
+1061,98,Topics learned by LightLDA,51.0,0.03373
+1062,98,Topics learned by LightLDA,52.0,0.02763
+1063,98,Topics learned by LightLDA,53.0,0.02433
+1064,98,Topics learned by LightLDA,54.0,0.04084
+1065,98,Topics learned by LightLDA,55.0,-0.08019
+1066,98,Topics learned by LightLDA,56.0,0.04786
+1067,98,Topics learned by LightLDA,57.0,-0.01861
+1068,98,Topics learned by LightLDA,58.0,-0.08819
+1069,98,Topics learned by LightLDA,59.0,-0.02019
+1070,98,Topics learned by LightLDA,60.0,-0.0884
+1071,98,Topics learned by LightLDA,61.0,-0.02518
+1072,98,Topics learned by LightLDA,62.0,0.04113
+1073,98,Topics learned by LightLDA,63.0,-0.03707
+1074,98,Topics learned by LightLDA,64.0,-0.00502
+1075,98,Topics learned by LightLDA,65.0,0.03626
+1076,98,Topics learned by LightLDA,66.0,0.00616
+1077,98,Topics learned by LightLDA,67.0,0.04678
+1078,98,Topics learned by LightLDA,68.0,0.02111
+1079,98,Topics learned by LightLDA,69.0,0.02364
+1080,98,Topics learned by LightLDA,70.0,-0.03043
+1081,98,Topics learned by LightLDA,71.0,-0.03349
+1082,98,Topics learned by LightLDA,72.0,0.05726
+1083,98,Topics learned by LightLDA,73.0,0.0208
+1084,98,Topics learned by LightLDA,74.0,-0.03525
+1085,98,Topics learned by LightLDA,75.0,0.04723
+1086,98,Topics learned by LightLDA,76.0,-0.01387
+1087,98,Topics learned by LightLDA,77.0,0.02878
+1088,98,Topics learned by LightLDA,78.0,0.04142
+1089,98,Topics learned by LightLDA,79.0,-0.07377
+1090,98,Topics learned by LightLDA,80.0,-0.02254
+1091,98,Topics learned by LightLDA,81.0,0.02201
+1092,98,Topics learned by LightLDA,82.0,0.02602
+1093,98,Topics learned by LightLDA,83.0,0.02429
+1094,98,Topics learned by LightLDA,84.0,-0.0062
+1095,98,Topics learned by LightLDA,85.0,-0.0363
+1096,98,Topics learned by LightLDA,86.0,-0.05748
+1097,98,Topics learned by LightLDA,87.0,-0.0164
+1098,98,Topics learned by LightLDA,88.0,0.00712
+1099,98,Topics learned by LightLDA,89.0,-0.04914
+1100,98,Topics learned by LightLDA,90.0,-0.01097
+1101,98,Topics learned by LightLDA,91.0,0.03184
+1102,98,Topics learned by LightLDA,92.0,0.02636
+1103,98,Topics learned by LightLDA,93.0,0.01524
+1104,98,Topics learned by LightLDA,94.0,-0.07039
+1105,98,Topics learned by LightLDA,95.0,0.01427
+1106,98,Topics learned by LightLDA,96.0,0.01284
+1107,98,Topics learned by LightLDA,97.0,-0.05264
+1108,98,Topics learned by LightLDA,98.0,0.02045
+1109,98,Topics learned by LightLDA,99.0,-0.03118
+1110,98,Topics learned by LightLDA,100.0,0.02445
+1111,21,Topics learned by LightLDA,0.0,0.00225
+1112,21,Topics learned by LightLDA,1.0,-0.04727
+1113,21,Topics learned by LightLDA,2.0,-0.00275
+1114,21,Topics learned by LightLDA,3.0,-0.04838
+1115,21,Topics learned by LightLDA,4.0,-0.00792
+1116,21,Topics learned by LightLDA,5.0,0.0183
+1117,21,Topics learned by LightLDA,6.0,-0.0041
+1118,21,Topics learned by LightLDA,7.0,-0.0569
+1119,21,Topics learned by LightLDA,8.0,-0.01871
+1120,21,Topics learned by LightLDA,9.0,-0.0359
+1121,21,Topics learned by LightLDA,10.0,-0.04406
+1122,21,Topics learned by LightLDA,11.0,-0.06088
+1123,21,Topics learned by LightLDA,12.0,-0.02517
+1124,21,Topics learned by LightLDA,13.0,-0.0849
+1125,21,Topics learned by LightLDA,14.0,-0.05541
+1126,21,Topics learned by LightLDA,15.0,-0.04915
+1127,21,Topics learned by LightLDA,16.0,-0.0719
+1128,21,Topics learned by LightLDA,17.0,-0.04769
+1129,21,Topics learned by LightLDA,18.0,-0.02208
+1130,21,Topics learned by LightLDA,19.0,-0.02791
+1131,21,Topics learned by LightLDA,20.0,-0.03439
+1132,21,Topics learned by LightLDA,21.0,-0.01785
+1133,21,Topics learned by LightLDA,22.0,-0.03221
+1134,21,Topics learned by LightLDA,23.0,-0.03278
+1135,21,Topics learned by LightLDA,24.0,-0.01919
+1136,21,Topics learned by LightLDA,25.0,-0.0194
+1137,21,Topics learned by LightLDA,26.0,-0.0361
+1138,21,Topics learned by LightLDA,27.0,-0.0426
+1139,21,Topics learned by LightLDA,28.0,-0.06934
+1140,21,Topics learned by LightLDA,29.0,-0.0624
+1141,21,Topics learned by LightLDA,30.0,-0.07977
+1142,21,Topics learned by LightLDA,31.0,-0.03845
+1143,21,Topics learned by LightLDA,32.0,-0.04024
+1144,21,Topics learned by LightLDA,33.0,-0.04268
+1145,21,Topics learned by LightLDA,34.0,-0.0607
+1146,21,Topics learned by LightLDA,35.0,-0.0446
+1147,21,Topics learned by LightLDA,36.0,-0.03626
+1148,21,Topics learned by LightLDA,37.0,-0.0672
+1149,21,Topics learned by LightLDA,38.0,-0.03714
+1150,21,Topics learned by LightLDA,39.0,-0.05251
+1151,21,Topics learned by LightLDA,40.0,-0.03506
+1152,21,Topics learned by LightLDA,41.0,-0.06285
+1153,21,Topics learned by LightLDA,42.0,-0.02855
+1154,21,Topics learned by LightLDA,43.0,-0.07137
+1155,21,Topics learned by LightLDA,44.0,-0.08344
+1156,21,Topics learned by LightLDA,45.0,-0.10712
+1157,21,Topics learned by LightLDA,46.0,-0.02503
+1158,21,Topics learned by LightLDA,47.0,-0.08007
+1159,21,Topics learned by LightLDA,48.0,-0.01798
+1160,21,Topics learned by LightLDA,49.0,-0.04677
+1161,21,Topics learned by LightLDA,50.0,-0.0937
+1162,21,Topics learned by LightLDA,51.0,-0.0608
+1163,21,Topics learned by LightLDA,52.0,-0.03335
+1164,21,Topics learned by LightLDA,53.0,-0.0629
+1165,21,Topics learned by LightLDA,54.0,-0.07593
+1166,21,Topics learned by LightLDA,55.0,-0.04883
+1167,21,Topics learned by LightLDA,56.0,-0.05334
+1168,21,Topics learned by LightLDA,57.0,-0.05123
+1169,21,Topics learned by LightLDA,58.0,-0.06029
+1170,21,Topics learned by LightLDA,59.0,-0.09188
+1171,21,Topics learned by LightLDA,60.0,-0.04156
+1172,21,Topics learned by LightLDA,61.0,-0.07498
+1173,21,Topics learned by LightLDA,62.0,-0.05812
+1174,21,Topics learned by LightLDA,63.0,-0.06621
+1175,21,Topics learned by LightLDA,64.0,-0.04608
+1176,21,Topics learned by LightLDA,65.0,-0.04014
+1177,21,Topics learned by LightLDA,66.0,-0.06811
+1178,21,Topics learned by LightLDA,67.0,-0.08018
+1179,21,Topics learned by LightLDA,68.0,-0.0207
+1180,21,Topics learned by LightLDA,69.0,-0.05795
+1181,21,Topics learned by LightLDA,70.0,-0.02831
+1182,21,Topics learned by LightLDA,71.0,-0.03166
+1183,21,Topics learned by LightLDA,72.0,-0.04028
+1184,21,Topics learned by LightLDA,73.0,-0.07763
+1185,21,Topics learned by LightLDA,74.0,-0.06538
+1186,21,Topics learned by LightLDA,75.0,-0.05806
+1187,21,Topics learned by LightLDA,76.0,-0.07125
+1188,21,Topics learned by LightLDA,77.0,-0.04949
+1189,21,Topics learned by LightLDA,78.0,-0.05105
+1190,21,Topics learned by LightLDA,79.0,-0.06706
+1191,21,Topics learned by LightLDA,80.0,-0.02443
+1192,21,Topics learned by LightLDA,81.0,-0.07692
+1193,21,Topics learned by LightLDA,82.0,-0.03278
+1194,21,Topics learned by LightLDA,83.0,-0.03271
+1195,21,Topics learned by LightLDA,84.0,-0.07483
+1196,21,Topics learned by LightLDA,85.0,-0.03943
+1197,21,Topics learned by LightLDA,86.0,-0.04417
+1198,21,Topics learned by LightLDA,87.0,-0.0351
+1199,21,Topics learned by LightLDA,88.0,-0.07731
+1200,21,Topics learned by LightLDA,89.0,-0.0668
+1201,21,Topics learned by LightLDA,90.0,-0.04577
+1202,21,Topics learned by LightLDA,91.0,-0.08178
+1203,21,Topics learned by LightLDA,92.0,-0.05319
+1204,21,Topics learned by LightLDA,93.0,-0.09365
+1205,21,Topics learned by LightLDA,94.0,-0.03549
+1206,21,Topics learned by LightLDA,95.0,-0.05644
+1207,21,Topics learned by LightLDA,96.0,-0.03216
+1208,21,Topics learned by LightLDA,97.0,-0.05284
+1209,21,Topics learned by LightLDA,98.0,-0.02829
+1210,21,Topics learned by LightLDA,99.0,-0.05655
+1211,21,Topics learned by LightLDA,100.0,-0.04622
+1212,5,Topics learned by LightLDA,0.0,0.05808
+1213,5,Topics learned by LightLDA,1.0,0.11683
+1214,5,Topics learned by LightLDA,2.0,0.01616
+1215,5,Topics learned by LightLDA,3.0,0.01809
+1216,5,Topics learned by LightLDA,4.0,0.03247
+1217,5,Topics learned by LightLDA,5.0,0.04166
+1218,5,Topics learned by LightLDA,6.0,0.01101
+1219,5,Topics learned by LightLDA,7.0,0.02027
+1220,5,Topics learned by LightLDA,8.0,-0.00822
+1221,5,Topics learned by LightLDA,9.0,0.0163
+1222,5,Topics learned by LightLDA,10.0,-0.00823
+1223,5,Topics learned by LightLDA,11.0,-0.02084
+1224,5,Topics learned by LightLDA,12.0,0.00018
+1225,5,Topics learned by LightLDA,13.0,0.03715
+1226,5,Topics learned by LightLDA,14.0,0.04973
+1227,5,Topics learned by LightLDA,15.0,0.07575
+1228,5,Topics learned by LightLDA,16.0,0.03697
+1229,5,Topics learned by LightLDA,17.0,-0.03127
+1230,5,Topics learned by LightLDA,18.0,0.03738
+1231,5,Topics learned by LightLDA,19.0,-0.05469
+1232,5,Topics learned by LightLDA,20.0,0.04387
+1233,5,Topics learned by LightLDA,21.0,-0.04732
+1234,5,Topics learned by LightLDA,22.0,-0.01081
+1235,5,Topics learned by LightLDA,23.0,0.00323
+1236,5,Topics learned by LightLDA,24.0,0.07409
+1237,5,Topics learned by LightLDA,25.0,0.00604
+1238,5,Topics learned by LightLDA,26.0,0.04047
+1239,5,Topics learned by LightLDA,27.0,0.00666
+1240,5,Topics learned by LightLDA,28.0,0.02587
+1241,5,Topics learned by LightLDA,29.0,-0.0494
+1242,5,Topics learned by LightLDA,30.0,0.04451
+1243,5,Topics learned by LightLDA,31.0,-0.01699
+1244,5,Topics learned by LightLDA,32.0,0.03223
+1245,5,Topics learned by LightLDA,33.0,0.00177
+1246,5,Topics learned by LightLDA,34.0,0.03435
+1247,5,Topics learned by LightLDA,35.0,-0.00057
+1248,5,Topics learned by LightLDA,36.0,0.0131
+1249,5,Topics learned by LightLDA,37.0,-0.00631
+1250,5,Topics learned by LightLDA,38.0,-0.05345
+1251,5,Topics learned by LightLDA,39.0,0.02455
+1252,5,Topics learned by LightLDA,40.0,0.00784
+1253,5,Topics learned by LightLDA,41.0,0.02973
+1254,5,Topics learned by LightLDA,42.0,-0.03837
+1255,5,Topics learned by LightLDA,43.0,0.00861
+1256,5,Topics learned by LightLDA,44.0,0.01344
+1257,5,Topics learned by LightLDA,45.0,0.06642
+1258,5,Topics learned by LightLDA,46.0,0.05177
+1259,5,Topics learned by LightLDA,47.0,-0.01748
+1260,5,Topics learned by LightLDA,48.0,-0.00813
+1261,5,Topics learned by LightLDA,49.0,-0.01505
+1262,5,Topics learned by LightLDA,50.0,0.0007
+1263,5,Topics learned by LightLDA,51.0,-0.01458
+1264,5,Topics learned by LightLDA,52.0,0.03589
+1265,5,Topics learned by LightLDA,53.0,-0.07784
+1266,5,Topics learned by LightLDA,54.0,-0.03745
+1267,5,Topics learned by LightLDA,55.0,0.03239
+1268,5,Topics learned by LightLDA,56.0,-0.02721
+1269,5,Topics learned by LightLDA,57.0,0.02098
+1270,5,Topics learned by LightLDA,58.0,-0.00855
+1271,5,Topics learned by LightLDA,59.0,-0.01963
+1272,5,Topics learned by LightLDA,60.0,0.01708
+1273,5,Topics learned by LightLDA,61.0,-0.02211
+1274,5,Topics learned by LightLDA,62.0,-0.00666
+1275,5,Topics learned by LightLDA,63.0,0.01989
+1276,5,Topics learned by LightLDA,64.0,0.04786
+1277,5,Topics learned by LightLDA,65.0,0.06943
+1278,5,Topics learned by LightLDA,66.0,-0.04786
+1279,5,Topics learned by LightLDA,67.0,0.03516
+1280,5,Topics learned by LightLDA,68.0,-0.06304
+1281,5,Topics learned by LightLDA,69.0,0.06447
+1282,5,Topics learned by LightLDA,70.0,0.01713
+1283,5,Topics learned by LightLDA,71.0,-0.09097
+1284,5,Topics learned by LightLDA,72.0,0.0107
+1285,5,Topics learned by LightLDA,73.0,0.03106
+1286,5,Topics learned by LightLDA,74.0,0.01306
+1287,5,Topics learned by LightLDA,75.0,0.02695
+1288,5,Topics learned by LightLDA,76.0,-0.03193
+1289,5,Topics learned by LightLDA,77.0,-0.00421
+1290,5,Topics learned by LightLDA,78.0,-0.0336
+1291,5,Topics learned by LightLDA,79.0,-0.00524
+1292,5,Topics learned by LightLDA,80.0,-0.00092
+1293,5,Topics learned by LightLDA,81.0,-0.00844
+1294,5,Topics learned by LightLDA,82.0,-0.01879
+1295,5,Topics learned by LightLDA,83.0,-0.02987
+1296,5,Topics learned by LightLDA,84.0,0.04741
+1297,5,Topics learned by LightLDA,85.0,0.02412
+1298,5,Topics learned by LightLDA,86.0,0.01061
+1299,5,Topics learned by LightLDA,87.0,0.0246
+1300,5,Topics learned by LightLDA,88.0,0.02978
+1301,5,Topics learned by LightLDA,89.0,0.0076
+1302,5,Topics learned by LightLDA,90.0,-0.00136
+1303,5,Topics learned by LightLDA,91.0,-0.00833
+1304,5,Topics learned by LightLDA,92.0,-0.01319
+1305,5,Topics learned by LightLDA,93.0,-0.07085
+1306,5,Topics learned by LightLDA,94.0,0.01397
+1307,5,Topics learned by LightLDA,95.0,0.03255
+1308,5,Topics learned by LightLDA,96.0,0.00677
+1309,5,Topics learned by LightLDA,97.0,0.00533
+1310,5,Topics learned by LightLDA,98.0,0.05301
+1311,5,Topics learned by LightLDA,99.0,0.02059
+1312,5,Topics learned by LightLDA,100.0,0.03447
+1313,44,Topics learned by LightLDA,0.0,0.04718
+1314,44,Topics learned by LightLDA,1.0,0.06856
+1315,44,Topics learned by LightLDA,2.0,0.00198
+1316,44,Topics learned by LightLDA,3.0,-0.00603
+1317,44,Topics learned by LightLDA,4.0,0.00625
+1318,44,Topics learned by LightLDA,5.0,0.041
+1319,44,Topics learned by LightLDA,6.0,-0.03586
+1320,44,Topics learned by LightLDA,7.0,-0.08201
+1321,44,Topics learned by LightLDA,8.0,0.03958
+1322,44,Topics learned by LightLDA,9.0,-0.03484
+1323,44,Topics learned by LightLDA,10.0,-0.03241
+1324,44,Topics learned by LightLDA,11.0,-0.0256
+1325,44,Topics learned by LightLDA,12.0,-0.03746
+1326,44,Topics learned by LightLDA,13.0,-0.02157
+1327,44,Topics learned by LightLDA,14.0,0.02142
+1328,44,Topics learned by LightLDA,15.0,0.03379
+1329,44,Topics learned by LightLDA,16.0,0.05251
+1330,44,Topics learned by LightLDA,17.0,-0.02574
+1331,44,Topics learned by LightLDA,18.0,0.00053
+1332,44,Topics learned by LightLDA,19.0,0.04607
+1333,44,Topics learned by LightLDA,20.0,0.00373
+1334,44,Topics learned by LightLDA,21.0,0.00402
+1335,44,Topics learned by LightLDA,22.0,0.04584
+1336,44,Topics learned by LightLDA,23.0,0.00499
+1337,44,Topics learned by LightLDA,24.0,-0.02197
+1338,44,Topics learned by LightLDA,25.0,0.01141
+1339,44,Topics learned by LightLDA,26.0,-0.06051
+1340,44,Topics learned by LightLDA,27.0,-0.04827
+1341,44,Topics learned by LightLDA,28.0,-0.05111
+1342,44,Topics learned by LightLDA,29.0,-0.00735
+1343,44,Topics learned by LightLDA,30.0,-0.00798
+1344,44,Topics learned by LightLDA,31.0,-0.00451
+1345,44,Topics learned by LightLDA,32.0,-0.02191
+1346,44,Topics learned by LightLDA,33.0,-0.00358
+1347,44,Topics learned by LightLDA,34.0,-0.04763
+1348,44,Topics learned by LightLDA,35.0,-0.03308
+1349,44,Topics learned by LightLDA,36.0,-0.0628
+1350,44,Topics learned by LightLDA,37.0,-0.09795
+1351,44,Topics learned by LightLDA,38.0,0.0046
+1352,44,Topics learned by LightLDA,39.0,0.01571
+1353,44,Topics learned by LightLDA,40.0,-0.05892
+1354,44,Topics learned by LightLDA,41.0,-0.08172
+1355,44,Topics learned by LightLDA,42.0,-0.02349
+1356,44,Topics learned by LightLDA,43.0,0.01169
+1357,44,Topics learned by LightLDA,44.0,-0.028
+1358,44,Topics learned by LightLDA,45.0,-0.0409
+1359,44,Topics learned by LightLDA,46.0,-0.03255
+1360,44,Topics learned by LightLDA,47.0,-0.00979
+1361,44,Topics learned by LightLDA,48.0,-0.02219
+1362,44,Topics learned by LightLDA,49.0,-0.06878
+1363,44,Topics learned by LightLDA,50.0,-0.05545
+1364,44,Topics learned by LightLDA,51.0,-0.03482
+1365,44,Topics learned by LightLDA,52.0,-0.01183
+1366,44,Topics learned by LightLDA,53.0,0.00551
+1367,44,Topics learned by LightLDA,54.0,0.01902
+1368,44,Topics learned by LightLDA,55.0,-0.01158
+1369,44,Topics learned by LightLDA,56.0,-0.02853
+1370,44,Topics learned by LightLDA,57.0,-0.04161
+1371,44,Topics learned by LightLDA,58.0,0.01344
+1372,44,Topics learned by LightLDA,59.0,0.01089
+1373,44,Topics learned by LightLDA,60.0,0.00937
+1374,44,Topics learned by LightLDA,61.0,-0.00626
+1375,44,Topics learned by LightLDA,62.0,-0.01585
+1376,44,Topics learned by LightLDA,63.0,0.00055
+1377,44,Topics learned by LightLDA,64.0,-0.03773
+1378,44,Topics learned by LightLDA,65.0,-0.04399
+1379,44,Topics learned by LightLDA,66.0,-0.02014
+1380,44,Topics learned by LightLDA,67.0,-0.04377
+1381,44,Topics learned by LightLDA,68.0,-0.08791
+1382,44,Topics learned by LightLDA,69.0,-0.01591
+1383,44,Topics learned by LightLDA,70.0,-0.00721
+1384,44,Topics learned by LightLDA,71.0,-0.03436
+1385,44,Topics learned by LightLDA,72.0,-0.07739
+1386,44,Topics learned by LightLDA,73.0,-0.08042
+1387,44,Topics learned by LightLDA,74.0,-0.03723
+1388,44,Topics learned by LightLDA,75.0,-0.00364
+1389,44,Topics learned by LightLDA,76.0,-0.01658
+1390,44,Topics learned by LightLDA,77.0,-0.04235
+1391,44,Topics learned by LightLDA,78.0,-0.00173
+1392,44,Topics learned by LightLDA,79.0,-0.03096
+1393,44,Topics learned by LightLDA,80.0,-0.02214
+1394,44,Topics learned by LightLDA,81.0,0.00161
+1395,44,Topics learned by LightLDA,82.0,-0.11134
+1396,44,Topics learned by LightLDA,83.0,-0.05537
+1397,44,Topics learned by LightLDA,84.0,-0.01404
+1398,44,Topics learned by LightLDA,85.0,-0.00706
+1399,44,Topics learned by LightLDA,86.0,-0.04174
+1400,44,Topics learned by LightLDA,87.0,-0.03784
+1401,44,Topics learned by LightLDA,88.0,-0.07955
+1402,44,Topics learned by LightLDA,89.0,-0.06855
+1403,44,Topics learned by LightLDA,90.0,-0.07419
+1404,44,Topics learned by LightLDA,91.0,-0.03981
+1405,44,Topics learned by LightLDA,92.0,-0.02303
+1406,44,Topics learned by LightLDA,93.0,-0.02547
+1407,44,Topics learned by LightLDA,94.0,-0.04747
+1408,44,Topics learned by LightLDA,95.0,-0.03656
+1409,44,Topics learned by LightLDA,96.0,-0.06477
+1410,44,Topics learned by LightLDA,97.0,0.01083
+1411,44,Topics learned by LightLDA,98.0,-0.0665
+1412,44,Topics learned by LightLDA,99.0,0.00766
+1413,44,Topics learned by LightLDA,100.0,-0.01131
+1414,28,Topics learned by LightLDA,0.0,0.12357
+1415,28,Topics learned by LightLDA,1.0,0.0997
+1416,28,Topics learned by LightLDA,2.0,0.08532
+1417,28,Topics learned by LightLDA,3.0,0.04999
+1418,28,Topics learned by LightLDA,4.0,0.09009
+1419,28,Topics learned by LightLDA,5.0,0.14023
+1420,28,Topics learned by LightLDA,6.0,0.02814
+1421,28,Topics learned by LightLDA,7.0,0.13007
+1422,28,Topics learned by LightLDA,8.0,0.10333
+1423,28,Topics learned by LightLDA,9.0,0.10198
+1424,28,Topics learned by LightLDA,10.0,0.06101
+1425,28,Topics learned by LightLDA,11.0,0.0288
+1426,28,Topics learned by LightLDA,12.0,0.07796
+1427,28,Topics learned by LightLDA,13.0,0.05763
+1428,28,Topics learned by LightLDA,14.0,-0.00988
+1429,28,Topics learned by LightLDA,15.0,-0.01352
+1430,28,Topics learned by LightLDA,16.0,-0.02459
+1431,28,Topics learned by LightLDA,17.0,0.02923
+1432,28,Topics learned by LightLDA,18.0,-0.00983
+1433,28,Topics learned by LightLDA,19.0,-0.03335
+1434,28,Topics learned by LightLDA,20.0,0.04852
+1435,28,Topics learned by LightLDA,21.0,0.00621
+1436,28,Topics learned by LightLDA,22.0,0.05772
+1437,28,Topics learned by LightLDA,23.0,0.00897
+1438,28,Topics learned by LightLDA,24.0,0.02282
+1439,28,Topics learned by LightLDA,25.0,0.00677
+1440,28,Topics learned by LightLDA,26.0,0.05923
+1441,28,Topics learned by LightLDA,27.0,0.03779
+1442,28,Topics learned by LightLDA,28.0,0.0055
+1443,28,Topics learned by LightLDA,29.0,0.02632
+1444,28,Topics learned by LightLDA,30.0,0.06809
+1445,28,Topics learned by LightLDA,31.0,0.03746
+1446,28,Topics learned by LightLDA,32.0,0.09675
+1447,28,Topics learned by LightLDA,33.0,0.01546
+1448,28,Topics learned by LightLDA,34.0,0.07892
+1449,28,Topics learned by LightLDA,35.0,-0.00543
+1450,28,Topics learned by LightLDA,36.0,0.00768
+1451,28,Topics learned by LightLDA,37.0,-0.05781
+1452,28,Topics learned by LightLDA,38.0,0.05111
+1453,28,Topics learned by LightLDA,39.0,0.05309
+1454,28,Topics learned by LightLDA,40.0,0.02971
+1455,28,Topics learned by LightLDA,41.0,0.02486
+1456,28,Topics learned by LightLDA,42.0,0.03353
+1457,28,Topics learned by LightLDA,43.0,-0.07529
+1458,28,Topics learned by LightLDA,44.0,0.0297
+1459,28,Topics learned by LightLDA,45.0,0.03598
+1460,28,Topics learned by LightLDA,46.0,0.0504
+1461,28,Topics learned by LightLDA,47.0,-0.00876
+1462,28,Topics learned by LightLDA,48.0,-0.01605
+1463,28,Topics learned by LightLDA,49.0,0.02712
+1464,28,Topics learned by LightLDA,50.0,0.02129
+1465,28,Topics learned by LightLDA,51.0,0.03193
+1466,28,Topics learned by LightLDA,52.0,0.05557
+1467,28,Topics learned by LightLDA,53.0,0.00519
+1468,28,Topics learned by LightLDA,54.0,0.0264
+1469,28,Topics learned by LightLDA,55.0,0.03093
+1470,28,Topics learned by LightLDA,56.0,0.0338
+1471,28,Topics learned by LightLDA,57.0,-0.05778
+1472,28,Topics learned by LightLDA,58.0,0.02121
+1473,28,Topics learned by LightLDA,59.0,0.07004
+1474,28,Topics learned by LightLDA,60.0,0.05181
+1475,28,Topics learned by LightLDA,61.0,0.03143
+1476,28,Topics learned by LightLDA,62.0,0.01835
+1477,28,Topics learned by LightLDA,63.0,-0.0085
+1478,28,Topics learned by LightLDA,64.0,0.03217
+1479,28,Topics learned by LightLDA,65.0,-0.06477
+1480,28,Topics learned by LightLDA,66.0,0.0196
+1481,28,Topics learned by LightLDA,67.0,0.0362
+1482,28,Topics learned by LightLDA,68.0,0.02516
+1483,28,Topics learned by LightLDA,69.0,0.01024
+1484,28,Topics learned by LightLDA,70.0,-0.02424
+1485,28,Topics learned by LightLDA,71.0,-0.01333
+1486,28,Topics learned by LightLDA,72.0,0.03988
+1487,28,Topics learned by LightLDA,73.0,0.02679
+1488,28,Topics learned by LightLDA,74.0,-0.03024
+1489,28,Topics learned by LightLDA,75.0,-0.00866
+1490,28,Topics learned by LightLDA,76.0,-0.00684
+1491,28,Topics learned by LightLDA,77.0,-0.02773
+1492,28,Topics learned by LightLDA,78.0,0.02593
+1493,28,Topics learned by LightLDA,79.0,-0.07185
+1494,28,Topics learned by LightLDA,80.0,0.02959
+1495,28,Topics learned by LightLDA,81.0,0.02081
+1496,28,Topics learned by LightLDA,82.0,0.02749
+1497,28,Topics learned by LightLDA,83.0,0.05152
+1498,28,Topics learned by LightLDA,84.0,0.01575
+1499,28,Topics learned by LightLDA,85.0,0.00926
+1500,28,Topics learned by LightLDA,86.0,0.05141
+1501,28,Topics learned by LightLDA,87.0,0.02529
+1502,28,Topics learned by LightLDA,88.0,-0.00213
+1503,28,Topics learned by LightLDA,89.0,0.03368
+1504,28,Topics learned by LightLDA,90.0,-0.06039
+1505,28,Topics learned by LightLDA,91.0,-0.02572
+1506,28,Topics learned by LightLDA,92.0,0.03525
+1507,28,Topics learned by LightLDA,93.0,0.01104
+1508,28,Topics learned by LightLDA,94.0,-0.02029
+1509,28,Topics learned by LightLDA,95.0,0.01681
+1510,28,Topics learned by LightLDA,96.0,0.00415
+1511,28,Topics learned by LightLDA,97.0,0.02162
+1512,28,Topics learned by LightLDA,98.0,-0.00861
+1513,28,Topics learned by LightLDA,99.0,0.02103
+1514,28,Topics learned by LightLDA,100.0,0.04596
+1515,79,Topics learned by LightLDA,0.0,-0.04949
+1516,79,Topics learned by LightLDA,1.0,-0.07522
+1517,79,Topics learned by LightLDA,2.0,-0.10339
+1518,79,Topics learned by LightLDA,3.0,-0.13069
+1519,79,Topics learned by LightLDA,4.0,-0.10385
+1520,79,Topics learned by LightLDA,5.0,-0.07844
+1521,79,Topics learned by LightLDA,6.0,-0.09069
+1522,79,Topics learned by LightLDA,7.0,-0.08831
+1523,79,Topics learned by LightLDA,8.0,-0.07903
+1524,79,Topics learned by LightLDA,9.0,-0.07658
+1525,79,Topics learned by LightLDA,10.0,-0.12805
+1526,79,Topics learned by LightLDA,11.0,-0.08471
+1527,79,Topics learned by LightLDA,12.0,-0.12478
+1528,79,Topics learned by LightLDA,13.0,-0.10299
+1529,79,Topics learned by LightLDA,14.0,-0.11836
+1530,79,Topics learned by LightLDA,15.0,-0.09863
+1531,79,Topics learned by LightLDA,16.0,-0.12576
+1532,79,Topics learned by LightLDA,17.0,-0.07351
+1533,79,Topics learned by LightLDA,18.0,-0.13361
+1534,79,Topics learned by LightLDA,19.0,-0.16731
+1535,79,Topics learned by LightLDA,20.0,-0.13967
+1536,79,Topics learned by LightLDA,21.0,-0.07473
+1537,79,Topics learned by LightLDA,22.0,-0.13399
+1538,79,Topics learned by LightLDA,23.0,-0.1246
+1539,79,Topics learned by LightLDA,24.0,-0.10036
+1540,79,Topics learned by LightLDA,25.0,-0.11201
+1541,79,Topics learned by LightLDA,26.0,-0.15131
+1542,79,Topics learned by LightLDA,27.0,-0.08209
+1543,79,Topics learned by LightLDA,28.0,-0.12775
+1544,79,Topics learned by LightLDA,29.0,-0.09442
+1545,79,Topics learned by LightLDA,30.0,-0.08925
+1546,79,Topics learned by LightLDA,31.0,-0.10279
+1547,79,Topics learned by LightLDA,32.0,-0.0799
+1548,79,Topics learned by LightLDA,33.0,-0.07956
+1549,79,Topics learned by LightLDA,34.0,-0.11887
+1550,79,Topics learned by LightLDA,35.0,-0.1098
+1551,79,Topics learned by LightLDA,36.0,-0.16155
+1552,79,Topics learned by LightLDA,37.0,-0.08113
+1553,79,Topics learned by LightLDA,38.0,-0.11598
+1554,79,Topics learned by LightLDA,39.0,-0.10753
+1555,79,Topics learned by LightLDA,40.0,-0.08394
+1556,79,Topics learned by LightLDA,41.0,-0.08834
+1557,79,Topics learned by LightLDA,42.0,-0.06948
+1558,79,Topics learned by LightLDA,43.0,-0.09324
+1559,79,Topics learned by LightLDA,44.0,-0.09712
+1560,79,Topics learned by LightLDA,45.0,-0.1276
+1561,79,Topics learned by LightLDA,46.0,-0.09458
+1562,79,Topics learned by LightLDA,47.0,-0.10169
+1563,79,Topics learned by LightLDA,48.0,-0.09192
+1564,79,Topics learned by LightLDA,49.0,-0.09124
+1565,79,Topics learned by LightLDA,50.0,-0.11618
+1566,79,Topics learned by LightLDA,51.0,-0.13622
+1567,79,Topics learned by LightLDA,52.0,-0.10237
+1568,79,Topics learned by LightLDA,53.0,-0.1617
+1569,79,Topics learned by LightLDA,54.0,-0.09193
+1570,79,Topics learned by LightLDA,55.0,-0.10869
+1571,79,Topics learned by LightLDA,56.0,-0.12829
+1572,79,Topics learned by LightLDA,57.0,-0.0704
+1573,79,Topics learned by LightLDA,58.0,-0.15593
+1574,79,Topics learned by LightLDA,59.0,-0.13669
+1575,79,Topics learned by LightLDA,60.0,-0.11494
+1576,79,Topics learned by LightLDA,61.0,-0.0933
+1577,79,Topics learned by LightLDA,62.0,-0.09514
+1578,79,Topics learned by LightLDA,63.0,-0.12609
+1579,79,Topics learned by LightLDA,64.0,-0.16115
+1580,79,Topics learned by LightLDA,65.0,-0.09938
+1581,79,Topics learned by LightLDA,66.0,-0.13177
+1582,79,Topics learned by LightLDA,67.0,-0.1027
+1583,79,Topics learned by LightLDA,68.0,-0.13269
+1584,79,Topics learned by LightLDA,69.0,-0.14848
+1585,79,Topics learned by LightLDA,70.0,-0.13852
+1586,79,Topics learned by LightLDA,71.0,-0.13983
+1587,79,Topics learned by LightLDA,72.0,-0.1094
+1588,79,Topics learned by LightLDA,73.0,-0.10597
+1589,79,Topics learned by LightLDA,74.0,-0.10814
+1590,79,Topics learned by LightLDA,75.0,-0.13582
+1591,79,Topics learned by LightLDA,76.0,-0.10756
+1592,79,Topics learned by LightLDA,77.0,-0.13548
+1593,79,Topics learned by LightLDA,78.0,-0.08444
+1594,79,Topics learned by LightLDA,79.0,-0.10079
+1595,79,Topics learned by LightLDA,80.0,-0.11981
+1596,79,Topics learned by LightLDA,81.0,-0.10914
+1597,79,Topics learned by LightLDA,82.0,-0.14078
+1598,79,Topics learned by LightLDA,83.0,-0.10474
+1599,79,Topics learned by LightLDA,84.0,-0.12313
+1600,79,Topics learned by LightLDA,85.0,-0.16495
+1601,79,Topics learned by LightLDA,86.0,-0.12177
+1602,79,Topics learned by LightLDA,87.0,-0.17142
+1603,79,Topics learned by LightLDA,88.0,-0.14588
+1604,79,Topics learned by LightLDA,89.0,-0.07877
+1605,79,Topics learned by LightLDA,90.0,-0.12507
+1606,79,Topics learned by LightLDA,91.0,-0.10985
+1607,79,Topics learned by LightLDA,92.0,-0.07084
+1608,79,Topics learned by LightLDA,93.0,-0.11772
+1609,79,Topics learned by LightLDA,94.0,-0.10952
+1610,79,Topics learned by LightLDA,95.0,-0.12758
+1611,79,Topics learned by LightLDA,96.0,-0.09963
+1612,79,Topics learned by LightLDA,97.0,-0.10901
+1613,79,Topics learned by LightLDA,98.0,-0.07412
+1614,79,Topics learned by LightLDA,99.0,-0.10905
+1615,79,Topics learned by LightLDA,100.0,-0.1764
+1616,97,Topics learned by LightLDA,0.0,0.07959
+1617,97,Topics learned by LightLDA,1.0,0.12968
+1618,97,Topics learned by LightLDA,2.0,0.18183
+1619,97,Topics learned by LightLDA,3.0,0.09704
+1620,97,Topics learned by LightLDA,4.0,0.07775
+1621,97,Topics learned by LightLDA,5.0,-0.02166
+1622,97,Topics learned by LightLDA,6.0,0.10783
+1623,97,Topics learned by LightLDA,7.0,0.10136
+1624,97,Topics learned by LightLDA,8.0,0.0984
+1625,97,Topics learned by LightLDA,9.0,0.11758
+1626,97,Topics learned by LightLDA,10.0,0.05003
+1627,97,Topics learned by LightLDA,11.0,0.07285
+1628,97,Topics learned by LightLDA,12.0,0.06508
+1629,97,Topics learned by LightLDA,13.0,0.07008
+1630,97,Topics learned by LightLDA,14.0,0.06557
+1631,97,Topics learned by LightLDA,15.0,0.02408
+1632,97,Topics learned by LightLDA,16.0,0.03598
+1633,97,Topics learned by LightLDA,17.0,0.0696
+1634,97,Topics learned by LightLDA,18.0,0.06738
+1635,97,Topics learned by LightLDA,19.0,0.11427
+1636,97,Topics learned by LightLDA,20.0,0.02415
+1637,97,Topics learned by LightLDA,21.0,0.01132
+1638,97,Topics learned by LightLDA,22.0,0.08371
+1639,97,Topics learned by LightLDA,23.0,0.11221
+1640,97,Topics learned by LightLDA,24.0,0.0028
+1641,97,Topics learned by LightLDA,25.0,0.06332
+1642,97,Topics learned by LightLDA,26.0,0.01416
+1643,97,Topics learned by LightLDA,27.0,0.00011
+1644,97,Topics learned by LightLDA,28.0,0.04698
+1645,97,Topics learned by LightLDA,29.0,0.09249
+1646,97,Topics learned by LightLDA,30.0,0.09361
+1647,97,Topics learned by LightLDA,31.0,0.06049
+1648,97,Topics learned by LightLDA,32.0,-0.0387
+1649,97,Topics learned by LightLDA,33.0,0.01483
+1650,97,Topics learned by LightLDA,34.0,0.05305
+1651,97,Topics learned by LightLDA,35.0,-0.00532
+1652,97,Topics learned by LightLDA,36.0,0.09303
+1653,97,Topics learned by LightLDA,37.0,0.00618
+1654,97,Topics learned by LightLDA,38.0,0.05785
+1655,97,Topics learned by LightLDA,39.0,0.06125
+1656,97,Topics learned by LightLDA,40.0,0.04802
+1657,97,Topics learned by LightLDA,41.0,0.04286
+1658,97,Topics learned by LightLDA,42.0,-0.02714
+1659,97,Topics learned by LightLDA,43.0,0.02332
+1660,97,Topics learned by LightLDA,44.0,0.03617
+1661,97,Topics learned by LightLDA,45.0,0.07989
+1662,97,Topics learned by LightLDA,46.0,-0.02468
+1663,97,Topics learned by LightLDA,47.0,0.03186
+1664,97,Topics learned by LightLDA,48.0,-0.02255
+1665,97,Topics learned by LightLDA,49.0,0.03399
+1666,97,Topics learned by LightLDA,50.0,0.04496
+1667,97,Topics learned by LightLDA,51.0,0.05864
+1668,97,Topics learned by LightLDA,52.0,0.02493
+1669,97,Topics learned by LightLDA,53.0,-0.00162
+1670,97,Topics learned by LightLDA,54.0,0.03735
+1671,97,Topics learned by LightLDA,55.0,0.04959
+1672,97,Topics learned by LightLDA,56.0,0.06654
+1673,97,Topics learned by LightLDA,57.0,0.06811
+1674,97,Topics learned by LightLDA,58.0,0.10477
+1675,97,Topics learned by LightLDA,59.0,0.07262
+1676,97,Topics learned by LightLDA,60.0,0.07797
+1677,97,Topics learned by LightLDA,61.0,-0.04361
+1678,97,Topics learned by LightLDA,62.0,0.0314
+1679,97,Topics learned by LightLDA,63.0,0.05771
+1680,97,Topics learned by LightLDA,64.0,0.06325
+1681,97,Topics learned by LightLDA,65.0,0.05556
+1682,97,Topics learned by LightLDA,66.0,-0.01467
+1683,97,Topics learned by LightLDA,67.0,0.01383
+1684,97,Topics learned by LightLDA,68.0,-0.03192
+1685,97,Topics learned by LightLDA,69.0,0.01542
+1686,97,Topics learned by LightLDA,70.0,0.03309
+1687,97,Topics learned by LightLDA,71.0,0.0589
+1688,97,Topics learned by LightLDA,72.0,0.09091
+1689,97,Topics learned by LightLDA,73.0,-0.02771
+1690,97,Topics learned by LightLDA,74.0,0.0821
+1691,97,Topics learned by LightLDA,75.0,0.01314
+1692,97,Topics learned by LightLDA,76.0,0.01876
+1693,97,Topics learned by LightLDA,77.0,-0.00114
+1694,97,Topics learned by LightLDA,78.0,0.04007
+1695,97,Topics learned by LightLDA,79.0,0.04642
+1696,97,Topics learned by LightLDA,80.0,0.06041
+1697,97,Topics learned by LightLDA,81.0,0.04827
+1698,97,Topics learned by LightLDA,82.0,-0.04952
+1699,97,Topics learned by LightLDA,83.0,0.0672
+1700,97,Topics learned by LightLDA,84.0,-0.01421
+1701,97,Topics learned by LightLDA,85.0,-0.02141
+1702,97,Topics learned by LightLDA,86.0,0.06018
+1703,97,Topics learned by LightLDA,87.0,0.07261
+1704,97,Topics learned by LightLDA,88.0,0.09226
+1705,97,Topics learned by LightLDA,89.0,-0.01066
+1706,97,Topics learned by LightLDA,90.0,0.06964
+1707,97,Topics learned by LightLDA,91.0,0.04579
+1708,97,Topics learned by LightLDA,92.0,0.00907
+1709,97,Topics learned by LightLDA,93.0,-0.03374
+1710,97,Topics learned by LightLDA,94.0,0.03603
+1711,97,Topics learned by LightLDA,95.0,0.03771
+1712,97,Topics learned by LightLDA,96.0,0.04827
+1713,97,Topics learned by LightLDA,97.0,0.046
+1714,97,Topics learned by LightLDA,98.0,0.06696
+1715,97,Topics learned by LightLDA,99.0,0.05407
+1716,97,Topics learned by LightLDA,100.0,0.04214
+1717,1,Topics learned by LightLDA,0.0,-0.00208
+1718,1,Topics learned by LightLDA,1.0,-0.0253
+1719,1,Topics learned by LightLDA,2.0,0.00756
+1720,1,Topics learned by LightLDA,3.0,-0.05137
+1721,1,Topics learned by LightLDA,4.0,0.01501
+1722,1,Topics learned by LightLDA,5.0,-0.07843
+1723,1,Topics learned by LightLDA,6.0,-0.02048
+1724,1,Topics learned by LightLDA,7.0,-0.02106
+1725,1,Topics learned by LightLDA,8.0,-0.04608
+1726,1,Topics learned by LightLDA,9.0,-0.06478
+1727,1,Topics learned by LightLDA,10.0,-0.04053
+1728,1,Topics learned by LightLDA,11.0,-0.02865
+1729,1,Topics learned by LightLDA,12.0,-0.02986
+1730,1,Topics learned by LightLDA,13.0,-0.04989
+1731,1,Topics learned by LightLDA,14.0,-0.06222
+1732,1,Topics learned by LightLDA,15.0,-0.00668
+1733,1,Topics learned by LightLDA,16.0,-0.02419
+1734,1,Topics learned by LightLDA,17.0,-0.13229
+1735,1,Topics learned by LightLDA,18.0,-0.0768
+1736,1,Topics learned by LightLDA,19.0,-0.0411
+1737,1,Topics learned by LightLDA,20.0,-0.00166
+1738,1,Topics learned by LightLDA,21.0,-0.06219
+1739,1,Topics learned by LightLDA,22.0,-0.05463
+1740,1,Topics learned by LightLDA,23.0,-0.03949
+1741,1,Topics learned by LightLDA,24.0,-0.02723
+1742,1,Topics learned by LightLDA,25.0,-0.05728
+1743,1,Topics learned by LightLDA,26.0,-0.09042
+1744,1,Topics learned by LightLDA,27.0,-0.04872
+1745,1,Topics learned by LightLDA,28.0,-0.05474
+1746,1,Topics learned by LightLDA,29.0,-0.05921
+1747,1,Topics learned by LightLDA,30.0,-0.08331
+1748,1,Topics learned by LightLDA,31.0,-0.05004
+1749,1,Topics learned by LightLDA,32.0,-0.0093
+1750,1,Topics learned by LightLDA,33.0,-0.09027
+1751,1,Topics learned by LightLDA,34.0,-0.06436
+1752,1,Topics learned by LightLDA,35.0,-0.10346
+1753,1,Topics learned by LightLDA,36.0,-0.09368
+1754,1,Topics learned by LightLDA,37.0,-0.08819
+1755,1,Topics learned by LightLDA,38.0,-0.055
+1756,1,Topics learned by LightLDA,39.0,-0.07994
+1757,1,Topics learned by LightLDA,40.0,-0.12995
+1758,1,Topics learned by LightLDA,41.0,-0.07277
+1759,1,Topics learned by LightLDA,42.0,-0.14676
+1760,1,Topics learned by LightLDA,43.0,-0.10531
+1761,1,Topics learned by LightLDA,44.0,-0.1264
+1762,1,Topics learned by LightLDA,45.0,-0.04079
+1763,1,Topics learned by LightLDA,46.0,-0.10722
+1764,1,Topics learned by LightLDA,47.0,-0.10326
+1765,1,Topics learned by LightLDA,48.0,-0.09458
+1766,1,Topics learned by LightLDA,49.0,-0.03522
+1767,1,Topics learned by LightLDA,50.0,-0.09718
+1768,1,Topics learned by LightLDA,51.0,-0.11882
+1769,1,Topics learned by LightLDA,52.0,-0.08936
+1770,1,Topics learned by LightLDA,53.0,-0.06411
+1771,1,Topics learned by LightLDA,54.0,-0.09716
+1772,1,Topics learned by LightLDA,55.0,-0.0337
+1773,1,Topics learned by LightLDA,56.0,-0.05878
+1774,1,Topics learned by LightLDA,57.0,-0.09573
+1775,1,Topics learned by LightLDA,58.0,-0.03511
+1776,1,Topics learned by LightLDA,59.0,-0.08832
+1777,1,Topics learned by LightLDA,60.0,-0.10786
+1778,1,Topics learned by LightLDA,61.0,-0.08786
+1779,1,Topics learned by LightLDA,62.0,-0.04315
+1780,1,Topics learned by LightLDA,63.0,-0.10337
+1781,1,Topics learned by LightLDA,64.0,-0.10679
+1782,1,Topics learned by LightLDA,65.0,-0.09543
+1783,1,Topics learned by LightLDA,66.0,-0.09206
+1784,1,Topics learned by LightLDA,67.0,-0.06944
+1785,1,Topics learned by LightLDA,68.0,-0.14261
+1786,1,Topics learned by LightLDA,69.0,-0.0351
+1787,1,Topics learned by LightLDA,70.0,-0.06586
+1788,1,Topics learned by LightLDA,71.0,-0.04576
+1789,1,Topics learned by LightLDA,72.0,-0.05367
+1790,1,Topics learned by LightLDA,73.0,-0.09262
+1791,1,Topics learned by LightLDA,74.0,-0.07885
+1792,1,Topics learned by LightLDA,75.0,-0.12884
+1793,1,Topics learned by LightLDA,76.0,-0.08357
+1794,1,Topics learned by LightLDA,77.0,-0.0758
+1795,1,Topics learned by LightLDA,78.0,-0.02163
+1796,1,Topics learned by LightLDA,79.0,-0.0683
+1797,1,Topics learned by LightLDA,80.0,-0.12819
+1798,1,Topics learned by LightLDA,81.0,-0.10813
+1799,1,Topics learned by LightLDA,82.0,-0.10141
+1800,1,Topics learned by LightLDA,83.0,-0.10142
+1801,1,Topics learned by LightLDA,84.0,-0.06287
+1802,1,Topics learned by LightLDA,85.0,-0.05401
+1803,1,Topics learned by LightLDA,86.0,-0.08428
+1804,1,Topics learned by LightLDA,87.0,-0.06007
+1805,1,Topics learned by LightLDA,88.0,-0.07464
+1806,1,Topics learned by LightLDA,89.0,-0.05432
+1807,1,Topics learned by LightLDA,90.0,-0.14019
+1808,1,Topics learned by LightLDA,91.0,-0.06986
+1809,1,Topics learned by LightLDA,92.0,-0.05832
+1810,1,Topics learned by LightLDA,93.0,-0.08534
+1811,1,Topics learned by LightLDA,94.0,-0.02747
+1812,1,Topics learned by LightLDA,95.0,-0.02268
+1813,1,Topics learned by LightLDA,96.0,-0.11147
+1814,1,Topics learned by LightLDA,97.0,-0.15461
+1815,1,Topics learned by LightLDA,98.0,-0.07754
+1816,1,Topics learned by LightLDA,99.0,-0.05193
+1817,1,Topics learned by LightLDA,100.0,-0.03919
+1818,19,Topics learned by LightLDA,0.0,0.10694
+1819,19,Topics learned by LightLDA,1.0,-0.03863
+1820,19,Topics learned by LightLDA,2.0,0.03474
+1821,19,Topics learned by LightLDA,3.0,-0.09451
+1822,19,Topics learned by LightLDA,4.0,0.0046
+1823,19,Topics learned by LightLDA,5.0,-0.04299
+1824,19,Topics learned by LightLDA,6.0,-0.00196
+1825,19,Topics learned by LightLDA,7.0,0.04903
+1826,19,Topics learned by LightLDA,8.0,-0.06621
+1827,19,Topics learned by LightLDA,9.0,-0.02598
+1828,19,Topics learned by LightLDA,10.0,-0.0347
+1829,19,Topics learned by LightLDA,11.0,-0.02143
+1830,19,Topics learned by LightLDA,12.0,-0.00072
+1831,19,Topics learned by LightLDA,13.0,-0.06669
+1832,19,Topics learned by LightLDA,14.0,0.00204
+1833,19,Topics learned by LightLDA,15.0,-0.04013
+1834,19,Topics learned by LightLDA,16.0,-0.04726
+1835,19,Topics learned by LightLDA,17.0,-0.0105
+1836,19,Topics learned by LightLDA,18.0,-0.05278
+1837,19,Topics learned by LightLDA,19.0,-0.06785
+1838,19,Topics learned by LightLDA,20.0,-0.00348
+1839,19,Topics learned by LightLDA,21.0,-0.02369
+1840,19,Topics learned by LightLDA,22.0,-0.03426
+1841,19,Topics learned by LightLDA,23.0,-0.03169
+1842,19,Topics learned by LightLDA,24.0,-0.03959
+1843,19,Topics learned by LightLDA,25.0,-0.00771
+1844,19,Topics learned by LightLDA,26.0,-0.08544
+1845,19,Topics learned by LightLDA,27.0,-0.07504
+1846,19,Topics learned by LightLDA,28.0,-0.06966
+1847,19,Topics learned by LightLDA,29.0,-0.04303
+1848,19,Topics learned by LightLDA,30.0,-0.03167
+1849,19,Topics learned by LightLDA,31.0,-0.03962
+1850,19,Topics learned by LightLDA,32.0,-0.02959
+1851,19,Topics learned by LightLDA,33.0,-0.09688
+1852,19,Topics learned by LightLDA,34.0,0.008
+1853,19,Topics learned by LightLDA,35.0,-0.02475
+1854,19,Topics learned by LightLDA,36.0,-0.01258
+1855,19,Topics learned by LightLDA,37.0,-0.0703
+1856,19,Topics learned by LightLDA,38.0,0.02455
+1857,19,Topics learned by LightLDA,39.0,-0.07558
+1858,19,Topics learned by LightLDA,40.0,-0.08835
+1859,19,Topics learned by LightLDA,41.0,-0.02157
+1860,19,Topics learned by LightLDA,42.0,-0.0798
+1861,19,Topics learned by LightLDA,43.0,-0.01557
+1862,19,Topics learned by LightLDA,44.0,-0.0787
+1863,19,Topics learned by LightLDA,45.0,-0.02702
+1864,19,Topics learned by LightLDA,46.0,-0.02634
+1865,19,Topics learned by LightLDA,47.0,-0.05562
+1866,19,Topics learned by LightLDA,48.0,-0.00731
+1867,19,Topics learned by LightLDA,49.0,-0.07903
+1868,19,Topics learned by LightLDA,50.0,-0.05728
+1869,19,Topics learned by LightLDA,51.0,-0.04606
+1870,19,Topics learned by LightLDA,52.0,-0.10299
+1871,19,Topics learned by LightLDA,53.0,-0.04999
+1872,19,Topics learned by LightLDA,54.0,-0.02134
+1873,19,Topics learned by LightLDA,55.0,-0.01997
+1874,19,Topics learned by LightLDA,56.0,-0.02472
+1875,19,Topics learned by LightLDA,57.0,-0.03406
+1876,19,Topics learned by LightLDA,58.0,-0.04092
+1877,19,Topics learned by LightLDA,59.0,-0.0443
+1878,19,Topics learned by LightLDA,60.0,-0.0313
+1879,19,Topics learned by LightLDA,61.0,-0.02167
+1880,19,Topics learned by LightLDA,62.0,-0.09149
+1881,19,Topics learned by LightLDA,63.0,-0.02901
+1882,19,Topics learned by LightLDA,64.0,-0.02835
+1883,19,Topics learned by LightLDA,65.0,-0.02626
+1884,19,Topics learned by LightLDA,66.0,-0.03245
+1885,19,Topics learned by LightLDA,67.0,-0.03458
+1886,19,Topics learned by LightLDA,68.0,-0.06124
+1887,19,Topics learned by LightLDA,69.0,-0.02301
+1888,19,Topics learned by LightLDA,70.0,-0.03639
+1889,19,Topics learned by LightLDA,71.0,-0.01638
+1890,19,Topics learned by LightLDA,72.0,-0.07325
+1891,19,Topics learned by LightLDA,73.0,-0.03591
+1892,19,Topics learned by LightLDA,74.0,-0.02458
+1893,19,Topics learned by LightLDA,75.0,-0.00129
+1894,19,Topics learned by LightLDA,76.0,-0.06135
+1895,19,Topics learned by LightLDA,77.0,-0.02038
+1896,19,Topics learned by LightLDA,78.0,-0.01801
+1897,19,Topics learned by LightLDA,79.0,-0.09621
+1898,19,Topics learned by LightLDA,80.0,-0.05933
+1899,19,Topics learned by LightLDA,81.0,-0.11286
+1900,19,Topics learned by LightLDA,82.0,-0.00811
+1901,19,Topics learned by LightLDA,83.0,-0.02097
+1902,19,Topics learned by LightLDA,84.0,-0.06203
+1903,19,Topics learned by LightLDA,85.0,-0.04789
+1904,19,Topics learned by LightLDA,86.0,-0.07114
+1905,19,Topics learned by LightLDA,87.0,-0.05411
+1906,19,Topics learned by LightLDA,88.0,-0.09453
+1907,19,Topics learned by LightLDA,89.0,-0.04241
+1908,19,Topics learned by LightLDA,90.0,-0.05884
+1909,19,Topics learned by LightLDA,91.0,-0.06614
+1910,19,Topics learned by LightLDA,92.0,-0.04834
+1911,19,Topics learned by LightLDA,93.0,-0.09591
+1912,19,Topics learned by LightLDA,94.0,-0.07167
+1913,19,Topics learned by LightLDA,95.0,-0.07253
+1914,19,Topics learned by LightLDA,96.0,-0.06523
+1915,19,Topics learned by LightLDA,97.0,-0.08407
+1916,19,Topics learned by LightLDA,98.0,-0.0542
+1917,19,Topics learned by LightLDA,99.0,-0.04743
+1918,19,Topics learned by LightLDA,100.0,-0.03559
+1919,22,Topics learned by LightLDA,0.0,0.13065
+1920,22,Topics learned by LightLDA,1.0,0.10211
+1921,22,Topics learned by LightLDA,2.0,0.09064
+1922,22,Topics learned by LightLDA,3.0,0.10342
+1923,22,Topics learned by LightLDA,4.0,0.13178
+1924,22,Topics learned by LightLDA,5.0,0.10894
+1925,22,Topics learned by LightLDA,6.0,0.09038
+1926,22,Topics learned by LightLDA,7.0,0.05899
+1927,22,Topics learned by LightLDA,8.0,0.07819
+1928,22,Topics learned by LightLDA,9.0,0.10531
+1929,22,Topics learned by LightLDA,10.0,0.08225
+1930,22,Topics learned by LightLDA,11.0,0.01431
+1931,22,Topics learned by LightLDA,12.0,0.07193
+1932,22,Topics learned by LightLDA,13.0,0.0703
+1933,22,Topics learned by LightLDA,14.0,0.06217
+1934,22,Topics learned by LightLDA,15.0,0.07778
+1935,22,Topics learned by LightLDA,16.0,0.05988
+1936,22,Topics learned by LightLDA,17.0,0.05858
+1937,22,Topics learned by LightLDA,18.0,0.09126
+1938,22,Topics learned by LightLDA,19.0,0.05355
+1939,22,Topics learned by LightLDA,20.0,0.06621
+1940,22,Topics learned by LightLDA,21.0,0.059
+1941,22,Topics learned by LightLDA,22.0,0.08567
+1942,22,Topics learned by LightLDA,23.0,0.06472
+1943,22,Topics learned by LightLDA,24.0,0.06206
+1944,22,Topics learned by LightLDA,25.0,0.02442
+1945,22,Topics learned by LightLDA,26.0,0.0271
+1946,22,Topics learned by LightLDA,27.0,0.05362
+1947,22,Topics learned by LightLDA,28.0,0.04661
+1948,22,Topics learned by LightLDA,29.0,0.05718
+1949,22,Topics learned by LightLDA,30.0,-4e-05
+1950,22,Topics learned by LightLDA,31.0,0.0754
+1951,22,Topics learned by LightLDA,32.0,-0.00584
+1952,22,Topics learned by LightLDA,33.0,0.05654
+1953,22,Topics learned by LightLDA,34.0,0.05398
+1954,22,Topics learned by LightLDA,35.0,0.05845
+1955,22,Topics learned by LightLDA,36.0,-0.01744
+1956,22,Topics learned by LightLDA,37.0,0.02445
+1957,22,Topics learned by LightLDA,38.0,0.03507
+1958,22,Topics learned by LightLDA,39.0,-0.00856
+1959,22,Topics learned by LightLDA,40.0,0.03946
+1960,22,Topics learned by LightLDA,41.0,0.01531
+1961,22,Topics learned by LightLDA,42.0,0.00879
+1962,22,Topics learned by LightLDA,43.0,0.05603
+1963,22,Topics learned by LightLDA,44.0,0.03176
+1964,22,Topics learned by LightLDA,45.0,0.04525
+1965,22,Topics learned by LightLDA,46.0,0.02741
+1966,22,Topics learned by LightLDA,47.0,0.02338
+1967,22,Topics learned by LightLDA,48.0,0.03592
+1968,22,Topics learned by LightLDA,49.0,0.03303
+1969,22,Topics learned by LightLDA,50.0,-0.01088
+1970,22,Topics learned by LightLDA,51.0,-0.00503
+1971,22,Topics learned by LightLDA,52.0,0.02683
+1972,22,Topics learned by LightLDA,53.0,0.04967
+1973,22,Topics learned by LightLDA,54.0,0.00043
+1974,22,Topics learned by LightLDA,55.0,0.03737
+1975,22,Topics learned by LightLDA,56.0,-0.00953
+1976,22,Topics learned by LightLDA,57.0,-0.03879
+1977,22,Topics learned by LightLDA,58.0,-0.02023
+1978,22,Topics learned by LightLDA,59.0,0.02213
+1979,22,Topics learned by LightLDA,60.0,0.06927
+1980,22,Topics learned by LightLDA,61.0,-0.01748
+1981,22,Topics learned by LightLDA,62.0,0.01297
+1982,22,Topics learned by LightLDA,63.0,-0.01494
+1983,22,Topics learned by LightLDA,64.0,-0.01577
+1984,22,Topics learned by LightLDA,65.0,0.0536
+1985,22,Topics learned by LightLDA,66.0,-0.06078
+1986,22,Topics learned by LightLDA,67.0,0.03054
+1987,22,Topics learned by LightLDA,68.0,0.04157
+1988,22,Topics learned by LightLDA,69.0,0.0359
+1989,22,Topics learned by LightLDA,70.0,0.07233
+1990,22,Topics learned by LightLDA,71.0,-0.14117
+1991,22,Topics learned by LightLDA,72.0,-0.02201
+1992,22,Topics learned by LightLDA,73.0,0.01428
+1993,22,Topics learned by LightLDA,74.0,-0.04265
+1994,22,Topics learned by LightLDA,75.0,0.03741
+1995,22,Topics learned by LightLDA,76.0,-0.03267
+1996,22,Topics learned by LightLDA,77.0,-0.01718
+1997,22,Topics learned by LightLDA,78.0,0.00429
+1998,22,Topics learned by LightLDA,79.0,0.00766
+1999,22,Topics learned by LightLDA,80.0,0.04223
+2000,22,Topics learned by LightLDA,81.0,0.02716
+2001,22,Topics learned by LightLDA,82.0,0.04511
+2002,22,Topics learned by LightLDA,83.0,0.02118
+2003,22,Topics learned by LightLDA,84.0,0.02279
+2004,22,Topics learned by LightLDA,85.0,-0.02745
+2005,22,Topics learned by LightLDA,86.0,0.04414
+2006,22,Topics learned by LightLDA,87.0,0.03453
+2007,22,Topics learned by LightLDA,88.0,-0.06145
+2008,22,Topics learned by LightLDA,89.0,0.03719
+2009,22,Topics learned by LightLDA,90.0,0.05377
+2010,22,Topics learned by LightLDA,91.0,0.04881
+2011,22,Topics learned by LightLDA,92.0,-0.09298
+2012,22,Topics learned by LightLDA,93.0,0.03786
+2013,22,Topics learned by LightLDA,94.0,-0.04579
+2014,22,Topics learned by LightLDA,95.0,0.01101
+2015,22,Topics learned by LightLDA,96.0,-0.00273
+2016,22,Topics learned by LightLDA,97.0,-0.00372
+2017,22,Topics learned by LightLDA,98.0,0.01889
+2018,22,Topics learned by LightLDA,99.0,0.02763
+2019,22,Topics learned by LightLDA,100.0,-0.07047
+2020,Film,Category-Level Topics,0.0,0.04345
+2021,Film,Category-Level Topics,1.0,0.17111
+2022,Film,Category-Level Topics,2.0,0.03942
+2023,Film,Category-Level Topics,3.0,0.13671
+2024,Film,Category-Level Topics,4.0,0.08686
+2025,Film,Category-Level Topics,5.0,0.07923
+2026,Film,Category-Level Topics,6.0,0.07323
+2027,Film,Category-Level Topics,7.0,-0.0087
+2028,Film,Category-Level Topics,8.0,0.11683
+2029,Film,Category-Level Topics,9.0,0.07778
+2030,Film,Category-Level Topics,10.0,0.05223
+2031,Film,Category-Level Topics,11.0,-0.01366
+2032,Film,Category-Level Topics,12.0,-0.00504
+2033,Film,Category-Level Topics,13.0,0.08357
+2034,Film,Category-Level Topics,14.0,-0.01162
+2035,Film,Category-Level Topics,15.0,0.02702
+2036,Film,Category-Level Topics,16.0,0.10833
+2037,Film,Category-Level Topics,17.0,0.03951
+2038,Film,Category-Level Topics,18.0,0.03753
+2039,Film,Category-Level Topics,19.0,-0.00564
+2040,Film,Category-Level Topics,20.0,0.01458
+2041,Film,Category-Level Topics,21.0,0.00698
+2042,Film,Category-Level Topics,22.0,0.07096
+2043,Film,Category-Level Topics,23.0,0.00353
+2044,Film,Category-Level Topics,24.0,0.07156
+2045,Film,Category-Level Topics,25.0,0.00017
+2046,Film,Category-Level Topics,26.0,-0.01865
+2047,Film,Category-Level Topics,27.0,-0.0302
+2048,Film,Category-Level Topics,28.0,-0.03267
+2049,Film,Category-Level Topics,29.0,0.06082
+2050,Film,Category-Level Topics,30.0,-0.06526
+2051,Film,Category-Level Topics,31.0,0.01899
+2052,Film,Category-Level Topics,32.0,0.03774
+2053,Film,Category-Level Topics,33.0,0.07455
+2054,Film,Category-Level Topics,34.0,0.02585
+2055,Film,Category-Level Topics,35.0,0.06645
+2056,Film,Category-Level Topics,36.0,0.06153
+2057,Film,Category-Level Topics,37.0,0.05106
+2058,Film,Category-Level Topics,38.0,0.04909
+2059,Film,Category-Level Topics,39.0,0.04198
+2060,Film,Category-Level Topics,40.0,-0.01141
+2061,Film,Category-Level Topics,41.0,-0.0222
+2062,Film,Category-Level Topics,42.0,0.12518
+2063,Film,Category-Level Topics,43.0,0.01127
+2064,Film,Category-Level Topics,44.0,0.00615
+2065,Film,Category-Level Topics,45.0,0.04864
+2066,Film,Category-Level Topics,46.0,0.01597
+2067,Film,Category-Level Topics,47.0,0.0675
+2068,Film,Category-Level Topics,48.0,-0.04765
+2069,Film,Category-Level Topics,49.0,0.00018
+2070,Film,Category-Level Topics,50.0,0.03094
+2071,Film,Category-Level Topics,51.0,0.07315
+2072,Film,Category-Level Topics,52.0,0.04396
+2073,Film,Category-Level Topics,53.0,-0.01463
+2074,Film,Category-Level Topics,54.0,-0.03357
+2075,Film,Category-Level Topics,55.0,-0.01664
+2076,Film,Category-Level Topics,56.0,0.04384
+2077,Film,Category-Level Topics,57.0,-0.03228
+2078,Film,Category-Level Topics,58.0,0.08073
+2079,Film,Category-Level Topics,59.0,-0.00878
+2080,Film,Category-Level Topics,60.0,0.02408
+2081,Film,Category-Level Topics,61.0,0.05507
+2082,Film,Category-Level Topics,62.0,0.06147
+2083,Film,Category-Level Topics,63.0,-0.01823
+2084,Film,Category-Level Topics,64.0,0.00024
+2085,Film,Category-Level Topics,65.0,0.02119
+2086,Film,Category-Level Topics,66.0,-0.01618
+2087,Film,Category-Level Topics,67.0,0.0341
+2088,Film,Category-Level Topics,68.0,-0.02029
+2089,Film,Category-Level Topics,69.0,-0.02214
+2090,Film,Category-Level Topics,70.0,0.03057
+2091,Film,Category-Level Topics,71.0,-0.01567
+2092,Film,Category-Level Topics,72.0,-0.02117
+2093,Film,Category-Level Topics,73.0,0.01471
+2094,Film,Category-Level Topics,74.0,-0.05005
+2095,Film,Category-Level Topics,75.0,-0.00886
+2096,Film,Category-Level Topics,76.0,0.02666
+2097,Film,Category-Level Topics,77.0,-0.06478
+2098,Film,Category-Level Topics,78.0,0.04141
+2099,Film,Category-Level Topics,79.0,-0.05662
+2100,Film,Category-Level Topics,80.0,0.05006
+2101,Film,Category-Level Topics,81.0,0.04631
+2102,Film,Category-Level Topics,82.0,0.03336
+2103,Film,Category-Level Topics,83.0,0.00146
+2104,Film,Category-Level Topics,84.0,-0.03722
+2105,Film,Category-Level Topics,85.0,0.02257
+2106,Film,Category-Level Topics,86.0,0.06509
+2107,Film,Category-Level Topics,87.0,-0.01792
+2108,Film,Category-Level Topics,88.0,-0.05091
+2109,Film,Category-Level Topics,89.0,0.04307
+2110,Film,Category-Level Topics,90.0,0.01641
+2111,Film,Category-Level Topics,91.0,0.01818
+2112,Film,Category-Level Topics,92.0,-0.05317
+2113,Film,Category-Level Topics,93.0,0.07554
+2114,Film,Category-Level Topics,94.0,-0.0052
+2115,Film,Category-Level Topics,95.0,-0.08578
+2116,Film,Category-Level Topics,96.0,0.02558
+2117,Film,Category-Level Topics,97.0,-0.01573
+2118,Film,Category-Level Topics,98.0,0.03208
+2119,Film,Category-Level Topics,99.0,0.04587
+2120,Film,Category-Level Topics,100.0,-0.02861
+2121,Tennis,Category-Level Topics,0.0,0.18378
+2122,Tennis,Category-Level Topics,1.0,0.18075
+2123,Tennis,Category-Level Topics,2.0,0.11062
+2124,Tennis,Category-Level Topics,3.0,0.07922
+2125,Tennis,Category-Level Topics,4.0,0.10711
+2126,Tennis,Category-Level Topics,5.0,0.06497
+2127,Tennis,Category-Level Topics,6.0,0.04833
+2128,Tennis,Category-Level Topics,7.0,0.09104
+2129,Tennis,Category-Level Topics,8.0,0.02654
+2130,Tennis,Category-Level Topics,9.0,0.03562
+2131,Tennis,Category-Level Topics,10.0,0.16409
+2132,Tennis,Category-Level Topics,11.0,0.07335
+2133,Tennis,Category-Level Topics,12.0,0.04797
+2134,Tennis,Category-Level Topics,13.0,0.06153
+2135,Tennis,Category-Level Topics,14.0,0.03718
+2136,Tennis,Category-Level Topics,15.0,-0.00509
+2137,Tennis,Category-Level Topics,16.0,0.03618
+2138,Tennis,Category-Level Topics,17.0,-0.04538
+2139,Tennis,Category-Level Topics,18.0,0.13109
+2140,Tennis,Category-Level Topics,19.0,0.03918
+2141,Tennis,Category-Level Topics,20.0,0.02674
+2142,Tennis,Category-Level Topics,21.0,0.08282
+2143,Tennis,Category-Level Topics,22.0,0.06161
+2144,Tennis,Category-Level Topics,23.0,0.0752
+2145,Tennis,Category-Level Topics,24.0,0.05598
+2146,Tennis,Category-Level Topics,25.0,0.0026
+2147,Tennis,Category-Level Topics,26.0,0.03107
+2148,Tennis,Category-Level Topics,27.0,-0.01458
+2149,Tennis,Category-Level Topics,28.0,0.06555
+2150,Tennis,Category-Level Topics,29.0,0.04341
+2151,Tennis,Category-Level Topics,30.0,0.00906
+2152,Tennis,Category-Level Topics,31.0,-0.01122
+2153,Tennis,Category-Level Topics,32.0,0.00876
+2154,Tennis,Category-Level Topics,33.0,-0.05149
+2155,Tennis,Category-Level Topics,34.0,-0.00996
+2156,Tennis,Category-Level Topics,35.0,-0.03142
+2157,Tennis,Category-Level Topics,36.0,-0.03393
+2158,Tennis,Category-Level Topics,37.0,0.02939
+2159,Tennis,Category-Level Topics,38.0,-0.00629
+2160,Tennis,Category-Level Topics,39.0,-0.06081
+2161,Tennis,Category-Level Topics,40.0,-0.02417
+2162,Tennis,Category-Level Topics,41.0,0.00628
+2163,Tennis,Category-Level Topics,42.0,0.04995
+2164,Tennis,Category-Level Topics,43.0,-0.00813
+2165,Tennis,Category-Level Topics,44.0,-0.00966
+2166,Tennis,Category-Level Topics,45.0,0.00611
+2167,Tennis,Category-Level Topics,46.0,0.07529
+2168,Tennis,Category-Level Topics,47.0,-0.01708
+2169,Tennis,Category-Level Topics,48.0,-0.01386
+2170,Tennis,Category-Level Topics,49.0,-0.01164
+2171,Tennis,Category-Level Topics,50.0,-0.00981
+2172,Tennis,Category-Level Topics,51.0,0.01845
+2173,Tennis,Category-Level Topics,52.0,-0.05575
+2174,Tennis,Category-Level Topics,53.0,-0.04549
+2175,Tennis,Category-Level Topics,54.0,-0.04326
+2176,Tennis,Category-Level Topics,55.0,-0.01513
+2177,Tennis,Category-Level Topics,56.0,-0.08863
+2178,Tennis,Category-Level Topics,57.0,0.00464
+2179,Tennis,Category-Level Topics,58.0,0.01253
+2180,Tennis,Category-Level Topics,59.0,-0.0857
+2181,Tennis,Category-Level Topics,60.0,-0.02871
+2182,Tennis,Category-Level Topics,61.0,-0.05099
+2183,Tennis,Category-Level Topics,62.0,-0.04965
+2184,Tennis,Category-Level Topics,63.0,-0.04133
+2185,Tennis,Category-Level Topics,64.0,-0.02817
+2186,Tennis,Category-Level Topics,65.0,-0.03189
+2187,Tennis,Category-Level Topics,66.0,-0.00852
+2188,Tennis,Category-Level Topics,67.0,-0.00903
+2189,Tennis,Category-Level Topics,68.0,-0.03394
+2190,Tennis,Category-Level Topics,69.0,0.00282
+2191,Tennis,Category-Level Topics,70.0,-0.03697
+2192,Tennis,Category-Level Topics,71.0,-0.05764
+2193,Tennis,Category-Level Topics,72.0,-0.03808
+2194,Tennis,Category-Level Topics,73.0,-0.00137
+2195,Tennis,Category-Level Topics,74.0,-0.06116
+2196,Tennis,Category-Level Topics,75.0,0.00536
+2197,Tennis,Category-Level Topics,76.0,-0.02957
+2198,Tennis,Category-Level Topics,77.0,0.02662
+2199,Tennis,Category-Level Topics,78.0,-0.05773
+2200,Tennis,Category-Level Topics,79.0,-0.03047
+2201,Tennis,Category-Level Topics,80.0,-0.04297
+2202,Tennis,Category-Level Topics,81.0,-0.06056
+2203,Tennis,Category-Level Topics,82.0,-0.00274
+2204,Tennis,Category-Level Topics,83.0,-0.02512
+2205,Tennis,Category-Level Topics,84.0,-0.02204
+2206,Tennis,Category-Level Topics,85.0,-0.08395
+2207,Tennis,Category-Level Topics,86.0,-0.00474
+2208,Tennis,Category-Level Topics,87.0,-0.07297
+2209,Tennis,Category-Level Topics,88.0,-0.00988
+2210,Tennis,Category-Level Topics,89.0,-0.05703
+2211,Tennis,Category-Level Topics,90.0,-0.06632
+2212,Tennis,Category-Level Topics,91.0,-0.03397
+2213,Tennis,Category-Level Topics,92.0,-0.00891
+2214,Tennis,Category-Level Topics,93.0,-0.03812
+2215,Tennis,Category-Level Topics,94.0,-0.00868
+2216,Tennis,Category-Level Topics,95.0,-0.02846
+2217,Tennis,Category-Level Topics,96.0,-0.00473
+2218,Tennis,Category-Level Topics,97.0,-0.00237
+2219,Tennis,Category-Level Topics,98.0,-0.02224
+2220,Tennis,Category-Level Topics,99.0,-0.03558
+2221,Tennis,Category-Level Topics,100.0,-0.03058
+2222,Chemistry,Category-Level Topics,0.0,0.13693
+2223,Chemistry,Category-Level Topics,1.0,0.11684
+2224,Chemistry,Category-Level Topics,2.0,0.15735
+2225,Chemistry,Category-Level Topics,3.0,0.12879
+2226,Chemistry,Category-Level Topics,4.0,0.08774
+2227,Chemistry,Category-Level Topics,5.0,0.09706
+2228,Chemistry,Category-Level Topics,6.0,0.17863
+2229,Chemistry,Category-Level Topics,7.0,0.12016
+2230,Chemistry,Category-Level Topics,8.0,0.05576
+2231,Chemistry,Category-Level Topics,9.0,0.09939
+2232,Chemistry,Category-Level Topics,10.0,0.0977
+2233,Chemistry,Category-Level Topics,11.0,0.05965
+2234,Chemistry,Category-Level Topics,12.0,0.08464
+2235,Chemistry,Category-Level Topics,13.0,0.0843
+2236,Chemistry,Category-Level Topics,14.0,0.0938
+2237,Chemistry,Category-Level Topics,15.0,0.11252
+2238,Chemistry,Category-Level Topics,16.0,0.05215
+2239,Chemistry,Category-Level Topics,17.0,0.07
+2240,Chemistry,Category-Level Topics,18.0,0.11353
+2241,Chemistry,Category-Level Topics,19.0,0.07465
+2242,Chemistry,Category-Level Topics,20.0,0.01515
+2243,Chemistry,Category-Level Topics,21.0,0.06124
+2244,Chemistry,Category-Level Topics,22.0,0.09487
+2245,Chemistry,Category-Level Topics,23.0,0.13356
+2246,Chemistry,Category-Level Topics,24.0,0.05114
+2247,Chemistry,Category-Level Topics,25.0,0.0784
+2248,Chemistry,Category-Level Topics,26.0,0.03201
+2249,Chemistry,Category-Level Topics,27.0,0.03666
+2250,Chemistry,Category-Level Topics,28.0,0.0493
+2251,Chemistry,Category-Level Topics,29.0,0.01079
+2252,Chemistry,Category-Level Topics,30.0,0.02109
+2253,Chemistry,Category-Level Topics,31.0,0.05904
+2254,Chemistry,Category-Level Topics,32.0,0.05243
+2255,Chemistry,Category-Level Topics,33.0,0.05355
+2256,Chemistry,Category-Level Topics,34.0,0.05748
+2257,Chemistry,Category-Level Topics,35.0,0.0149
+2258,Chemistry,Category-Level Topics,36.0,0.00469
+2259,Chemistry,Category-Level Topics,37.0,0.02408
+2260,Chemistry,Category-Level Topics,38.0,0.11114
+2261,Chemistry,Category-Level Topics,39.0,0.04833
+2262,Chemistry,Category-Level Topics,40.0,0.05597
+2263,Chemistry,Category-Level Topics,41.0,0.01827
+2264,Chemistry,Category-Level Topics,42.0,0.05476
+2265,Chemistry,Category-Level Topics,43.0,0.02264
+2266,Chemistry,Category-Level Topics,44.0,0.0638
+2267,Chemistry,Category-Level Topics,45.0,0.08732
+2268,Chemistry,Category-Level Topics,46.0,0.03102
+2269,Chemistry,Category-Level Topics,47.0,0.06102
+2270,Chemistry,Category-Level Topics,48.0,0.08799
+2271,Chemistry,Category-Level Topics,49.0,0.07541
+2272,Chemistry,Category-Level Topics,50.0,0.04191
+2273,Chemistry,Category-Level Topics,51.0,0.06608
+2274,Chemistry,Category-Level Topics,52.0,0.06015
+2275,Chemistry,Category-Level Topics,53.0,0.03202
+2276,Chemistry,Category-Level Topics,54.0,0.09939
+2277,Chemistry,Category-Level Topics,55.0,0.07011
+2278,Chemistry,Category-Level Topics,56.0,0.02602
+2279,Chemistry,Category-Level Topics,57.0,0.07115
+2280,Chemistry,Category-Level Topics,58.0,0.04849
+2281,Chemistry,Category-Level Topics,59.0,0.02739
+2282,Chemistry,Category-Level Topics,60.0,0.03894
+2283,Chemistry,Category-Level Topics,61.0,0.06625
+2284,Chemistry,Category-Level Topics,62.0,0.04601
+2285,Chemistry,Category-Level Topics,63.0,0.08346
+2286,Chemistry,Category-Level Topics,64.0,0.03902
+2287,Chemistry,Category-Level Topics,65.0,0.05134
+2288,Chemistry,Category-Level Topics,66.0,0.08166
+2289,Chemistry,Category-Level Topics,67.0,0.03589
+2290,Chemistry,Category-Level Topics,68.0,0.04475
+2291,Chemistry,Category-Level Topics,69.0,0.06423
+2292,Chemistry,Category-Level Topics,70.0,0.0778
+2293,Chemistry,Category-Level Topics,71.0,0.02323
+2294,Chemistry,Category-Level Topics,72.0,0.06233
+2295,Chemistry,Category-Level Topics,73.0,-0.02934
+2296,Chemistry,Category-Level Topics,74.0,0.01881
+2297,Chemistry,Category-Level Topics,75.0,0.01441
+2298,Chemistry,Category-Level Topics,76.0,0.04837
+2299,Chemistry,Category-Level Topics,77.0,0.02334
+2300,Chemistry,Category-Level Topics,78.0,0.02326
+2301,Chemistry,Category-Level Topics,79.0,0.00245
+2302,Chemistry,Category-Level Topics,80.0,0.02452
+2303,Chemistry,Category-Level Topics,81.0,0.01719
+2304,Chemistry,Category-Level Topics,82.0,0.03286
+2305,Chemistry,Category-Level Topics,83.0,0.05287
+2306,Chemistry,Category-Level Topics,84.0,-0.00372
+2307,Chemistry,Category-Level Topics,85.0,0.06171
+2308,Chemistry,Category-Level Topics,86.0,-0.00301
+2309,Chemistry,Category-Level Topics,87.0,0.02022
+2310,Chemistry,Category-Level Topics,88.0,0.042
+2311,Chemistry,Category-Level Topics,89.0,-0.0188
+2312,Chemistry,Category-Level Topics,90.0,0.02698
+2313,Chemistry,Category-Level Topics,91.0,0.05876
+2314,Chemistry,Category-Level Topics,92.0,-0.0265
+2315,Chemistry,Category-Level Topics,93.0,-0.00938
+2316,Chemistry,Category-Level Topics,94.0,0.03674
+2317,Chemistry,Category-Level Topics,95.0,0.05588
+2318,Chemistry,Category-Level Topics,96.0,0.01459
+2319,Chemistry,Category-Level Topics,97.0,0.0404
+2320,Chemistry,Category-Level Topics,98.0,0.06974
+2321,Chemistry,Category-Level Topics,99.0,-0.04468
+2322,Chemistry,Category-Level Topics,100.0,0.06
+2323,Golf,Category-Level Topics,0.0,0.25882
+2324,Golf,Category-Level Topics,1.0,0.14851
+2325,Golf,Category-Level Topics,2.0,0.17958
+2326,Golf,Category-Level Topics,3.0,0.1753
+2327,Golf,Category-Level Topics,4.0,0.12124
+2328,Golf,Category-Level Topics,5.0,0.13094
+2329,Golf,Category-Level Topics,6.0,0.12906
+2330,Golf,Category-Level Topics,7.0,0.17393
+2331,Golf,Category-Level Topics,8.0,0.01929
+2332,Golf,Category-Level Topics,9.0,0.13884
+2333,Golf,Category-Level Topics,10.0,0.02684
+2334,Golf,Category-Level Topics,11.0,0.13138
+2335,Golf,Category-Level Topics,12.0,0.05557
+2336,Golf,Category-Level Topics,13.0,-0.00098
+2337,Golf,Category-Level Topics,14.0,0.05668
+2338,Golf,Category-Level Topics,15.0,0.06187
+2339,Golf,Category-Level Topics,16.0,0.09603
+2340,Golf,Category-Level Topics,17.0,-0.01077
+2341,Golf,Category-Level Topics,18.0,0.05965
+2342,Golf,Category-Level Topics,19.0,0.03186
+2343,Golf,Category-Level Topics,20.0,0.06281
+2344,Golf,Category-Level Topics,21.0,0.06246
+2345,Golf,Category-Level Topics,22.0,0.0408
+2346,Golf,Category-Level Topics,23.0,0.03174
+2347,Golf,Category-Level Topics,24.0,0.09337
+2348,Golf,Category-Level Topics,25.0,0.12013
+2349,Golf,Category-Level Topics,26.0,-0.00416
+2350,Golf,Category-Level Topics,27.0,0.05068
+2351,Golf,Category-Level Topics,28.0,0.0152
+2352,Golf,Category-Level Topics,29.0,0.05053
+2353,Golf,Category-Level Topics,30.0,0.04146
+2354,Golf,Category-Level Topics,31.0,-0.01816
+2355,Golf,Category-Level Topics,32.0,0.02062
+2356,Golf,Category-Level Topics,33.0,-0.01936
+2357,Golf,Category-Level Topics,34.0,0.08092
+2358,Golf,Category-Level Topics,35.0,0.03135
+2359,Golf,Category-Level Topics,36.0,-0.00208
+2360,Golf,Category-Level Topics,37.0,0.06484
+2361,Golf,Category-Level Topics,38.0,0.03265
+2362,Golf,Category-Level Topics,39.0,0.08234
+2363,Golf,Category-Level Topics,40.0,0.04573
+2364,Golf,Category-Level Topics,41.0,0.0081
+2365,Golf,Category-Level Topics,42.0,0.03809
+2366,Golf,Category-Level Topics,43.0,0.02342
+2367,Golf,Category-Level Topics,44.0,-0.03779
+2368,Golf,Category-Level Topics,45.0,-0.0307
+2369,Golf,Category-Level Topics,46.0,0.03747
+2370,Golf,Category-Level Topics,47.0,0.07797
+2371,Golf,Category-Level Topics,48.0,0.04759
+2372,Golf,Category-Level Topics,49.0,0.01961
+2373,Golf,Category-Level Topics,50.0,0.00829
+2374,Golf,Category-Level Topics,51.0,-0.03049
+2375,Golf,Category-Level Topics,52.0,0.07678
+2376,Golf,Category-Level Topics,53.0,0.03332
+2377,Golf,Category-Level Topics,54.0,0.01837
+2378,Golf,Category-Level Topics,55.0,0.0696
+2379,Golf,Category-Level Topics,56.0,0.05952
+2380,Golf,Category-Level Topics,57.0,0.00472
+2381,Golf,Category-Level Topics,58.0,0.02214
+2382,Golf,Category-Level Topics,59.0,-0.00525
+2383,Golf,Category-Level Topics,60.0,0.01815
+2384,Golf,Category-Level Topics,61.0,0.03125
+2385,Golf,Category-Level Topics,62.0,-0.0441
+2386,Golf,Category-Level Topics,63.0,0.02382
+2387,Golf,Category-Level Topics,64.0,-0.00888
+2388,Golf,Category-Level Topics,65.0,-0.02532
+2389,Golf,Category-Level Topics,66.0,-0.07776
+2390,Golf,Category-Level Topics,67.0,-0.02116
+2391,Golf,Category-Level Topics,68.0,0.02647
+2392,Golf,Category-Level Topics,69.0,0.04369
+2393,Golf,Category-Level Topics,70.0,0.04417
+2394,Golf,Category-Level Topics,71.0,-0.09203
+2395,Golf,Category-Level Topics,72.0,-0.04399
+2396,Golf,Category-Level Topics,73.0,0.04809
+2397,Golf,Category-Level Topics,74.0,-0.01071
+2398,Golf,Category-Level Topics,75.0,-0.00047
+2399,Golf,Category-Level Topics,76.0,-0.00128
+2400,Golf,Category-Level Topics,77.0,-0.05247
+2401,Golf,Category-Level Topics,78.0,0.0529
+2402,Golf,Category-Level Topics,79.0,0.03694
+2403,Golf,Category-Level Topics,80.0,-0.03615
+2404,Golf,Category-Level Topics,81.0,0.02842
+2405,Golf,Category-Level Topics,82.0,-0.01797
+2406,Golf,Category-Level Topics,83.0,0.03351
+2407,Golf,Category-Level Topics,84.0,-0.0513
+2408,Golf,Category-Level Topics,85.0,0.00406
+2409,Golf,Category-Level Topics,86.0,-0.01911
+2410,Golf,Category-Level Topics,87.0,0.04952
+2411,Golf,Category-Level Topics,88.0,-0.0466
+2412,Golf,Category-Level Topics,89.0,-0.03691
+2413,Golf,Category-Level Topics,90.0,0.00736
+2414,Golf,Category-Level Topics,91.0,-0.02376
+2415,Golf,Category-Level Topics,92.0,-0.04586
+2416,Golf,Category-Level Topics,93.0,-0.03619
+2417,Golf,Category-Level Topics,94.0,-0.08089
+2418,Golf,Category-Level Topics,95.0,-0.06419
+2419,Golf,Category-Level Topics,96.0,0.00532
+2420,Golf,Category-Level Topics,97.0,0.03248
+2421,Golf,Category-Level Topics,98.0,-0.00837
+2422,Golf,Category-Level Topics,99.0,0.04607
+2423,Golf,Category-Level Topics,100.0,-0.03032
+2424,Aviation,Category-Level Topics,0.0,0.11308
+2425,Aviation,Category-Level Topics,1.0,0.15513
+2426,Aviation,Category-Level Topics,2.0,0.09244
+2427,Aviation,Category-Level Topics,3.0,0.17854
+2428,Aviation,Category-Level Topics,4.0,0.13742
+2429,Aviation,Category-Level Topics,5.0,0.1887
+2430,Aviation,Category-Level Topics,6.0,0.08761
+2431,Aviation,Category-Level Topics,7.0,0.15898
+2432,Aviation,Category-Level Topics,8.0,0.18648
+2433,Aviation,Category-Level Topics,9.0,0.15661
+2434,Aviation,Category-Level Topics,10.0,0.16574
+2435,Aviation,Category-Level Topics,11.0,0.10799
+2436,Aviation,Category-Level Topics,12.0,0.10983
+2437,Aviation,Category-Level Topics,13.0,0.12859
+2438,Aviation,Category-Level Topics,14.0,0.13053
+2439,Aviation,Category-Level Topics,15.0,0.08571
+2440,Aviation,Category-Level Topics,16.0,0.02529
+2441,Aviation,Category-Level Topics,17.0,0.11176
+2442,Aviation,Category-Level Topics,18.0,0.13079
+2443,Aviation,Category-Level Topics,19.0,0.06831
+2444,Aviation,Category-Level Topics,20.0,0.15424
+2445,Aviation,Category-Level Topics,21.0,0.063
+2446,Aviation,Category-Level Topics,22.0,0.13211
+2447,Aviation,Category-Level Topics,23.0,0.10411
+2448,Aviation,Category-Level Topics,24.0,0.11582
+2449,Aviation,Category-Level Topics,25.0,0.12615
+2450,Aviation,Category-Level Topics,26.0,0.08972
+2451,Aviation,Category-Level Topics,27.0,0.11433
+2452,Aviation,Category-Level Topics,28.0,0.03974
+2453,Aviation,Category-Level Topics,29.0,0.06045
+2454,Aviation,Category-Level Topics,30.0,0.08237
+2455,Aviation,Category-Level Topics,31.0,0.08549
+2456,Aviation,Category-Level Topics,32.0,0.10001
+2457,Aviation,Category-Level Topics,33.0,0.03648
+2458,Aviation,Category-Level Topics,34.0,0.09348
+2459,Aviation,Category-Level Topics,35.0,0.0674
+2460,Aviation,Category-Level Topics,36.0,0.04482
+2461,Aviation,Category-Level Topics,37.0,0.05637
+2462,Aviation,Category-Level Topics,38.0,0.08403
+2463,Aviation,Category-Level Topics,39.0,0.06615
+2464,Aviation,Category-Level Topics,40.0,-0.02403
+2465,Aviation,Category-Level Topics,41.0,0.07903
+2466,Aviation,Category-Level Topics,42.0,0.10162
+2467,Aviation,Category-Level Topics,43.0,0.06146
+2468,Aviation,Category-Level Topics,44.0,0.06729
+2469,Aviation,Category-Level Topics,45.0,0.03778
+2470,Aviation,Category-Level Topics,46.0,0.11452
+2471,Aviation,Category-Level Topics,47.0,0.022
+2472,Aviation,Category-Level Topics,48.0,0.03087
+2473,Aviation,Category-Level Topics,49.0,0.01305
+2474,Aviation,Category-Level Topics,50.0,0.07466
+2475,Aviation,Category-Level Topics,51.0,0.11458
+2476,Aviation,Category-Level Topics,52.0,0.07603
+2477,Aviation,Category-Level Topics,53.0,0.06149
+2478,Aviation,Category-Level Topics,54.0,0.04294
+2479,Aviation,Category-Level Topics,55.0,0.02359
+2480,Aviation,Category-Level Topics,56.0,0.09456
+2481,Aviation,Category-Level Topics,57.0,0.11063
+2482,Aviation,Category-Level Topics,58.0,0.10791
+2483,Aviation,Category-Level Topics,59.0,-0.06455
+2484,Aviation,Category-Level Topics,60.0,0.06445
+2485,Aviation,Category-Level Topics,61.0,0.03188
+2486,Aviation,Category-Level Topics,62.0,0.07926
+2487,Aviation,Category-Level Topics,63.0,0.06878
+2488,Aviation,Category-Level Topics,64.0,0.06685
+2489,Aviation,Category-Level Topics,65.0,-0.04518
+2490,Aviation,Category-Level Topics,66.0,0.00362
+2491,Aviation,Category-Level Topics,67.0,0.0829
+2492,Aviation,Category-Level Topics,68.0,0.07348
+2493,Aviation,Category-Level Topics,69.0,0.05166
+2494,Aviation,Category-Level Topics,70.0,0.0076
+2495,Aviation,Category-Level Topics,71.0,0.01071
+2496,Aviation,Category-Level Topics,72.0,0.07601
+2497,Aviation,Category-Level Topics,73.0,0.02397
+2498,Aviation,Category-Level Topics,74.0,0.04529
+2499,Aviation,Category-Level Topics,75.0,0.01374
+2500,Aviation,Category-Level Topics,76.0,0.08693
+2501,Aviation,Category-Level Topics,77.0,-0.01091
+2502,Aviation,Category-Level Topics,78.0,-0.01034
+2503,Aviation,Category-Level Topics,79.0,0.06527
+2504,Aviation,Category-Level Topics,80.0,0.04243
+2505,Aviation,Category-Level Topics,81.0,0.05699
+2506,Aviation,Category-Level Topics,82.0,-0.02202
+2507,Aviation,Category-Level Topics,83.0,0.10891
+2508,Aviation,Category-Level Topics,84.0,0.02625
+2509,Aviation,Category-Level Topics,85.0,0.03229
+2510,Aviation,Category-Level Topics,86.0,0.05254
+2511,Aviation,Category-Level Topics,87.0,-0.04556
+2512,Aviation,Category-Level Topics,88.0,0.05376
+2513,Aviation,Category-Level Topics,89.0,0.06068
+2514,Aviation,Category-Level Topics,90.0,0.03578
+2515,Aviation,Category-Level Topics,91.0,0.0124
+2516,Aviation,Category-Level Topics,92.0,0.08709
+2517,Aviation,Category-Level Topics,93.0,-0.00733
+2518,Aviation,Category-Level Topics,94.0,0.0549
+2519,Aviation,Category-Level Topics,95.0,0.01803
+2520,Aviation,Category-Level Topics,96.0,0.06622
+2521,Aviation,Category-Level Topics,97.0,-0.00591
+2522,Aviation,Category-Level Topics,98.0,-0.0144
+2523,Aviation,Category-Level Topics,99.0,0.06141
+2524,Aviation,Category-Level Topics,100.0,0.06333
+2525,Medicine,Category-Level Topics,0.0,0.1906
+2526,Medicine,Category-Level Topics,1.0,0.12098
+2527,Medicine,Category-Level Topics,2.0,0.10965
+2528,Medicine,Category-Level Topics,3.0,0.06356
+2529,Medicine,Category-Level Topics,4.0,0.09533
+2530,Medicine,Category-Level Topics,5.0,0.06248
+2531,Medicine,Category-Level Topics,6.0,0.07548
+2532,Medicine,Category-Level Topics,7.0,0.07205
+2533,Medicine,Category-Level Topics,8.0,0.08015
+2534,Medicine,Category-Level Topics,9.0,0.04128
+2535,Medicine,Category-Level Topics,10.0,0.06611
+2536,Medicine,Category-Level Topics,11.0,0.0289
+2537,Medicine,Category-Level Topics,12.0,-0.01244
+2538,Medicine,Category-Level Topics,13.0,0.04678
+2539,Medicine,Category-Level Topics,14.0,0.05191
+2540,Medicine,Category-Level Topics,15.0,0.02466
+2541,Medicine,Category-Level Topics,16.0,0.01996
+2542,Medicine,Category-Level Topics,17.0,-0.04891
+2543,Medicine,Category-Level Topics,18.0,0.08988
+2544,Medicine,Category-Level Topics,19.0,0.02665
+2545,Medicine,Category-Level Topics,20.0,0.06097
+2546,Medicine,Category-Level Topics,21.0,0.06441
+2547,Medicine,Category-Level Topics,22.0,0.02466
+2548,Medicine,Category-Level Topics,23.0,0.01345
+2549,Medicine,Category-Level Topics,24.0,-0.0591
+2550,Medicine,Category-Level Topics,25.0,0.04093
+2551,Medicine,Category-Level Topics,26.0,-0.02245
+2552,Medicine,Category-Level Topics,27.0,-0.03998
+2553,Medicine,Category-Level Topics,28.0,0.00758
+2554,Medicine,Category-Level Topics,29.0,-0.02311
+2555,Medicine,Category-Level Topics,30.0,0.02161
+2556,Medicine,Category-Level Topics,31.0,-0.02811
+2557,Medicine,Category-Level Topics,32.0,0.02064
+2558,Medicine,Category-Level Topics,33.0,-0.05562
+2559,Medicine,Category-Level Topics,34.0,0.00863
+2560,Medicine,Category-Level Topics,35.0,0.00657
+2561,Medicine,Category-Level Topics,36.0,0.00436
+2562,Medicine,Category-Level Topics,37.0,0.00894
+2563,Medicine,Category-Level Topics,38.0,-0.00718
+2564,Medicine,Category-Level Topics,39.0,0.04182
+2565,Medicine,Category-Level Topics,40.0,-0.00133
+2566,Medicine,Category-Level Topics,41.0,0.02319
+2567,Medicine,Category-Level Topics,42.0,0.05186
+2568,Medicine,Category-Level Topics,43.0,-0.00654
+2569,Medicine,Category-Level Topics,44.0,0.0158
+2570,Medicine,Category-Level Topics,45.0,0.01178
+2571,Medicine,Category-Level Topics,46.0,0.02989
+2572,Medicine,Category-Level Topics,47.0,0.01807
+2573,Medicine,Category-Level Topics,48.0,-0.01682
+2574,Medicine,Category-Level Topics,49.0,-0.00959
+2575,Medicine,Category-Level Topics,50.0,0.00972
+2576,Medicine,Category-Level Topics,51.0,0.02657
+2577,Medicine,Category-Level Topics,52.0,0.01904
+2578,Medicine,Category-Level Topics,53.0,0.00431
+2579,Medicine,Category-Level Topics,54.0,-0.03795
+2580,Medicine,Category-Level Topics,55.0,-0.03487
+2581,Medicine,Category-Level Topics,56.0,0.01858
+2582,Medicine,Category-Level Topics,57.0,0.00679
+2583,Medicine,Category-Level Topics,58.0,-0.00618
+2584,Medicine,Category-Level Topics,59.0,-0.01038
+2585,Medicine,Category-Level Topics,60.0,0.00979
+2586,Medicine,Category-Level Topics,61.0,0.00333
+2587,Medicine,Category-Level Topics,62.0,0.0113
+2588,Medicine,Category-Level Topics,63.0,0.00051
+2589,Medicine,Category-Level Topics,64.0,0.05407
+2590,Medicine,Category-Level Topics,65.0,-0.0342
+2591,Medicine,Category-Level Topics,66.0,0.0075
+2592,Medicine,Category-Level Topics,67.0,-0.00596
+2593,Medicine,Category-Level Topics,68.0,-0.00241
+2594,Medicine,Category-Level Topics,69.0,0.00387
+2595,Medicine,Category-Level Topics,70.0,-0.0378
+2596,Medicine,Category-Level Topics,71.0,-0.04479
+2597,Medicine,Category-Level Topics,72.0,-0.02955
+2598,Medicine,Category-Level Topics,73.0,0.02753
+2599,Medicine,Category-Level Topics,74.0,-0.03143
+2600,Medicine,Category-Level Topics,75.0,-0.01662
+2601,Medicine,Category-Level Topics,76.0,-0.00486
+2602,Medicine,Category-Level Topics,77.0,-0.01118
+2603,Medicine,Category-Level Topics,78.0,0.01216
+2604,Medicine,Category-Level Topics,79.0,0.0041
+2605,Medicine,Category-Level Topics,80.0,-0.048
+2606,Medicine,Category-Level Topics,81.0,0.00341
+2607,Medicine,Category-Level Topics,82.0,0.01565
+2608,Medicine,Category-Level Topics,83.0,-0.01941
+2609,Medicine,Category-Level Topics,84.0,-0.02268
+2610,Medicine,Category-Level Topics,85.0,-0.01685
+2611,Medicine,Category-Level Topics,86.0,-0.03985
+2612,Medicine,Category-Level Topics,87.0,-0.02672
+2613,Medicine,Category-Level Topics,88.0,-0.00316
+2614,Medicine,Category-Level Topics,89.0,-0.02583
+2615,Medicine,Category-Level Topics,90.0,-0.01245
+2616,Medicine,Category-Level Topics,91.0,-0.01055
+2617,Medicine,Category-Level Topics,92.0,-0.02412
+2618,Medicine,Category-Level Topics,93.0,-0.0576
+2619,Medicine,Category-Level Topics,94.0,-0.03178
+2620,Medicine,Category-Level Topics,95.0,0.01781
+2621,Medicine,Category-Level Topics,96.0,-0.02963
+2622,Medicine,Category-Level Topics,97.0,-0.02159
+2623,Medicine,Category-Level Topics,98.0,-0.03221
+2624,Medicine,Category-Level Topics,99.0,-0.04703
+2625,Medicine,Category-Level Topics,100.0,-0.0476
+2626,Animals,Category-Level Topics,0.0,0.07789
+2627,Animals,Category-Level Topics,1.0,0.06527
+2628,Animals,Category-Level Topics,2.0,0.08062
+2629,Animals,Category-Level Topics,3.0,0.01631
+2630,Animals,Category-Level Topics,4.0,0.02166
+2631,Animals,Category-Level Topics,5.0,-0.00808
+2632,Animals,Category-Level Topics,6.0,-0.03069
+2633,Animals,Category-Level Topics,7.0,0.00239
+2634,Animals,Category-Level Topics,8.0,0.03619
+2635,Animals,Category-Level Topics,9.0,-0.01306
+2636,Animals,Category-Level Topics,10.0,-0.03412
+2637,Animals,Category-Level Topics,11.0,0.03874
+2638,Animals,Category-Level Topics,12.0,-0.02236
+2639,Animals,Category-Level Topics,13.0,0.00379
+2640,Animals,Category-Level Topics,14.0,-0.04272
+2641,Animals,Category-Level Topics,15.0,0.03146
+2642,Animals,Category-Level Topics,16.0,-0.00291
+2643,Animals,Category-Level Topics,17.0,0.04734
+2644,Animals,Category-Level Topics,18.0,0.03175
+2645,Animals,Category-Level Topics,19.0,-0.01943
+2646,Animals,Category-Level Topics,20.0,0.01176
+2647,Animals,Category-Level Topics,21.0,0.00851
+2648,Animals,Category-Level Topics,22.0,-0.03439
+2649,Animals,Category-Level Topics,23.0,-0.02808
+2650,Animals,Category-Level Topics,24.0,-0.05729
+2651,Animals,Category-Level Topics,25.0,0.03343
+2652,Animals,Category-Level Topics,26.0,-0.00769
+2653,Animals,Category-Level Topics,27.0,-0.00321
+2654,Animals,Category-Level Topics,28.0,0.04461
+2655,Animals,Category-Level Topics,29.0,0.01492
+2656,Animals,Category-Level Topics,30.0,-0.00381
+2657,Animals,Category-Level Topics,31.0,0.00352
+2658,Animals,Category-Level Topics,32.0,-0.02091
+2659,Animals,Category-Level Topics,33.0,-0.00638
+2660,Animals,Category-Level Topics,34.0,-0.00944
+2661,Animals,Category-Level Topics,35.0,-0.02323
+2662,Animals,Category-Level Topics,36.0,-0.02965
+2663,Animals,Category-Level Topics,37.0,-0.00449
+2664,Animals,Category-Level Topics,38.0,-0.00725
+2665,Animals,Category-Level Topics,39.0,-0.0458
+2666,Animals,Category-Level Topics,40.0,-0.02742
+2667,Animals,Category-Level Topics,41.0,-0.02013
+2668,Animals,Category-Level Topics,42.0,0.04933
+2669,Animals,Category-Level Topics,43.0,-0.03832
+2670,Animals,Category-Level Topics,44.0,-0.06107
+2671,Animals,Category-Level Topics,45.0,-0.03041
+2672,Animals,Category-Level Topics,46.0,-0.01506
+2673,Animals,Category-Level Topics,47.0,-0.03865
+2674,Animals,Category-Level Topics,48.0,0.03078
+2675,Animals,Category-Level Topics,49.0,-0.03526
+2676,Animals,Category-Level Topics,50.0,0.0232
+2677,Animals,Category-Level Topics,51.0,-0.00723
+2678,Animals,Category-Level Topics,52.0,-0.03994
+2679,Animals,Category-Level Topics,53.0,-0.00732
+2680,Animals,Category-Level Topics,54.0,-0.08103
+2681,Animals,Category-Level Topics,55.0,-0.01349
+2682,Animals,Category-Level Topics,56.0,-0.03217
+2683,Animals,Category-Level Topics,57.0,-0.0015
+2684,Animals,Category-Level Topics,58.0,-0.01115
+2685,Animals,Category-Level Topics,59.0,-0.0764
+2686,Animals,Category-Level Topics,60.0,0.00358
+2687,Animals,Category-Level Topics,61.0,-0.06314
+2688,Animals,Category-Level Topics,62.0,-0.06078
+2689,Animals,Category-Level Topics,63.0,-0.07358
+2690,Animals,Category-Level Topics,64.0,-0.03528
+2691,Animals,Category-Level Topics,65.0,-0.0633
+2692,Animals,Category-Level Topics,66.0,-0.04455
+2693,Animals,Category-Level Topics,67.0,0.00874
+2694,Animals,Category-Level Topics,68.0,-0.03152
+2695,Animals,Category-Level Topics,69.0,0.00475
+2696,Animals,Category-Level Topics,70.0,-0.01565
+2697,Animals,Category-Level Topics,71.0,-0.03123
+2698,Animals,Category-Level Topics,72.0,-0.03238
+2699,Animals,Category-Level Topics,73.0,-0.04656
+2700,Animals,Category-Level Topics,74.0,-0.01807
+2701,Animals,Category-Level Topics,75.0,-0.05564
+2702,Animals,Category-Level Topics,76.0,-0.06039
+2703,Animals,Category-Level Topics,77.0,-0.01126
+2704,Animals,Category-Level Topics,78.0,0.00779
+2705,Animals,Category-Level Topics,79.0,-0.07129
+2706,Animals,Category-Level Topics,80.0,-0.01016
+2707,Animals,Category-Level Topics,81.0,-0.00478
+2708,Animals,Category-Level Topics,82.0,-0.01156
+2709,Animals,Category-Level Topics,83.0,-0.045
+2710,Animals,Category-Level Topics,84.0,-0.04706
+2711,Animals,Category-Level Topics,85.0,-0.06588
+2712,Animals,Category-Level Topics,86.0,-0.05309
+2713,Animals,Category-Level Topics,87.0,-0.02034
+2714,Animals,Category-Level Topics,88.0,-0.11687
+2715,Animals,Category-Level Topics,89.0,0.00182
+2716,Animals,Category-Level Topics,90.0,0.00327
+2717,Animals,Category-Level Topics,91.0,-0.00608
+2718,Animals,Category-Level Topics,92.0,-0.03211
+2719,Animals,Category-Level Topics,93.0,-0.07648
+2720,Animals,Category-Level Topics,94.0,-0.03613
+2721,Animals,Category-Level Topics,95.0,-0.00024
+2722,Animals,Category-Level Topics,96.0,-0.02582
+2723,Animals,Category-Level Topics,97.0,-0.05923
+2724,Animals,Category-Level Topics,98.0,-0.04866
+2725,Animals,Category-Level Topics,99.0,-0.00963
+2726,Animals,Category-Level Topics,100.0,-0.0404
+2727,Mobile,Category-Level Topics,0.0,0.27501
+2728,Mobile,Category-Level Topics,1.0,0.32724
+2729,Mobile,Category-Level Topics,2.0,0.19779
+2730,Mobile,Category-Level Topics,3.0,0.14645
+2731,Mobile,Category-Level Topics,4.0,0.17852
+2732,Mobile,Category-Level Topics,5.0,0.173
+2733,Mobile,Category-Level Topics,6.0,0.1613
+2734,Mobile,Category-Level Topics,7.0,0.12623
+2735,Mobile,Category-Level Topics,8.0,0.11772
+2736,Mobile,Category-Level Topics,9.0,0.15709
+2737,Mobile,Category-Level Topics,10.0,0.11199
+2738,Mobile,Category-Level Topics,11.0,0.11098
+2739,Mobile,Category-Level Topics,12.0,0.02918
+2740,Mobile,Category-Level Topics,13.0,0.08195
+2741,Mobile,Category-Level Topics,14.0,0.05998
+2742,Mobile,Category-Level Topics,15.0,0.01459
+2743,Mobile,Category-Level Topics,16.0,0.04941
+2744,Mobile,Category-Level Topics,17.0,0.0365
+2745,Mobile,Category-Level Topics,18.0,0.11611
+2746,Mobile,Category-Level Topics,19.0,0.0493
+2747,Mobile,Category-Level Topics,20.0,0.11055
+2748,Mobile,Category-Level Topics,21.0,0.09029
+2749,Mobile,Category-Level Topics,22.0,0.05049
+2750,Mobile,Category-Level Topics,23.0,0.03817
+2751,Mobile,Category-Level Topics,24.0,0.05614
+2752,Mobile,Category-Level Topics,25.0,0.09382
+2753,Mobile,Category-Level Topics,26.0,0.00576
+2754,Mobile,Category-Level Topics,27.0,0.03076
+2755,Mobile,Category-Level Topics,28.0,0.05113
+2756,Mobile,Category-Level Topics,29.0,0.01741
+2757,Mobile,Category-Level Topics,30.0,0.0358
+2758,Mobile,Category-Level Topics,31.0,0.01855
+2759,Mobile,Category-Level Topics,32.0,0.06363
+2760,Mobile,Category-Level Topics,33.0,0.08278
+2761,Mobile,Category-Level Topics,34.0,0.02519
+2762,Mobile,Category-Level Topics,35.0,0.08394
+2763,Mobile,Category-Level Topics,36.0,-0.01567
+2764,Mobile,Category-Level Topics,37.0,0.0569
+2765,Mobile,Category-Level Topics,38.0,0.11157
+2766,Mobile,Category-Level Topics,39.0,0.04907
+2767,Mobile,Category-Level Topics,40.0,0.04889
+2768,Mobile,Category-Level Topics,41.0,0.00773
+2769,Mobile,Category-Level Topics,42.0,0.08668
+2770,Mobile,Category-Level Topics,43.0,-0.02825
+2771,Mobile,Category-Level Topics,44.0,0.02604
+2772,Mobile,Category-Level Topics,45.0,-0.06342
+2773,Mobile,Category-Level Topics,46.0,-0.00032
+2774,Mobile,Category-Level Topics,47.0,-0.03087
+2775,Mobile,Category-Level Topics,48.0,0.0267
+2776,Mobile,Category-Level Topics,49.0,0.04239
+2777,Mobile,Category-Level Topics,50.0,-0.00256
+2778,Mobile,Category-Level Topics,51.0,0.01341
+2779,Mobile,Category-Level Topics,52.0,-0.02361
+2780,Mobile,Category-Level Topics,53.0,-0.02034
+2781,Mobile,Category-Level Topics,54.0,0.07668
+2782,Mobile,Category-Level Topics,55.0,0.01938
+2783,Mobile,Category-Level Topics,56.0,0.01674
+2784,Mobile,Category-Level Topics,57.0,0.00819
+2785,Mobile,Category-Level Topics,58.0,0.04467
+2786,Mobile,Category-Level Topics,59.0,-0.0428
+2787,Mobile,Category-Level Topics,60.0,0.02351
+2788,Mobile,Category-Level Topics,61.0,0.05211
+2789,Mobile,Category-Level Topics,62.0,-0.02295
+2790,Mobile,Category-Level Topics,63.0,0.00582
+2791,Mobile,Category-Level Topics,64.0,-0.05455
+2792,Mobile,Category-Level Topics,65.0,-0.05362
+2793,Mobile,Category-Level Topics,66.0,0.0165
+2794,Mobile,Category-Level Topics,67.0,-0.04587
+2795,Mobile,Category-Level Topics,68.0,-0.00586
+2796,Mobile,Category-Level Topics,69.0,-0.1006
+2797,Mobile,Category-Level Topics,70.0,0.04081
+2798,Mobile,Category-Level Topics,71.0,-0.00862
+2799,Mobile,Category-Level Topics,72.0,-0.04987
+2800,Mobile,Category-Level Topics,73.0,-0.0286
+2801,Mobile,Category-Level Topics,74.0,0.07383
+2802,Mobile,Category-Level Topics,75.0,0.00716
+2803,Mobile,Category-Level Topics,76.0,0.0463
+2804,Mobile,Category-Level Topics,77.0,-0.0278
+2805,Mobile,Category-Level Topics,78.0,0.01023
+2806,Mobile,Category-Level Topics,79.0,0.01094
+2807,Mobile,Category-Level Topics,80.0,-0.04182
+2808,Mobile,Category-Level Topics,81.0,-0.0504
+2809,Mobile,Category-Level Topics,82.0,-0.01824
+2810,Mobile,Category-Level Topics,83.0,-0.04725
+2811,Mobile,Category-Level Topics,84.0,-0.0309
+2812,Mobile,Category-Level Topics,85.0,0.0487
+2813,Mobile,Category-Level Topics,86.0,0.01422
+2814,Mobile,Category-Level Topics,87.0,-0.02145
+2815,Mobile,Category-Level Topics,88.0,0.00673
+2816,Mobile,Category-Level Topics,89.0,0.06066
+2817,Mobile,Category-Level Topics,90.0,-0.02954
+2818,Mobile,Category-Level Topics,91.0,-0.01153
+2819,Mobile,Category-Level Topics,92.0,-0.06592
+2820,Mobile,Category-Level Topics,93.0,0.02189
+2821,Mobile,Category-Level Topics,94.0,0.00471
+2822,Mobile,Category-Level Topics,95.0,-0.04893
+2823,Mobile,Category-Level Topics,96.0,-0.04997
+2824,Mobile,Category-Level Topics,97.0,-0.04109
+2825,Mobile,Category-Level Topics,98.0,-0.03103
+2826,Mobile,Category-Level Topics,99.0,-0.0335
+2827,Mobile,Category-Level Topics,100.0,0.01949
+2828,Military,Category-Level Topics,0.0,0.21346
+2829,Military,Category-Level Topics,1.0,0.20709
+2830,Military,Category-Level Topics,2.0,0.20162
+2831,Military,Category-Level Topics,3.0,0.08358
+2832,Military,Category-Level Topics,4.0,0.10198
+2833,Military,Category-Level Topics,5.0,0.08626
+2834,Military,Category-Level Topics,6.0,0.06546
+2835,Military,Category-Level Topics,7.0,0.0584
+2836,Military,Category-Level Topics,8.0,0.12036
+2837,Military,Category-Level Topics,9.0,0.11298
+2838,Military,Category-Level Topics,10.0,0.07543
+2839,Military,Category-Level Topics,11.0,-0.02929
+2840,Military,Category-Level Topics,12.0,0.13581
+2841,Military,Category-Level Topics,13.0,0.06336
+2842,Military,Category-Level Topics,14.0,0.11031
+2843,Military,Category-Level Topics,15.0,0.11365
+2844,Military,Category-Level Topics,16.0,0.10408
+2845,Military,Category-Level Topics,17.0,0.07344
+2846,Military,Category-Level Topics,18.0,0.144
+2847,Military,Category-Level Topics,19.0,0.0657
+2848,Military,Category-Level Topics,20.0,-0.00302
+2849,Military,Category-Level Topics,21.0,0.09465
+2850,Military,Category-Level Topics,22.0,0.02634
+2851,Military,Category-Level Topics,23.0,0.03041
+2852,Military,Category-Level Topics,24.0,-0.00987
+2853,Military,Category-Level Topics,25.0,0.04998
+2854,Military,Category-Level Topics,26.0,0.13388
+2855,Military,Category-Level Topics,27.0,0.10491
+2856,Military,Category-Level Topics,28.0,0.07919
+2857,Military,Category-Level Topics,29.0,0.12453
+2858,Military,Category-Level Topics,30.0,0.03231
+2859,Military,Category-Level Topics,31.0,0.01639
+2860,Military,Category-Level Topics,32.0,0.05624
+2861,Military,Category-Level Topics,33.0,0.09837
+2862,Military,Category-Level Topics,34.0,0.01601
+2863,Military,Category-Level Topics,35.0,0.10229
+2864,Military,Category-Level Topics,36.0,-0.00827
+2865,Military,Category-Level Topics,37.0,0.01762
+2866,Military,Category-Level Topics,38.0,0.0876
+2867,Military,Category-Level Topics,39.0,0.10726
+2868,Military,Category-Level Topics,40.0,0.06289
+2869,Military,Category-Level Topics,41.0,0.07157
+2870,Military,Category-Level Topics,42.0,0.14998
+2871,Military,Category-Level Topics,43.0,0.10449
+2872,Military,Category-Level Topics,44.0,0.02038
+2873,Military,Category-Level Topics,45.0,0.04882
+2874,Military,Category-Level Topics,46.0,0.03159
+2875,Military,Category-Level Topics,47.0,0.10461
+2876,Military,Category-Level Topics,48.0,0.01668
+2877,Military,Category-Level Topics,49.0,0.04435
+2878,Military,Category-Level Topics,50.0,0.06641
+2879,Military,Category-Level Topics,51.0,0.02374
+2880,Military,Category-Level Topics,52.0,0.03776
+2881,Military,Category-Level Topics,53.0,0.02905
+2882,Military,Category-Level Topics,54.0,0.04725
+2883,Military,Category-Level Topics,55.0,0.03445
+2884,Military,Category-Level Topics,56.0,0.00651
+2885,Military,Category-Level Topics,57.0,-0.00048
+2886,Military,Category-Level Topics,58.0,-0.00189
+2887,Military,Category-Level Topics,59.0,0.01537
+2888,Military,Category-Level Topics,60.0,0.04962
+2889,Military,Category-Level Topics,61.0,0.0234
+2890,Military,Category-Level Topics,62.0,-0.04037
+2891,Military,Category-Level Topics,63.0,0.02227
+2892,Military,Category-Level Topics,64.0,0.02581
+2893,Military,Category-Level Topics,65.0,0.03411
+2894,Military,Category-Level Topics,66.0,0.09787
+2895,Military,Category-Level Topics,67.0,-0.02409
+2896,Military,Category-Level Topics,68.0,-0.07463
+2897,Military,Category-Level Topics,69.0,0.0294
+2898,Military,Category-Level Topics,70.0,-0.04811
+2899,Military,Category-Level Topics,71.0,-0.00627
+2900,Military,Category-Level Topics,72.0,0.03308
+2901,Military,Category-Level Topics,73.0,0.07308
+2902,Military,Category-Level Topics,74.0,0.06182
+2903,Military,Category-Level Topics,75.0,0.03808
+2904,Military,Category-Level Topics,76.0,0.02108
+2905,Military,Category-Level Topics,77.0,0.03865
+2906,Military,Category-Level Topics,78.0,-0.0086
+2907,Military,Category-Level Topics,79.0,0.03897
+2908,Military,Category-Level Topics,80.0,0.03361
+2909,Military,Category-Level Topics,81.0,-0.00193
+2910,Military,Category-Level Topics,82.0,0.05821
+2911,Military,Category-Level Topics,83.0,0.05932
+2912,Military,Category-Level Topics,84.0,0.00391
+2913,Military,Category-Level Topics,85.0,-0.01649
+2914,Military,Category-Level Topics,86.0,0.01661
+2915,Military,Category-Level Topics,87.0,0.01443
+2916,Military,Category-Level Topics,88.0,0.04621
+2917,Military,Category-Level Topics,89.0,0.08134
+2918,Military,Category-Level Topics,90.0,0.10556
+2919,Military,Category-Level Topics,91.0,-0.01486
+2920,Military,Category-Level Topics,92.0,-0.00594
+2921,Military,Category-Level Topics,93.0,-0.06051
+2922,Military,Category-Level Topics,94.0,-0.06516
+2923,Military,Category-Level Topics,95.0,0.00726
+2924,Military,Category-Level Topics,96.0,0.02851
+2925,Military,Category-Level Topics,97.0,0.01444
+2926,Military,Category-Level Topics,98.0,0.0336
+2927,Military,Category-Level Topics,99.0,0.01907
+2928,Military,Category-Level Topics,100.0,0.00607
+2929,Taxation,Category-Level Topics,0.0,0.16963
+2930,Taxation,Category-Level Topics,1.0,0.0486
+2931,Taxation,Category-Level Topics,2.0,0.09935
+2932,Taxation,Category-Level Topics,3.0,0.11626
+2933,Taxation,Category-Level Topics,4.0,0.09594
+2934,Taxation,Category-Level Topics,5.0,0.00296
+2935,Taxation,Category-Level Topics,6.0,0.06307
+2936,Taxation,Category-Level Topics,7.0,0.02084
+2937,Taxation,Category-Level Topics,8.0,0.02488
+2938,Taxation,Category-Level Topics,9.0,0.02034
+2939,Taxation,Category-Level Topics,10.0,0.05104
+2940,Taxation,Category-Level Topics,11.0,0.08943
+2941,Taxation,Category-Level Topics,12.0,0.11855
+2942,Taxation,Category-Level Topics,13.0,0.05342
+2943,Taxation,Category-Level Topics,14.0,0.00409
+2944,Taxation,Category-Level Topics,15.0,0.00617
+2945,Taxation,Category-Level Topics,16.0,0.03103
+2946,Taxation,Category-Level Topics,17.0,0.03785
+2947,Taxation,Category-Level Topics,18.0,0.01487
+2948,Taxation,Category-Level Topics,19.0,0.03943
+2949,Taxation,Category-Level Topics,20.0,0.07238
+2950,Taxation,Category-Level Topics,21.0,0.06027
+2951,Taxation,Category-Level Topics,22.0,-0.02973
+2952,Taxation,Category-Level Topics,23.0,-0.01037
+2953,Taxation,Category-Level Topics,24.0,0.03791
+2954,Taxation,Category-Level Topics,25.0,0.07201
+2955,Taxation,Category-Level Topics,26.0,0.02073
+2956,Taxation,Category-Level Topics,27.0,0.01405
+2957,Taxation,Category-Level Topics,28.0,0.05332
+2958,Taxation,Category-Level Topics,29.0,-0.02334
+2959,Taxation,Category-Level Topics,30.0,-0.00623
+2960,Taxation,Category-Level Topics,31.0,0.02784
+2961,Taxation,Category-Level Topics,32.0,-0.02115
+2962,Taxation,Category-Level Topics,33.0,0.04302
+2963,Taxation,Category-Level Topics,34.0,0.0778
+2964,Taxation,Category-Level Topics,35.0,-0.03323
+2965,Taxation,Category-Level Topics,36.0,0.0101
+2966,Taxation,Category-Level Topics,37.0,-0.01927
+2967,Taxation,Category-Level Topics,38.0,0.01145
+2968,Taxation,Category-Level Topics,39.0,-0.0045
+2969,Taxation,Category-Level Topics,40.0,0.09544
+2970,Taxation,Category-Level Topics,41.0,0.05159
+2971,Taxation,Category-Level Topics,42.0,-0.00184
+2972,Taxation,Category-Level Topics,43.0,-0.06775
+2973,Taxation,Category-Level Topics,44.0,-0.01131
+2974,Taxation,Category-Level Topics,45.0,-0.04056
+2975,Taxation,Category-Level Topics,46.0,-0.00886
+2976,Taxation,Category-Level Topics,47.0,-0.01446
+2977,Taxation,Category-Level Topics,48.0,0.07708
+2978,Taxation,Category-Level Topics,49.0,0.04839
+2979,Taxation,Category-Level Topics,50.0,-0.01562
+2980,Taxation,Category-Level Topics,51.0,-0.05486
+2981,Taxation,Category-Level Topics,52.0,-0.07486
+2982,Taxation,Category-Level Topics,53.0,-0.01024
+2983,Taxation,Category-Level Topics,54.0,0.00684
+2984,Taxation,Category-Level Topics,55.0,-0.00607
+2985,Taxation,Category-Level Topics,56.0,0.02671
+2986,Taxation,Category-Level Topics,57.0,-0.06763
+2987,Taxation,Category-Level Topics,58.0,0.01951
+2988,Taxation,Category-Level Topics,59.0,0.03378
+2989,Taxation,Category-Level Topics,60.0,-0.07291
+2990,Taxation,Category-Level Topics,61.0,0.02
+2991,Taxation,Category-Level Topics,62.0,-0.0109
+2992,Taxation,Category-Level Topics,63.0,-0.06083
+2993,Taxation,Category-Level Topics,64.0,-0.00541
+2994,Taxation,Category-Level Topics,65.0,0.01507
+2995,Taxation,Category-Level Topics,66.0,-0.08009
+2996,Taxation,Category-Level Topics,67.0,-0.00966
+2997,Taxation,Category-Level Topics,68.0,-0.05292
+2998,Taxation,Category-Level Topics,69.0,-0.02511
+2999,Taxation,Category-Level Topics,70.0,0.01012
+3000,Taxation,Category-Level Topics,71.0,-0.03562
+3001,Taxation,Category-Level Topics,72.0,0.03515
+3002,Taxation,Category-Level Topics,73.0,-0.06725
+3003,Taxation,Category-Level Topics,74.0,0.04929
+3004,Taxation,Category-Level Topics,75.0,-0.01888
+3005,Taxation,Category-Level Topics,76.0,0.00712
+3006,Taxation,Category-Level Topics,77.0,-0.01972
+3007,Taxation,Category-Level Topics,78.0,0.09008
+3008,Taxation,Category-Level Topics,79.0,-0.00821
+3009,Taxation,Category-Level Topics,80.0,0.00038
+3010,Taxation,Category-Level Topics,81.0,-0.001
+3011,Taxation,Category-Level Topics,82.0,-0.03157
+3012,Taxation,Category-Level Topics,83.0,-0.02039
+3013,Taxation,Category-Level Topics,84.0,0.02246
+3014,Taxation,Category-Level Topics,85.0,0.01017
+3015,Taxation,Category-Level Topics,86.0,-0.00919
+3016,Taxation,Category-Level Topics,87.0,0.03924
+3017,Taxation,Category-Level Topics,88.0,-0.03729
+3018,Taxation,Category-Level Topics,89.0,-0.03123
+3019,Taxation,Category-Level Topics,90.0,-0.02845
+3020,Taxation,Category-Level Topics,91.0,-0.04117
+3021,Taxation,Category-Level Topics,92.0,-0.03852
+3022,Taxation,Category-Level Topics,93.0,-0.05532
+3023,Taxation,Category-Level Topics,94.0,-0.06964
+3024,Taxation,Category-Level Topics,95.0,0.02112
+3025,Taxation,Category-Level Topics,96.0,-0.10453
+3026,Taxation,Category-Level Topics,97.0,0.03331
+3027,Taxation,Category-Level Topics,98.0,0.00295
+3028,Taxation,Category-Level Topics,99.0,-0.06179
+3029,Taxation,Category-Level Topics,100.0,0.01657
+3030,Christians,Category-Level Topics,0.0,0.22409
+3031,Christians,Category-Level Topics,1.0,0.16399
+3032,Christians,Category-Level Topics,2.0,0.08936
+3033,Christians,Category-Level Topics,3.0,0.19483
+3034,Christians,Category-Level Topics,4.0,0.19739
+3035,Christians,Category-Level Topics,5.0,0.10436
+3036,Christians,Category-Level Topics,6.0,0.11365
+3037,Christians,Category-Level Topics,7.0,0.10652
+3038,Christians,Category-Level Topics,8.0,0.04753
+3039,Christians,Category-Level Topics,9.0,0.0929
+3040,Christians,Category-Level Topics,10.0,0.11798
+3041,Christians,Category-Level Topics,11.0,0.06566
+3042,Christians,Category-Level Topics,12.0,0.12943
+3043,Christians,Category-Level Topics,13.0,0.11091
+3044,Christians,Category-Level Topics,14.0,0.14076
+3045,Christians,Category-Level Topics,15.0,0.13666
+3046,Christians,Category-Level Topics,16.0,0.0534
+3047,Christians,Category-Level Topics,17.0,0.0962
+3048,Christians,Category-Level Topics,18.0,0.13546
+3049,Christians,Category-Level Topics,19.0,0.05419
+3050,Christians,Category-Level Topics,20.0,0.07217
+3051,Christians,Category-Level Topics,21.0,0.07533
+3052,Christians,Category-Level Topics,22.0,0.12542
+3053,Christians,Category-Level Topics,23.0,0.09238
+3054,Christians,Category-Level Topics,24.0,0.01604
+3055,Christians,Category-Level Topics,25.0,0.08545
+3056,Christians,Category-Level Topics,26.0,0.06718
+3057,Christians,Category-Level Topics,27.0,0.00231
+3058,Christians,Category-Level Topics,28.0,0.11968
+3059,Christians,Category-Level Topics,29.0,0.06425
+3060,Christians,Category-Level Topics,30.0,0.06968
+3061,Christians,Category-Level Topics,31.0,0.01695
+3062,Christians,Category-Level Topics,32.0,0.02597
+3063,Christians,Category-Level Topics,33.0,0.0183
+3064,Christians,Category-Level Topics,34.0,0.07824
+3065,Christians,Category-Level Topics,35.0,0.03535
+3066,Christians,Category-Level Topics,36.0,0.06999
+3067,Christians,Category-Level Topics,37.0,0.08035
+3068,Christians,Category-Level Topics,38.0,0.01947
+3069,Christians,Category-Level Topics,39.0,0.1165
+3070,Christians,Category-Level Topics,40.0,0.04842
+3071,Christians,Category-Level Topics,41.0,-0.01178
+3072,Christians,Category-Level Topics,42.0,-0.0036
+3073,Christians,Category-Level Topics,43.0,-0.01693
+3074,Christians,Category-Level Topics,44.0,0.05378
+3075,Christians,Category-Level Topics,45.0,0.0354
+3076,Christians,Category-Level Topics,46.0,0.01559
+3077,Christians,Category-Level Topics,47.0,0.01496
+3078,Christians,Category-Level Topics,48.0,0.01919
+3079,Christians,Category-Level Topics,49.0,0.03481
+3080,Christians,Category-Level Topics,50.0,0.0352
+3081,Christians,Category-Level Topics,51.0,-0.00769
+3082,Christians,Category-Level Topics,52.0,0.06882
+3083,Christians,Category-Level Topics,53.0,0.03108
+3084,Christians,Category-Level Topics,54.0,-0.00372
+3085,Christians,Category-Level Topics,55.0,0.02806
+3086,Christians,Category-Level Topics,56.0,0.03996
+3087,Christians,Category-Level Topics,57.0,0.03229
+3088,Christians,Category-Level Topics,58.0,0.01955
+3089,Christians,Category-Level Topics,59.0,0.05037
+3090,Christians,Category-Level Topics,60.0,0.02626
+3091,Christians,Category-Level Topics,61.0,0.04674
+3092,Christians,Category-Level Topics,62.0,0.02726
+3093,Christians,Category-Level Topics,63.0,0.00324
+3094,Christians,Category-Level Topics,64.0,0.07949
+3095,Christians,Category-Level Topics,65.0,0.00279
+3096,Christians,Category-Level Topics,66.0,-0.05813
+3097,Christians,Category-Level Topics,67.0,0.03622
+3098,Christians,Category-Level Topics,68.0,0.03765
+3099,Christians,Category-Level Topics,69.0,0.06287
+3100,Christians,Category-Level Topics,70.0,0.04575
+3101,Christians,Category-Level Topics,71.0,-0.03689
+3102,Christians,Category-Level Topics,72.0,0.01471
+3103,Christians,Category-Level Topics,73.0,-0.03376
+3104,Christians,Category-Level Topics,74.0,-0.00486
+3105,Christians,Category-Level Topics,75.0,-0.01755
+3106,Christians,Category-Level Topics,76.0,-0.026
+3107,Christians,Category-Level Topics,77.0,0.00031
+3108,Christians,Category-Level Topics,78.0,0.073
+3109,Christians,Category-Level Topics,79.0,-0.001
+3110,Christians,Category-Level Topics,80.0,0.00073
+3111,Christians,Category-Level Topics,81.0,0.03153
+3112,Christians,Category-Level Topics,82.0,-0.05838
+3113,Christians,Category-Level Topics,83.0,0.0715
+3114,Christians,Category-Level Topics,84.0,-0.02398
+3115,Christians,Category-Level Topics,85.0,-0.00719
+3116,Christians,Category-Level Topics,86.0,0.04808
+3117,Christians,Category-Level Topics,87.0,-0.06222
+3118,Christians,Category-Level Topics,88.0,0.0091
+3119,Christians,Category-Level Topics,89.0,0.03082
+3120,Christians,Category-Level Topics,90.0,0.04085
+3121,Christians,Category-Level Topics,91.0,-0.00783
+3122,Christians,Category-Level Topics,92.0,0.03659
+3123,Christians,Category-Level Topics,93.0,-0.08016
+3124,Christians,Category-Level Topics,94.0,0.01084
+3125,Christians,Category-Level Topics,95.0,0.03538
+3126,Christians,Category-Level Topics,96.0,-0.0176
+3127,Christians,Category-Level Topics,97.0,-0.05443
+3128,Christians,Category-Level Topics,98.0,-0.0445
+3129,Christians,Category-Level Topics,99.0,-0.00271
+3130,Christians,Category-Level Topics,100.0,0.02512
+3131,Harry,Category-Level Topics,0.0,0.24554
+3132,Harry,Category-Level Topics,1.0,0.16817
+3133,Harry,Category-Level Topics,2.0,0.17032
+3134,Harry,Category-Level Topics,3.0,0.14235
+3135,Harry,Category-Level Topics,4.0,0.12247
+3136,Harry,Category-Level Topics,5.0,0.10379
+3137,Harry,Category-Level Topics,6.0,0.09361
+3138,Harry,Category-Level Topics,7.0,0.10491
+3139,Harry,Category-Level Topics,8.0,0.02248
+3140,Harry,Category-Level Topics,9.0,0.00626
+3141,Harry,Category-Level Topics,10.0,-0.00672
+3142,Harry,Category-Level Topics,11.0,0.047
+3143,Harry,Category-Level Topics,12.0,0.14574
+3144,Harry,Category-Level Topics,13.0,0.03376
+3145,Harry,Category-Level Topics,14.0,0.02039
+3146,Harry,Category-Level Topics,15.0,-0.02783
+3147,Harry,Category-Level Topics,16.0,0.01075
+3148,Harry,Category-Level Topics,17.0,0.01648
+3149,Harry,Category-Level Topics,18.0,0.05236
+3150,Harry,Category-Level Topics,19.0,0.02976
+3151,Harry,Category-Level Topics,20.0,0.05517
+3152,Harry,Category-Level Topics,21.0,0.09837
+3153,Harry,Category-Level Topics,22.0,-0.00045
+3154,Harry,Category-Level Topics,23.0,-0.03835
+3155,Harry,Category-Level Topics,24.0,0.02101
+3156,Harry,Category-Level Topics,25.0,0.05292
+3157,Harry,Category-Level Topics,26.0,-0.02396
+3158,Harry,Category-Level Topics,27.0,0.02366
+3159,Harry,Category-Level Topics,28.0,0.01354
+3160,Harry,Category-Level Topics,29.0,0.09858
+3161,Harry,Category-Level Topics,30.0,-0.01178
+3162,Harry,Category-Level Topics,31.0,-0.0213
+3163,Harry,Category-Level Topics,32.0,-0.05866
+3164,Harry,Category-Level Topics,33.0,-0.0086
+3165,Harry,Category-Level Topics,34.0,-0.01239
+3166,Harry,Category-Level Topics,35.0,-0.01471
+3167,Harry,Category-Level Topics,36.0,-0.05377
+3168,Harry,Category-Level Topics,37.0,0.01898
+3169,Harry,Category-Level Topics,38.0,-0.01624
+3170,Harry,Category-Level Topics,39.0,-0.05261
+3171,Harry,Category-Level Topics,40.0,0.06139
+3172,Harry,Category-Level Topics,41.0,0.0141
+3173,Harry,Category-Level Topics,42.0,0.01335
+3174,Harry,Category-Level Topics,43.0,-0.00891
+3175,Harry,Category-Level Topics,44.0,-0.08647
+3176,Harry,Category-Level Topics,45.0,0.00498
+3177,Harry,Category-Level Topics,46.0,-0.06088
+3178,Harry,Category-Level Topics,47.0,0.01814
+3179,Harry,Category-Level Topics,48.0,-0.00426
+3180,Harry,Category-Level Topics,49.0,-0.00645
+3181,Harry,Category-Level Topics,50.0,0.01978
+3182,Harry,Category-Level Topics,51.0,0.05402
+3183,Harry,Category-Level Topics,52.0,-0.06531
+3184,Harry,Category-Level Topics,53.0,-0.03499
+3185,Harry,Category-Level Topics,54.0,-0.0202
+3186,Harry,Category-Level Topics,55.0,-0.03468
+3187,Harry,Category-Level Topics,56.0,-0.03373
+3188,Harry,Category-Level Topics,57.0,-0.02692
+3189,Harry,Category-Level Topics,58.0,-0.07391
+3190,Harry,Category-Level Topics,59.0,-0.04876
+3191,Harry,Category-Level Topics,60.0,-0.02414
+3192,Harry,Category-Level Topics,61.0,0.03818
+3193,Harry,Category-Level Topics,62.0,0.01825
+3194,Harry,Category-Level Topics,63.0,0.00659
+3195,Harry,Category-Level Topics,64.0,-0.06546
+3196,Harry,Category-Level Topics,65.0,-0.05792
+3197,Harry,Category-Level Topics,66.0,-0.0005
+3198,Harry,Category-Level Topics,67.0,0.06464
+3199,Harry,Category-Level Topics,68.0,0.03506
+3200,Harry,Category-Level Topics,69.0,0.01835
+3201,Harry,Category-Level Topics,70.0,0.02389
+3202,Harry,Category-Level Topics,71.0,-0.00725
+3203,Harry,Category-Level Topics,72.0,-0.03661
+3204,Harry,Category-Level Topics,73.0,-0.02475
+3205,Harry,Category-Level Topics,74.0,0.03649
+3206,Harry,Category-Level Topics,75.0,0.01418
+3207,Harry,Category-Level Topics,76.0,-0.03815
+3208,Harry,Category-Level Topics,77.0,0.00891
+3209,Harry,Category-Level Topics,78.0,-0.01007
+3210,Harry,Category-Level Topics,79.0,0.05093
+3211,Harry,Category-Level Topics,80.0,-0.02335
+3212,Harry,Category-Level Topics,81.0,0.02545
+3213,Harry,Category-Level Topics,82.0,0.03587
+3214,Harry,Category-Level Topics,83.0,0.04566
+3215,Harry,Category-Level Topics,84.0,-0.00953
+3216,Harry,Category-Level Topics,85.0,-0.01468
+3217,Harry,Category-Level Topics,86.0,0.05841
+3218,Harry,Category-Level Topics,87.0,-0.05806
+3219,Harry,Category-Level Topics,88.0,0.03997
+3220,Harry,Category-Level Topics,89.0,0.0292
+3221,Harry,Category-Level Topics,90.0,0.0116
+3222,Harry,Category-Level Topics,91.0,-0.00127
+3223,Harry,Category-Level Topics,92.0,-0.02506
+3224,Harry,Category-Level Topics,93.0,0.04487
+3225,Harry,Category-Level Topics,94.0,-0.03195
+3226,Harry,Category-Level Topics,95.0,-0.01909
+3227,Harry,Category-Level Topics,96.0,0.04217
+3228,Harry,Category-Level Topics,97.0,-0.051
+3229,Harry,Category-Level Topics,98.0,-0.02049
+3230,Harry,Category-Level Topics,99.0,-0.0698
+3231,Harry,Category-Level Topics,100.0,0.00736
+3232,Beverages,Category-Level Topics,0.0,0.15111
+3233,Beverages,Category-Level Topics,1.0,0.11551
+3234,Beverages,Category-Level Topics,2.0,-0.02897
+3235,Beverages,Category-Level Topics,3.0,0.01769
+3236,Beverages,Category-Level Topics,4.0,0.0394
+3237,Beverages,Category-Level Topics,5.0,-0.00256
+3238,Beverages,Category-Level Topics,6.0,0.01245
+3239,Beverages,Category-Level Topics,7.0,0.05795
+3240,Beverages,Category-Level Topics,8.0,0.02904
+3241,Beverages,Category-Level Topics,9.0,0.00606
+3242,Beverages,Category-Level Topics,10.0,0.01065
+3243,Beverages,Category-Level Topics,11.0,-0.04309
+3244,Beverages,Category-Level Topics,12.0,-0.05856
+3245,Beverages,Category-Level Topics,13.0,0.02563
+3246,Beverages,Category-Level Topics,14.0,-0.01023
+3247,Beverages,Category-Level Topics,15.0,0.03942
+3248,Beverages,Category-Level Topics,16.0,0.00919
+3249,Beverages,Category-Level Topics,17.0,-0.07345
+3250,Beverages,Category-Level Topics,18.0,0.05237
+3251,Beverages,Category-Level Topics,19.0,-0.0144
+3252,Beverages,Category-Level Topics,20.0,-0.06246
+3253,Beverages,Category-Level Topics,21.0,-0.02607
+3254,Beverages,Category-Level Topics,22.0,-0.02543
+3255,Beverages,Category-Level Topics,23.0,-0.03885
+3256,Beverages,Category-Level Topics,24.0,-0.10826
+3257,Beverages,Category-Level Topics,25.0,0.07797
+3258,Beverages,Category-Level Topics,26.0,-0.06486
+3259,Beverages,Category-Level Topics,27.0,-0.0941
+3260,Beverages,Category-Level Topics,28.0,-0.04565
+3261,Beverages,Category-Level Topics,29.0,-0.07215
+3262,Beverages,Category-Level Topics,30.0,-0.0144
+3263,Beverages,Category-Level Topics,31.0,-0.04599
+3264,Beverages,Category-Level Topics,32.0,-0.04074
+3265,Beverages,Category-Level Topics,33.0,-0.0642
+3266,Beverages,Category-Level Topics,34.0,-0.04572
+3267,Beverages,Category-Level Topics,35.0,-0.04344
+3268,Beverages,Category-Level Topics,36.0,-0.04463
+3269,Beverages,Category-Level Topics,37.0,-0.05008
+3270,Beverages,Category-Level Topics,38.0,-0.04521
+3271,Beverages,Category-Level Topics,39.0,-0.10449
+3272,Beverages,Category-Level Topics,40.0,-0.02077
+3273,Beverages,Category-Level Topics,41.0,-0.06524
+3274,Beverages,Category-Level Topics,42.0,-0.00803
+3275,Beverages,Category-Level Topics,43.0,-0.04134
+3276,Beverages,Category-Level Topics,44.0,-0.06076
+3277,Beverages,Category-Level Topics,45.0,-0.02513
+3278,Beverages,Category-Level Topics,46.0,-0.09589
+3279,Beverages,Category-Level Topics,47.0,-0.06758
+3280,Beverages,Category-Level Topics,48.0,-0.08115
+3281,Beverages,Category-Level Topics,49.0,-0.07774
+3282,Beverages,Category-Level Topics,50.0,-0.11071
+3283,Beverages,Category-Level Topics,51.0,-0.09376
+3284,Beverages,Category-Level Topics,52.0,-0.03641
+3285,Beverages,Category-Level Topics,53.0,-0.10511
+3286,Beverages,Category-Level Topics,54.0,-0.06776
+3287,Beverages,Category-Level Topics,55.0,0.00168
+3288,Beverages,Category-Level Topics,56.0,-0.07044
+3289,Beverages,Category-Level Topics,57.0,-0.07188
+3290,Beverages,Category-Level Topics,58.0,-0.07743
+3291,Beverages,Category-Level Topics,59.0,-0.05489
+3292,Beverages,Category-Level Topics,60.0,-0.0483
+3293,Beverages,Category-Level Topics,61.0,-0.16929
+3294,Beverages,Category-Level Topics,62.0,-0.06749
+3295,Beverages,Category-Level Topics,63.0,0.01237
+3296,Beverages,Category-Level Topics,64.0,-0.12586
+3297,Beverages,Category-Level Topics,65.0,-0.07205
+3298,Beverages,Category-Level Topics,66.0,-0.02167
+3299,Beverages,Category-Level Topics,67.0,-0.03906
+3300,Beverages,Category-Level Topics,68.0,-0.07776
+3301,Beverages,Category-Level Topics,69.0,-0.08509
+3302,Beverages,Category-Level Topics,70.0,-0.06249
+3303,Beverages,Category-Level Topics,71.0,-0.05277
+3304,Beverages,Category-Level Topics,72.0,-0.02278
+3305,Beverages,Category-Level Topics,73.0,-0.03341
+3306,Beverages,Category-Level Topics,74.0,-0.06659
+3307,Beverages,Category-Level Topics,75.0,-0.05463
+3308,Beverages,Category-Level Topics,76.0,-0.07485
+3309,Beverages,Category-Level Topics,77.0,-0.05638
+3310,Beverages,Category-Level Topics,78.0,-0.03539
+3311,Beverages,Category-Level Topics,79.0,-0.04838
+3312,Beverages,Category-Level Topics,80.0,-0.08488
+3313,Beverages,Category-Level Topics,81.0,-0.07352
+3314,Beverages,Category-Level Topics,82.0,-0.05114
+3315,Beverages,Category-Level Topics,83.0,-0.06216
+3316,Beverages,Category-Level Topics,84.0,-0.01867
+3317,Beverages,Category-Level Topics,85.0,-0.05767
+3318,Beverages,Category-Level Topics,86.0,-0.12213
+3319,Beverages,Category-Level Topics,87.0,-0.12516
+3320,Beverages,Category-Level Topics,88.0,-0.05808
+3321,Beverages,Category-Level Topics,89.0,-0.04231
+3322,Beverages,Category-Level Topics,90.0,-0.06017
+3323,Beverages,Category-Level Topics,91.0,-0.11584
+3324,Beverages,Category-Level Topics,92.0,-0.0876
+3325,Beverages,Category-Level Topics,93.0,-0.06645
+3326,Beverages,Category-Level Topics,94.0,-0.0813
+3327,Beverages,Category-Level Topics,95.0,-0.05818
+3328,Beverages,Category-Level Topics,96.0,-0.06123
+3329,Beverages,Category-Level Topics,97.0,-0.07571
+3330,Beverages,Category-Level Topics,98.0,-0.06544
+3331,Beverages,Category-Level Topics,99.0,-0.13383
+3332,Beverages,Category-Level Topics,100.0,-0.06877
+3333,Foods,Category-Level Topics,0.0,0.18347
+3334,Foods,Category-Level Topics,1.0,0.18793
+3335,Foods,Category-Level Topics,2.0,0.24348
+3336,Foods,Category-Level Topics,3.0,0.28473
+3337,Foods,Category-Level Topics,4.0,0.26077
+3338,Foods,Category-Level Topics,5.0,0.15448
+3339,Foods,Category-Level Topics,6.0,0.10099
+3340,Foods,Category-Level Topics,7.0,0.1242
+3341,Foods,Category-Level Topics,8.0,0.13607
+3342,Foods,Category-Level Topics,9.0,0.17347
+3343,Foods,Category-Level Topics,10.0,0.22355
+3344,Foods,Category-Level Topics,11.0,0.10998
+3345,Foods,Category-Level Topics,12.0,0.14202
+3346,Foods,Category-Level Topics,13.0,0.23739
+3347,Foods,Category-Level Topics,14.0,0.12173
+3348,Foods,Category-Level Topics,15.0,0.11195
+3349,Foods,Category-Level Topics,16.0,0.09976
+3350,Foods,Category-Level Topics,17.0,0.10997
+3351,Foods,Category-Level Topics,18.0,0.13661
+3352,Foods,Category-Level Topics,19.0,0.08416
+3353,Foods,Category-Level Topics,20.0,0.11381
+3354,Foods,Category-Level Topics,21.0,0.03083
+3355,Foods,Category-Level Topics,22.0,0.20612
+3356,Foods,Category-Level Topics,23.0,0.09725
+3357,Foods,Category-Level Topics,24.0,0.07247
+3358,Foods,Category-Level Topics,25.0,0.07044
+3359,Foods,Category-Level Topics,26.0,0.18403
+3360,Foods,Category-Level Topics,27.0,0.08159
+3361,Foods,Category-Level Topics,28.0,0.15647
+3362,Foods,Category-Level Topics,29.0,0.00777
+3363,Foods,Category-Level Topics,30.0,0.06667
+3364,Foods,Category-Level Topics,31.0,0.06732
+3365,Foods,Category-Level Topics,32.0,0.03855
+3366,Foods,Category-Level Topics,33.0,0.05302
+3367,Foods,Category-Level Topics,34.0,0.13083
+3368,Foods,Category-Level Topics,35.0,0.04868
+3369,Foods,Category-Level Topics,36.0,0.07363
+3370,Foods,Category-Level Topics,37.0,0.16436
+3371,Foods,Category-Level Topics,38.0,0.11397
+3372,Foods,Category-Level Topics,39.0,-0.02804
+3373,Foods,Category-Level Topics,40.0,0.08614
+3374,Foods,Category-Level Topics,41.0,0.06106
+3375,Foods,Category-Level Topics,42.0,0.08521
+3376,Foods,Category-Level Topics,43.0,0.10692
+3377,Foods,Category-Level Topics,44.0,0.10511
+3378,Foods,Category-Level Topics,45.0,0.04379
+3379,Foods,Category-Level Topics,46.0,0.10988
+3380,Foods,Category-Level Topics,47.0,0.08018
+3381,Foods,Category-Level Topics,48.0,0.06485
+3382,Foods,Category-Level Topics,49.0,0.09571
+3383,Foods,Category-Level Topics,50.0,0.01251
+3384,Foods,Category-Level Topics,51.0,0.08279
+3385,Foods,Category-Level Topics,52.0,0.10007
+3386,Foods,Category-Level Topics,53.0,0.06528
+3387,Foods,Category-Level Topics,54.0,0.02215
+3388,Foods,Category-Level Topics,55.0,0.07526
+3389,Foods,Category-Level Topics,56.0,0.0705
+3390,Foods,Category-Level Topics,57.0,0.04061
+3391,Foods,Category-Level Topics,58.0,0.02589
+3392,Foods,Category-Level Topics,59.0,0.06322
+3393,Foods,Category-Level Topics,60.0,0.09619
+3394,Foods,Category-Level Topics,61.0,0.08383
+3395,Foods,Category-Level Topics,62.0,0.00333
+3396,Foods,Category-Level Topics,63.0,0.10851
+3397,Foods,Category-Level Topics,64.0,0.0967
+3398,Foods,Category-Level Topics,65.0,0.13283
+3399,Foods,Category-Level Topics,66.0,0.04698
+3400,Foods,Category-Level Topics,67.0,0.12887
+3401,Foods,Category-Level Topics,68.0,0.06449
+3402,Foods,Category-Level Topics,69.0,0.04822
+3403,Foods,Category-Level Topics,70.0,0.03791
+3404,Foods,Category-Level Topics,71.0,0.07419
+3405,Foods,Category-Level Topics,72.0,0.09426
+3406,Foods,Category-Level Topics,73.0,0.00412
+3407,Foods,Category-Level Topics,74.0,0.00332
+3408,Foods,Category-Level Topics,75.0,0.04584
+3409,Foods,Category-Level Topics,76.0,-0.02452
+3410,Foods,Category-Level Topics,77.0,0.01939
+3411,Foods,Category-Level Topics,78.0,-0.01149
+3412,Foods,Category-Level Topics,79.0,0.04681
+3413,Foods,Category-Level Topics,80.0,0.01808
+3414,Foods,Category-Level Topics,81.0,-0.03447
+3415,Foods,Category-Level Topics,82.0,0.0561
+3416,Foods,Category-Level Topics,83.0,0.04616
+3417,Foods,Category-Level Topics,84.0,0.01855
+3418,Foods,Category-Level Topics,85.0,0.03248
+3419,Foods,Category-Level Topics,86.0,0.08501
+3420,Foods,Category-Level Topics,87.0,0.00619
+3421,Foods,Category-Level Topics,88.0,0.01312
+3422,Foods,Category-Level Topics,89.0,-0.02367
+3423,Foods,Category-Level Topics,90.0,-0.03275
+3424,Foods,Category-Level Topics,91.0,0.00787
+3425,Foods,Category-Level Topics,92.0,0.04922
+3426,Foods,Category-Level Topics,93.0,-0.0291
+3427,Foods,Category-Level Topics,94.0,-0.01239
+3428,Foods,Category-Level Topics,95.0,-0.05375
+3429,Foods,Category-Level Topics,96.0,0.04591
+3430,Foods,Category-Level Topics,97.0,0.10858
+3431,Foods,Category-Level Topics,98.0,0.00984
+3432,Foods,Category-Level Topics,99.0,0.08499
+3433,Foods,Category-Level Topics,100.0,0.05849
+3434,Law,Category-Level Topics,0.0,0.13445
+3435,Law,Category-Level Topics,1.0,0.12486
+3436,Law,Category-Level Topics,2.0,0.0937
+3437,Law,Category-Level Topics,3.0,0.10087
+3438,Law,Category-Level Topics,4.0,0.1114
+3439,Law,Category-Level Topics,5.0,0.05387
+3440,Law,Category-Level Topics,6.0,0.13002
+3441,Law,Category-Level Topics,7.0,0.03766
+3442,Law,Category-Level Topics,8.0,0.06251
+3443,Law,Category-Level Topics,9.0,0.09365
+3444,Law,Category-Level Topics,10.0,0.00727
+3445,Law,Category-Level Topics,11.0,0.01582
+3446,Law,Category-Level Topics,12.0,0.03925
+3447,Law,Category-Level Topics,13.0,0.03924
+3448,Law,Category-Level Topics,14.0,0.08057
+3449,Law,Category-Level Topics,15.0,0.02698
+3450,Law,Category-Level Topics,16.0,0.06197
+3451,Law,Category-Level Topics,17.0,0.02072
+3452,Law,Category-Level Topics,18.0,0.06877
+3453,Law,Category-Level Topics,19.0,-0.01434
+3454,Law,Category-Level Topics,20.0,0.03387
+3455,Law,Category-Level Topics,21.0,0.01117
+3456,Law,Category-Level Topics,22.0,0.0103
+3457,Law,Category-Level Topics,23.0,0.01144
+3458,Law,Category-Level Topics,24.0,0.05146
+3459,Law,Category-Level Topics,25.0,-0.03237
+3460,Law,Category-Level Topics,26.0,0.03392
+3461,Law,Category-Level Topics,27.0,0.04377
+3462,Law,Category-Level Topics,28.0,0.04519
+3463,Law,Category-Level Topics,29.0,-0.05903
+3464,Law,Category-Level Topics,30.0,0.08335
+3465,Law,Category-Level Topics,31.0,0.01928
+3466,Law,Category-Level Topics,32.0,0.03517
+3467,Law,Category-Level Topics,33.0,0.04119
+3468,Law,Category-Level Topics,34.0,0.05216
+3469,Law,Category-Level Topics,35.0,-0.00252
+3470,Law,Category-Level Topics,36.0,0.07065
+3471,Law,Category-Level Topics,37.0,-0.01304
+3472,Law,Category-Level Topics,38.0,-0.01057
+3473,Law,Category-Level Topics,39.0,0.09084
+3474,Law,Category-Level Topics,40.0,0.04493
+3475,Law,Category-Level Topics,41.0,0.06347
+3476,Law,Category-Level Topics,42.0,-0.0166
+3477,Law,Category-Level Topics,43.0,0.06361
+3478,Law,Category-Level Topics,44.0,0.06427
+3479,Law,Category-Level Topics,45.0,0.04821
+3480,Law,Category-Level Topics,46.0,0.04052
+3481,Law,Category-Level Topics,47.0,0.01542
+3482,Law,Category-Level Topics,48.0,-0.01002
+3483,Law,Category-Level Topics,49.0,0.02185
+3484,Law,Category-Level Topics,50.0,-0.05593
+3485,Law,Category-Level Topics,51.0,0.01799
+3486,Law,Category-Level Topics,52.0,-0.02453
+3487,Law,Category-Level Topics,53.0,0.07398
+3488,Law,Category-Level Topics,54.0,0.031
+3489,Law,Category-Level Topics,55.0,0.08131
+3490,Law,Category-Level Topics,56.0,0.0296
+3491,Law,Category-Level Topics,57.0,0.05354
+3492,Law,Category-Level Topics,58.0,0.02204
+3493,Law,Category-Level Topics,59.0,0.03255
+3494,Law,Category-Level Topics,60.0,-0.008
+3495,Law,Category-Level Topics,61.0,-0.01391
+3496,Law,Category-Level Topics,62.0,0.05486
+3497,Law,Category-Level Topics,63.0,0.04958
+3498,Law,Category-Level Topics,64.0,0.05149
+3499,Law,Category-Level Topics,65.0,0.04283
+3500,Law,Category-Level Topics,66.0,0.0168
+3501,Law,Category-Level Topics,67.0,-0.00274
+3502,Law,Category-Level Topics,68.0,0.07297
+3503,Law,Category-Level Topics,69.0,0.05221
+3504,Law,Category-Level Topics,70.0,0.00042
+3505,Law,Category-Level Topics,71.0,0.028
+3506,Law,Category-Level Topics,72.0,-0.02636
+3507,Law,Category-Level Topics,73.0,-0.04164
+3508,Law,Category-Level Topics,74.0,0.02131
+3509,Law,Category-Level Topics,75.0,0.04299
+3510,Law,Category-Level Topics,76.0,0.07638
+3511,Law,Category-Level Topics,77.0,0.05634
+3512,Law,Category-Level Topics,78.0,0.01209
+3513,Law,Category-Level Topics,79.0,-0.02194
+3514,Law,Category-Level Topics,80.0,-0.01933
+3515,Law,Category-Level Topics,81.0,0.02948
+3516,Law,Category-Level Topics,82.0,-0.04778
+3517,Law,Category-Level Topics,83.0,0.0475
+3518,Law,Category-Level Topics,84.0,0.05219
+3519,Law,Category-Level Topics,85.0,0.00816
+3520,Law,Category-Level Topics,86.0,-0.01471
+3521,Law,Category-Level Topics,87.0,-0.06626
+3522,Law,Category-Level Topics,88.0,0.00722
+3523,Law,Category-Level Topics,89.0,0.06435
+3524,Law,Category-Level Topics,90.0,-0.00571
+3525,Law,Category-Level Topics,91.0,0.00331
+3526,Law,Category-Level Topics,92.0,0.00546
+3527,Law,Category-Level Topics,93.0,0.04663
+3528,Law,Category-Level Topics,94.0,0.00185
+3529,Law,Category-Level Topics,95.0,0.02329
+3530,Law,Category-Level Topics,96.0,0.03109
+3531,Law,Category-Level Topics,97.0,0.03818
+3532,Law,Category-Level Topics,98.0,-0.02489
+3533,Law,Category-Level Topics,99.0,0.03034
+3534,Law,Category-Level Topics,100.0,0.01759
+3535,Mathematics,Category-Level Topics,0.0,0.26928
+3536,Mathematics,Category-Level Topics,1.0,0.05033
+3537,Mathematics,Category-Level Topics,2.0,0.22927
+3538,Mathematics,Category-Level Topics,3.0,0.21243
+3539,Mathematics,Category-Level Topics,4.0,0.13888
+3540,Mathematics,Category-Level Topics,5.0,0.12632
+3541,Mathematics,Category-Level Topics,6.0,0.13225
+3542,Mathematics,Category-Level Topics,7.0,0.21731
+3543,Mathematics,Category-Level Topics,8.0,0.0559
+3544,Mathematics,Category-Level Topics,9.0,0.18284
+3545,Mathematics,Category-Level Topics,10.0,0.19924
+3546,Mathematics,Category-Level Topics,11.0,0.13929
+3547,Mathematics,Category-Level Topics,12.0,0.11676
+3548,Mathematics,Category-Level Topics,13.0,0.11103
+3549,Mathematics,Category-Level Topics,14.0,0.10452
+3550,Mathematics,Category-Level Topics,15.0,0.09965
+3551,Mathematics,Category-Level Topics,16.0,0.11316
+3552,Mathematics,Category-Level Topics,17.0,0.09541
+3553,Mathematics,Category-Level Topics,18.0,0.18711
+3554,Mathematics,Category-Level Topics,19.0,0.03888
+3555,Mathematics,Category-Level Topics,20.0,0.15591
+3556,Mathematics,Category-Level Topics,21.0,0.16555
+3557,Mathematics,Category-Level Topics,22.0,0.17566
+3558,Mathematics,Category-Level Topics,23.0,0.10604
+3559,Mathematics,Category-Level Topics,24.0,0.13047
+3560,Mathematics,Category-Level Topics,25.0,0.12584
+3561,Mathematics,Category-Level Topics,26.0,0.13056
+3562,Mathematics,Category-Level Topics,27.0,0.11321
+3563,Mathematics,Category-Level Topics,28.0,0.16629
+3564,Mathematics,Category-Level Topics,29.0,0.11268
+3565,Mathematics,Category-Level Topics,30.0,0.00574
+3566,Mathematics,Category-Level Topics,31.0,0.05729
+3567,Mathematics,Category-Level Topics,32.0,0.06304
+3568,Mathematics,Category-Level Topics,33.0,0.13898
+3569,Mathematics,Category-Level Topics,34.0,0.11365
+3570,Mathematics,Category-Level Topics,35.0,0.10572
+3571,Mathematics,Category-Level Topics,36.0,0.07849
+3572,Mathematics,Category-Level Topics,37.0,0.12733
+3573,Mathematics,Category-Level Topics,38.0,0.15202
+3574,Mathematics,Category-Level Topics,39.0,0.08417
+3575,Mathematics,Category-Level Topics,40.0,0.08485
+3576,Mathematics,Category-Level Topics,41.0,0.06006
+3577,Mathematics,Category-Level Topics,42.0,0.11727
+3578,Mathematics,Category-Level Topics,43.0,0.00979
+3579,Mathematics,Category-Level Topics,44.0,0.06318
+3580,Mathematics,Category-Level Topics,45.0,0.14691
+3581,Mathematics,Category-Level Topics,46.0,0.04616
+3582,Mathematics,Category-Level Topics,47.0,0.01083
+3583,Mathematics,Category-Level Topics,48.0,0.07156
+3584,Mathematics,Category-Level Topics,49.0,0.04995
+3585,Mathematics,Category-Level Topics,50.0,0.014
+3586,Mathematics,Category-Level Topics,51.0,0.13556
+3587,Mathematics,Category-Level Topics,52.0,0.02468
+3588,Mathematics,Category-Level Topics,53.0,0.10613
+3589,Mathematics,Category-Level Topics,54.0,0.10029
+3590,Mathematics,Category-Level Topics,55.0,0.05426
+3591,Mathematics,Category-Level Topics,56.0,0.03489
+3592,Mathematics,Category-Level Topics,57.0,0.09124
+3593,Mathematics,Category-Level Topics,58.0,0.02431
+3594,Mathematics,Category-Level Topics,59.0,0.10006
+3595,Mathematics,Category-Level Topics,60.0,0.03776
+3596,Mathematics,Category-Level Topics,61.0,0.09799
+3597,Mathematics,Category-Level Topics,62.0,0.04377
+3598,Mathematics,Category-Level Topics,63.0,0.15196
+3599,Mathematics,Category-Level Topics,64.0,0.11299
+3600,Mathematics,Category-Level Topics,65.0,0.09832
+3601,Mathematics,Category-Level Topics,66.0,0.11172
+3602,Mathematics,Category-Level Topics,67.0,0.0964
+3603,Mathematics,Category-Level Topics,68.0,0.13208
+3604,Mathematics,Category-Level Topics,69.0,0.09846
+3605,Mathematics,Category-Level Topics,70.0,0.08213
+3606,Mathematics,Category-Level Topics,71.0,0.11345
+3607,Mathematics,Category-Level Topics,72.0,0.01997
+3608,Mathematics,Category-Level Topics,73.0,0.06974
+3609,Mathematics,Category-Level Topics,74.0,0.12364
+3610,Mathematics,Category-Level Topics,75.0,0.09795
+3611,Mathematics,Category-Level Topics,76.0,0.06401
+3612,Mathematics,Category-Level Topics,77.0,0.07086
+3613,Mathematics,Category-Level Topics,78.0,-0.02804
+3614,Mathematics,Category-Level Topics,79.0,0.08475
+3615,Mathematics,Category-Level Topics,80.0,0.05474
+3616,Mathematics,Category-Level Topics,81.0,0.0159
+3617,Mathematics,Category-Level Topics,82.0,0.00213
+3618,Mathematics,Category-Level Topics,83.0,0.06448
+3619,Mathematics,Category-Level Topics,84.0,0.05106
+3620,Mathematics,Category-Level Topics,85.0,0.06031
+3621,Mathematics,Category-Level Topics,86.0,0.02025
+3622,Mathematics,Category-Level Topics,87.0,0.10423
+3623,Mathematics,Category-Level Topics,88.0,0.08045
+3624,Mathematics,Category-Level Topics,89.0,0.06874
+3625,Mathematics,Category-Level Topics,90.0,0.0549
+3626,Mathematics,Category-Level Topics,91.0,0.02141
+3627,Mathematics,Category-Level Topics,92.0,0.02122
+3628,Mathematics,Category-Level Topics,93.0,0.02027
+3629,Mathematics,Category-Level Topics,94.0,0.04073
+3630,Mathematics,Category-Level Topics,95.0,0.0919
+3631,Mathematics,Category-Level Topics,96.0,0.05651
+3632,Mathematics,Category-Level Topics,97.0,0.03013
+3633,Mathematics,Category-Level Topics,98.0,0.04102
+3634,Mathematics,Category-Level Topics,99.0,0.08188
+3635,Mathematics,Category-Level Topics,100.0,0.03728
+3636,Photography,Category-Level Topics,0.0,0.24415
+3637,Photography,Category-Level Topics,1.0,0.30484
+3638,Photography,Category-Level Topics,2.0,0.19204
+3639,Photography,Category-Level Topics,3.0,0.10554
+3640,Photography,Category-Level Topics,4.0,0.15971
+3641,Photography,Category-Level Topics,5.0,0.13899
+3642,Photography,Category-Level Topics,6.0,0.08955
+3643,Photography,Category-Level Topics,7.0,0.10904
+3644,Photography,Category-Level Topics,8.0,0.1185
+3645,Photography,Category-Level Topics,9.0,0.01336
+3646,Photography,Category-Level Topics,10.0,0.03998
+3647,Photography,Category-Level Topics,11.0,0.07957
+3648,Photography,Category-Level Topics,12.0,0.01132
+3649,Photography,Category-Level Topics,13.0,0.02246
+3650,Photography,Category-Level Topics,14.0,-0.00501
+3651,Photography,Category-Level Topics,15.0,-0.00553
+3652,Photography,Category-Level Topics,16.0,-0.00862
+3653,Photography,Category-Level Topics,17.0,0.04055
+3654,Photography,Category-Level Topics,18.0,0.00169
+3655,Photography,Category-Level Topics,19.0,0.06152
+3656,Photography,Category-Level Topics,20.0,0.00347
+3657,Photography,Category-Level Topics,21.0,0.00688
+3658,Photography,Category-Level Topics,22.0,0.04451
+3659,Photography,Category-Level Topics,23.0,-0.04411
+3660,Photography,Category-Level Topics,24.0,0.03525
+3661,Photography,Category-Level Topics,25.0,-0.04053
+3662,Photography,Category-Level Topics,26.0,-0.07626
+3663,Photography,Category-Level Topics,27.0,0.0008
+3664,Photography,Category-Level Topics,28.0,-0.00856
+3665,Photography,Category-Level Topics,29.0,0.02847
+3666,Photography,Category-Level Topics,30.0,-0.0493
+3667,Photography,Category-Level Topics,31.0,-0.04877
+3668,Photography,Category-Level Topics,32.0,-0.05881
+3669,Photography,Category-Level Topics,33.0,0.04584
+3670,Photography,Category-Level Topics,34.0,0.02671
+3671,Photography,Category-Level Topics,35.0,-0.06155
+3672,Photography,Category-Level Topics,36.0,-0.03077
+3673,Photography,Category-Level Topics,37.0,0.04194
+3674,Photography,Category-Level Topics,38.0,0.00316
+3675,Photography,Category-Level Topics,39.0,0.01412
+3676,Photography,Category-Level Topics,40.0,-0.0388
+3677,Photography,Category-Level Topics,41.0,-0.00841
+3678,Photography,Category-Level Topics,42.0,-0.02437
+3679,Photography,Category-Level Topics,43.0,-0.06348
+3680,Photography,Category-Level Topics,44.0,0.01745
+3681,Photography,Category-Level Topics,45.0,0.02868
+3682,Photography,Category-Level Topics,46.0,-0.06939
+3683,Photography,Category-Level Topics,47.0,0.02439
+3684,Photography,Category-Level Topics,48.0,-0.03748
+3685,Photography,Category-Level Topics,49.0,-0.00812
+3686,Photography,Category-Level Topics,50.0,0.00712
+3687,Photography,Category-Level Topics,51.0,-0.01485
+3688,Photography,Category-Level Topics,52.0,-0.07433
+3689,Photography,Category-Level Topics,53.0,-0.00287
+3690,Photography,Category-Level Topics,54.0,0.0222
+3691,Photography,Category-Level Topics,55.0,-0.04357
+3692,Photography,Category-Level Topics,56.0,0.03185
+3693,Photography,Category-Level Topics,57.0,-0.0256
+3694,Photography,Category-Level Topics,58.0,-0.04136
+3695,Photography,Category-Level Topics,59.0,-0.03746
+3696,Photography,Category-Level Topics,60.0,-0.02467
+3697,Photography,Category-Level Topics,61.0,-0.03016
+3698,Photography,Category-Level Topics,62.0,-0.04902
+3699,Photography,Category-Level Topics,63.0,-0.07148
+3700,Photography,Category-Level Topics,64.0,0.03512
+3701,Photography,Category-Level Topics,65.0,0.00502
+3702,Photography,Category-Level Topics,66.0,0.0533
+3703,Photography,Category-Level Topics,67.0,0.02574
+3704,Photography,Category-Level Topics,68.0,0.01499
+3705,Photography,Category-Level Topics,69.0,-0.0155
+3706,Photography,Category-Level Topics,70.0,0.01708
+3707,Photography,Category-Level Topics,71.0,-0.00883
+3708,Photography,Category-Level Topics,72.0,0.02831
+3709,Photography,Category-Level Topics,73.0,0.02941
+3710,Photography,Category-Level Topics,74.0,0.00023
+3711,Photography,Category-Level Topics,75.0,0.00473
+3712,Photography,Category-Level Topics,76.0,-0.06135
+3713,Photography,Category-Level Topics,77.0,0.01351
+3714,Photography,Category-Level Topics,78.0,-0.02227
+3715,Photography,Category-Level Topics,79.0,-0.05208
+3716,Photography,Category-Level Topics,80.0,-0.02951
+3717,Photography,Category-Level Topics,81.0,-0.00476
+3718,Photography,Category-Level Topics,82.0,-0.03495
+3719,Photography,Category-Level Topics,83.0,-0.04769
+3720,Photography,Category-Level Topics,84.0,-0.07514
+3721,Photography,Category-Level Topics,85.0,-0.01012
+3722,Photography,Category-Level Topics,86.0,-0.03956
+3723,Photography,Category-Level Topics,87.0,-0.03655
+3724,Photography,Category-Level Topics,88.0,-0.0071
+3725,Photography,Category-Level Topics,89.0,-0.07435
+3726,Photography,Category-Level Topics,90.0,0.00473
+3727,Photography,Category-Level Topics,91.0,-0.02905
+3728,Photography,Category-Level Topics,92.0,-0.05307
+3729,Photography,Category-Level Topics,93.0,-0.03203
+3730,Photography,Category-Level Topics,94.0,-0.03417
+3731,Photography,Category-Level Topics,95.0,0.01927
+3732,Photography,Category-Level Topics,96.0,-0.05093
+3733,Photography,Category-Level Topics,97.0,-0.06474
+3734,Photography,Category-Level Topics,98.0,-0.01314
+3735,Photography,Category-Level Topics,99.0,-0.03056
+3736,Photography,Category-Level Topics,100.0,0.04595
+3737,Middle,Category-Level Topics,0.0,0.19288
+3738,Middle,Category-Level Topics,1.0,0.17989
+3739,Middle,Category-Level Topics,2.0,0.17218
+3740,Middle,Category-Level Topics,3.0,0.171
+3741,Middle,Category-Level Topics,4.0,0.17243
+3742,Middle,Category-Level Topics,5.0,0.07172
+3743,Middle,Category-Level Topics,6.0,0.09321
+3744,Middle,Category-Level Topics,7.0,0.09424
+3745,Middle,Category-Level Topics,8.0,0.09847
+3746,Middle,Category-Level Topics,9.0,0.08093
+3747,Middle,Category-Level Topics,10.0,0.0641
+3748,Middle,Category-Level Topics,11.0,0.02716
+3749,Middle,Category-Level Topics,12.0,0.10482
+3750,Middle,Category-Level Topics,13.0,0.04702
+3751,Middle,Category-Level Topics,14.0,0.0112
+3752,Middle,Category-Level Topics,15.0,0.03207
+3753,Middle,Category-Level Topics,16.0,-0.04591
+3754,Middle,Category-Level Topics,17.0,-0.00761
+3755,Middle,Category-Level Topics,18.0,-0.02694
+3756,Middle,Category-Level Topics,19.0,0.02964
+3757,Middle,Category-Level Topics,20.0,0.03958
+3758,Middle,Category-Level Topics,21.0,-0.00427
+3759,Middle,Category-Level Topics,22.0,0.11169
+3760,Middle,Category-Level Topics,23.0,0.04912
+3761,Middle,Category-Level Topics,24.0,0.05039
+3762,Middle,Category-Level Topics,25.0,0.04623
+3763,Middle,Category-Level Topics,26.0,-0.00375
+3764,Middle,Category-Level Topics,27.0,0.03443
+3765,Middle,Category-Level Topics,28.0,0.00048
+3766,Middle,Category-Level Topics,29.0,-0.01319
+3767,Middle,Category-Level Topics,30.0,0.02052
+3768,Middle,Category-Level Topics,31.0,0.00273
+3769,Middle,Category-Level Topics,32.0,0.06914
+3770,Middle,Category-Level Topics,33.0,-0.0335
+3771,Middle,Category-Level Topics,34.0,-0.07564
+3772,Middle,Category-Level Topics,35.0,-0.01463
+3773,Middle,Category-Level Topics,36.0,-0.01002
+3774,Middle,Category-Level Topics,37.0,-0.04127
+3775,Middle,Category-Level Topics,38.0,-0.02652
+3776,Middle,Category-Level Topics,39.0,-0.01731
+3777,Middle,Category-Level Topics,40.0,-0.00019
+3778,Middle,Category-Level Topics,41.0,-0.00866
+3779,Middle,Category-Level Topics,42.0,0.0523
+3780,Middle,Category-Level Topics,43.0,-0.09975
+3781,Middle,Category-Level Topics,44.0,-0.02786
+3782,Middle,Category-Level Topics,45.0,0.00083
+3783,Middle,Category-Level Topics,46.0,-0.05277
+3784,Middle,Category-Level Topics,47.0,-0.03881
+3785,Middle,Category-Level Topics,48.0,-0.0886
+3786,Middle,Category-Level Topics,49.0,0.0092
+3787,Middle,Category-Level Topics,50.0,-0.04816
+3788,Middle,Category-Level Topics,51.0,-0.06042
+3789,Middle,Category-Level Topics,52.0,-0.09305
+3790,Middle,Category-Level Topics,53.0,-0.01584
+3791,Middle,Category-Level Topics,54.0,-0.0206
+3792,Middle,Category-Level Topics,55.0,-0.04629
+3793,Middle,Category-Level Topics,56.0,0.05091
+3794,Middle,Category-Level Topics,57.0,-0.04201
+3795,Middle,Category-Level Topics,58.0,-0.00238
+3796,Middle,Category-Level Topics,59.0,-0.02483
+3797,Middle,Category-Level Topics,60.0,-0.13253
+3798,Middle,Category-Level Topics,61.0,-0.0283
+3799,Middle,Category-Level Topics,62.0,-0.01418
+3800,Middle,Category-Level Topics,63.0,-0.0356
+3801,Middle,Category-Level Topics,64.0,0.05416
+3802,Middle,Category-Level Topics,65.0,-0.0419
+3803,Middle,Category-Level Topics,66.0,-0.04269
+3804,Middle,Category-Level Topics,67.0,-0.0675
+3805,Middle,Category-Level Topics,68.0,-0.11152
+3806,Middle,Category-Level Topics,69.0,-0.06776
+3807,Middle,Category-Level Topics,70.0,-0.0195
+3808,Middle,Category-Level Topics,71.0,-0.03058
+3809,Middle,Category-Level Topics,72.0,-0.05284
+3810,Middle,Category-Level Topics,73.0,-0.03845
+3811,Middle,Category-Level Topics,74.0,0.01394
+3812,Middle,Category-Level Topics,75.0,-0.00228
+3813,Middle,Category-Level Topics,76.0,-0.11433
+3814,Middle,Category-Level Topics,77.0,-0.08116
+3815,Middle,Category-Level Topics,78.0,-0.08409
+3816,Middle,Category-Level Topics,79.0,0.06064
+3817,Middle,Category-Level Topics,80.0,-0.03691
+3818,Middle,Category-Level Topics,81.0,-0.07361
+3819,Middle,Category-Level Topics,82.0,-0.05863
+3820,Middle,Category-Level Topics,83.0,-0.06889
+3821,Middle,Category-Level Topics,84.0,-0.03692
+3822,Middle,Category-Level Topics,85.0,-0.04607
+3823,Middle,Category-Level Topics,86.0,-0.04855
+3824,Middle,Category-Level Topics,87.0,-0.0722
+3825,Middle,Category-Level Topics,88.0,-0.07911
+3826,Middle,Category-Level Topics,89.0,-0.07157
+3827,Middle,Category-Level Topics,90.0,0.00872
+3828,Middle,Category-Level Topics,91.0,-0.05338
+3829,Middle,Category-Level Topics,92.0,-0.09305
+3830,Middle,Category-Level Topics,93.0,-0.04423
+3831,Middle,Category-Level Topics,94.0,-0.05276
+3832,Middle,Category-Level Topics,95.0,-0.13545
+3833,Middle,Category-Level Topics,96.0,-0.07278
+3834,Middle,Category-Level Topics,97.0,-0.00662
+3835,Middle,Category-Level Topics,98.0,-0.12474
+3836,Middle,Category-Level Topics,99.0,-0.06986
+3837,Middle,Category-Level Topics,100.0,-0.04338
+3838,Video,Category-Level Topics,0.0,0.17638
+3839,Video,Category-Level Topics,1.0,0.26465
+3840,Video,Category-Level Topics,2.0,0.12201
+3841,Video,Category-Level Topics,3.0,0.19044
+3842,Video,Category-Level Topics,4.0,0.23895
+3843,Video,Category-Level Topics,5.0,0.13161
+3844,Video,Category-Level Topics,6.0,0.15473
+3845,Video,Category-Level Topics,7.0,0.12247
+3846,Video,Category-Level Topics,8.0,0.1206
+3847,Video,Category-Level Topics,9.0,0.09554
+3848,Video,Category-Level Topics,10.0,0.09684
+3849,Video,Category-Level Topics,11.0,0.0794
+3850,Video,Category-Level Topics,12.0,0.06375
+3851,Video,Category-Level Topics,13.0,0.1465
+3852,Video,Category-Level Topics,14.0,0.17147
+3853,Video,Category-Level Topics,15.0,0.17632
+3854,Video,Category-Level Topics,16.0,0.05107
+3855,Video,Category-Level Topics,17.0,0.12269
+3856,Video,Category-Level Topics,18.0,0.11207
+3857,Video,Category-Level Topics,19.0,0.11391
+3858,Video,Category-Level Topics,20.0,0.12113
+3859,Video,Category-Level Topics,21.0,0.10181
+3860,Video,Category-Level Topics,22.0,0.04866
+3861,Video,Category-Level Topics,23.0,0.13048
+3862,Video,Category-Level Topics,24.0,0.1136
+3863,Video,Category-Level Topics,25.0,0.12613
+3864,Video,Category-Level Topics,26.0,0.12826
+3865,Video,Category-Level Topics,27.0,-0.00069
+3866,Video,Category-Level Topics,28.0,0.12425
+3867,Video,Category-Level Topics,29.0,0.11587
+3868,Video,Category-Level Topics,30.0,0.09142
+3869,Video,Category-Level Topics,31.0,0.11719
+3870,Video,Category-Level Topics,32.0,0.08936
+3871,Video,Category-Level Topics,33.0,0.11141
+3872,Video,Category-Level Topics,34.0,-0.01558
+3873,Video,Category-Level Topics,35.0,0.10122
+3874,Video,Category-Level Topics,36.0,0.02494
+3875,Video,Category-Level Topics,37.0,0.05056
+3876,Video,Category-Level Topics,38.0,0.05909
+3877,Video,Category-Level Topics,39.0,0.05299
+3878,Video,Category-Level Topics,40.0,0.06316
+3879,Video,Category-Level Topics,41.0,0.08085
+3880,Video,Category-Level Topics,42.0,0.06317
+3881,Video,Category-Level Topics,43.0,0.06691
+3882,Video,Category-Level Topics,44.0,0.08846
+3883,Video,Category-Level Topics,45.0,0.05667
+3884,Video,Category-Level Topics,46.0,0.0191
+3885,Video,Category-Level Topics,47.0,-0.03364
+3886,Video,Category-Level Topics,48.0,0.00594
+3887,Video,Category-Level Topics,49.0,0.11389
+3888,Video,Category-Level Topics,50.0,0.0251
+3889,Video,Category-Level Topics,51.0,0.09435
+3890,Video,Category-Level Topics,52.0,0.00186
+3891,Video,Category-Level Topics,53.0,0.11535
+3892,Video,Category-Level Topics,54.0,0.05114
+3893,Video,Category-Level Topics,55.0,0.07044
+3894,Video,Category-Level Topics,56.0,0.01
+3895,Video,Category-Level Topics,57.0,0.05393
+3896,Video,Category-Level Topics,58.0,0.09842
+3897,Video,Category-Level Topics,59.0,0.06102
+3898,Video,Category-Level Topics,60.0,0.01512
+3899,Video,Category-Level Topics,61.0,0.01363
+3900,Video,Category-Level Topics,62.0,0.0806
+3901,Video,Category-Level Topics,63.0,0.08745
+3902,Video,Category-Level Topics,64.0,0.02294
+3903,Video,Category-Level Topics,65.0,-0.02047
+3904,Video,Category-Level Topics,66.0,0.05025
+3905,Video,Category-Level Topics,67.0,0.04774
+3906,Video,Category-Level Topics,68.0,0.05859
+3907,Video,Category-Level Topics,69.0,-0.07592
+3908,Video,Category-Level Topics,70.0,0.06562
+3909,Video,Category-Level Topics,71.0,-0.00339
+3910,Video,Category-Level Topics,72.0,-0.02792
+3911,Video,Category-Level Topics,73.0,-0.01861
+3912,Video,Category-Level Topics,74.0,-0.0095
+3913,Video,Category-Level Topics,75.0,-0.01079
+3914,Video,Category-Level Topics,76.0,-0.0164
+3915,Video,Category-Level Topics,77.0,0.01889
+3916,Video,Category-Level Topics,78.0,0.02596
+3917,Video,Category-Level Topics,79.0,0.01033
+3918,Video,Category-Level Topics,80.0,-0.02311
+3919,Video,Category-Level Topics,81.0,0.07078
+3920,Video,Category-Level Topics,82.0,-0.03331
+3921,Video,Category-Level Topics,83.0,0.04468
+3922,Video,Category-Level Topics,84.0,0.04911
+3923,Video,Category-Level Topics,85.0,0.03105
+3924,Video,Category-Level Topics,86.0,-0.02295
+3925,Video,Category-Level Topics,87.0,0.02148
+3926,Video,Category-Level Topics,88.0,0.03519
+3927,Video,Category-Level Topics,89.0,0.0527
+3928,Video,Category-Level Topics,90.0,0.03228
+3929,Video,Category-Level Topics,91.0,0.03264
+3930,Video,Category-Level Topics,92.0,0.03572
+3931,Video,Category-Level Topics,93.0,-0.00677
+3932,Video,Category-Level Topics,94.0,-0.00572
+3933,Video,Category-Level Topics,95.0,0.00699
+3934,Video,Category-Level Topics,96.0,0.12636
+3935,Video,Category-Level Topics,97.0,0.01372
+3936,Video,Category-Level Topics,98.0,0.0341
+3937,Video,Category-Level Topics,99.0,0.01104
+3938,Video,Category-Level Topics,100.0,0.01356
+3939,Basketball,Category-Level Topics,0.0,0.03488
+3940,Basketball,Category-Level Topics,1.0,0.05827
+3941,Basketball,Category-Level Topics,2.0,0.10158
+3942,Basketball,Category-Level Topics,3.0,0.07016
+3943,Basketball,Category-Level Topics,4.0,0.15271
+3944,Basketball,Category-Level Topics,5.0,0.08443
+3945,Basketball,Category-Level Topics,6.0,0.06599
+3946,Basketball,Category-Level Topics,7.0,0.14319
+3947,Basketball,Category-Level Topics,8.0,0.09624
+3948,Basketball,Category-Level Topics,9.0,0.06097
+3949,Basketball,Category-Level Topics,10.0,0.03118
+3950,Basketball,Category-Level Topics,11.0,0.02648
+3951,Basketball,Category-Level Topics,12.0,-0.05303
+3952,Basketball,Category-Level Topics,13.0,0.03966
+3953,Basketball,Category-Level Topics,14.0,0.00149
+3954,Basketball,Category-Level Topics,15.0,-0.02337
+3955,Basketball,Category-Level Topics,16.0,0.07794
+3956,Basketball,Category-Level Topics,17.0,0.00387
+3957,Basketball,Category-Level Topics,18.0,0.00658
+3958,Basketball,Category-Level Topics,19.0,-0.021
+3959,Basketball,Category-Level Topics,20.0,0.03061
+3960,Basketball,Category-Level Topics,21.0,0.03361
+3961,Basketball,Category-Level Topics,22.0,-0.028
+3962,Basketball,Category-Level Topics,23.0,-0.00827
+3963,Basketball,Category-Level Topics,24.0,0.02792
+3964,Basketball,Category-Level Topics,25.0,0.01929
+3965,Basketball,Category-Level Topics,26.0,0.05081
+3966,Basketball,Category-Level Topics,27.0,-0.00387
+3967,Basketball,Category-Level Topics,28.0,-0.01013
+3968,Basketball,Category-Level Topics,29.0,-0.0803
+3969,Basketball,Category-Level Topics,30.0,0.01379
+3970,Basketball,Category-Level Topics,31.0,0.00731
+3971,Basketball,Category-Level Topics,32.0,-0.039
+3972,Basketball,Category-Level Topics,33.0,-0.03087
+3973,Basketball,Category-Level Topics,34.0,0.0152
+3974,Basketball,Category-Level Topics,35.0,0.00724
+3975,Basketball,Category-Level Topics,36.0,-0.03194
+3976,Basketball,Category-Level Topics,37.0,-0.05284
+3977,Basketball,Category-Level Topics,38.0,-0.02699
+3978,Basketball,Category-Level Topics,39.0,-0.03943
+3979,Basketball,Category-Level Topics,40.0,0.01869
+3980,Basketball,Category-Level Topics,41.0,0.00175
+3981,Basketball,Category-Level Topics,42.0,-0.04564
+3982,Basketball,Category-Level Topics,43.0,-0.0025
+3983,Basketball,Category-Level Topics,44.0,-0.01413
+3984,Basketball,Category-Level Topics,45.0,-0.00159
+3985,Basketball,Category-Level Topics,46.0,-0.04086
+3986,Basketball,Category-Level Topics,47.0,0.01415
+3987,Basketball,Category-Level Topics,48.0,-0.03127
+3988,Basketball,Category-Level Topics,49.0,-0.02459
+3989,Basketball,Category-Level Topics,50.0,-0.00592
+3990,Basketball,Category-Level Topics,51.0,-0.0686
+3991,Basketball,Category-Level Topics,52.0,-0.02004
+3992,Basketball,Category-Level Topics,53.0,-0.03508
+3993,Basketball,Category-Level Topics,54.0,-0.05343
+3994,Basketball,Category-Level Topics,55.0,-0.07866
+3995,Basketball,Category-Level Topics,56.0,-0.01929
+3996,Basketball,Category-Level Topics,57.0,-0.029
+3997,Basketball,Category-Level Topics,58.0,-0.02173
+3998,Basketball,Category-Level Topics,59.0,-0.04829
+3999,Basketball,Category-Level Topics,60.0,-0.08274
+4000,Basketball,Category-Level Topics,61.0,-0.01611
+4001,Basketball,Category-Level Topics,62.0,0.00031
+4002,Basketball,Category-Level Topics,63.0,0.00381
+4003,Basketball,Category-Level Topics,64.0,-0.06473
+4004,Basketball,Category-Level Topics,65.0,-0.03466
+4005,Basketball,Category-Level Topics,66.0,0.01202
+4006,Basketball,Category-Level Topics,67.0,-0.00977
+4007,Basketball,Category-Level Topics,68.0,-0.07973
+4008,Basketball,Category-Level Topics,69.0,-0.02388
+4009,Basketball,Category-Level Topics,70.0,-0.05881
+4010,Basketball,Category-Level Topics,71.0,0.00757
+4011,Basketball,Category-Level Topics,72.0,-0.00329
+4012,Basketball,Category-Level Topics,73.0,-0.02874
+4013,Basketball,Category-Level Topics,74.0,-0.06102
+4014,Basketball,Category-Level Topics,75.0,0.00997
+4015,Basketball,Category-Level Topics,76.0,-0.06197
+4016,Basketball,Category-Level Topics,77.0,0.00119
+4017,Basketball,Category-Level Topics,78.0,0.00125
+4018,Basketball,Category-Level Topics,79.0,-0.02239
+4019,Basketball,Category-Level Topics,80.0,-0.08202
+4020,Basketball,Category-Level Topics,81.0,0.00951
+4021,Basketball,Category-Level Topics,82.0,-0.05592
+4022,Basketball,Category-Level Topics,83.0,-0.02036
+4023,Basketball,Category-Level Topics,84.0,-0.03907
+4024,Basketball,Category-Level Topics,85.0,-0.01661
+4025,Basketball,Category-Level Topics,86.0,-0.04184
+4026,Basketball,Category-Level Topics,87.0,0.00522
+4027,Basketball,Category-Level Topics,88.0,-0.03936
+4028,Basketball,Category-Level Topics,89.0,0.02217
+4029,Basketball,Category-Level Topics,90.0,-0.05756
+4030,Basketball,Category-Level Topics,91.0,-0.0413
+4031,Basketball,Category-Level Topics,92.0,0.01037
+4032,Basketball,Category-Level Topics,93.0,-0.09492
+4033,Basketball,Category-Level Topics,94.0,0.0352
+4034,Basketball,Category-Level Topics,95.0,-0.06478
+4035,Basketball,Category-Level Topics,96.0,-0.04539
+4036,Basketball,Category-Level Topics,97.0,-0.05251
+4037,Basketball,Category-Level Topics,98.0,-0.00137
+4038,Basketball,Category-Level Topics,99.0,-0.05479
+4039,Basketball,Category-Level Topics,100.0,-0.05055

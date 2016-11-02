@@ -9,6 +9,7 @@
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 
+%\usepackage{ulem}%used for uwave
 \usepackage{comment}
 \usepackage{subfigure}
 \usepackage{enumitem}
@@ -69,7 +70,7 @@
 %构造（building）一个**词表（找一个词对它更合适的描述），for transfer learning in accurate event detection
 %\title{Constructing Knowledge Base's Category Topics for Transfer Learning in Accurate Microblog Event Detection}
 %\begin{comment}% for double blind
-\author{Weijing Huang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.}\and Tengjiao Wang\inst{1}}
+\author{Weijing Huang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.} \and Yazhou Wang\inst{1} \and Tengjiao Wang\inst{1}}
 \institute{Key Laboratory of High Confidence Software Technologies (Ministry of Education), EECS, Peking University, Beijing, China \\ 
 \path{huangwaleking@gmail.com,{pekingchenwei,tjwang}@pku.edu.cn}\\ 
 }
@@ -730,11 +731,11 @@ In total &  &  &  & \\ \hline
 \setlength{\belowcaptionskip}{0.cm}
 \centering
 \caption{Top words' topic coherence of \textit{Aviation}'s history state. * means the group also contains the five top words \textit{aircraft}, \textit{air}, \textit{airport}, \textit{flight}, and \textit{airline}, but we don't show them in table to save space. NPMI is computed on ten words (a combination of words in each row with the five top words).}
-\scalebox{0.67}{
+\scalebox{0.65}{
 \begin{tabular}{|c|l|l|l !{\vrule width 1pt} c|l|l|l|}
 \hline
-\multicolumn{4}{|c!{\vrule width 1pt}}{TransDetector} & \multicolumn{4}{c|}{LightLDA}    \\ \hline
-\#group*  & \#words*  & words  & NPMI & \#group* & \#words* & words & NPMI \\ \hline
+\multicolumn{4}{|c!{\vrule width 1pt}}{Category-Level Topics extracted from Wikipedia by \textsc{TransDetector}} & \multicolumn{4}{c|}{Topics Learned from Wikipedia by LightLDA}    \\ \hline
+Group ID& \#words*  & words  & NPMI & \#group* & Group ID& words & NPMI \\ \hline
 -1 & 1-5 & aircraft air airport flight airline &  & -1 & 1-5 & engine aircraft car air power & \\ \hline
 0 & 6-10 & airlines aviation flying pilot squadron &  0.113 & 0 & 6-10 & design flight model production speed & 0.112\\ \hline
 1 & 11-15 &flights pilots raf airways fighter & 0.155 & 1 & 11-15 &system vehicle cars engines mm & 0.062\\ \hline
@@ -756,8 +757,9 @@ In total &  &  &  & \\ \hline
 \end{table}
 
 %TODO figure2需要增加BTM的情况，以及要用盒形图表示
-\hlgreen{Add a topic of BTM for Figure 2.}
 \begin{figure}
+	\setlength{\abovecaptionskip}{0.cm}
+	\setlength{\belowcaptionskip}{0.cm}
         \centering
         \includegraphics[width=1.0\columnwidth]{img/NPMI.pdf}
         \caption{Effectiveness of history state in terms of NPMI}
