@@ -9,7 +9,7 @@
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 
-\usepackage{showframe}%show the margin
+%\usepackage{showframe}%show the margin
 %\usepackage{ulem}%used for uwave
 \usepackage{comment}
 \usepackage{subfigure}
@@ -591,7 +591,6 @@ For example, there are six bursty words in \(\mathcal{B}_{military,2011-07-28}\)
 
 In order to group the bursty words together, we  construct the directed weighted graph \(\mathcal{G}_{c,t}=(\mathcal{B}_{c,t},\mathcal{E}_{c,t},\mathcal{W}_{c,t})\), where \(\mathcal{E}_{c,t}=\{(a,b)|a \in \mathcal{B}_{c,t}, b \in \mathcal{B}_{c,t}, PMI(a,b)>0 \}\), and \(\mathcal{W}_{c,t}\) gives the PMI scores on the edges.
 The graph \(\mathcal{G}_{c,t}\) means the words in \(\mathcal{B}_{c,t}\) are connected if and only if their PMI score in the given time window's microblogs is over 0. 
-
 Given the graph \(\mathcal{G}_{c,t}\), spectral clustering\cite{von2007tutorial} is utilized for exploring the best partition of words. 
 To get the optimum cluster number, we use the graph density as the criteria.
 The graph density is the ratio of the number of edges to that of complete graph (the graph with all possible edges), and in practice all the sub-graphs in \(\mathcal{G}_{c,t}\) should have the densities over an empirical threshold. 
@@ -607,7 +606,6 @@ Generally, according to the number of bursting words in the event phrase \(\math
 (2) \(|\mathcal{C}_{c,t,i}|\geq 2\), it's not necessary that all the bursting words are included in the event related microblog.
 For example, the tweet ``\textit{Soldier wanted to attack Fort Hood troops}" contains the bursting words \textit{attack} and \textit{hood}, not all the event phrase ``\textit{ft, hood, attack}". 
 To tackle this problem, we consider the microblog, that contains any pair of category-words in the event phrase, as the event related microblog.
-
 Finally, \textsc{TransDetector} gets the detected events \(\{(\mathcal{C}_{c,t,i},\mathcal{D}_{c,t,i})\}_{i=1}^{|\mathcal{C}_{c,t}|}\), containing the event phrase and the corresponding event related microblogs for the given category and the time window.
 
 %Text stream evolves more quickly with time than knowledge base.
@@ -634,7 +632,7 @@ And the mid categories, which reflect the main interests of the target corpus, a
 Due to the developer policy of Twitter, \cite{petrovic2012using} only redistributes tweets' IDs\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/fsd_corpus.tar.gz}}.
 %\footnote{\url{https://dev.twitter.com/overview/terms/policy}}
 We collected the tweets' contents according to the IDs with the help of Twitter API. 
-Though we cannot get the whole dataset due to the limit of Twitter API, after necessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which spans identically from 2011/06/30 to 2011/09/15.
+Though we cannot get the whole dataset due to the limit of Twitter API, after necessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which also spans from 2011/06/30 to 2011/09/15.
 More details of the original dataset are described in \cite{petrovic2010edinburgh}.
 
 \subsection{Effects of Categroy-Level Topics}
@@ -807,7 +805,7 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 \textbf{Baselines Methods.} We compare our proposed method against the following methods, Twevent\cite{Twevent2012}, BurstyBTM\cite{Yan:2015wm}, LSH\cite{Petrovic:2010uj}, EDCoW\cite{Weng:2011wz}, and TimeUserLDA\cite{Diao:2012wj}, which are mentioned in the Section \ref{sec:relatedWorks}.
 We implement these competing methods based on the open source community versions, e.g. EDCoW\footnote{\url{https://github.com/Falitokiniaina/EDCoW}}, or the authors' releases, e.g. BurstyBTM\footnote{\url{https://github.com/xiaohuiyan/BurstyBTM}}.
 The above methods are set carefully according to the descriptions in the papers.
-More precisely, (1) for LSH, 13 bits per hash table, 20 hash tables are set, and top 500 clusters with high entropy are selected as the event candidates; (2) for Twevent, the number of candidate bursty segments is set to be the square root of the window size, the newsworthiness threshold is set to be 4, and 375 candidate events are detected; (3) for EDCoW, the tunable parameter \(\gamma\) value is set to be 40, and 192 bursty ``phrases" are found for evaluation; (4) for TimeUserLDA, the topic number is set to be 500, and the most 100 bursty topics are selected as candidate events; (5) for BurstyBTM, the topic number is set to be 200, which is also the number of bursty topics in the model.
+More precisely, (1) for LSH, 13 bits per hash table, 20 hash tables are set, and top 500 clusters with high entropy are selected as the event candidates; (2) for Twevent, the number of candidate bursty segments is set to be the square root of the window size, the newsworthiness threshold is set to be 4, and 375 candidate events are detected; (3) for EDCoW, the tunable parameter \(\gamma\) value is set to be 40, and 349 bursty ``phrases" are found for evaluation; (4) for TimeUserLDA, the topic number is set to be 500, and the most 100 bursty topics are selected as candidate events; (5) for BurstyBTM, the topic number is set to be 200, which is also the number of bursty topics in the model.
 The information about the number of events to be evaluated is listed in Table \ref{tbl:overall}, where TransDetector detects 457 events after filtering out too niche events that contain less than 20 tweets. 
 
 \textbf{Benchmarks and Evaluation Metrics.} 
@@ -825,14 +823,13 @@ The smaller the metric DERate, the less duplicate events to be filtered out in t
 
 \textbf{Results.}
 %\chinese{我们需要说明几个问题。1，在Benchmark2上，事件有395个；LSH能够检测到3337个聚类簇，判断它是否命中我们采用比较聚类簇中心的方法，}
-In general, our method is better than the existing methods in terms of precision and recall, only sacrificing in the DERate slightly, as shown in Table \ref{tbl:overall}. 
-This is because an event could be grouped into multiple categories (e.g. the event ``S\&P downgrade US credit rating", related to the politics category and the financial category simultaneously), but is not a problem as the method \textsc{TrasnDetector} has already achieved the high precision and recall. 
+In general, our method is better than the existing methods in terms of the precision and the recall, only sacrificing in the DERate slightly, as shown in Table \ref{tbl:overall}. 
+This is because an event could be grouped into multiple categories (e.g. the event \textit{``S\&P downgrade US credit rating"}, related to the politics category and the financial category simultaneously), but is not a problem as the method \textsc{TrasnDetector} has already achieved the high precision and recall. 
 
 Comparing to \textsc{TrasnDetector}, the existing methods are suffered from having to choose between precision and recall, but not both. 
-Taking the method Twevent as an example, which also utilizes the knowledge base for promoting the event detection performance, it has three parameters to trade off.
-The variable that has the greatest impact on the outcome is its newsworthiness. 
-
-
+Taking the method Twevent as an example, which also utilizes the knowledge base for promoting the event detection performance, it has three parameters to trade off, in which the newsworthiness is the most impact one. 
+In our experiment, when setting newsworthiness to be 4, Twevent achieves its best performance in terms of F value; lower or higher of value sacrifices the recall or precision. 
+The other methods also meet the same problem of tuning parameters, such as the topic number for TimeUserLDA and BurstyBTM, and the distance threshold for LSH.
 
 \begin{table}[h]
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
@@ -850,7 +847,7 @@ The variable that has the greatest impact on the outcome is its newsworthiness.
     LSH & 500 & 0.704 & 0.788 & 0.651 & 0.713 & 0.348 \\ \hline
     TimeUserLDA & 100 & 0.370 & 0.790 & 0.177 & 0.289 & 0.114 \\ \hline
     Twevent & 375 &  0.741 & 0.808 & 0.658 & 0.725 & 0.142 \\ \hline
-    EDCoW & 192 & 0.556 & 0.714 & 0.258 & 0.379 & 0.255 \\ \hline
+    EDCoW & 349 & 0.556 & 0.748 & 0.511 & 0.607 & 0.226 \\ \hline
     BurstyBTM & 200 & 0.667 & 0.825 & 0.384 & 0.497 & \textbf{0.079} \\ \hline
     \textsc{TransDetector} & 457 & \textbf{0.889} & \textbf{0.912} & \textbf{0.876} & \textbf{0.894} & 0.170 \\ \hline
     \end{tabular}
@@ -863,6 +860,17 @@ The variable that has the greatest impact on the outcome is its newsworthiness.
 \label{tbl:overall}
 \end{table}
 
+In order to understand why the existing methods cannot perform well, we dive into the results on the Benchmark1, and show the relation between the recall and the event size (number of microblogs related to the events) in Figure \ref{fig:Benchmark1}. 
+The 27 events are divided into 4 groups according to its size. 
+The first group contains 5 very popular events, having more than 200 microblogs, such as \textit{``S\&P downgrade US credit rating''} with 656 microblogs, \textit{``Atlantis shuttle lands''} with 595 microblogs, etc.
+The remaining groups' sizes are listed in the x-axis of Figure \ref{fig:Benchmark1}.
+The fourth group contains 11 not-so-popular events, each containing less than 50 microblogs, such as \textit{``War criminal Goran hadzic arrested"} with only 27 microblogs reported.
+In our experimental settings, the methods all perform well on the very popular events, but perform worse on the not-so-popular events.
+For the not-so-popular events, the underlying bursty pattern is not so obvious that leads many methods to fail to catch the pattern.
+We further find out that the number of microblogs in an event follows a power-law distribution, which similar phenomenon is also reported in \cite{Twevent2012}.
+The widespread existence of such not-so-popular events challenge almost all the existing event detection methods.
+
+
 \begin{figure}[h]
 	\setlength{\abovecaptionskip}{0.cm}
 	\setlength{\belowcaptionskip}{0.cm}
@@ -872,6 +880,7 @@ The variable that has the greatest impact on the outcome is its newsworthiness.
         \label{fig:Benchmark1}
 \end{figure}
 
+Illustrated in Table \ref{tbl:overall} and Figure \ref{fig:Benchmark1}, \textsc{TransDetector} achieves very good results even on the not-so-popular events. 
 
 \begin{table}
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
@@ -885,11 +894,11 @@ The variable that has the greatest impact on the outcome is its newsworthiness.
 \hline
 \multirow{2}{*}{Date} & \multirow{2}{*}{Event key words} & \multirow{2}{*}{Representative event tweet} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Number of \\ event tweet\end{tabular}} & \multicolumn{6}{c|}{Methods\tnote{a}} \\ \cline{5-10} 
  &  &  &  & L & TU & TW & E & B & TD \\ \hline
-7/22/11 & \begin{tabular}[c]{@{}l@{}}Norway, Oslo,\\ attacks, bombing\end{tabular} & \begin{tabular}[c]{@{}l@{}}Terror Attacks Devastate Norway: A bomb ripped through \\ government offices in Oslo and a gunman... http://dlvr.it/cLbk8\end{tabular} & 557 & \checkmark & \checkmark & \checkmark &  &  &  \\ \hline
-7/23/11 & Gunman, rink & \begin{tabular}[c]{@{}l@{}}Gunman Kills Self, 5 Others at Texas Roller Rink \\ http://dlvr.it/cLcTH\end{tabular} & 43 & \checkmark & - &  &  &  &  \\ \hline
-7/26/11 & \begin{tabular}[c]{@{}l@{}}Kandahar, mayor, \\ suicide, attack\end{tabular} & \begin{tabular}[c]{@{}l@{}}TELEGRAPH{]}: Kandahar mayor killed by Afghan suicide \\ bomber: The mayor of Kandahar, the biggest city in south \_\end{tabular} & 47 & \checkmark & - &  &  &  &  \\ \hline
-7/28/11 & Ft., Hood, attack & Possible Ft. Hood Attack Thwarted http://t.co/BSJ33hk & 52 & \checkmark & - &  &  &  &  \\ \hline
-7/28/11 & \begin{tabular}[c]{@{}l@{}}Libyan, rebel, \\ gunned\end{tabular} & \begin{tabular}[c]{@{}l@{}}Libyan rebel chief gunned down in Benghazi \\ http://sns.mx/prfvy1\end{tabular} & 44 & \checkmark & - &  &  &  &  \\ \hline
+7/22/11 & \begin{tabular}[c]{@{}l@{}}Norway, Oslo,\\ attacks, bombing\end{tabular} & \begin{tabular}[c]{@{}l@{}}Terror Attacks Devastate Norway: A bomb ripped through \\ government offices in Oslo and a gunman... http://dlvr.it/cLbk8\end{tabular} & 557 & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\ \hline
+7/23/11 & Gunman, rink & \begin{tabular}[c]{@{}l@{}}Gunman Kills Self, 5 Others at Texas Roller Rink \\ http://dlvr.it/cLcTH\end{tabular} & 43 & - & - & \checkmark &  \checkmark & - & \checkmark \\ \hline
+7/26/11 & \begin{tabular}[c]{@{}l@{}}Kandahar, mayor, \\ suicide, attack\end{tabular} & \begin{tabular}[c]{@{}l@{}}TELEGRAPH{]}: Kandahar mayor killed by Afghan suicide \\ bomber: The mayor of Kandahar, the biggest city in south \_\end{tabular} & 47 & \checkmark & - & \checkmark & \checkmark & - & \checkmark \\ \hline
+7/28/11 & Ft., Hood, attack & Possible Ft. Hood Attack Thwarted http://t.co/BSJ33hk & 52 & - & - & - & - & - & \checkmark \\ \hline
+7/28/11 & \begin{tabular}[c]{@{}l@{}}Libyan, rebel, \\ gunned\end{tabular} & \begin{tabular}[c]{@{}l@{}}Libyan rebel chief gunned down in Benghazi \\ http://sns.mx/prfvy1\end{tabular} & 44 & - & - & - & - & - & \checkmark \\ \hline
 \end{tabular}
 
 \begin{tablenotes}  
