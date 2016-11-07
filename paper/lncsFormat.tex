@@ -9,6 +9,7 @@
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 
+\usepackage{showframe}%show the margin
 %\usepackage{ulem}%used for uwave
 \usepackage{comment}
 \usepackage{subfigure}
@@ -41,9 +42,16 @@
 }%used for highlight, but set the color as green
 %================================================
 %================================================
-%footnote in table
-%TODO 加和不加这一段对空间的影响很大
-%================================================
+
+%================================
+%中文
+\inputencoding{utf8}
+\newcommand{\chinese}[1]{
+	\begin{CJK*}{UTF8}{gbsn}
+	#1	
+	\end{CJK*}
+}
+%================================
 
 \usepackage{multirow}% for table
 
@@ -65,14 +73,16 @@
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+%\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+\title{Leveraging Knowledge Base for Accurate Event Detection on Microblog Stream}
 \titlerunning{Transfer Learning for Accurate Event Detection}
 %构造（building）一个**词表（找一个词对它更合适的描述），for transfer learning in accurate event detection
 %\title{Constructing Knowledge Base's Category Topics for Transfer Learning in Accurate Microblog Event Detection}
 %\begin{comment}% for double blind
-\author{Weijing Huang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.} \and Yazhou Wang\inst{1} \and Tengjiao Wang\inst{1}}
+\author{Weijing Huang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.} \and Tengjiao Wang\inst{1} \and Yazhou Wang\inst{1} }
 \institute{Key Laboratory of High Confidence Software Technologies (Ministry of Education), EECS, Peking University, Beijing, China \\ 
 \path{huangwaleking@gmail.com,{pekingchenwei,tjwang}@pku.edu.cn}\\ 
+\path{pkuwangyz@gmail.com}
 }
 %\end{comment}
 
@@ -81,14 +91,16 @@
 \begin{abstract}
 Many web applications need the accurate event detection technique on microblog stream. 
 But the accuracy of existing methods are still challenged by microblog's short length and high noise. 
-We develop a novel category-pivot transfer learning method \textsc{TransDetector} to deal with the task.  
+We develop a novel category-level transfer learning method \textsc{TransDetector} to deal with the task.  
 \textsc{TransDetector} bases on two facts, that microblog is short but can be enriched by knowledge base semantically with transfer learning; and events can be detected more accurately on microblogs with richer semantics.
+%文本短，建模很困难；直接做迁移学习困难，两者的组织结构不同，如何从精心构造的知识库迁移到微博是一个很大的挑战。
+%所以我们提出了Category-Level Transfer Learning ...
 The following contributions are made in \textsc{TransDetector}.
-(1) We propose a structure-guided category-pivot topics extraction method, which exploits the knowledge base's hierarchical structure to extract categories' highly correlated topics. 
-(2) We develop a probabilistic model CTrans-LDA for category-pivot transfer learning, which utilizes the word co-occurrences and transfers the knowledge base's category-pivot topics into microblogs. 
+(1) We propose a structure-guided category-level topics extraction method, which exploits the knowledge base's hierarchical structure to extract categories' highly correlated topics. 
+(2) We develop a probabilistic model CTrans-LDA for category-level transfer learning, which utilizes the word co-occurrences and transfers the knowledge base's category-level topics into microblogs. 
 %Hence, word time series are expanded as category-pivot word time series.
-(3) Events are detected accurately on category-pivot word time series, due to richer semantics and less noise. 
-(4) Experiment verifies the quality of category-pivot topics extracted from knowledge base, and the further study on the benchmark \textit{Edinburgh twitter corpus} validates the effectiveness of our proposed transfer learning method for event detection.
+(3) Events are detected accurately on category-level word time series, due to richer semantics and less noise. 
+(4) Experiment verifies the quality of category-level topics extracted from knowledge base, and the further study on the benchmark \textit{Edinburgh twitter corpus} validates the effectiveness of our proposed transfer learning method for event detection.
 \textsc{TransDetector} achieves high accuracy, promoting the precision by 9\% without  sacrificing the recall rate.
 %另外，我们还标注了事件，使其语义可理解。以及LTDetector是efficient的。
 
@@ -151,7 +163,7 @@ Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million 
                 \includegraphics[width=.42\columnwidth]{img/initializationExample.pdf}
                 \label{fig:NSinitializaton}
         }
-        \caption{(a)\textsc{LTDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{LTDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events.;(b)Illustration on how to initialize history states from Wikipedia, taking \textit{Military} as an example.}
+        \caption{(a)\textsc{TransDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{TransDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events.;(b)Illustration on how to initialize history states from Wikipedia, taking \textit{Military} as an example.}
 \end{figure}
 
 
@@ -388,6 +400,7 @@ That means the term \textit{shooting} is highly related to the category \textit{
 %To prevent the overclaim of rare word by chi-square statitistcs, the word frequency is introduced as a supplement\cite{liu2009imbalanced}, as shown in line \ref{alg:line10inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
 Finally, we can get the category's history state, which are  composed by the category related words and their corresponding importance.
 %history states衡量一个词在考虑完整历史信息的情况下，对于一个类别的重要程度，例如在military类别下面；从某种程度上讲，history state从knowledge base中抽取了对于该类别的重要特征，有助于我们将它应用到text stream当中。
+\setlength{\textfloatsep}{3pt}% Remove \textfloatsep
 \begin{algorithm}[h]
 \scriptsize
 \caption{History State Initialization from Knowledge Base}
@@ -606,7 +619,7 @@ Finally, \textsc{TransDetector} gets the detected events \(\{(\mathcal{C}_{c,t,i
 
 
 \section{Experiments}
-\subsection{Effects of History States and Recent States}
+\subsection{Data Sets}
 In this subsection, we demonstrate the effectiveness of \textit{history states} initialized from knowledge base and \textit{recent states} learned by transfer learning. 
 
 \textbf{Knowledge Base.} 
@@ -624,69 +637,80 @@ We collected the tweets' contents according to the IDs with the help of Twitter 
 Though we cannot get the whole dataset due to the limit of Twitter API, after necessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which spans identically from 2011/06/30 to 2011/09/15.
 More details of the original dataset are described in \cite{petrovic2010edinburgh}.
 
-\textbf{History States and Recent States.} 
-The history states are initialized on the pre-defined categories on the knowledge base as Algorithm \ref{alg:normalStatesInit}.
-For \textsc{HS-Prior-LDA}, \(K\) is set to be 200, which means \textsc{HS-Prior-LDA} learned 100 history-state-like topics and 100 other topics.
-After cross-validated grid-search, \(\lambda\) is set to be 12.8. The other parameters are set as \(\alpha=0.1\), \(\beta=0.005\).
-We run \textsc{HS-Prior-LDA} window by window on text stream, and learn specific categories' recent states.
+\subsection{Effects of Categroy-Level Topics}
+The category-level topics are initialized on the pre-defined categories from the knowledge base as Algorithm \ref{alg:normalStatesInit}.
 %This process is illustrated by Table \ref{tbl:historyStates}. 
 
+\textbf{Evaluation Metrics.}
 We compare the topic coherence of history states with the topics learned from Wikipedia by LDA in terms of NPMI\cite{Rder2015ExploringTS}.
 Different from traditional experiments that only compute the topic coherence of top words, we want to check whether  it can hold for more words.
 Due to the limit of NPMI computing module\footnote{\url{https://github.com/AKSW/Palmetto}}, which computes the coherence of up to 10 words each time, we compute NPMI on the combination of top five words with each next five words as Table \ref{tbl:NPMIDetails}.
+
+\textbf{Results.}
 Observe that even for the combination of 96th to 100th words with the top five words in \textit{Aviation}'s history state, NPMI=0.131 shows that the topic coherence still holds well without drifting.
 More generally, Figure \ref{fig:NPMI} illustrates that the history states are much more stable than the topics learned by LDA.
 Taking the group 10 (the combination of 56th to 60th words with the top five words) as an example, the median one of history states performs better than all those learned by LDA. 
 
 Since the history states extracted from knowledge base is stable and topic coherence, 
 
+%\hlgreen{TODO: add a new table, containing a topic generated by BTM, which is most similar to the extracted topic from KB.}
+\begin{table}[h]
+\setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
+\setlength{\belowcaptionskip}{0.cm}
+\centering
+\caption{Top words' topic coherence of \textit{Aviation}'s history state. * means the group also contains the five top words \textit{aircraft}, \textit{air}, \textit{airport}, \textit{flight}, and \textit{airline}, but we don't show them in table to save space. NPMI is computed on ten words (a combination of words in each row with the five top words).}
+\scalebox{0.65}{
+\begin{tabular}{|c|l|l|l !{\vrule width 1pt} c|l|l|l|}
+\hline
+\multicolumn{4}{|c!{\vrule width 1pt}}{Category-Level Topics extracted from Wikipedia by \textsc{TransDetector}} & \multicolumn{4}{c|}{Topics Learned from Wikipedia by LightLDA}    \\ \hline
+Group ID& \#words*  & words  & NPMI & Group ID& \#words*& words & NPMI \\ \hline
+-1 & 1-5 & aircraft air airport flight airline &  & -1 & 1-5 & engine aircraft car air power & \\ \hline
+0 & 6-10 & airlines aviation flying pilot squadron &  0.113 & 0 & 6-10 & design flight model production speed & 0.112\\ \hline
+1 & 11-15 &flights pilots raf airways fighter & 0.155 & 1 & 11-15 &system vehicle cars engines mm & 0.062\\ \hline
+2 & 16-20 &boeing runway force crashed flew   & 0.092 & 2 & 16-20 & fuel vehicles designed models type & 0.072\\ \hline
+3 & 21-25 &airfield landing passengers plane aerial & 0.179 & 3 & 21-25 & version front produced rear electric & 0.035\\ \hline
+4 & 26-30 &bomber radar wing bombers crash & 0.137 & 4 & 26-30 & space control motor standard development & 0.085\\ \hline
+5 & 31-35 &airbus airports operations jet helicopter & 0.189 & 5 & 31-35 & film range light using available & -0.002\\ \hline
+6 & 36-40 &squadrons base flown havilland crew & 0.088 & 6 & 36-40 & wing powered wheel weight launch & 0.087\\ \hline
+7 & 41-45 &combat luftwaffe aerodrome carrier fokker & 0.159 & 7 & 41-45 & developed low test ford cylinder & 0.007\\ \hline
+8 & 46-50 &planes fly engine takeoff fleet & 0.186 & 8 & 46-50 & equipment side pilot hp aviation & 0.091\\ \hline
+9 & 51-55 &fuselage helicopters aviator naval aero & 0.157 & 9 & 51-55 & systems us sold body drive & -0.051\\ \hline
+10 & 56-60 &glider command training balloon faa & 0.166 & 10 & 56-60 & gear introduced class safety seat & 0.069\\ \hline
+\(\cdots\) & \(\cdots\) &\(\cdots\) &\(\cdots\) & \(\cdots\) & \(\cdots\) &\(\cdots\) &\(\cdots\)\\ \hline
+18 & 96-100 &scheduled carriers military curtiss biplane &0.131 & 18 & 96-100 & transmission special replaced limited different & 0.059\\ \hline
+19 & 101-105 &accident engines iaf albatross rcaf &0.068 & 19 & 101-105 & features machine nuclear even unit & 0.011\\ \hline
+\end{tabular}
+}
+\label{tbl:NPMIDetails}
+\end{table}
+
+\begin{figure}[h]
+	\setlength{\abovecaptionskip}{0.cm}
+	\setlength{\belowcaptionskip}{0.cm}
+        \centering
+        \includegraphics[width=1.0\columnwidth]{img/NPMI.pdf}
+        \caption{The variable that has the greatest impact on the outcome is its newsworthiness.}
+        \label{fig:NPMI}
+\end{figure}
+
+\textbf{Category-Level Topics Learned from Microblog Stream.}
+For Trans-LDA, \(K\) is set to be 200, which means Trans-LDA learned 100 history-state-like topics and 100 other topics.
+After cross-validated grid-search, \(\lambda\) is set to be 12.8. The other parameters are set as \(\alpha=0.1\), \(\beta=0.005\).
+We run \textsc{Trans-LDA} window by window on text stream, and learn specific categories' topics.
+
+
+
+
 %如图（topic）中，能够从Military*中学习出tweet（20110728）话题中包含libyan。
 
 
 %We use 20newsgroups\cite{lang1995newsweeder} dataset\footnote{\url{http://qwone.com/~jason/20Newsgroups}} to check the effects of normal states initialization.
 
-
-\begin{comment}
-\begin{table}[]
-\scriptsize
-\centering
-\caption{Normal State's cateogries corresponding to the 20-newsgroups corpus, and the F1 score on the classification task}
-\label{my-label}
-\begin{tabular}{|l|l|}
-\hline
-comp.graphics            & Computer graphics      \\ \hline
-comp.os.ms-windows.misc  & Microsoft Windows      \\ \hline
-comp.sys.ibm.pc.hardware & IBM personal computers \\ \hline
-comp.sys.mac.hardware    & Macintosh computers    \\ \hline
-comp.windows.x           & X Window System        \\ \hline
-rec.autos                & Automobiles            \\ \hline
-rec.motorcycles          & Motorcycles            \\ \hline
-rec.sport.baseball       & Baseball               \\ \hline
-rec.sport.hockey         & Hockey                 \\ \hline
-sci.crypt                & Cryptography           \\ \hline
-sci.electronics          & Electronics            \\ \hline
-sci.med                  & Medicine               \\ \hline
-sci.space                & Outer space            \\ \hline
-misc.forsale             & Sales                  \\ \hline
-talk.politics.misc       & Politics               \\ \hline
-talk.politics.guns       & Gun politics          \\ \hline
-talk.politics.mideast    & Middle East           \\ \hline
-talk.religion.misc       & Religion               \\ \hline
-alt.atheism              & Atheism                \\ \hline
-soc.religion.christian   & Christians             \\ \Xhline{3\arrayrulewidth}
-LDA & 0.74\\ \hline
-BOW & 0.84\\ \hline
-doc2vec & 0.73\\ \hline
-NS-Prior-LDA & 0.89\\ \hline
-\end{tabular}
-\end{table}
-\end{comment}
-
 \begin{comment}
 \begin{table}[]
 \tiny
 \centering
-\caption{My caption}
+\caption{Normal State's cateogries corresponding to the 20-newsgroups corpus, and the F1 score on the classification task}
 \label{my-label}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -724,49 +748,6 @@ In total &  &  &  & \\ \hline
 \end{figure}
 \end{comment}
 
-%TODO 这个table需要增加BTM生成的和aviation最相近的一个topic的情况。
-%\hlgreen{TODO: add a new table, containing a topic generated by BTM, which is most similar to the extracted topic from KB.}
-\begin{table}[]
-\setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
-\setlength{\belowcaptionskip}{0.cm}
-\centering
-\caption{Top words' topic coherence of \textit{Aviation}'s history state. * means the group also contains the five top words \textit{aircraft}, \textit{air}, \textit{airport}, \textit{flight}, and \textit{airline}, but we don't show them in table to save space. NPMI is computed on ten words (a combination of words in each row with the five top words).}
-\scalebox{0.65}{
-\begin{tabular}{|c|l|l|l !{\vrule width 1pt} c|l|l|l|}
-\hline
-\multicolumn{4}{|c!{\vrule width 1pt}}{Category-Level Topics extracted from Wikipedia by \textsc{TransDetector}} & \multicolumn{4}{c|}{Topics Learned from Wikipedia by LightLDA}    \\ \hline
-Group ID& \#words*  & words  & NPMI & \#group* & Group ID& words & NPMI \\ \hline
--1 & 1-5 & aircraft air airport flight airline &  & -1 & 1-5 & engine aircraft car air power & \\ \hline
-0 & 6-10 & airlines aviation flying pilot squadron &  0.113 & 0 & 6-10 & design flight model production speed & 0.112\\ \hline
-1 & 11-15 &flights pilots raf airways fighter & 0.155 & 1 & 11-15 &system vehicle cars engines mm & 0.062\\ \hline
-2 & 16-20 &boeing runway force crashed flew   & 0.092 & 2 & 16-20 & fuel vehicles designed models type & 0.072\\ \hline
-3 & 21-25 &airfield landing passengers plane aerial & 0.179 & 3 & 21-25 & version front produced rear electric & 0.035\\ \hline
-4 & 26-30 &bomber radar wing bombers crash & 0.137 & 4 & 26-30 & space control motor standard development & 0.085\\ \hline
-5 & 31-35 &airbus airports operations jet helicopter & 0.189 & 5 & 31-35 & film range light using available & -0.002\\ \hline
-6 & 36-40 &squadrons base flown havilland crew & 0.088 & 6 & 36-40 & wing powered wheel weight launch & 0.087\\ \hline
-7 & 41-45 &combat luftwaffe aerodrome carrier fokker & 0.159 & 7 & 41-45 & developed low test ford cylinder & 0.007\\ \hline
-8 & 46-50 &planes fly engine takeoff fleet & 0.186 & 8 & 46-50 & equipment side pilot hp aviation & 0.091\\ \hline
-9 & 51-55 &fuselage helicopters aviator naval aero & 0.157 & 9 & 51-55 & systems us sold body drive & -0.051\\ \hline
-10 & 56-60 &glider command training balloon faa & 0.166 & 10 & 56-60 & gear introduced class safety seat & 0.069\\ \hline
-\(\cdots\) & \(\cdots\) &\(\cdots\) &\(\cdots\) & \(\cdots\) & \(\cdots\) &\(\cdots\) &\(\cdots\)\\ \hline
-18 & 96-100 &scheduled carriers military curtiss biplane &0.131 & 18 & 96-100 & transmission special replaced limited different & 0.059\\ \hline
-19 & 101-105 &accident engines iaf albatross rcaf &0.068 & 19 & 101-105 & features machine nuclear even unit & 0.011\\ \hline
-\end{tabular}
-}
-\label{tbl:NPMIDetails}
-\end{table}
-
-%TODO figure2需要增加BTM的情况，以及要用盒形图表示
-\begin{figure}
-	\setlength{\abovecaptionskip}{0.cm}
-	\setlength{\belowcaptionskip}{0.cm}
-        \centering
-        \includegraphics[width=1.0\columnwidth]{img/NPMI.pdf}
-        \caption{Effectiveness of history state in terms of NPMI}
-        \label{fig:NPMI}
-\end{figure}
-
-
 \begin{comment}
 \begin{table}
 \centering
@@ -787,7 +768,7 @@ Group ID& \#words*  & words  & NPMI & \#group* & Group ID& words & NPMI \\ \hlin
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
 \centering
-\caption{Category-Level Topics extracted from knowledge base and the corresponding topics on microblog stream learned from CTrans-LDA, taking the categories \textit{Aviation},  \textit{Health}, \textit{Middle East}, \textit{Military}, and \textit{Mobile Phones} as examples. The words in \textbf{\textit{bold italic}} font are newly learned on the microblog stream by the transfer learning, which semantic meanings are verified consistent with the categories; while the words in normal font play the role as the bridge in transfer learning, and appear in the both category-level topics in two domains.}
+\caption{Category-Level Topics extracted from knowledge base and the corresponding topics on microblog stream learned from Trans-LDA, taking the categories \textit{Aviation},  \textit{Health}, \textit{Middle East}, \textit{Military}, and \textit{Mobile Phones} as examples. The words in \textbf{\textit{bold italic}} font are newly learned on the microblog stream by the transfer learning, which semantic meanings are verified consistent with the categories; while the words in normal font play the role as the bridge in transfer learning, and appear in the both category-level topics in two domains.}
 \scalebox{0.8}{
 \begin{tabular}{|cc|cc|cc|cc|cc|cc|}
 \hline
@@ -810,10 +791,10 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 \label{tbl:historyStates}
 \end{table*}
 %TODO: add the top words in the category-level topic 
-\hlgreen{TODO: add the top words of the category-level topic in each window of microblog stream AFTER Table 2.}
+%\hlgreen{TODO: add the top words of the category-level topic in each window of microblog stream AFTER Table 2.}
 
 %TODO: add the effect of transfer learning by using text classification, compared with fastText and SVM.
-\hlgreen{TODO: add the effect of transfer learning by using text classification, compared with fastText and SVM.}
+%\hlgreen{TODO: add the effect of transfer learning by using text classification, compared with fastText and SVM.}
 \begin{comment}
 \begin{figure*}
     \label{fig:algorithm}
@@ -823,36 +804,74 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 \end{comment}
 
 \subsection{Effects of Event Detection}
-\textbf{Baselines Methods.} We compare our proposed method against the following methods, Twevent\cite{Twevent2012}, BurstyBTM\cite{Yan:2015wm}, LSH\cite{Petrovic:2010uj}, EDCoW\cite{Weng:2011wz}, TimeUserLDA\cite{Diao:2012wj}, and UMass System\cite{Allan:2000wu}, which are mentioned in the Section \ref{sec:relatedWorks}.
+\textbf{Baselines Methods.} We compare our proposed method against the following methods, Twevent\cite{Twevent2012}, BurstyBTM\cite{Yan:2015wm}, LSH\cite{Petrovic:2010uj}, EDCoW\cite{Weng:2011wz}, and TimeUserLDA\cite{Diao:2012wj}, which are mentioned in the Section \ref{sec:relatedWorks}.
 We implement these competing methods based on the open source community versions, e.g. EDCoW\footnote{\url{https://github.com/Falitokiniaina/EDCoW}}, or the authors' releases, e.g. BurstyBTM\footnote{\url{https://github.com/xiaohuiyan/BurstyBTM}}.
+The above methods are set carefully according to the descriptions in the papers.
+More precisely, (1) for LSH, 13 bits per hash table, 20 hash tables are set, and top 500 clusters with high entropy are selected as the event candidates; (2) for Twevent, the number of candidate bursty segments is set to be the square root of the window size, the newsworthiness threshold is set to be 4, and 375 candidate events are detected; (3) for EDCoW, the tunable parameter \(\gamma\) value is set to be 40, and 192 bursty ``phrases" are found for evaluation; (4) for TimeUserLDA, the topic number is set to be 500, and the most 100 bursty topics are selected as candidate events; (5) for BurstyBTM, the topic number is set to be 200, which is also the number of bursty topics in the model.
+The information about the number of events to be evaluated is listed in Table \ref{tbl:overall}, where TransDetector detects 457 events after filtering out too niche events that contain less than 20 tweets. 
 
-\textbf{Evaluation Metrics.} 
+\textbf{Benchmarks and Evaluation Metrics.} 
+The evaluation is conducted on two benchmarks.
 The first benchmark on \textit{Edinburgh twitter corpus} contains 27 manually labeled events\cite{petrovic2013can}\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/Newswire_Events.tar.gz}}, which all exist in our rebuilt dataset on the \textit{Edinburgh twitter}'s IDs.
 These labeled events focus on the events that are both mentioned in twitter and newswire,e.g. \textit{``Oslo Attacks"} and \textit{``US Increasing Debt Ceiling"}, but still miss many important events such as \textit{``Hurricane Irene"}, \textit{``Al-Qaida's No. 2 Leader Being Killed"}, and popular events such as \textit{``Harry Potter and the Deathly Hallows (Part 2)"}.
-To enlarge the ground truth of realistic events, we manually evaluate the candidate events detected by LTDetector, Twevent, EDCoW, BurstyBTM, and TimeUserLDA, and  use the labeled events as the second benchmark.
-We use precision and recall to evaluate each method on both benchmarks.
+To include these important events and enlarge the ground truth of realistic events pool, we build the second benchmark carefully.
+We manually evaluate the candidate events detected by LSH,  \textsc{TransDetector}, Twevent, EDCoW, BurstyBTM, and TimeUserLDA, with the help of the Wikipedia Current Event Portal\footnote{\url{https://en.wikipedia.org/wiki/Portal:Current_events}} and a local search engine built on Lucene.
+The labeling process generates the Benchmark2, and contains 395 events.
+We use precision and recall to evaluate each method on both benchmarks, and utilize the DERate(Duplicate Event Rate) metric\cite{Twevent2012} to measure the readability of detected events.
+The smaller the metric DERate, the less duplicate events to be filtered out in the application.
 
-%TODO LSH-FSD\cite{Petrovic:2010uj}没有评测FSD的情况，我们也可以提一句，我们不评测FSD，我们只评测检测出的事件是否是真实的事件。
-\hlgreen{TODO: check the number of detected events.}
+%LSH-FSD\cite{Petrovic:2010uj}没有评测FSD的情况，我们也可以提一句，我们不评测FSD，我们只评测检测出的事件是否是真实的事件。
+
+
+\textbf{Results.}
+%\chinese{我们需要说明几个问题。1，在Benchmark2上，事件有395个；LSH能够检测到3337个聚类簇，判断它是否命中我们采用比较聚类簇中心的方法，}
+In general, our method is better than the existing methods in terms of precision and recall, only sacrificing in the DERate slightly, as shown in Table \ref{tbl:overall}. 
+This is because an event could be grouped into multiple categories (e.g. the event ``S\&P downgrade US credit rating", related to the politics category and the financial category simultaneously), but is not a problem as the method \textsc{TrasnDetector} has already achieved the high precision and recall. 
+
+Comparing to \textsc{TrasnDetector}, the existing methods are suffered from having to choose between precision and recall, but not both. 
+Taking the method Twevent as an example, which also utilizes the knowledge base for promoting the event detection performance, it has three parameters to trade off.
+The variable that has the greatest impact on the outcome is its newsworthiness. 
+
+
+
 \begin{table}[h]
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
 \centering
 \caption{Overall Performance on Event Detection}
+
 \scriptsize
-\scalebox{0.95}{
-    \begin{tabular}{|l|l|l|l|l|l|}
+\scalebox{1}{
+\begin{threeparttable}  
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
-    Method & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark1\end{tabular} & \begin{tabular}[c]{@{}l@{}}Precision@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}Recall@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}F@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}l@{}}DERate\\(Duplicate \\ Event Rate)\end{tabular} \\ \hline
-    LSH & 0.824 & 0.095 & 0.803 & - & 0.302 \\ \hline
-    TimeUserLDA & 0.353 & 0.536 & 0.071 & - & 0.054 \\ \hline
-    Twevent & 0.824 & 0.697 & 0.641 & - & 0.113 \\ \hline
-    EDCoW & 0.412 & 0.756 & 0.119 & - & 0.290 \\ \hline
-    BurstyBTM & 0.647 & 0.809 & 0.170 & - & 0.045 \\ \hline
-    \textsc{TransDetector} & 1.000 & 0.894 & 0.950 & - & 0.042 \\ \hline
+    Method & \begin{tabular}[c]{@{}c@{}}Number of\\Events to \\ be Evaluated \end{tabular} & \begin{tabular}[c]{@{}c@{}}Recall@ \\ Benchmark1\end{tabular}& \begin{tabular}[c]{@{}c@{}}Precision@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}c@{}}Recall@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}c@{}}F@ \\ Benchmark2\end{tabular} & \begin{tabular}[c]{@{}c@{}}DERate\tnote{a}\ \ (Duplicate\\ Event Rate)@\\ Benchmark2\end{tabular} \\ \hline
+    LSH & 500 & 0.704 & 0.788 & 0.651 & 0.713 & 0.348 \\ \hline
+    TimeUserLDA & 100 & 0.370 & 0.790 & 0.177 & 0.289 & 0.114 \\ \hline
+    Twevent & 375 &  0.741 & 0.808 & 0.658 & 0.725 & 0.142 \\ \hline
+    EDCoW & 192 & 0.556 & 0.714 & 0.258 & 0.379 & 0.255 \\ \hline
+    BurstyBTM & 200 & 0.667 & 0.825 & 0.384 & 0.497 & \textbf{0.079} \\ \hline
+    \textsc{TransDetector} & 457 & \textbf{0.889} & \textbf{0.912} & \textbf{0.876} & \textbf{0.894} & 0.170 \\ \hline
     \end{tabular}
+
+\begin{tablenotes}  
+\item[a] DERate = (the number of duplicate events) / (the total number of detected realistic events)\cite{Twevent2012}
+\end{tablenotes}  
+\end{threeparttable}  
 }
+\label{tbl:overall}
 \end{table}
+
+\begin{figure}[h]
+	\setlength{\abovecaptionskip}{0.cm}
+	\setlength{\belowcaptionskip}{0.cm}
+        \centering
+        \includegraphics[width=1.0\columnwidth]{img/barchartOnBenchmark1.pdf}
+        \caption{The relation between the recall and the event size}
+        \label{fig:Benchmark1}
+\end{figure}
+
 
 \begin{table}
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
@@ -862,15 +881,15 @@ We use precision and recall to evaluate each method on both benchmarks.
 \label{my-label}
 \scalebox{0.77}{
 \begin{threeparttable}  
-\begin{tabular}{|c|l|l|c|l|l|l|l|l|l|}
+\begin{tabular}{|c|l|l|c|c|c|c|c|c|c|}
 \hline
 \multirow{2}{*}{Date} & \multirow{2}{*}{Event key words} & \multirow{2}{*}{Representative event tweet} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Number of \\ event tweet\end{tabular}} & \multicolumn{6}{c|}{Methods\tnote{a}} \\ \cline{5-10} 
  &  &  &  & L & TU & TW & E & B & TD \\ \hline
-7/22/11 & \begin{tabular}[c]{@{}l@{}}Norway, Oslo,\\ attacks, bombing\end{tabular} & \begin{tabular}[c]{@{}l@{}}Terror Attacks Devastate Norway: A bomb ripped through \\ government offices in Oslo and a gunman... http://dlvr.it/cLbk8\end{tabular} & 557 & \checkmark &  &  &  &  &  \\ \hline
-7/23/11 & Gunman, rink & \begin{tabular}[c]{@{}l@{}}Gunman Kills Self, 5 Others at Texas Roller Rink \\ http://dlvr.it/cLcTH\end{tabular} & 43 & \checkmark &  &  &  &  &  \\ \hline
-7/26/11 & \begin{tabular}[c]{@{}l@{}}Kandahar, mayor, \\ suicide, attack\end{tabular} & \begin{tabular}[c]{@{}l@{}}TELEGRAPH{]}: Kandahar mayor killed by Afghan suicide \\ bomber: The mayor of Kandahar, the biggest city in south \_\end{tabular} & 47 & \checkmark &  &  &  &  &  \\ \hline
-7/28/11 & Ft., Hood, attack & Possible Ft. Hood Attack Thwarted http://t.co/BSJ33hk & 52 & \checkmark &  &  &  &  &  \\ \hline
-7/28/11 & \begin{tabular}[c]{@{}l@{}}Libyan, rebel, \\ gunned\end{tabular} & \begin{tabular}[c]{@{}l@{}}Libyan rebel chief gunned down in Benghazi \\ http://sns.mx/prfvy1\end{tabular} & 44 & \checkmark &  &  &  &  &  \\ \hline
+7/22/11 & \begin{tabular}[c]{@{}l@{}}Norway, Oslo,\\ attacks, bombing\end{tabular} & \begin{tabular}[c]{@{}l@{}}Terror Attacks Devastate Norway: A bomb ripped through \\ government offices in Oslo and a gunman... http://dlvr.it/cLbk8\end{tabular} & 557 & \checkmark & \checkmark & \checkmark &  &  &  \\ \hline
+7/23/11 & Gunman, rink & \begin{tabular}[c]{@{}l@{}}Gunman Kills Self, 5 Others at Texas Roller Rink \\ http://dlvr.it/cLcTH\end{tabular} & 43 & \checkmark & - &  &  &  &  \\ \hline
+7/26/11 & \begin{tabular}[c]{@{}l@{}}Kandahar, mayor, \\ suicide, attack\end{tabular} & \begin{tabular}[c]{@{}l@{}}TELEGRAPH{]}: Kandahar mayor killed by Afghan suicide \\ bomber: The mayor of Kandahar, the biggest city in south \_\end{tabular} & 47 & \checkmark & - &  &  &  &  \\ \hline
+7/28/11 & Ft., Hood, attack & Possible Ft. Hood Attack Thwarted http://t.co/BSJ33hk & 52 & \checkmark & - &  &  &  &  \\ \hline
+7/28/11 & \begin{tabular}[c]{@{}l@{}}Libyan, rebel, \\ gunned\end{tabular} & \begin{tabular}[c]{@{}l@{}}Libyan rebel chief gunned down in Benghazi \\ http://sns.mx/prfvy1\end{tabular} & 44 & \checkmark & - &  &  &  &  \\ \hline
 \end{tabular}
 
 \begin{tablenotes}  
@@ -880,11 +899,6 @@ We use precision and recall to evaluate each method on both benchmarks.
 }
 \end{table}
 
-
-\textbf{Overall Performances.}
-\begin{CJK*}{UTF8}{gbsn}
-    中文范例！超级长的一句中文    中文范例！超级长的一句中文    中文范例！超级长的一句中文    中文范例！超级长的一句中文
-\end{CJK*}
 
 \begin{comment}
 Table 1 reports the number of events
@@ -909,7 +923,6 @@ topic (e.g., the event). Two tweet segments about the same event
 are therefore have higher chance to be clustered together.
 \end{comment}
 
-\textbf{Discussions.} 
 %An accurate recent states learning leads to accurate event detection.
 \begin{comment}
 These methods work in four ways. 
@@ -924,8 +937,6 @@ As designed for First Story Detection task (one of the Topic Detection and Track
 \begin{comment}
 20-newsgroup\footnote{http://qwone.com/~jason/20Newsgroups/}
 \end{comment}
-
-
 
 \section{Conclusions \& Future Work}
 Knowledge base is constructed elaborately and contains rich information, which can benefit the not-well-organized text stream. 

@@ -1,0 +1,163 @@
+,eventName,date,#tweets,group,detected,method
+0,S&P downgrade US credit rating,05/08/11,656.0,>200,1.0,LSH
+1,S&P downgrade US credit rating,05/08/11,656.0,>200,1.0,TransDetector
+2,S&P downgrade US credit rating,05/08/11,656.0,>200,1.0,Twevent
+3,S&P downgrade US credit rating,05/08/11,656.0,>200,1.0,EDCoW
+4,S&P downgrade US credit rating,05/08/11,656.0,>200,1.0,BurstyBTM
+5,S&P downgrade US credit rating,05/08/11,656.0,>200,1.0,TimeUserLDA
+6,Atlantis shuttle lands,21/07/11,595.0,>200,1.0,LSH
+7,Atlantis shuttle lands,21/07/11,595.0,>200,1.0,TransDetector
+8,Atlantis shuttle lands,21/07/11,595.0,>200,1.0,Twevent
+9,Atlantis shuttle lands,21/07/11,595.0,>200,1.0,EDCoW
+10,Atlantis shuttle lands,21/07/11,595.0,>200,1.0,BurstyBTM
+11,Atlantis shuttle lands,21/07/11,595.0,>200,1.0,TimeUserLDA
+12,US increases debt ceiling,25/07/11,485.0,>200,1.0,LSH
+13,US increases debt ceiling,25/07/11,485.0,>200,1.0,TransDetector
+14,US increases debt ceiling,25/07/11,485.0,>200,1.0,Twevent
+15,US increases debt ceiling,25/07/11,485.0,>200,1.0,EDCoW
+16,US increases debt ceiling,25/07/11,485.0,>200,1.0,BurstyBTM
+17,US increases debt ceiling,25/07/11,485.0,>200,1.0,TimeUserLDA
+18,Plane with Russian hocky team Lokomotiv crashes,07/09/11,286.0,>200,1.0,LSH
+19,Plane with Russian hocky team Lokomotiv crashes,07/09/11,286.0,>200,1.0,TransDetector
+20,Plane with Russian hocky team Lokomotiv crashes,07/09/11,286.0,>200,1.0,Twevent
+21,Plane with Russian hocky team Lokomotiv crashes,07/09/11,286.0,>200,0.0,EDCoW
+22,Plane with Russian hocky team Lokomotiv crashes,07/09/11,286.0,>200,1.0,BurstyBTM
+23,Plane with Russian hocky team Lokomotiv crashes,07/09/11,286.0,>200,0.0,TimeUserLDA
+24,Amy Winehouse dies,23/07/11,283.0,>200,1.0,LSH
+25,Amy Winehouse dies,23/07/11,283.0,>200,1.0,TransDetector
+26,Amy Winehouse dies,23/07/11,283.0,>200,1.0,Twevent
+27,Amy Winehouse dies,23/07/11,283.0,>200,1.0,EDCoW
+28,Amy Winehouse dies,23/07/11,283.0,>200,1.0,BurstyBTM
+29,Amy Winehouse dies,23/07/11,283.0,>200,1.0,TimeUserLDA
+30,Gunman opens fire in youth camp in Norway,23/07/11,260.0,>200,1.0,LSH
+31,Gunman opens fire in youth camp in Norway,23/07/11,260.0,>200,1.0,TransDetector
+32,Gunman opens fire in youth camp in Norway,23/07/11,260.0,>200,1.0,Twevent
+33,Gunman opens fire in youth camp in Norway,23/07/11,260.0,>200,1.0,EDCoW
+34,Gunman opens fire in youth camp in Norway,23/07/11,260.0,>200,1.0,BurstyBTM
+35,Gunman opens fire in youth camp in Norway,23/07/11,260.0,>200,1.0,TimeUserLDA
+36,Earthquake in Virginia,24/08/11,246.0,>200,1.0,LSH
+37,Earthquake in Virginia,24/08/11,246.0,>200,1.0,TransDetector
+38,Earthquake in Virginia,24/08/11,246.0,>200,1.0,Twevent
+39,Earthquake in Virginia,24/08/11,246.0,>200,0.0,EDCoW
+40,Earthquake in Virginia,24/08/11,246.0,>200,1.0,BurstyBTM
+41,Earthquake in Virginia,24/08/11,246.0,>200,1.0,TimeUserLDA
+42,First victim of London riots dies,09/08/11,174.0,"(100,200]",0.0,LSH
+43,First victim of London riots dies,09/08/11,174.0,"(100,200]",1.0,TransDetector
+44,First victim of London riots dies,09/08/11,174.0,"(100,200]",0.0,Twevent
+45,First victim of London riots dies,09/08/11,174.0,"(100,200]",1.0,EDCoW
+46,First victim of London riots dies,09/08/11,174.0,"(100,200]",1.0,BurstyBTM
+47,First victim of London riots dies,09/08/11,174.0,"(100,200]",1.0,TimeUserLDA
+48,Explosion in French nuclear plant in Marcoule,12/09/11,135.0,"(100,200]",1.0,LSH
+49,Explosion in French nuclear plant in Marcoule,12/09/11,135.0,"(100,200]",1.0,TransDetector
+50,Explosion in French nuclear plant in Marcoule,12/09/11,135.0,"(100,200]",1.0,Twevent
+51,Explosion in French nuclear plant in Marcoule,12/09/11,135.0,"(100,200]",1.0,EDCoW
+52,Explosion in French nuclear plant in Marcoule,12/09/11,135.0,"(100,200]",1.0,BurstyBTM
+53,Explosion in French nuclear plant in Marcoule,12/09/11,135.0,"(100,200]",1.0,TimeUserLDA
+54,Google announces plans to bury Motorola Mobility,15/08/11,127.0,"(100,200]",1.0,LSH
+55,Google announces plans to bury Motorola Mobility,15/08/11,127.0,"(100,200]",1.0,TransDetector
+56,Google announces plans to bury Motorola Mobility,15/08/11,127.0,"(100,200]",1.0,Twevent
+57,Google announces plans to bury Motorola Mobility,15/08/11,127.0,"(100,200]",0.0,EDCoW
+58,Google announces plans to bury Motorola Mobility,15/08/11,127.0,"(100,200]",1.0,BurstyBTM
+59,Google announces plans to bury Motorola Mobility,15/08/11,127.0,"(100,200]",0.0,TimeUserLDA
+60,NASA announces there might be water on Mars,04/08/11,124.0,"(100,200]",1.0,LSH
+61,NASA announces there might be water on Mars,04/08/11,124.0,"(100,200]",1.0,TransDetector
+62,NASA announces there might be water on Mars,04/08/11,124.0,"(100,200]",1.0,Twevent
+63,NASA announces there might be water on Mars,04/08/11,124.0,"(100,200]",0.0,EDCoW
+64,NASA announces there might be water on Mars,04/08/11,124.0,"(100,200]",1.0,BurstyBTM
+65,NASA announces there might be water on Mars,04/08/11,124.0,"(100,200]",0.0,TimeUserLDA
+66,"Car bomb explodes in Oslo, Norway",22/07/11,114.0,"(100,200]",1.0,LSH
+67,"Car bomb explodes in Oslo, Norway",22/07/11,114.0,"(100,200]",1.0,TransDetector
+68,"Car bomb explodes in Oslo, Norway",22/07/11,114.0,"(100,200]",1.0,Twevent
+69,"Car bomb explodes in Oslo, Norway",22/07/11,114.0,"(100,200]",1.0,EDCoW
+70,"Car bomb explodes in Oslo, Norway",22/07/11,114.0,"(100,200]",1.0,BurstyBTM
+71,"Car bomb explodes in Oslo, Norway",22/07/11,114.0,"(100,200]",1.0,TimeUserLDA
+72,"riots break out in tottenham, england",06/08/11,97.0,"(50,100]",0.0,LSH
+73,"riots break out in tottenham, england",06/08/11,97.0,"(50,100]",1.0,TransDetector
+74,"riots break out in tottenham, england",06/08/11,97.0,"(50,100]",1.0,Twevent
+75,"riots break out in tottenham, england",06/08/11,97.0,"(50,100]",1.0,EDCoW
+76,"riots break out in tottenham, england",06/08/11,97.0,"(50,100]",1.0,BurstyBTM
+77,"riots break out in tottenham, england",06/08/11,97.0,"(50,100]",1.0,TimeUserLDA
+78,Famine declared in Somalia,20/07/11,89.0,"(50,100]",1.0,LSH
+79,Famine declared in Somalia,20/07/11,89.0,"(50,100]",1.0,TransDetector
+80,Famine declared in Somalia,20/07/11,89.0,"(50,100]",1.0,Twevent
+81,Famine declared in Somalia,20/07/11,89.0,"(50,100]",1.0,EDCoW
+82,Famine declared in Somalia,20/07/11,89.0,"(50,100]",1.0,BurstyBTM
+83,Famine declared in Somalia,20/07/11,89.0,"(50,100]",0.0,TimeUserLDA
+84,Terrorist attack in Delhi,05/09/11,72.0,"(50,100]",1.0,LSH
+85,Terrorist attack in Delhi,05/09/11,72.0,"(50,100]",1.0,TransDetector
+86,Terrorist attack in Delhi,05/09/11,72.0,"(50,100]",1.0,Twevent
+87,Terrorist attack in Delhi,05/09/11,72.0,"(50,100]",1.0,EDCoW
+88,Terrorist attack in Delhi,05/09/11,72.0,"(50,100]",1.0,BurstyBTM
+89,Terrorist attack in Delhi,05/09/11,72.0,"(50,100]",0.0,TimeUserLDA
+90,Petrol pipeline explodes in Kenya,12/09/11,56.0,"(50,100]",1.0,LSH
+91,Petrol pipeline explodes in Kenya,12/09/11,56.0,"(50,100]",1.0,TransDetector
+92,Petrol pipeline explodes in Kenya,12/09/11,56.0,"(50,100]",1.0,Twevent
+93,Petrol pipeline explodes in Kenya,12/09/11,56.0,"(50,100]",0.0,EDCoW
+94,Petrol pipeline explodes in Kenya,12/09/11,56.0,"(50,100]",0.0,BurstyBTM
+95,Petrol pipeline explodes in Kenya,12/09/11,56.0,"(50,100]",0.0,TimeUserLDA
+96,ferry sinks in zanzibar,10/09/11,41.0,"[0,50]",1.0,LSH
+97,ferry sinks in zanzibar,10/09/11,41.0,"[0,50]",1.0,TransDetector
+98,ferry sinks in zanzibar,10/09/11,41.0,"[0,50]",1.0,Twevent
+99,ferry sinks in zanzibar,10/09/11,41.0,"[0,50]",1.0,EDCoW
+100,ferry sinks in zanzibar,10/09/11,41.0,"[0,50]",0.0,BurstyBTM
+101,ferry sinks in zanzibar,10/09/11,41.0,"[0,50]",0.0,TimeUserLDA
+102,south sudan becomes un member state,14/07/11,33.0,"[0,50]",1.0,LSH
+103,south sudan becomes un member state,14/07/11,33.0,"[0,50]",1.0,TransDetector
+104,south sudan becomes un member state,14/07/11,33.0,"[0,50]",1.0,Twevent
+105,south sudan becomes un member state,14/07/11,33.0,"[0,50]",1.0,EDCoW
+106,south sudan becomes un member state,14/07/11,33.0,"[0,50]",1.0,BurstyBTM
+107,south sudan becomes un member state,14/07/11,33.0,"[0,50]",0.0,TimeUserLDA
+108,South Sudan becomes independent country,11/07/11,33.0,"[0,50]",1.0,LSH
+109,South Sudan becomes independent country,11/07/11,33.0,"[0,50]",1.0,TransDetector
+110,South Sudan becomes independent country,11/07/11,33.0,"[0,50]",1.0,Twevent
+111,South Sudan becomes independent country,11/07/11,33.0,"[0,50]",1.0,EDCoW
+112,South Sudan becomes independent country,11/07/11,33.0,"[0,50]",1.0,BurstyBTM
+113,South Sudan becomes independent country,11/07/11,33.0,"[0,50]",0.0,TimeUserLDA
+114,Betty Ford dies,11/07/11,28.0,"[0,50]",0.0,LSH
+115,Betty Ford dies,11/07/11,28.0,"[0,50]",0.0,TransDetector
+116,Betty Ford dies,11/07/11,28.0,"[0,50]",0.0,Twevent
+117,Betty Ford dies,11/07/11,28.0,"[0,50]",0.0,EDCoW
+118,Betty Ford dies,11/07/11,28.0,"[0,50]",0.0,BurstyBTM
+119,Betty Ford dies,11/07/11,28.0,"[0,50]",0.0,TimeUserLDA
+120,War criminal Goran hadzic arrested,20/07/11,27.0,"[0,50]",0.0,LSH
+121,War criminal Goran hadzic arrested,20/07/11,27.0,"[0,50]",1.0,TransDetector
+122,War criminal Goran hadzic arrested,20/07/11,27.0,"[0,50]",0.0,Twevent
+123,War criminal Goran hadzic arrested,20/07/11,27.0,"[0,50]",1.0,EDCoW
+124,War criminal Goran hadzic arrested,20/07/11,27.0,"[0,50]",0.0,BurstyBTM
+125,War criminal Goran hadzic arrested,20/07/11,27.0,"[0,50]",0.0,TimeUserLDA
+126,Richard Bowes killed in riots in England,11/08/11,27.0,"[0,50]",0.0,LSH
+127,Richard Bowes killed in riots in England,11/08/11,27.0,"[0,50]",1.0,TransDetector
+128,Richard Bowes killed in riots in England,11/08/11,27.0,"[0,50]",0.0,Twevent
+129,Richard Bowes killed in riots in England,11/08/11,27.0,"[0,50]",0.0,EDCoW
+130,Richard Bowes killed in riots in England,11/08/11,27.0,"[0,50]",1.0,BurstyBTM
+131,Richard Bowes killed in riots in England,11/08/11,27.0,"[0,50]",0.0,TimeUserLDA
+132,Indian and Bangladesh sign a border pact,06/09/11,25.0,"[0,50]",1.0,LSH
+133,Indian and Bangladesh sign a border pact,06/09/11,25.0,"[0,50]",0.0,TransDetector
+134,Indian and Bangladesh sign a border pact,06/09/11,25.0,"[0,50]",1.0,Twevent
+135,Indian and Bangladesh sign a border pact,06/09/11,25.0,"[0,50]",0.0,EDCoW
+136,Indian and Bangladesh sign a border pact,06/09/11,25.0,"[0,50]",0.0,BurstyBTM
+137,Indian and Bangladesh sign a border pact,06/09/11,25.0,"[0,50]",0.0,TimeUserLDA
+138,Flight 4896 crash,13/07/11,21.0,"[0,50]",1.0,LSH
+139,Flight 4896 crash,13/07/11,21.0,"[0,50]",1.0,TransDetector
+140,Flight 4896 crash,13/07/11,21.0,"[0,50]",1.0,Twevent
+141,Flight 4896 crash,13/07/11,21.0,"[0,50]",0.0,EDCoW
+142,Flight 4896 crash,13/07/11,21.0,"[0,50]",0.0,BurstyBTM
+143,Flight 4896 crash,13/07/11,21.0,"[0,50]",0.0,TimeUserLDA
+144,First aritficial organ transplant,12/07/11,18.0,"[0,50]",0.0,LSH
+145,First aritficial organ transplant,12/07/11,18.0,"[0,50]",1.0,TransDetector
+146,First aritficial organ transplant,12/07/11,18.0,"[0,50]",0.0,Twevent
+147,First aritficial organ transplant,12/07/11,18.0,"[0,50]",0.0,EDCoW
+148,First aritficial organ transplant,12/07/11,18.0,"[0,50]",0.0,BurstyBTM
+149,First aritficial organ transplant,12/07/11,18.0,"[0,50]",0.0,TimeUserLDA
+150,three men die in riots in england,10/08/11,16.0,"[0,50]",0.0,LSH
+151,three men die in riots in england,10/08/11,16.0,"[0,50]",0.0,TransDetector
+152,three men die in riots in england,10/08/11,16.0,"[0,50]",0.0,Twevent
+153,three men die in riots in england,10/08/11,16.0,"[0,50]",0.0,EDCoW
+154,three men die in riots in england,10/08/11,16.0,"[0,50]",0.0,BurstyBTM
+155,three men die in riots in england,10/08/11,16.0,"[0,50]",0.0,TimeUserLDA
+156,rebels capture interational tripoli airport,21/08/11,13.0,"[0,50]",0.0,LSH
+157,rebels capture interational tripoli airport,21/08/11,13.0,"[0,50]",1.0,TransDetector
+158,rebels capture interational tripoli airport,21/08/11,13.0,"[0,50]",0.0,Twevent
+159,rebels capture interational tripoli airport,21/08/11,13.0,"[0,50]",0.0,EDCoW
+160,rebels capture interational tripoli airport,21/08/11,13.0,"[0,50]",0.0,BurstyBTM
+161,rebels capture interational tripoli airport,21/08/11,13.0,"[0,50]",0.0,TimeUserLDA
