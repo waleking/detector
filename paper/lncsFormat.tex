@@ -9,7 +9,7 @@
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 
-%\usepackage{showframe}%show the margin
+\usepackage{showframe}%show the margin
 %\usepackage{ulem}%used for uwave
 \usepackage{comment}
 \usepackage{subfigure}
@@ -73,8 +73,8 @@
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-%\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
-\title{Leveraging Knowledge Base for Accurate Event Detection on Microblog Stream}
+\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+%\title{Leveraging Knowledge Base for Accurate Event Detection on Microblog Stream}
 \titlerunning{Transfer Learning for Accurate Event Detection}
 %构造（building）一个**词表（找一个词对它更合适的描述），for transfer learning in accurate event detection
 %\title{Constructing Knowledge Base's Category Topics for Transfer Learning in Accurate Microblog Event Detection}
@@ -111,26 +111,28 @@ Many web applications need the accurate event detection technique on microblog s
 Although event detection has been a research topic for a long while\cite{allan1998topic}, event detection in microblog stream is still challenging\cite{atefeh2015survey}.
 According to \cite{huang2016probabilistic}, the characteristics of microblog, which is fast changing, high noise, and short length, raise the challenge.
 
-Knowledge base can be a good supplementary for event detection on microblog stream.
+Knowledge base can be a good supplementary for event detection on microblog stream to address these challenges.
 Different from the not-well-organized microblog stream, knowledge base (e.g. Wikipedia) is constructed elaborately and contains rich information. 
-For example, the microblog message ``Possible Ft. Hood Attack Thwarted (2011-07-28)'' is short, but still comprehensible because the words ``\textit{Ft. Hood}" is included in the wiki page ``\textit{Ft. Hood}", and belongs to the category ``\textit{Military}''.
-By reading these two wiki pages, the model easily understands the example tweet is talking about something related to \textit{Military}.
+For example, the microblog message ``Possible Ft. Hood Attack Thwarted (2011-07-28)'' is short, but still comprehensible because the words ``\textit{Ft. Hood}" is included in the wiki page ``\textit{Ft. Hood}", and belongs to the category ``\textit{Military}'' at a higher conceptual level.
+By regarding these two wiki pages and the word \textit{attack} (also highly related to \textit{Military}), the model easily understands the example tweet is about something related to \textit{Military}.
 In other words, knowledge base enriches the linkages between words, and provides more comprehensive context for microblogs.
 Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information restored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
-%拆成两个小图，中间说明这是transfer learning过后的
-\intextsep=3pt plus 3pt minus 1pt
+Taking the below Figure \ref{fig:hood} as an example, the fluctuation of time series of raw word \textit{hood} is not so obvious to reflect the event happened to the military base \textit{Ft. Hood}.
+After referring to the knowledge base and extracting the time series of word \textit{``hood"} about \textit{``Military"}, it's more vivid to detect the event happened on July 28th, 2011.
+
+\intextsep=0pt plus 0pt minus 0pt
 \begin{figure}[h]
+		\setlength{\abovecaptionskip}{0.cm}
+        \setlength{\belowcaptionskip}{0.cm}
         \centering
         \includegraphics[width=1.0\columnwidth]{img/hood.pdf}
-        %\caption{Hood\footnote{\url{https://en.wikipedia.org/wiki/Naser_Jason_Abdo#Arrest}}\footnote{\url{https://en.wikipedia.org/wiki/Fort_Hood#2011_attack_plot}}}
+        \caption{The comparison of the time series between the raw word \textit{hood} and the \textit{Military} related word \textit{hood}, computed on the \textit{Edinburgh twitter corpus}\cite{petrovic2012using}. The rise on July 28th, 2011 is corresponding to the event mentioned in \url{https://en.wikipedia.org/wiki/Fort_Hood\#2011_attack_plot}.}
         \label{fig:hood}
 \end{figure}
 
-
-
-But it's non-trivial to conduct transfer learning from knowledge base to microblog stream directly.
+The benefit of enriching the semantics for micorblogs is attractive, but it's non-trivial to transfer the knowledge restored in the knowledge base into microblog stream directly.
 The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and acuaretely detecting events.
-What most meet the efficiency demand is Twevent\cite{Twevent2012}, but it's limited to filtering out meaningless microblogs by looking up Wikipedia. Some event,  which may contains the segments not restored in Wikipedia, may be dropped incorrectly.
+What already most meets the efficiency demand is Twevent\cite{Twevent2012}, but it's limited in filtering out meaningless microblogs by looking up Wikipedia. Some event, which contains the segments not restored in Wikipedia, may be dropped by Twevent incorrectly.
 
 In our paper, to balance the performance and the cost of transfer learning, new data structure \textit{KB states} is proposed. 
 It bases on the following facts. 
@@ -140,6 +142,8 @@ And the last page-content map goes into the detail at the word level.
 By considering these three parts together, we can extract a class or category's highly related words (evaluated by chi-square score in Section \ref{subsec:hs_initialization}), and restore them in the newly proposed data structure \textit{history states}.
 In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base. 
 
+\cite{dai2007transferring}.
+
 More than that, we propose a new quick and lightweight probabilistic model KB-Prior-LDA for transfer learning. 
 After deriving KB-Prior-LDA (detailed in Section \ref{subsec:rs_initialization}), it reveals that whether a word in microblog links to a high-level category in knowledge base depends on three factors, the word's score in the category's \textit{KB state}, the linkages of microblogs' other words, the linkages of the word types in the same time window. 
 All these statistics are easy to gain, which leads the model efficient. 
@@ -148,6 +152,8 @@ Since the recent states have filtered out meaningless words, the detected events
 \textsc{KB-Prior-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
 Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million tweets)} validates the effectiveness of our proposed method \textsc{LTDetector}.
 
+
+
 \intextsep=5pt plus 3pt minus 1pt
 \begin{figure}[h]
 	\setlength{\abovecaptionskip}{0.cm}
@@ -155,12 +161,12 @@ Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million 
 	\centering
     \label{fig:subfig} %% label for entire figure
         \subfigure[]{
-                \includegraphics[width=.42\columnwidth]{img/NSDetectorExample.pdf}
+                \includegraphics[width=.50\columnwidth]{img/NSDetectorExample.pdf}
                 \label{fig:modelDesc}
 
         }
         \subfigure[]{
-                \includegraphics[width=.42\columnwidth]{img/initializationExample.pdf}
+                \includegraphics[width=.44\columnwidth]{img/initializationExample.pdf}
                 \label{fig:NSinitializaton}
         }
         \caption{(a)\textsc{TransDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{TransDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events.;(b)Illustration on how to initialize history states from Wikipedia, taking \textit{Military} as an example.}
@@ -206,10 +212,6 @@ In a nutshell, existing works are different from ours, as we transfer the catego
 %\cite{mcminn2013building} leverages LSH, wikipedia to build a large corpus for evaluating event detection on twitter.
 %The unsupervised methods, including UMass\cite{Allan:2000wu} and BurstyBTM\cite{Yan:2015wm}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
 
-
-%The reason why this kind methods cannot achieve high precision and high recall simultaneously lies in that they lack the accumulation of history knowledge. 
-%This kind methods ``understand" the document only by the recent data and the frequencies of the data, but the ``understanding" is not so confident that they still need the specific threshold to help to make decision. 
-
 \textbf{Knowledge Base} Recently, many general knowledge bases and customized knowledge bases are constructed and utilized for different text mining tasks. 
 For example, Probase\cite{wu2012probase} constructs a large general probabilistic \textit{IsA} taxomomy from webpages, and is used for semantic web search, and text classification\cite{wang2014concept}.
 Such kind efforts are also made by DBPedia\cite{auer2007dbpedia}, Yago\cite{fabian2007yago}, and Freebase\cite{bollacker2008freebase}. 
@@ -223,80 +225,10 @@ Event Registry collects the articles by the API of News Feed Service\cite{trampu
 Storybase introduces Wikipedia current events\footnote{\url{https://en.wikipedia.org/wiki/Portal:Current_events}} as the resources for constructing event-and-storyline knowledge base on news articles, which are provided by GDELT project\cite{leetaru2013gdelt}.
 As the news articles may lag behind the microblogs when the emergency of events, it's not enough to detect events from microblog stream by directly applying these customized knowledge bases. 
 
-
-
-%近年来，知识图谱也被广泛应用在了文本挖掘领域，TKDE的文章利用wikipedia将
-
-
-
-%Although \cite{Wurzer:2015wq} points out that UMass\cite{Allan:2000wu} and its variants\cite{Petrovic:2010uj}\cite{petrovic2012using}\cite{Wurzer:2015wq} are the state-of-art systems on the Event Detection task for the newswire data, these systems still suffers from the lack of accuracy to applied on more general cyberspace data, such as tweets, emails, and reddit posts. 
-
-%\textbf{Knowledge Base}. \cite{faralli2015large} propose the Twixonomy Graph. 
-
-
-%Twitter Trending Topic Classification
-%We use PageRank-HITS\cite{Yan:2015wq} algorithm to update score of categories in wikipedia.
-
-%3*4 figures, 0-11 is reorganized in the following order: 0, 1, 4, 5, 8, 9;
-%2, 3, 6, 7, 10, 11;
-\begin{comment}
-\begin{figure*}[ht]
-        \centering
-        \label{fig:subfig} %% label for entire figure
-        \subfigure[\((0.25,0.25,0.25)\)]{
-                \label{fig:subfig:a} %% label for first subfigure a
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph0.pdf}
-        }
-        \subfigure[\((0.5,0.5,0.5)\)]{
-                \label{fig:subfig:b} %% label for second subfigure b
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph1.pdf}
-        } 
-        \subfigure[\((0.25,0.25,0.75)\)]{
-                \label{fig:subfig:c} %% label for third subfigure c
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph4.pdf}
-        }
-        \subfigure[\((0.5,0.5,1.5)\)]{
-                \label{fig:subfig:a} %% label for first subfigure d
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph5.pdf}
-        }
-        \subfigure[\((0.25,0.75,0.75)\)]{
-                \label{fig:subfig:d} %% label for third subfigure e
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph8.pdf}
-        }
-        \subfigure[\((0.5,1.5,1.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure f
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph9.pdf}
-        }\hspace{1in}
-        \subfigure[\((1.5,1.5,1.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure g
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph2.pdf}
-        }
-        \subfigure[\((2.5,2.5,2.5)\)]{
-                \label{fig:subfig:a} %% label for first subfigure h
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph3.pdf}
-        }
-        \subfigure[\((1.5,1.5,2.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure i
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph6.pdf}
-        }
-        \subfigure[\((2.5,2.5,3.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure j
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph7.pdf}
-        }
-        \subfigure[\((1.5,2.5,2.5)\)]{
-                \label{fig:subfig:d} %% label for third subfigure k
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph10.pdf}
-        }
-        \subfigure[\((2.5,3.5,3.5)\)]{
-                \label{fig:subfig:a} %% label for first subfigure l
-                \includegraphics[height=2.14cm]{img/croppedDirichletGraph11.pdf}
-        }\hspace{1in}
-        \caption{Illustration of Dirichlet distribution's probabilistic density on the 3-dimensional simplex when given different priors. (a,b,g,h) the left four subfigures illustrate the probabilistic density when given the symetric priors for Dirichlet distribution; (c,d,i,j) the central subfigures illustrate the probablistic density given ; (e,f,k,l) }
-\end{figure*}
-\end{comment}
-
-
 \section{Proposed Method}
+In this section, we present a novel category-level transfer learning method for event detection, namely \textsc{TransDetector}. 
+Illustrated in Figure \ref{fig:modelDesc}, \textsc{TransDetector} consists of three parts: (1) extracting category-level topics in knowledge base, (2) transfer learning on category-level topics in microblog stream, (3) detecting events from category-level word time series.
+\begin{comment}
 Knowledge base often contains much information about what happened. 
 But the existing RDF model\cite{klyne2006rdf} on knowledge base lacks an efficient mechanism to transfer the information from knowledge base to text stream.  
 With the help of knowledge base's structure (detailed in sec \ref{subsec:hs_initialization}), we provide a  lightweight model to transfer the information in knowledge base to text stream.
@@ -314,6 +246,7 @@ In the example of Figure \ref{fig:modelDesc}, the words \textit{libyan} and \tex
 After processing each time window's data, the words in microblogs can be enriched semantically with knowledge base.
 In this way, the transfer learning model provides richer semantics and less noise for microblog stream, which promotes the accuracy of event detection significantly. 
 The following definitions are the concepts used by the transfer learning model \textsc{TransDetector}. 
+\end{comment}
 
 \begin{rmk}[History State] 
 The history state of the specific category is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(chi(c,w^{(c)}_{i})\) under the category \(c\). 
@@ -888,7 +821,7 @@ Illustrated in Table \ref{tbl:overall} and Figure \ref{fig:Benchmark1}, \textsc{
 \centering
 \caption{Events about \textit{military} detected by systems between 2011-07-22 and 2011-07-28}
 \label{my-label}
-\scalebox{0.77}{
+\scalebox{0.76}{
 \begin{threeparttable}  
 \begin{tabular}{|c|l|l|c|c|c|c|c|c|c|}
 \hline
