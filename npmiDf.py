@@ -45,7 +45,7 @@ def getDataframe():
     #transDetectorTopicNames = [e.split("_")[0] for e in os.listdir("/Users/huangwaleking/Downloads/nt/")]
     for transDetectorTopicName in transDetectorTopicNames:
         transDetectorNPMIfile = "/Users/huangwaleking/Downloads/nt/" + transDetectorTopicName + "_npmi.txt"
-        df = getSeries(transDetectorNPMIfile, transDetectorTopicName, "Category-Level Topics", df)
+        df = getSeries(transDetectorNPMIfile, transDetectorTopicName, "Category-Level Topics in Knowledge Base", df)
 
     return df
 

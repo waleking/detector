@@ -393,7 +393,7 @@ The generative process of CTrans-LDA can be described as follows.
 
 In the above generative process, the line 2(a) is the key point to distinguish CTrans-LDA from LDA\cite{blei2003latent}, where \(\bm{\tau}_k\) is defined by Equation(\ref{eq:wikiPrior}).
 \(K_{KB}\) is the number of pre-defined history-state-like topics, and \(S_k\) is the set of words appeared in the \(k\)-th topic's history state.
-As \cite{wallach2008structured} mentioned that the asymmetric prior distribution can significantly improve the quality of topic modelling, \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\) incorporates history state into the asymmetric prior of the word distribution on topic. 
+As \cite{wallach2008structured} mentioned that the asymmetric prior distribution can significantly improve the quality of topic modelling, \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\) incorporates \textit{category-level topics in knowledge base} into the asymmetric prior of the word distribution on topic. 
 The effect of \(\bm{\tau_k}\) is obvious, e.g., \(\tau_{Military,army}/\tau_{Military,basketball}=203\) leads to that topic \textit{Military} prefers to contain the word \textit{army} other than \textit{basketball}.
 The parameter \(\lambda\) controls how much the learned topics are similar to the history state, which can be chosen by cross-validated grid-search. 
 
