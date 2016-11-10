@@ -9,7 +9,10 @@
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 
-\usepackage{showframe}%show the margin
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}%used for theorem and definition
+%\usepackage{showframe}%show the margin
 %\usepackage{ulem}%used for uwave
 \usepackage{comment}
 \usepackage{subfigure}
@@ -31,6 +34,25 @@
 %Chinese
 \usepackage{CJKutf8}
 \inputencoding{utf8}
+
+%================================================
+%Definition
+\newtheorem{thm}{Theorem}
+
+\newtheoremstyle{exampstyle}
+  {0pt} % Space above
+  {0pt} % Space below
+  {} % Body font
+  {} % Indent amount
+  {\bfseries} % Theorem head font
+  {.} % Punctuation after theorem head
+  {.5em} % Space after theorem head
+  {} % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{exampstyle}
+\newtheorem{rmkWithoutSpacing}[thm]{Definition}
+%================================================
+
 
 %================================================
 %highlight
@@ -75,16 +97,16 @@
 %
 \title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
 %\title{Leveraging Knowledge Base for Accurate Event Detection on Microblog Stream}
-\titlerunning{Transfer Learning for Accurate Event Detection}
+\titlerunning{\ }
 %构造（building）一个**词表（找一个词对它更合适的描述），for transfer learning in accurate event detection
 %\title{Constructing Knowledge Base's Category Topics for Transfer Learning in Accurate Microblog Event Detection}
-%\begin{comment}% for double blind
+\begin{comment}% for double blind
 \author{Weijing Huang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.} \and Tengjiao Wang\inst{1} \and Yazhou Wang\inst{1} }
 \institute{Key Laboratory of High Confidence Software Technologies (Ministry of Education), EECS, Peking University, Beijing, China \\ 
 \path{huangwaleking@gmail.com,{pekingchenwei,tjwang}@pku.edu.cn}\\ 
 \path{pkuwangyz@gmail.com}
 }
-%\end{comment}
+\end{comment}
 
 \maketitle
 
@@ -114,11 +136,11 @@ According to \cite{huang2016probabilistic}, the characteristics of microblog, wh
 Knowledge base can be a good supplementary for event detection on microblog stream to address these challenges.
 Different from the not-well-organized microblog stream, knowledge base (e.g. Wikipedia) is constructed elaborately and contains rich information. 
 For example, the microblog message ``Possible Ft. Hood Attack Thwarted (2011-07-28)'' is short, but still comprehensible because the words ``\textit{Ft. Hood}" is included in the wiki page ``\textit{Ft. Hood}", and belongs to the category ``\textit{Military}'' at a higher conceptual level.
-By regarding these two wiki pages and the word \textit{attack} (also highly related to \textit{Military}), the model easily understands the example tweet is about something related to \textit{Military}.
-In other words, knowledge base enriches the linkages between words, and provides more comprehensive context for microblogs.
+By regarding these wiki information and the word \textit{attack} (also highly related to \textit{Military}), the model easily understands the example tweet is about something related to \textit{Military}.
+In other words, knowledge base enriches the linkages between words and concepts, and provides more comprehensive context for microblogs.
 Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information restored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
 Taking the below Figure \ref{fig:hood} as an example, the fluctuation of time series of raw word \textit{hood} is not so obvious to reflect the event happened to the military base \textit{Ft. Hood}.
-After referring to the knowledge base and extracting the time series of word \textit{``hood"} about \textit{``Military"}, it's more vivid to detect the event happened on July 28th, 2011.
+After transferring the knowledge about \textit{``Military"} into the microblog stream, the time series of word \textit{``hood"} related to \textit{``Military"} is extracted, which is more vivid to detect the event happened on July 28th, 2011.
 
 \intextsep=0pt plus 0pt minus 0pt
 \begin{figure}[h]
@@ -126,54 +148,61 @@ After referring to the knowledge base and extracting the time series of word \te
         \setlength{\belowcaptionskip}{0.cm}
         \centering
         \includegraphics[width=1.0\columnwidth]{img/hood.pdf}
-        \caption{The comparison of the time series between the raw word \textit{hood} and the \textit{Military} related word \textit{hood}, computed on the \textit{Edinburgh twitter corpus}\cite{petrovic2012using}. The rise on July 28th, 2011 is corresponding to the event mentioned in \url{https://en.wikipedia.org/wiki/Fort_Hood\#2011_attack_plot}.}
+        \caption{The comparison of the time series between the raw word \textit{hood} and the \textit{Military} related word \textit{hood}, computed on the \textit{Edinburgh twitter corpus}\cite{petrovic2012using}. The rise of document frequency on July 28th, 2011 is corresponding to the event mentioned in \url{https://en.wikipedia.org/wiki/Fort_Hood\#2011_attack_plot}.}
         \label{fig:hood}
 \end{figure}
 
 The benefit of enriching the semantics for micorblogs is attractive, but it's non-trivial to transfer the knowledge restored in the knowledge base into microblog stream directly.
-The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and acuaretely detecting events.
-What already most meets the efficiency demand is Twevent\cite{Twevent2012}, but it's limited in filtering out meaningless microblogs by looking up Wikipedia. Some event, which contains the segments not restored in Wikipedia, may be dropped by Twevent incorrectly.
+The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and accurately detecting events.
+In existing methods, what meets the demand most is Twevent\cite{Twevent2012}, but it's limited in only treating Wikipedia as a looking-up table and may drop some events incorrectly.
 
-In our paper, to balance the performance and the cost of transfer learning, new data structure \textit{KB states} is proposed. 
+In our paper, to balance the performance and the cost of leveraging knowledge base for event detection, we develop a novel category-level transfer learning method, namely \textsc{TransDetector}.
+It consists of three phases: extracting of category-level topics in knowledge base, conducting transfer learning to get category-level topics in microblog stream, and detecting events from category-level word time series, as illustrated in Figure \ref{fig:modelDesc}.
+We explain the main idea of the three parts in \textsc{TransDetector}, and leave more technique details in Section \ref{sec:TransDetector}.
+(1) For the \textbf{extracting} phase, we propose a structural-guided category-level topics extraction method on the knowledge base, . 
 It bases on the following facts. 
-The knowledge base's three fold structure includes the taxonomy graph (\textit{class} \(\rightarrow\) \textit{subclass}), the category-page bipartite graph (\textit{class} \(\rightarrow\) \textit{instance}), and the page-content map (\textit{instance} \(\rightarrow\) \textit{content}) relations in the knowledge base. 
+The knowledge base has the three fold hierarchical structure, consisting of the taxonomy graph (\textit{class} \(\rightarrow\) \textit{subclass}), the category-page bipartite graph (\textit{class} \(\rightarrow\) \textit{instance}), and the page-content map (\textit{instance} \(\rightarrow\) \textit{content}), as illustrated in Figure \ref{fig:NSinitializaton}.
 In terms of concept level, the latter part is finer than the former. 
 And the last page-content map goes into the detail at the word level. 
-By considering these three parts together, we can extract a class or category's highly related words (evaluated by chi-square score in Section \ref{subsec:hs_initialization}), and restore them in the newly proposed data structure \textit{history states}.
-In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base. 
+By considering these three parts together, we can extract a class or category's highly related words, and restore them in \textit{category-level topics in knowledge base}.
+(2) For the \textbf{conducting transfer learning} phase, we propose a novel probabilistic model CTrans-LDA for transferring the knowledge.
+CTrans-LDA works in the bayesian transfer learning way like \cite{dai2007transferring}, by utilizing the extracted \textit{category-level topics in knowledge base} as the informative priors to bridge two data domains. 
+After running CTrans-LDA, it labels whether a word in a microblog message should link to a category concept in knowledge base.
+Applying CTrans-LDA on more microblogs, it gets the \textit{category-level topics in microblog stream}.
+(3) For the \textbf{detecting} phase, 
 
-\cite{dai2007transferring}.
-
-More than that, we propose a new quick and lightweight probabilistic model KB-Prior-LDA for transfer learning. 
-After deriving KB-Prior-LDA (detailed in Section \ref{subsec:rs_initialization}), it reveals that whether a word in microblog links to a high-level category in knowledge base depends on three factors, the word's score in the category's \textit{KB state}, the linkages of microblogs' other words, the linkages of the word types in the same time window. 
-All these statistics are easy to gain, which leads the model efficient. 
-What KB-Prior-LDA learned is summarized as \textit{recent states}, shown in Figure \ref{fig:modelDesc}.
 Since the recent states have filtered out meaningless words, the detected events on recent states is much more accurate than other methods which don't do the transfer learning.
-\textsc{KB-Prior-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
+\textsc{CTrans-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
 Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million tweets)} validates the effectiveness of our proposed method \textsc{LTDetector}.
 
+%In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base. 
 
 
 \intextsep=5pt plus 3pt minus 1pt
-\begin{figure}[h]
+\begin{figure}
 	\setlength{\abovecaptionskip}{0.cm}
 	\setlength{\belowcaptionskip}{0.cm}
 	\centering
     \label{fig:subfig} %% label for entire figure
-        \subfigure[]{
-                \includegraphics[width=.50\columnwidth]{img/NSDetectorExample.pdf}
+        \subfigure[\textsc{TransDetector}'s Process Flow]{
+                \includegraphics[width=.44\columnwidth]{img/NSDetectorExample.pdf}
                 \label{fig:modelDesc}
 
         }
-        \subfigure[]{
+        \subfigure[Extracting Category-Level Topics in Knowledge Base]{
                 \includegraphics[width=.44\columnwidth]{img/initializationExample.pdf}
                 \label{fig:NSinitializaton}
         }
-        \caption{(a)\textsc{TransDetector}'s process flow, taking \textit{Military} related events in cyberspace as an example. \textsc{TransDetector} initializes the normal states about military from knowledge base, learns the topical words further within the time windows on the target corpus, detects events.;(b)Illustration on how to initialize history states from Wikipedia, taking \textit{Military} as an example.}
+        \caption{(a) \textsc{TransDetector}'s process flow, taking \textit{Military} related events in microblogs as an example. \textsc{TransDetector} includes three phases: extracting category-level topics in knowledge base, conducting transfer learning to get category-level topics in microblog stream, and detecting events from category-level word time series; (b) Illustration on how to extract category-level topics in knowledge base via its three fold hierarchical structure, taking \textit{Military} as an example.}
 \end{figure}
 
+To sum up, the contribution of this paper is mainly in four aspects.
+(1) We propose a structure-guided category-level topics extraction method, which exploits the knowledge base's hierarchical structure to extract categories' highly correlated topics. 
+(2) We develop a probabilistic model CTrans-LDA for category-level transfer learning, which utilizes the word co-occurrences and transfers the knowledge base's category-level topics into microblogs. 
+(3) Events are detected accurately on category-level word time series, due to richer semantics and less noise. 
+(4) Experiment verifies the quality of category-level topics extracted from knowledge base, and the further study on the benchmark \textit{Edinburgh twitter corpus} validates the effectiveness of our proposed transfer learning method for event detection.
 
-%The contribution of this paper is mainly in three aspects.
+
 %(1) We reveal that transfer learning from knowledge base to microblog stream can benefit event detection task.
 %(2) We propose the probability model \textsc{NSDetector}. 
 %The model can combine the history data and the recent data, further determine the arrival new document whether it represents a new event. 
@@ -183,36 +212,30 @@ Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million 
 
 \section{Related Works}
 \label{sec:relatedWorks}
-\textbf{Event Detection.} According to how much data are used, the approaches are divided into two groups: the detection \textit{without extra information}, and the detection by \textit{leveraging extra information}. 
+\textbf{Event Detection.} Based on how much data used, the methods are mainly in two groups, the detection \textit{without extra information} and that by \textit{leveraging extra information}. 
 
 Most existing methods are implemented \textit{without extra information}.
-They utilize the bursty pattern in the text stream to detect events, and are carried out by  clustering articles\cite{Allan:2000wu,Petrovic:2010uj,Wurzer:2015wq}, analyzing word frequencies\cite{Mathioudakis:2010fc,Weng:2011wz}, or finding bursty topics\cite{Diao:2012wj,Yan:2015wm}. 
-(1) By clustering articles, UMass\cite{Allan:2000wu}, LSH\cite{Petrovic:2010uj}, k-Term-FSD\cite{Wurzer:2015wq} and other similar methods model the occurred events as clusters of articles, and link the incoming article with an already existed event cluster or label it as the first story of a new event.
+They are mainly carried out by clustering articles\cite{Allan:2000wu,Petrovic:2010uj,Wurzer:2015wq}, analyzing word frequencies\cite{Mathioudakis:2010fc,Weng:2011wz}, or finding bursty topics\cite{Diao:2012wj,Yan:2015wm} etc. 
+(1) By clustering articles, UMass\cite{Allan:2000wu}, LSH\cite{Petrovic:2010uj}, k-Term-FSD\cite{Wurzer:2015wq} and other similar methods model the occurred events as clusters of articles.
 The decision is based on whether the dissimilarity between the incoming article and existed event clusters is over the user-specified threshold. 
-Taking LSH as an example, as \cite{Petrovic:2010uj} discussed, the threshold controls the result: the big one leads to very few and broad clusters, while the small one results in very small and specific clusters.
-Even after carefully set the appropriate threshold, the clusters generated by this kind method are still mixed of events and non-events due to large portion of non-event microblogs, which requires some post-processing methods as the supplement. 
-(2) By analyzing word frequencies, TwitterMonitor\cite{Mathioudakis:2010fc} models the bursty words by queueing theory, and EDCoW\cite{Weng:2011wz} exploits wavelet transformation, which converts signal from time domain to time-scale domain, to detect the change point of word signal. 
-However they treat the word as the most basic unit in analysis, without regarding how many concepts are represented by the word.
+(2) By analyzing word frequencies, EDCoW\cite{Weng:2011wz} exploits wavelet transformation, which converts signal from time domain to time-scale domain, to detect the change point of word signal. 
+However they treat the word as the most basic unit in analysis, without regarding polysemy words.
 (3) By finding bursty topics via topic modelling, TimeUserLDA\cite{Diao:2012wj}, BurstyBTM\cite{Yan:2015wm} generates detected events.
 TimeUserLDA distinguishes user's long term interests and short term bursty events, and BurstyBTM utilizes the burstiness of biterms as prior knowledge.
-They both need to set the appropriate number of topics to run the topic modelling, and detect the ``large" events that associate with many articles but ignore the ``small" ones. 
+This kind method needs to set the appropriate number of topics, and detects the ``large" events but ignore the ``small" ones. 
 To summarize, due to microblog's short length and high noise, it's not easy to set the directly applicable parameter for existing methods to achieve high precision and high recall simultaneously.
 
 The second group methods detect events by \textit{leveraging extra information}. 
-\cite{huang2016efficient} incorporates user's and the followees' profiles in microblog platform as the extra information for modeling user's long term interests, and further detects the bursty events which draws the attention of users with different interests. 
-However many event detection scenes only provide the microblog stream without user profile information and the following network.
-\cite{osborne2012bieber} compares two time series generated by event-related tweets and corresponding Wikipedia article's page views, and further filter out spurious events of microblogs.
+\cite{huang2016efficient} incorporates user's and the followees' profiles to help to detect the events of public concern. 
+However it's not easy to get this kind contextual information.
+\cite{osborne2012bieber} compares two time series generated by event-related tweets and the corresponding Wikipedia article's page views, and further filter out spurious events of microblogs.
 Twevent \cite{Twevent2012} divides the tweet into segments according to the Microsoft Web N-Gram service and Wikpedia, then detect the bursty segments and cluster these segments into candidate events for necessary post processings.
-But Twevent is still hampered by the performance of simply clustering the bursty segments shown by \cite{Yan:2015wm}.
-If not limited to microblog stream, many systems also use the extra information for improving event detection.
-\cite{steiner2013mj} utilizes the concurrent wikipedia edit spikes for event detection.
+But as shown in \cite{Yan:2015wm}, Twevent is still hampered by the performance of simply clustering the bursty segments.
+Beyond the scope of microblog stream, \cite{steiner2013mj} utilizes the concurrent wikipedia edit spikes for event detection.
 And \cite{liuleveraging2016} leverages the ACE corpus\cite{doddington2004automatic} and the structure of FrameNet\cite{baker1998berkeley} to improve the event detection within FrameNet, but has not shown how to apply the knowledge base for more general unstructured corpus.
 In a nutshell, existing works are different from ours, as we transfer the category information of knowledge base into microblog's words and get the finer processing objects in event detection, rather than treating the knowledge base as a lookup table or a comparison base.
-%Wikipop\cite{ciglan2010wikipop} uses the statistics of page views on Wikipedia articles to detect the personalized events.
-%\cite{mcminn2013building} leverages LSH, wikipedia to build a large corpus for evaluating event detection on twitter.
-%The unsupervised methods, including UMass\cite{Allan:2000wu} and BurstyBTM\cite{Yan:2015wm}, use \textit{the data within the recent time windows} to help to decide whether the incoming article is related to a new event. 
 
-\textbf{Knowledge Base} Recently, many general knowledge bases and customized knowledge bases are constructed and utilized for different text mining tasks. 
+\textbf{Knowledge Base.} Many general knowledge bases and customized knowledge bases are constructed and utilized for different text mining tasks. 
 For example, Probase\cite{wu2012probase} constructs a large general probabilistic \textit{IsA} taxomomy from webpages, and is used for semantic web search, and text classification\cite{wang2014concept}.
 Such kind efforts are also made by DBPedia\cite{auer2007dbpedia}, Yago\cite{fabian2007yago}, and Freebase\cite{bollacker2008freebase}. 
 These works manages knowledge as tuples on graph. 
@@ -225,9 +248,14 @@ Event Registry collects the articles by the API of News Feed Service\cite{trampu
 Storybase introduces Wikipedia current events\footnote{\url{https://en.wikipedia.org/wiki/Portal:Current_events}} as the resources for constructing event-and-storyline knowledge base on news articles, which are provided by GDELT project\cite{leetaru2013gdelt}.
 As the news articles may lag behind the microblogs when the emergency of events, it's not enough to detect events from microblog stream by directly applying these customized knowledge bases. 
 
-\section{Proposed Method}
+\section{\textsc{TransDetector}} 
+\label{sec:TransDetector}
 In this section, we present a novel category-level transfer learning method for event detection, namely \textsc{TransDetector}. 
 Illustrated in Figure \ref{fig:modelDesc}, \textsc{TransDetector} consists of three parts: (1) extracting category-level topics in knowledge base, (2) transfer learning on category-level topics in microblog stream, (3) detecting events from category-level word time series.
+
+\textit{Category-level Topics in Knowledge Base} is a set of tuples extracted from knowledge base, which weighs the importance of given words to the specific category, defined in Definition 1 formally. 
+Taking the \textit{military} category in Figure \ref{fig:modelDesc} as an example, the history state of \textit{military} contain the words \textit{army}, \textit{military}, and \textit{shootings} etc. 
+
 \begin{comment}
 Knowledge base often contains much information about what happened. 
 But the existing RDF model\cite{klyne2006rdf} on knowledge base lacks an efficient mechanism to transfer the information from knowledge base to text stream.  
@@ -239,69 +267,41 @@ Taking the \textit{military} category in Figure \ref{fig:modelDesc} as an exampl
 
 \textit{Recent state} is the proposed data structure to maintain the information about what's happening.
 It extracts category-related words from incoming text stream, for each time window.
-Still taking the \textit{military} category in  Figure \ref{fig:modelDesc} as an example, based on extracted history states, our proposed probabilistic continuous learning model \textsc{HS-Prior-LDA} can recognize the words \textit{libyan} and \textit{rebel} in the time window 2011-07-28 in the text stream are related to the category \textit{military}. 
+Still taking the \textit{military} category in  Figure \ref{fig:modelDesc} as an example, based on extracted history states, our proposed probabilistic continuous learning model CTrans-LDA can recognize the words \textit{libyan} and \textit{rebel} in the time window 2011-07-28 in the text stream are related to the category \textit{military}. 
 Furthermore the time series analysis on the neighbouring recent states can recognize the set of events' candidate words, and finally detects the events in the text stream. 
 In the example of Figure \ref{fig:modelDesc}, the words \textit{libyan} and \textit{rebel} are related to the \textit{military} event ``\#libya Libyan rebels chief is killed (2011-07-28)''.
 
-After processing each time window's data, the words in microblogs can be enriched semantically with knowledge base.
-In this way, the transfer learning model provides richer semantics and less noise for microblog stream, which promotes the accuracy of event detection significantly. 
-The following definitions are the concepts used by the transfer learning model \textsc{TransDetector}. 
 \end{comment}
 
-\begin{rmk}[History State] 
-The history state of the specific category is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(chi(c,w^{(c)}_{i})\) under the category \(c\). 
-And we denote the history states of category \(c\) as \(\bm{h}_c=\{<w^{(c)}_i,chi(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
-\end{rmk}
+\begin{rmkWithoutSpacing}[\textbf{Category-level Topics in Knowledge Base}] 
+Given category \(c\), the category level topic in knowledge base is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(chi(c,w^{(c)}_{i})\) under the category \(c\). 
+And we denote \(c\)'s category-level topic in knowledge base as \(\bm{h}_c=\{<w^{(c)}_i,chi(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
+\end{rmkWithoutSpacing}
 
-\begin{rmk}[Recent State] 
-The recent state at time \(t\) of the specific category \(c\) is defined by a set of tuples, and denoted as \(\bm{r}_{c,t}=\{<w^{(c)}_i,n(c,t,w^{(c)}_{i})>\}_{i=1,...,N_c}\), in which word \(w^{(c)}_{i}\) is related to the category \(c\), and \(n(c,t,w^{(c)}_{i})\) is its document frequency in the time window \(t\).
-\end{rmk}
+\begin{rmkWithoutSpacing}[\textbf{Category-level Topics in Microblog Stream}] 
+Given category \(c\), the category level topic in microblog stream at time \(t\) is defined by a set of tuples, and denoted as \(\bm{r}_{c,t}=\{<w^{(c)}_i,n(c,t,w^{(c)}_{i})>\}_{i=1,...,N_c}\), in which word \(w^{(c)}_{i}\) is related to the category \(c\), and \(n(c,t,w^{(c)}_{i})\) is its document frequency in the time window \(t\).
+\end{rmkWithoutSpacing}
 
-\begin{rmk}[The Set of Events' Candidate Words] 
-The set of events' candidate words \(\mathcal{B}_{c,t}\) are defined by the bursty words in recent state \(\bm{r}_{c,t}\).
-\end{rmk}
+\begin{rmkWithoutSpacing}[\textbf{Category-level Word Time Series}] 
+Given category \(c\) and word \(w\), the category level word time series is a list extracted from \(\{\bm{r}_{c,t}\}_{t=1}^{T}\), and denoted as \(\{n(c,t,w^{(c)}_{i})\}_{t=1}^{T}\).
+\end{rmkWithoutSpacing}
 
-\begin{rmk}[Event Phrase] 
+
+\begin{rmkWithoutSpacing}[\textbf{The Set of Events' Candidate Words}] 
+The set of events' candidate words \(\mathcal{B}_{c,t}\) are groups of the bursty words in \(\bm{r}_{c,t}\).
+\end{rmkWithoutSpacing}
+
+\begin{rmkWithoutSpacing}[Event Phrase] 
 Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occurred in the set of events' candidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happened in time \(t\) under the category \(c\).
-\end{rmk}
+\end{rmkWithoutSpacing}
 
-\begin{rmk}[Event Related Microblogs] Event related microblogs \(\mathcal{D}_{c,t,i}\) are articles that relate to the \(i\)-th event in time \(t\) under the category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
-\end{rmk}
+\begin{rmkWithoutSpacing}[Event Related Microblogs] Event related microblogs \(\mathcal{D}_{c,t,i}\) are articles relating to the \(i\)-th event in time \(t\) of category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
+\end{rmkWithoutSpacing}
 
 
 Section \ref{subsec:hs_initialization} explains the details of how to initialize history states from knowledge base.
 Section \ref{subsec:rs_initialization} shows how to perform transfer learning for recent states.
 And section \ref{subsec:detection} interprets the high accuracy event detection based on the processed recent states.
-\begin{comment}
-\begin{table}
-\scriptsize
-\caption{Notations used by \textsc{NSDetector}}
-\label{tbl:notations}
-\begin{tabular}{|c|p{0.06\columnwidth}|p{0.66\columnwidth}|} \hline
-%first part: normalization initialization
-\multirow{5}{0.13\columnwidth}{History States' Initialization} & \(G^{(0)}\) & Taxonomy's Graph in Knowledge Base\\ \cline{2-3}
-& \(G^{(1)}\) & Category-Page Bipartite Graph in Knowledge Base\\ \cline{2-3}
-& \(G^{(2)}\) & Page-Content Map in Knowledge Base\\ \cline{2-3}
-& \(c\) & topic related category node in \(G^{(0)}\), \(G^{(1)}\) \\ \cline{2-3}
-& \(K_{\bm{KB}}\) & number of pre-defined topics in Knowledge Base \\ \cline{2-3}
-& \(h_{c,w}\) & word \(w\)'s history state (chi-square score) in category \(c\) \\ \hline
-%second part: normalization maintenance
-\multirow{4}{0.13\columnwidth}{Normal States Maintenance} & \(\lambda\) & normal state weight in  NS-Prior-LDA\\ \cline{2-3}
-& \(\tau_{c,w}\) & word \(w\)'s prior knowledge confidence for topic \(c\) in NS-Prior-LDA\\ \cline{2-3}
-& \(S_c\) & topic \(c\)'s all normal states related words \\ \cline{2-3}
-& \(K\) & number of topics in NS-Prior-LDA such as \(K>K_{\bm{KB}}\)\\ \hline
-%third part: event detection
-\multirow{5}{0.13\columnwidth}{Event Detection} & \(\mathcal{B}_{c, t}\)  & event words set detected from topic \(c\) at time \(t\)  \\ \cline{2-3}
-& \(\mathcal{G}_{c, t}\)  & hot word graph constructed from \(\mathcal{B}_{c, t}\) \\ \cline{2-3}
-& \(\mathcal{C}_{c,t,i}\) & event \(i\)-th related words in topic \(c\) at time \(t\) \\ \cline{2-3}
-& \(\mathcal{D}_{c,t,i}\) & event \(i\)-th related articles in topic \(c\) at time \(t\) \\ \cline{2-3}
-& \(\rho\) & density threshold for the sub-graph constructed by event words  \\ \hline
-
-\end{tabular}
-\label{symbolsInModel}
-\end{table}
-\end{comment}
-
 
 \subsection{History States' Extraction}\label{subsec:hs_initialization}
 In this part, we discuss in detail how to initialize the history states from the given knowledge base. 
@@ -363,18 +363,17 @@ We further discuss how to apply history states to the text stream on the followi
 
 \subsection{Recent States' Maintenance}
 \label{subsec:rs_initialization}
-In this subsection, we describe how the proposed probabilistic model \textsc{HS-Prior-LDA} utilizes the history states to learn the recent states from text stream.
+In this subsection, we describe how the proposed probabilistic model CTrans-LDA utilizes the history states to learn the recent states from text stream.
 
-There are two facts inspiring \textsc{HS-Prior-LDA}. 
+There are two facts inspiring CTrans-LDA. 
 (1) The topics in the document may contain history-state-like topics. 
 As an example, the tweet ``Libyan rebel chief gunned down in Benghazi (2011-07-28)'' contains the topic that is similar to the \textit{Military}'s history state.
 (2) The history-state-like topics can reuse the information  stored in the history states.
 The word \textit{libyan} in the aforementioned example tweet ranks much higher in the \textit{Military} and the \textit{Middle East} history states than the other categories' history states.
 After considering the relatedness between the remaining context and the history states, the learned topics of the example tweet include \textit{Military} and \textit{Middle East}. 
 
-The generative process of \textsc{HS-Prior-LDA} can be described as follows.
-
-\begin{enumerate}[itemsep=0mm]
+The generative process of CTrans-LDA can be described as follows.
+\begin{enumerate}[topsep=0pt,itemsep=0mm]
 \item Draw corpus prior distribution \(\bm{m} \sim Dir(\alpha \bm{u})\), where \(\bm{u}\) is the uniform distribution.
 \item For each topic \(k \in \{1,\cdots,K\}\), 
 \begin{enumerate}[itemsep=0mm]
@@ -392,12 +391,14 @@ The generative process of \textsc{HS-Prior-LDA} can be described as follows.
 
 \end{enumerate}
 
-In the above generative process, the line 2(a) is the key point to distinguish \textsc{HS-Prior-LDA} from LDA\cite{blei2003latent}, where \(\bm{\tau}_k\) is defined by Equation(\ref{eq:wikiPrior}).
+In the above generative process, the line 2(a) is the key point to distinguish CTrans-LDA from LDA\cite{blei2003latent}, where \(\bm{\tau}_k\) is defined by Equation(\ref{eq:wikiPrior}).
 \(K_{KB}\) is the number of pre-defined history-state-like topics, and \(S_k\) is the set of words appeared in the \(k\)-th topic's history state.
 As \cite{wallach2008structured} mentioned that the asymmetric prior distribution can significantly improve the quality of topic modelling, \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\) incorporates history state into the asymmetric prior of the word distribution on topic. 
 The effect of \(\bm{\tau_k}\) is obvious, e.g., \(\tau_{Military,army}/\tau_{Military,basketball}=203\) leads to that topic \textit{Military} prefers to contain the word \textit{army} other than \textit{basketball}.
 The parameter \(\lambda\) controls how much the learned topics are similar to the history state, which can be chosen by cross-validated grid-search. 
 
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
 \begin{scriptsize}
 \begin{equation}
 \label{eq:wikiPrior}
@@ -411,21 +412,13 @@ The parameter \(\lambda\) controls how much the learned topics are similar to th
 \end{equation}
 \end{scriptsize}
 
-\begin{comment}
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.75\columnwidth]{model/lda_tikz.pdf}
-    \caption{Probabilistic model for training normal states by using history information.}
-    %The convolution neural network for extracting character-level representations of words. Dashed arrows indicate a dropout layer applied before character embeddings are input to CNN.}
-    \label{fig:NS-Prior-LDA}
-\end{figure}
-\end{comment}
-
-To solve \textsc{HS-Prior-LDA}, the gibbs sampling is adopted to determine the hidden variable \(z_{dn}\) and the model parameter \(\phi_k\).
-In the initialization phase of Gibbs sampling for \textsc{HS-Prior-LDA}, the hidden variable \(z_{dn}\) is initialized to topic \(k\) with probability \(\hat{q}_{k|v}\) as Equation (\ref{eq:initProbability}).
-For the word \(v\) that belongs to any history state, \(\hat{q}_{k|v}\) is proportional to its importance in the history state \(\tau_{kv}\) as Eq\ref{eq:initProbability}(a). 
-For the new word \(v\) in text stream, \(\hat{q}_{k|v}\) is   set uniformly \(1/(K-K_{\bm{KB}})\) on the other topics as Eq\ref{eq:initProbability}(b,c). 
+To solve CTrans-LDA, the gibbs sampling is adopted to determine the hidden variable \(z_{dn}\) and the model parameter \(\phi_k\).
+In the initialization phase of Gibbs sampling for CTrans-LDA, the hidden variable \(z_{dn}\) is initialized to topic \(k\) with probability \(\hat{q}_{k|v}\) as Equation (\ref{eq:initProbability}).
+For the word \(v\) that belongs to any history state, \(\hat{q}_{k|v}\) is proportional to its importance in the history state \(\tau_{kv}\) as Equation \ref{eq:initProbability}(a). 
+For the new word \(v\) in text stream, \(\hat{q}_{k|v}\) is   set uniformly \(1/(K-K_{\bm{KB}})\) on the other topics as Equation \ref{eq:initProbability}(b,c). 
 The initialization makes sure that the learned topics are aligned to the pre-defined history states.
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
 \begin{scriptsize} 
 \begin{equation}
 \label{eq:initProbability}
@@ -442,77 +435,21 @@ The initialization makes sure that the learned topics are aligned to the pre-def
 
 %采样公式p(z|.)，z有两部分。
 The sampling process uses the conditional probability \(p(z_{dn}=k|.)\propto (n^{(d)}_{dk}+\alpha m_k)(n^{(w)}_{kv}+\tau_{kv}+\beta)/(n^{(w)}_{k,.}+\tau_{k,.}+V\beta)\), where \(n^{(d)}_{dk}\) is the number of words in document \(d\) assigned to topic \(k\), and \(n^{(w)}_{kv}\) is the times of word \(v\) assigned to topic \(k\).
-We also optimize \(\alpha \bm{m}\) for promoting \textsc{HS-Prior-LDA}'s fitting to documents according to \cite{wallach2008structured}\footnote{\url{https://github.com/mimno/Mallet/blob/master/src/cc/mallet/types/Dirichlet.java}}.\begin{comment}
-\begin{equation}
-\label{eq:KBPriorLDAgibbs}
-\begin{aligned}
-&p(z_{dn}=k|w_{dn}=v,z_{\neg{dn}},w_{\neg{dn}},\alpha\bm{m},\beta,\tau)\\
-&\ \ \propto (n^{(d)}_{dk}+\alpha m_k)\frac{n^{(w)}_{kv}+\tau_{kv}+\beta}{n^{(w)}_{k,.}+\tau_{k,.}+V\beta}
-\end{aligned}
-\end{equation}
-\end{comment}
+We set \(\alpha=0.1\) and \(\beta=0.01\) according to the suggestion by \cite{tang2014understanding}.
 
-\begin{comment}
-\begin{scriptsize}
-\begin{equation}
-\label{eq:KBPriorLDAgibbs}
-\begin{aligned}
-&p(z_{dn}=k|w_{dn}=v,z_{\neg{dn}},w_{\neg{dn}},\alpha\bm{m},\beta,\tau)\\
-&\ \ \propto (n^{(d)}_{dk}+\alpha m_k)\frac{n^{(w)}_{kv}+\tau_{kv}+\beta}{n^{(w)}_{k,.}+\tau_{k,.}+V\beta}
-\end{aligned}
-\end{equation}
-\end{scriptsize}
-\end{comment}
 
-\begin{comment}
-\begin{algorithm}
-\scriptsize
-\caption{NS-Prior-LDA Learning Algorithm}
-\label{alg:gibbsSamplingKBPriorLDA}
-\KwIn{Documents \(\mathcal{D}\) (a.k.a., \(\bm{w_{1:D}}\)), and normal states \(\bm{f}_{1:K_{\bm{KB}}}\)}
-\KwOut{The sufficient statistics \(\bm{n^{(d)}}\), \(\bm{n^{(w)}}\)}
-\tcc{Initialization of NS-Prior-LDA}
-\For{\(d=1:D\)}{
-    \For{\(n=1:N_d\)}{
-        \(v=w_{dn}\), sample \(z_{dn}=k\) as Eq(\ref{eq:wikiPrior})(\ref{eq:initProbability}).\\
-        Update the sufficient statistics \(n^{(d)}_{d,k}\), \(n^{(w)}_{k,v}\).\\
-            }
-        }
-\For{\(i= 1:I\)}{
-    \tcc{E-Step of NS-Prior-LDA}
-    \For{\(i=1:I_E\)}{
-        \For{\(d=1:D\)}{
-            \For{\(n=1:N_d\)}{
-                Set \(v=w_{dn}\), and reset the sufficient statistics \(n^{(d)}_{d,z_{dn}}\), \(n^{(w)}_{z_{dn},v}\).\\
-                Resample \(z_{dn}=k\) as Eq(\ref{eq:wikiPrior})(\ref{eq:KBPriorLDAgibbs}).\\
-                Update the sufficient statistics \(n^{(d)}_{d,k}\), \(n^{(w)}_{k,v}\).\\
-            }
-        }
-    }
-    \tcc{M-Step of NS-Prior-LDA}
-    Optimize \(\alpha \bm{m}\) by the fixed-point iteration\cite{wallach2008structured}. 
-}
-\Return{\(\bm{n^{(w)}}\)}
-\end{algorithm}
-\end{comment}
-
-After Gibbs sampling on discrete time windows, \textsc{HS-Prior-LDA} learned all hidden topics of words in microblog stream.
+After Gibbs sampling on discrete time windows, CTrans-LDA learned all hidden topics of words in microblog stream.
 And for a specific word type \(w\) and its history-state-like topic assignment \(c\) in time window \(t\), its document frequency is counted as \(n(c,t,w^{(c)})\), which is the element of category \(c\)'s \(t\)-th recent state.
 Event detection on recent states is discussed in the following subsection.
 
-\subsection{Detecting Events from Recent States}
+\subsection{Detecting Events from Category-Level Word Time Series}
 \label{subsec:detection}
-After transfer learning, events are detected accurately because the word time series is refined to finer grain as multiple corresponding (word, category) time series, and the bursty pattern is better exposed. 
-Taking the word \textit{hood} as an example, it belongs to the category \textit{Military} when it appeared in \textit{Ft Hood}, a US military establishment located in Texas.
-As shown in Figure \ref{fig:hood}, the bursty pattern of \textit{hood} is clearly exposed after distinguishing its \textit{Military} time series from the raw one.
-%Therefore, the processing on each category's accurate stream states leads to the accurate event detection. 
-
-Given (word, category) time series and microblogs in a time window, we take the detection in	 three sub-phases: (1) detecting events' candidate words; (2) generating event phrases; (3) retrieving event related microblogs.
+After transfer learning, it's much easier to detect the event from category-level word time series, which is shown in Figure \ref{fig:hood}. We take the detection in three sub-phases: (1) detecting events' candidate words; (2) generating event phrases; and (3) retrieving event related microblogs.
 Note that these sub-phases are also available for the common text stream, but they performs better when words are enriched by category concepts of knowledge base.
 %这里添加对这几个Definition的解释。
 
 \textbf{Detecting events' candidate words}. For a word \(w\) and a category \(c\), on its time series \(\{n(c,t,w^{(c)})\}_{t=1}^{T}\), many bursty detection methods can be applied to check if the word \(w\) is bursty in category \(c\) by given time \(t\). 
-We assume the document frequency of \(w^{(c)}\) follows a poisson distribution, which is also used in \cite{Diao:2012wj}.
+In our paper, we assume the document frequency of \(w^{(c)}\) follows a poisson distribution, which is also used in \cite{Diao:2012wj}.
 And the document frequency of nonbursting \(w^{(c)}\) has the possison distribution with the parameter \(\lambda=\mu_0\); while the bursting one with the parameter \(4\mu_0\) means the document frequency \(n(c,t,w^{(c)})\) is much higher when bursting.
 We empirically set \(\mu_0\) as the moving average \(\mu_0^{(t)}=\frac{1}{T}\sum_{\tau=t-T}^{t-1}n(c,\tau,w^{(c)})\), and set T=10.
 Hence, at time \(t\), bursty or not is determined by comparing the probabilities of above poisson distributions. 
@@ -522,13 +459,12 @@ After bursty detection on the time series, we add each time \(t\)'s bursty word 
 In the set of event's candidate words \(\mathcal{B}_{c,t}\), some words appear together and should be grouped into event phrases.
 For example, there are six bursty words in \(\mathcal{B}_{military,2011-07-28}\) belonging to two event phrases \textit{``ft, hood, attack"} and \textit{``libyan, rebel, gunned"} in the time window 2011-07-28 to represent the events happened to the US military establishment and the Libyan rebel respectively. 
 
-In order to group the bursty words together, we  construct the directed weighted graph \(\mathcal{G}_{c,t}=(\mathcal{B}_{c,t},\mathcal{E}_{c,t},\mathcal{W}_{c,t})\), where \(\mathcal{E}_{c,t}=\{(a,b)|a \in \mathcal{B}_{c,t}, b \in \mathcal{B}_{c,t}, PMI(a,b)>0 \}\), and \(\mathcal{W}_{c,t}\) gives the PMI scores on the edges.
+To group the bursty words together, we  construct the directed weighted graph \(\mathcal{G}_{c,t}=(\mathcal{B}_{c,t},\mathcal{E}_{c,t},\mathcal{W}_{c,t})\), where \(\mathcal{E}_{c,t}=\{(a,b)|a \in \mathcal{B}_{c,t}, b \in \mathcal{B}_{c,t}, PMI(a,b)>0 \}\), and \(\mathcal{W}_{c,t}\) gives the PMI scores on the edges.
 The graph \(\mathcal{G}_{c,t}\) means the words in \(\mathcal{B}_{c,t}\) are connected if and only if their PMI score in the given time window's microblogs is over 0. 
-Given the graph \(\mathcal{G}_{c,t}\), spectral clustering\cite{von2007tutorial} is utilized for exploring the best partition of words. 
+Given the graph \(\mathcal{G}_{c,t}\), the spectral clustering\cite{von2007tutorial} is utilized for exploring the best partition of words. 
 To get the optimum cluster number, we use the graph density as the criteria.
-The graph density is the ratio of the number of edges to that of complete graph (the graph with all possible edges), and in practice all the sub-graphs in \(\mathcal{G}_{c,t}\) should have the densities over an empirical threshold. 
-And the empirical threshold is set to 0.6 in our setting.
-We run the spectral clustering with cluster number from 1 to \(|\mathcal{B}_{c,t}|\), and stop when all the resulting sub-graphs satisfy the criteria that the density is over the given threshold. 
+The graph density is the ratio of the number of edges to that of complete graph (the graph with all possible edges). 
+We search the best cluster number from 1 to \(|\mathcal{B}_{c,t}|\), and stop when all the resulting sub-graphs satisfy the criteria that the density is over the threshold, which is set to 0.6 empirically.
 In this way, the generated event phrase combines the co-occurred bursty words and excludes the unrelated. 
 
 
@@ -538,7 +474,7 @@ Generally, according to the number of bursting words in the event phrase \(\math
 (1) \(|\mathcal{C}_{c,t,i}|=1\), we directly add the microblog in time window \(t\), which contains the bursting category-word \(w^{(c)}\), into the set \(\mathcal{D}_{c,t,i}\).
 (2) \(|\mathcal{C}_{c,t,i}|\geq 2\), it's not necessary that all the bursting words are included in the event related microblog.
 For example, the tweet ``\textit{Soldier wanted to attack Fort Hood troops}" contains the bursting words \textit{attack} and \textit{hood}, not all the event phrase ``\textit{ft, hood, attack}". 
-To tackle this problem, we consider the microblog, that contains any pair of category-words in the event phrase, as the event related microblog.
+To tackle this problem, we consider the microblog, that contains any pair of category-words in the event phrase, as the event related microblog. 
 Finally, \textsc{TransDetector} gets the detected events \(\{(\mathcal{C}_{c,t,i},\mathcal{D}_{c,t,i})\}_{i=1}^{|\mathcal{C}_{c,t}|}\), containing the event phrase and the corresponding event related microblogs for the given category and the time window.
 
 %Text stream evolves more quickly with time than knowledge base.
@@ -550,7 +486,7 @@ Finally, \textsc{TransDetector} gets the detected events \(\{(\mathcal{C}_{c,t,i
 
 
 \section{Experiments}
-\subsection{Data Sets}
+%\subsection{Data Sets}
 In this subsection, we demonstrate the effectiveness of \textit{history states} initialized from knowledge base and \textit{recent states} learned by transfer learning. 
 
 \textbf{Knowledge Base.} 
@@ -591,11 +527,11 @@ Since the history states extracted from knowledge base is stable and topic coher
 \centering
 \caption{Top words' topic coherence of \textit{Aviation}'s history state. * means the group also contains the five top words \textit{aircraft}, \textit{air}, \textit{airport}, \textit{flight}, and \textit{airline}, but we don't show them in table to save space. NPMI is computed on ten words (a combination of words in each row with the five top words).}
 \scalebox{0.65}{
-\begin{tabular}{|c|l|l|l !{\vrule width 1pt} c|l|l|l|}
+\begin{tabular}{|c|l|l|c !{\vrule width 1pt} c|l|l|c|}
 \hline
 \multicolumn{4}{|c!{\vrule width 1pt}}{Category-Level Topics extracted from Wikipedia by \textsc{TransDetector}} & \multicolumn{4}{c|}{Topics Learned from Wikipedia by LightLDA}    \\ \hline
 Group ID& \#words*  & words  & NPMI & Group ID& \#words*& words & NPMI \\ \hline
--1 & 1-5 & aircraft air airport flight airline &  & -1 & 1-5 & engine aircraft car air power & \\ \hline
+- & 1-5 & aircraft air airport flight airline &-& - & 1-5 & engine aircraft car air power &-\\ \hline
 0 & 6-10 & airlines aviation flying pilot squadron &  0.113 & 0 & 6-10 & design flight model production speed & 0.112\\ \hline
 1 & 11-15 &flights pilots raf airways fighter & 0.155 & 1 & 11-15 &system vehicle cars engines mm & 0.062\\ \hline
 2 & 16-20 &boeing runway force crashed flew   & 0.092 & 2 & 16-20 & fuel vehicles designed models type & 0.072\\ \hline
@@ -814,6 +750,18 @@ The widespread existence of such not-so-popular events challenge almost all the 
 \end{figure}
 
 Illustrated in Table \ref{tbl:overall} and Figure \ref{fig:Benchmark1}, \textsc{TransDetector} achieves very good results even on the not-so-popular events. 
+\hlgreen{To check} 
+After processing each time window's data, the words in microblogs can be enriched semantically with knowledge base.
+In this way, the transfer learning model provides richer semantics and less noise for microblog stream, which promotes the accuracy of event detection significantly. 
+The following definitions are the concepts used by the transfer learning model \textsc{TransDetector}. 
+\hlgreen{To Check}
+After transfer learning, events are detected accurately because the word time series is refined to finer grain as multiple corresponding (word, category) time series, and the bursty pattern is better exposed. 
+Taking the word \textit{hood} as an example, it belongs to the category \textit{Military} when it appeared in \textit{Ft Hood}, a US military establishment located in Texas.
+\hlgreen{To Check}
+As shown in Figure \ref{fig:hood}, the bursty pattern of \textit{hood} is clearly exposed after distinguishing its \textit{Military} time series from the raw one.
+%Therefore, the processing on each category's accurate stream states leads to the accurate event detection. 
+
+
 
 \begin{table}
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
@@ -840,30 +788,6 @@ Illustrated in Table \ref{tbl:overall} and Figure \ref{fig:Benchmark1}, \textsc{
 \end{threeparttable}  
 }
 \end{table}
-
-
-\begin{comment}
-Table 1 reports the number of events
-detected, the precision and recall, of the three methods respectively.
-The results of EDCoW are reproduced from [21]9
-. Shown in the
-table, our proposed method Twevent yields the best precision of
-86.1\% which is significantly larger than the precisions achieved
-by EDCoW and Tweventu. Observe that our method Twevent detects
-101 events with a recall of 75 realistic events. On the same
-dataset, EDCoW detects 21 events in total with 13 realistic events.
-Tweventu yields a slighter worse precision than EDCoW (75.3%
-vs 76.2\%) but detects the largest number of realistic events. In
-terms of DERate, Twevent achieves the lowest rate despite that our
-method detects much more events than EDCoW (101 vs 21). On
-the other hand, we observe that Tweventu delivers the worst DERate,
-more than double of Twevent (41\% vs 16.0\%). That is, the unigrams
-about the same event are clustered into two or more events.
-Because a tweet segment usually conveys very specific information,
-the tweets containing the tweet segment are all about the same
-topic (e.g., the event). Two tweet segments about the same event
-are therefore have higher chance to be clustered together.
-\end{comment}
 
 %An accurate recent states learning leads to accurate event detection.
 \begin{comment}

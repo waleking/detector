@@ -13,7 +13,8 @@ df2$method<-factor(df2$method,levels=c("TimeUserLDA","BurstyBTM","EDCoW","LSH","
 
 p <- ggplot(df2, aes(fill=method, y=recall, x=group))+
       geom_bar(position="dodge",stat = "identity") +
-      scale_fill_manual(values=c("#E5E5E5", "#F1EEF6","#BDC9E1","#74A9CF","#2B8CBE","#045A8D"))+
+      #scale_fill_manual(values=c("#E5E5E5", "#F1EEF6","#BDC9E1","#74A9CF","#2B8CBE","#045A8D"))+ #dark
+      scale_fill_manual(values=c("#EE9336", "#EED757","#D4EE3D","#B9EE91","#79DCD1","#4CB3EE"))+
       theme_bw()+
       labs(y="Recall@Benchmark1",x="Group with different event size (number of tweets)",size=9)+ #set y and x labels
       theme(panel.grid.major.x = element_blank(), panel.grid.minor = element_blank(), legend.title=element_blank())

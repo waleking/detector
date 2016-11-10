@@ -46,20 +46,22 @@ if __name__ == '__main__':
     parsedDayNum34= parsedDayNum34.reindex(idx, fill_value=0)  # set missing
 
     parsedDayNum.loc[parsedDayNum.index=="2011-07-28"]=98
-    print(parsedDayNum34)
 
     #combine two time series, refer to http://pandas.pydata.org/pandas-docs/stable/merging.html
     hoodSeries=pd.concat([parsedDayNum,parsedDayNum34],axis=1)
     #rename the columns
     hoodSeries.columns = ['hood', 'hood (military)']
 
-    #ac.plot_date(hoodSeries,'v-')
     fig,ax=plt.subplots()
     #set figure size
     fig.set_size_inches(8,2)
     #plot
     #ax.plot_date(idx.to_pydatetime(),hoodSeries,'v-')
-    ax.plot(hoodSeries,'v-')
+    #todo, set different lengeds
+    print(hoodSeries.ix[:,1])
+    #ax.plot(hoodSeries,'v-')
+    ax.plot(hoodSeries.ix[:,0],'v-')
+    ax.plot(hoodSeries.ix[:,1],'o--')
     #set x axis
     ax.xaxis.set_minor_locator(dates.DayLocator(interval=1))
     ax.xaxis.set_minor_formatter(dates.DateFormatter('%d'))
