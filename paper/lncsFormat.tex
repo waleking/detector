@@ -20,6 +20,20 @@
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 \usepackage{algorithmic}
 
+%================================================
+%% make a tight section title
+%% Save the class definition of \subparagraph
+\let\llncssubparagraph\subparagraph
+%% Provide a definition to \subparagraph to keep titlesec happy
+\let\subparagraph\paragraph
+%% Load titlesec
+\usepackage[compact]{titlesec}
+%% Revert \subparagraph to the llncs definition
+\let\subparagraph\llncssubparagraph
+\usepackage[compact]{titlesec}% shrink all the whitespace around section headings
+%================================================
+
+
 \usepackage{bm}%used for bm
 \usepackage{graphics} % used for scalebox
 \usepackage{graphicx}
@@ -142,7 +156,7 @@ Since the transfer learning\cite{pan2010survey} aims at utilizing the extra info
 Taking the below Figure \ref{fig:hood} as an example, the fluctuation of time series of raw word \textit{hood} is not so obvious to reflect the event happened to the military base \textit{Ft. Hood}.
 After transferring the knowledge about \textit{``Military"} into the microblog stream, the time series of word \textit{``hood"} related to \textit{``Military"} is extracted, which is more vivid to detect the event happened on July 28th, 2011.
 
-\intextsep=0pt plus 0pt minus 0pt
+\intextsep=1pt plus 1pt minus 1pt
 \begin{figure}[h]
 		\setlength{\abovecaptionskip}{0.cm}
         \setlength{\belowcaptionskip}{0.cm}
@@ -157,25 +171,21 @@ The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to 
 In existing methods, what meets the demand most is Twevent\cite{Twevent2012}, but it's limited in only treating Wikipedia as a looking-up table and may drop some events incorrectly.
 
 In our paper, to balance the performance and the cost of leveraging knowledge base for event detection, we develop a novel category-level transfer learning method, namely \textsc{TransDetector}.
-It consists of three phases: extracting of category-level topics in knowledge base, conducting transfer learning to get category-level topics in microblog stream, and detecting events from category-level word time series, as illustrated in Figure \ref{fig:modelDesc}.
+It consists of three phases: extracting category-level topics in knowledge base, conducting transfer learning to get category-level topics in microblog stream, and detecting events from category-level word time series, as illustrated in Figure \ref{fig:modelDesc}.
 We explain the main idea of the three parts in \textsc{TransDetector}, and leave more technique details in Section \ref{sec:TransDetector}.
-(1) For the \textbf{extracting} phase, we propose a structural-guided category-level topics extraction method on the knowledge base, . 
+(1) In the \textbf{extracting} phase, we propose a structural-guided category-level topics extraction method on the knowledge base, . 
 It bases on the following facts. 
 The knowledge base has the three fold hierarchical structure, consisting of the taxonomy graph (\textit{class} \(\rightarrow\) \textit{subclass}), the category-page bipartite graph (\textit{class} \(\rightarrow\) \textit{instance}), and the page-content map (\textit{instance} \(\rightarrow\) \textit{content}), as illustrated in Figure \ref{fig:NSinitializaton}.
 In terms of concept level, the latter part is finer than the former. 
 And the last page-content map goes into the detail at the word level. 
 By considering these three parts together, we can extract a class or category's highly related words, and restore them in \textit{category-level topics in knowledge base}.
-(2) For the \textbf{conducting transfer learning} phase, we propose a novel probabilistic model CTrans-LDA for transferring the knowledge.
+(2) In the \textbf{conducting transfer learning} phase, we propose a novel probabilistic model CTrans-LDA for transferring the knowledge.
 CTrans-LDA works in the bayesian transfer learning way like \cite{dai2007transferring}, by utilizing the extracted \textit{category-level topics in knowledge base} as the informative priors to bridge two data domains. 
-After running CTrans-LDA, it labels whether a word in a microblog message should link to a category concept in knowledge base.
-Applying CTrans-LDA on more microblogs, it gets the \textit{category-level topics in microblog stream}.
-(3) For the \textbf{detecting} phase, 
-
-Since the recent states have filtered out meaningless words, the detected events on recent states is much more accurate than other methods which don't do the transfer learning.
-\textsc{CTrans-LDA}, \textit{history states}, and \textit{recent states} forms up our proposed event detection method \textsc{LTDetector}.
-Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million tweets)} validates the effectiveness of our proposed method \textsc{LTDetector}.
-
-%In transfer learning, \textit{history states} play an important role at speeding up building the linkage between the word in microblog and the high level concept in knowledge base. 
+CTrans-LDA labels whether a word in a microblog message should link to a category in knowledge base, or just label it as no-category-related word.
+Applying CTrans-LDA on more microblogs, it gets the \textit{category-level topics in microblog stream} and \textit{category-level word time series}.
+(3) In the \textbf{detecting} phase, since the words in microblogs have been enriched semantically and the meaningless words are labeled as no-category-related, the event detection on \textit{category-level word time series} is much more accurate than other methods which don't conduct the transfer learning.
+Without loss of generality, we use Wikipedia as a representative of the knowledge base in the remaining of this paper.
+And the experiment on the \textit{Edinburgh twitter corpus} demonstrates the effectiveness of our proposed \textsc{TransDetector}.
 
 
 \intextsep=5pt plus 3pt minus 1pt
@@ -197,18 +207,10 @@ Our experiment on the real dataset \textit{Edinburgh twitter corpus (30 million 
 \end{figure}
 
 To sum up, the contribution of this paper is mainly in four aspects.
-(1) We propose a structure-guided category-level topics extraction method, which exploits the knowledge base's hierarchical structure to extract categories' highly correlated topics. 
+(1) We propose a structure-guided category-level topics extraction method, exploiting the knowledge base's hierarchical structure to extract categories' highly correlated topics. 
 (2) We develop a probabilistic model CTrans-LDA for category-level transfer learning, which utilizes the word co-occurrences and transfers the knowledge base's category-level topics into microblogs. 
 (3) Events are detected accurately on category-level word time series, due to richer semantics and less noise. 
 (4) Experiment verifies the quality of category-level topics extracted from knowledge base, and the further study on the benchmark \textit{Edinburgh twitter corpus} validates the effectiveness of our proposed transfer learning method for event detection.
-
-
-%(1) We reveal that transfer learning from knowledge base to microblog stream can benefit event detection task.
-%(2) We propose the probability model \textsc{NSDetector}. 
-%The model can combine the history data and the recent data, further determine the arrival new document whether it represents a new event. 
-%More than that, \textsc{NSDetector} has the capability to update the knowledge of what happened.
-%(3) The experiment on the Edinburgh twitter corpus which contains 30 million tweets show that \textsc{NSDetector} promotes the accuracy rate by 9\% without sacrificing the recall rate.
-
 
 \section{Related Works}
 \label{sec:relatedWorks}
@@ -251,39 +253,24 @@ As the news articles may lag behind the microblogs when the emergency of events,
 \section{\textsc{TransDetector}} 
 \label{sec:TransDetector}
 In this section, we present a novel category-level transfer learning method for event detection, namely \textsc{TransDetector}. 
-Illustrated in Figure \ref{fig:modelDesc}, \textsc{TransDetector} consists of three parts: (1) extracting category-level topics in knowledge base, (2) transfer learning on category-level topics in microblog stream, (3) detecting events from category-level word time series.
+Illustrated in Figure \ref{fig:modelDesc}, \textsc{TransDetector} consists of three parts: (1) extracting category-level topics in knowledge base, (2) conducting transfer learning to get category-level topics in microblog stream, and (3) detecting events from category-level word time series.
+The following definitions are used by our method \textsc{TransDetector}. 
+Definition 1 is used in the \textbf{extracting} phase, Definitions 2 and 3 are used in the \textbf{conducting transfer learning} phase, and Definitions 4 to 6 are used in the \textbf{detecting} phase.
+Because Definitions 2 to 6 are very easy to understand, what needs to be specified are Definition 1.
+\textit{Category-level topics in knowledge base} is a set of tuples extracted from knowledge base, which weighs the importance of given words to the specific category, defined in Definition 1 formally. 
+Taking the \textit{Military} category in Figure \ref{fig:NSinitializaton} as an example, the category-level topic of \textit{military} contain the words \textit{army}, \textit{military}, and \textit{shootings} etc, which are highly related to the category \textit{Military}.
 
-\textit{Category-level Topics in Knowledge Base} is a set of tuples extracted from knowledge base, which weighs the importance of given words to the specific category, defined in Definition 1 formally. 
-Taking the \textit{military} category in Figure \ref{fig:modelDesc} as an example, the history state of \textit{military} contain the words \textit{army}, \textit{military}, and \textit{shootings} etc. 
-
-\begin{comment}
-Knowledge base often contains much information about what happened. 
-But the existing RDF model\cite{klyne2006rdf} on knowledge base lacks an efficient mechanism to transfer the information from knowledge base to text stream.  
-With the help of knowledge base's structure (detailed in sec \ref{subsec:hs_initialization}), we provide a  lightweight model to transfer the information in knowledge base to text stream.
-
-\textit{History state} is the proposed data structure to restore the information about what happened. 
-Initially, \textit{history state} extracts category-related history data into a set of tuples, which weighs the importance of given words to the specific category, defined in Definition 1 formally. 
-Taking the \textit{military} category in Figure \ref{fig:modelDesc} as an example, the history state of \textit{military} contain the words \textit{army}, \textit{military}, and \textit{shootings} etc. 
-
-\textit{Recent state} is the proposed data structure to maintain the information about what's happening.
-It extracts category-related words from incoming text stream, for each time window.
-Still taking the \textit{military} category in  Figure \ref{fig:modelDesc} as an example, based on extracted history states, our proposed probabilistic continuous learning model CTrans-LDA can recognize the words \textit{libyan} and \textit{rebel} in the time window 2011-07-28 in the text stream are related to the category \textit{military}. 
-Furthermore the time series analysis on the neighbouring recent states can recognize the set of events' candidate words, and finally detects the events in the text stream. 
-In the example of Figure \ref{fig:modelDesc}, the words \textit{libyan} and \textit{rebel} are related to the \textit{military} event ``\#libya Libyan rebels chief is killed (2011-07-28)''.
-
-\end{comment}
-
-\begin{rmkWithoutSpacing}[\textbf{Category-level Topics in Knowledge Base}] 
+\begin{rmkWithoutSpacing}[\textbf{Category-Level Topics in Knowledge Base}] 
 Given category \(c\), the category level topic in knowledge base is defined by a set of tuples, in which the first element is the word \(w^{(c)}_i\) related to the category \(c\), and the second element is the chi-square score \(chi(c,w^{(c)}_{i})\) under the category \(c\). 
-And we denote \(c\)'s category-level topic in knowledge base as \(\bm{h}_c=\{<w^{(c)}_i,chi(c,w^{(c)}_{i})>\}_{i=1,...,N_c}\).
+And we denote \(c\)'s category-level topic in knowledge base as \(\bm{h}_c=\{<w^{(c)}_i,chi(c,w^{(c)}_{i})>\}_{i=1}^{N_c}\).
 \end{rmkWithoutSpacing}
 
-\begin{rmkWithoutSpacing}[\textbf{Category-level Topics in Microblog Stream}] 
-Given category \(c\), the category level topic in microblog stream at time \(t\) is defined by a set of tuples, and denoted as \(\bm{r}_{c,t}=\{<w^{(c)}_i,n(c,t,w^{(c)}_{i})>\}_{i=1,...,N_c}\), in which word \(w^{(c)}_{i}\) is related to the category \(c\), and \(n(c,t,w^{(c)}_{i})\) is its document frequency in the time window \(t\).
+\begin{rmkWithoutSpacing}[\textbf{Category-Level Topics in Microblog Stream}] 
+Given category \(c\), the category level topic in microblog stream at time \(t\) is defined by a set of tuples, and denoted as \(\bm{r}_{c,t}=\{<w^{(c)}_i,n(c,t,w^{(c)}_{i})>\}_{i=1}^{N_c}\), in which word \(w^{(c)}_{i}\) is related to the category \(c\), and \(n(c,t,w^{(c)}_{i})\) is its document frequency in the time window \(t\).
 \end{rmkWithoutSpacing}
 
-\begin{rmkWithoutSpacing}[\textbf{Category-level Word Time Series}] 
-Given category \(c\) and word \(w\), the category level word time series is a list extracted from \(\{\bm{r}_{c,t}\}_{t=1}^{T}\), and denoted as \(\{n(c,t,w^{(c)}_{i})\}_{t=1}^{T}\).
+\begin{rmkWithoutSpacing}[\textbf{Category-Level Word Time Series}] 
+Given category \(c\) and word \(w\), the category level word time series is a list of document frequencies extracted from \(\{\bm{r}_{c,t}\}_{t=1}^{T}\), and denoted as \(\{n(c,t,w^{(c)}_{i})\}_{t=1}^{T}\).
 \end{rmkWithoutSpacing}
 
 
@@ -291,25 +278,25 @@ Given category \(c\) and word \(w\), the category level word time series is a li
 The set of events' candidate words \(\mathcal{B}_{c,t}\) are groups of the bursty words in \(\bm{r}_{c,t}\).
 \end{rmkWithoutSpacing}
 
-\begin{rmkWithoutSpacing}[Event Phrase] 
+\begin{rmkWithoutSpacing}[\textbf{Event Phrase}] 
 Event phrase \(\mathcal{C}_{c,t,i}\) is the \(i\)-th combination of words which occurred in the set of events' candidate words \(\mathcal{B}_{c,t}\), and represents the \(i\)-th event happened in time \(t\) under the category \(c\).
 \end{rmkWithoutSpacing}
 
-\begin{rmkWithoutSpacing}[Event Related Microblogs] Event related microblogs \(\mathcal{D}_{c,t,i}\) are articles relating to the \(i\)-th event in time \(t\) of category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
+\begin{rmkWithoutSpacing}[\textbf{Event Related Microblogs}] Event related microblogs \(\mathcal{D}_{c,t,i}\) are articles relating to the \(i\)-th event in time \(t\) of category \(c\), and correspond to the event phase \(\mathcal{C}_{c,t,i}\).
 \end{rmkWithoutSpacing}
 
 
-Section \ref{subsec:hs_initialization} explains the details of how to initialize history states from knowledge base.
-Section \ref{subsec:rs_initialization} shows how to perform transfer learning for recent states.
-And section \ref{subsec:detection} interprets the high accuracy event detection based on the processed recent states.
+Section \ref{subsec:hs_initialization} explains the details of how to extract \textit{category-level topics in knowledge base} by using the three fold hierarchical structure.
+Section \ref{subsec:rs_initialization} shows how to conduct transfer learning to get \textit{category-level word time series} in microblog stream.
+And section \ref{subsec:detection} interprets the high accuracy event detection based on the processed \textit{category-level word time series}.
 
-\subsection{History States' Extraction}\label{subsec:hs_initialization}
-In this part, we discuss in detail how to initialize the history states from the given knowledge base. 
+\subsection{Extracting Category-Level Topics in Knowledge Base}\label{subsec:hs_initialization}
+In this part, we discuss in detail how to extract the \textit{category-level topics in knowledge base} on the given categories. 
 The knowledge base such as Wikipedia has the structure of classes, subclasses, instances, and the edges between them. 
 This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia. 
-But the reasoning and maintenance of knowledge on the graph is usually expensive\cite{broekstra2003inferencing,bursztyn2015reasoning}. 
-To make a trade-off between cost and performance, we use the lightweight data structure \textit{history state} to represent the knowledge about what happened, which is extracted from the knowledge base.
-And the knowledge base's threefold structure \(G^{(0)}\), \(G^{(1)}\), \(G^{(2)}\) benefits the extraction of history states. 
+But the reasoning and maintenance of knowledge on the graph is usually expensive\cite{bursztyn2015reasoning}. 
+To make a trade-off between cost and performance, we use the lightweight data structure \textit{topics} to represent the knowledge at category(class) level.
+And the knowledge base's threefold structure \(G^{(0)}\), \(G^{(1)}\), \(G^{(2)}\) benefits the extraction of \textit{category-level topics}. 
 
 \textbf{Taxonomy Graph \(G^{(0)}\)}. The directed edges in \(G^{(0)}\) represent the \textit{class}\(\rightarrow\)\textit{subclass} relations in the knowledge base. 
 Taking Wikipedia for example (Figure \ref{fig:NSinitializaton}), the node \textit{Main topic classifications}\footnote{\url{https://en.wikipedia.org/wiki/Category:Main_topic_classifications}} has the subclass \textit{Society}, further contains the subclass \textit{Politics}, which is the ancestor of the subclass \textit{Military}.
@@ -324,23 +311,22 @@ In Wikipedia, by considering \(G^{(0)'}\) and \(G^{(1)}\) together as shown in l
 
 \textbf{Page-Content Map \(G^{(2)}\)}. 
 For a specific Wikipedia dumps version, the edges  \textit{page} \(\rightarrow\)\textit{content} in \(G^{(2)}\) define a one-to-one mapping.
-There are a bulk of history information restored in the wiki text content.
+There are a bulk of information restored in the wiki text content.
 In order to extract the key words in wiki page's content, which distinguish it from other pages, we use the chi-square statistics\cite{yang1997comparative}\cite{liu2009imbalanced} to measure the importance of each word for the specific page.
 
 For a given category in \(G^{(0)'}\), chi-square statistics also can evaluate the importance of each word appeared in text contents. 
 For example, the chi-square statistic of the term \textit{shooting} under the category \textit{military} is 2888.7 under chi-square test with 1 degree of freedom.
 That means the term \textit{shooting} is highly related to the category \textit{military}.  
 %To prevent the overclaim of rare word by chi-square statitistcs, the word frequency is introduced as a supplement\cite{liu2009imbalanced}, as shown in line \ref{alg:line10inNormalStatesInit} of Algorithm \ref{alg:normalStatesInit}.
-Finally, we can get the category's history state, which are  composed by the category related words and their corresponding importance.
-%history states衡量一个词在考虑完整历史信息的情况下，对于一个类别的重要程度，例如在military类别下面；从某种程度上讲，history state从knowledge base中抽取了对于该类别的重要特征，有助于我们将它应用到text stream当中。
+Finally, we can get the \textit{category-level topic}, which are  composed by the category related words and their corresponding importance.
 \setlength{\textfloatsep}{3pt}% Remove \textfloatsep
 \begin{algorithm}[h]
 \scriptsize
-\caption{History State Initialization from Knowledge Base}
+\caption{Extraction of Category-Level Topics in Knowledge Base}
 \label{alg:normalStatesInit}
 
 \KwIn{Taxonomy's Graph \(G^{(0)}\), Category-Page Bipartite Graph \(G^{(1)}\), Page-Content Bipartite Graph \(G^{(2)}\), topic related category node \(c\)}
-\KwOut{History state \(\bm{h}_c\) on category \(c\)}
+\KwOut{\(c\)'s category-level topic in knowledge base \(\bm{h}_c\)}
 \(Pages(c)\leftarrow \varnothing\), \(\bm{h}_c \leftarrow \varnothing\)\\
 DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank scores. \label{alg:line2inNormalStatesInit}\\
 \(SuccessorNodes(c) \leftarrow \) Breadth-first-traverse(\(G^{(0)'},c\))\label{alg:line3inNormalStatesInit}\\
@@ -356,21 +342,20 @@ Word frequency table \(n(All,.) \leftarrow \) do word count on the text contents
 \Return{\(\bm{h}_c\)}
 \end{algorithm}
 
-Considering the full Wikipedia's contents, history state evaluates the importance of word to the concerned category accurately. 
-For example, in \textit{Military}'s history state, the top  words are \textit{army}, \textit{military}, \textit{air}, \textit{command}, \textit{force}, and \textit{regiment}, etc. 
+Considering the full Wikipedia's contents, the word's score in the \textit{category-level topic} evaluates the importance of word to the concerned category accurately. 
+For example, in \textit{Military}'s \textit{category-level topic}, the top  words are \textit{army}, \textit{military}, \textit{air}, \textit{command}, \textit{force}, and \textit{regiment}, etc. 
 The document which contains these words is related to the category \textit{Military} with high probability. 
-We further discuss how to apply history states to the text stream on the following subsection \ref{subsec:rs_initialization}.
 
-\subsection{Recent States' Maintenance}
+\subsection{Conducting Transfer Learning}
 \label{subsec:rs_initialization}
-In this subsection, we describe how the proposed probabilistic model CTrans-LDA utilizes the history states to learn the recent states from text stream.
+In this subsection, we describe how the proposed probabilistic model CTrans-LDA transfers the category-level topics into microblogs.
 
 There are two facts inspiring CTrans-LDA. 
-(1) The topics in the document may contain history-state-like topics. 
-As an example, the tweet ``Libyan rebel chief gunned down in Benghazi (2011-07-28)'' contains the topic that is similar to the \textit{Military}'s history state.
-(2) The history-state-like topics can reuse the information  stored in the history states.
-The word \textit{libyan} in the aforementioned example tweet ranks much higher in the \textit{Military} and the \textit{Middle East} history states than the other categories' history states.
-After considering the relatedness between the remaining context and the history states, the learned topics of the example tweet include \textit{Military} and \textit{Middle East}. 
+(1) The topics in the document may contain category-level topics. 
+As an example, the tweet ``Libyan rebel chief gunned down in Benghazi (2011-07-28)'' contains the topic that is similar to the \textit{Military}'s \textit{category-level topics in knowledge base}.
+(2) The \textit{category-level topics in microblog stream} can reuse the information stored in the corresponding \textit{category-level topics in knowledge base}.
+The word \textit{libyan} in the aforementioned example tweet ranks much higher in the \textit{Military} and the \textit{Middle East} category-level topics than the other categories' topics.
+After considering the relatedness between the remaining context and the \textit{category-level topics in knowledge base}, the learned topics of the example tweet include \textit{Military} and \textit{Middle East}. 
 
 The generative process of CTrans-LDA can be described as follows.
 \begin{enumerate}[topsep=0pt,itemsep=0mm]
@@ -392,10 +377,10 @@ The generative process of CTrans-LDA can be described as follows.
 \end{enumerate}
 
 In the above generative process, the line 2(a) is the key point to distinguish CTrans-LDA from LDA\cite{blei2003latent}, where \(\bm{\tau}_k\) is defined by Equation(\ref{eq:wikiPrior}).
-\(K_{KB}\) is the number of pre-defined history-state-like topics, and \(S_k\) is the set of words appeared in the \(k\)-th topic's history state.
+\(K_{KB}\) is the number of pre-defined categories used for transferring, and \(S_k\) is the set of words appeared in the \(k\)-th category-level topic.
 As \cite{wallach2008structured} mentioned that the asymmetric prior distribution can significantly improve the quality of topic modelling, \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\) incorporates \textit{category-level topics in knowledge base} into the asymmetric prior of the word distribution on topic. 
 The effect of \(\bm{\tau_k}\) is obvious, e.g., \(\tau_{Military,army}/\tau_{Military,basketball}=203\) leads to that topic \textit{Military} prefers to contain the word \textit{army} other than \textit{basketball}.
-The parameter \(\lambda\) controls how much the learned topics are similar to the history state, which can be chosen by cross-validated grid-search. 
+The parameter \(\lambda\) controls how much the knowledge is used for transferring, which can be chosen by cross-validated grid-search. 
 
 \setlength{\abovedisplayskip}{0pt}
 \setlength{\belowdisplayskip}{0pt}
@@ -414,11 +399,11 @@ The parameter \(\lambda\) controls how much the learned topics are similar to th
 
 To solve CTrans-LDA, the gibbs sampling is adopted to determine the hidden variable \(z_{dn}\) and the model parameter \(\phi_k\).
 In the initialization phase of Gibbs sampling for CTrans-LDA, the hidden variable \(z_{dn}\) is initialized to topic \(k\) with probability \(\hat{q}_{k|v}\) as Equation (\ref{eq:initProbability}).
-For the word \(v\) that belongs to any history state, \(\hat{q}_{k|v}\) is proportional to its importance in the history state \(\tau_{kv}\) as Equation \ref{eq:initProbability}(a). 
+For the word \(v\) that belongs to any category-level topic, \(\hat{q}_{k|v}\) is proportional to its importance in the category-level topic \(\tau_{kv}\) as Equation \ref{eq:initProbability}(a). 
 For the new word \(v\) in text stream, \(\hat{q}_{k|v}\) is   set uniformly \(1/(K-K_{\bm{KB}})\) on the other topics as Equation \ref{eq:initProbability}(b,c). 
-The initialization makes sure that the learned topics are aligned to the pre-defined history states.
-\setlength{\abovedisplayskip}{1pt}
-\setlength{\belowdisplayskip}{1pt}
+The initialization makes sure that the learned topics are aligned to the pre-defined category-level topic.
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
 \begin{scriptsize} 
 \begin{equation}
 \label{eq:initProbability}
@@ -435,12 +420,12 @@ The initialization makes sure that the learned topics are aligned to the pre-def
 
 %采样公式p(z|.)，z有两部分。
 The sampling process uses the conditional probability \(p(z_{dn}=k|.)\propto (n^{(d)}_{dk}+\alpha m_k)(n^{(w)}_{kv}+\tau_{kv}+\beta)/(n^{(w)}_{k,.}+\tau_{k,.}+V\beta)\), where \(n^{(d)}_{dk}\) is the number of words in document \(d\) assigned to topic \(k\), and \(n^{(w)}_{kv}\) is the times of word \(v\) assigned to topic \(k\).
-We set \(\alpha=0.1\) and \(\beta=0.01\) according to the suggestion by \cite{tang2014understanding}.
+We set \(\alpha=0.1\) and \(\beta=0.005\) according to the suggestion by \cite{tang2014understanding}.
 
 
 After Gibbs sampling on discrete time windows, CTrans-LDA learned all hidden topics of words in microblog stream.
-And for a specific word type \(w\) and its history-state-like topic assignment \(c\) in time window \(t\), its document frequency is counted as \(n(c,t,w^{(c)})\), which is the element of category \(c\)'s \(t\)-th recent state.
-Event detection on recent states is discussed in the following subsection.
+And for a specific word type \(w\) and its category assignment \(c\) in time window \(t\), its document frequency is counted as \(n(c,t,w^{(c)})\), which is the element of category-level word time series.
+Event detection on category-level word time series is discussed in the following subsection.
 
 \subsection{Detecting Events from Category-Level Word Time Series}
 \label{subsec:detection}
@@ -479,7 +464,6 @@ Finally, \textsc{TransDetector} gets the detected events \(\{(\mathcal{C}_{c,t,i
 
 %Text stream evolves more quickly with time than knowledge base.
 %For example, recent state of Military contain .
-%In other words, recent state is history-state-like topic timestamp.%在时间轴上的横截面。
 
 
 
@@ -487,11 +471,11 @@ Finally, \textsc{TransDetector} gets the detected events \(\{(\mathcal{C}_{c,t,i
 
 \section{Experiments}
 %\subsection{Data Sets}
-In this subsection, we demonstrate the effectiveness of \textit{history states} initialized from knowledge base and \textit{recent states} learned by transfer learning. 
+In this subsection, we demonstrate the effectiveness of \textsc{TransDetector}, by evaluating the \textit{category-level topics in knowledge base}, \textit{category-level topics in microblog stream} learned by transfer learning, and the effect of event detection. 
 
 \textbf{Knowledge Base.} 
 We construct the taxonomy graph \(G^{(0)}\), the category-page bipartite graph \(G^{(1)}\) from the latest dump of category links\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-categorylinks.sql.gz}} and the page-content map \(G^{(2)}\) from Wikipedia pages\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles.xml.bz2 }}.
-We set \(K_{KB}=100\), which means 100 categories are selected manually to cover the topics of Wikipedia and the target corpus as widely as possible. 
+We set \(K_{KB}=50\), which means 50 categories are selected manually to cover the topics of Wikipedia and the target corpus as widely as possible. 
 There are two kinds of categories are considered. 
 The mid-high categories in the taxonomy graph \(G^{(0)'}\), which are representative, are likely to be selected, such as \textit{Aviation}, \textit{Military}, and \textit{Middle East}, etc.
 And the mid categories, which reflect the main interests of the target corpus, are also taken into consideration, such as \textit{American Football}, \textit{Basketball}, and \textit{Baseball}, etc. 
@@ -504,48 +488,45 @@ We collected the tweets' contents according to the IDs with the help of Twitter 
 Though we cannot get the whole dataset due to the limit of Twitter API, after necessary pre-processing, our rebuilt dataset still contains 36,627,434 tweets, which also spans from 2011/06/30 to 2011/09/15.
 More details of the original dataset are described in \cite{petrovic2010edinburgh}.
 
-\subsection{Effects of Categroy-Level Topics}
+\subsection{Evaluation on Categroy-Level Topics in Knowledge Base}
 The category-level topics are initialized on the pre-defined categories from the knowledge base as Algorithm \ref{alg:normalStatesInit}.
-%This process is illustrated by Table \ref{tbl:historyStates}. 
 
 \textbf{Evaluation Metrics.}
-We compare the topic coherence of history states with the topics learned from Wikipedia by LDA in terms of NPMI\cite{Rder2015ExploringTS}.
+We compare the topic coherence of category-level topics with the topics learned from Wikipedia by LightLDA\cite{yuan2015lightlda} in terms of NPMI\cite{Rder2015ExploringTS}.
 Different from traditional experiments that only compute the topic coherence of top words, we want to check whether  it can hold for more words.
 Due to the limit of NPMI computing module\footnote{\url{https://github.com/AKSW/Palmetto}}, which computes the coherence of up to 10 words each time, we compute NPMI on the combination of top five words with each next five words as Table \ref{tbl:NPMIDetails}.
 
 \textbf{Results.}
-Observe that even for the combination of 96th to 100th words with the top five words in \textit{Aviation}'s history state, NPMI=0.131 shows that the topic coherence still holds well without drifting.
-More generally, Figure \ref{fig:NPMI} illustrates that the history states are much more stable than the topics learned by LDA.
-Taking the group 10 (the combination of 56th to 60th words with the top five words) as an example, the median one of history states performs better than all those learned by LDA. 
+Observe that even for the combination of 96th to 100th words with the top five words in \textit{Aviation}'s category-level topics in knowledge base, NPMI=0.131 shows that the topic coherence still holds well without drifting.
+More generally, Figure \ref{fig:NPMI} illustrates that the category-level topics are much more stable than the topics learned by LightLDA.
+Taking the group 10 (the combination of 56th to 60th words with the top five words) as an example, the median one of category-level topic performs better than those learned by LightLDA. 
+And more topics are compared shown in Figure \ref{fig:NPMI}, proving that our method performs better at extracting key features for categories.
 
-Since the history states extracted from knowledge base is stable and topic coherence, 
-
-%\hlgreen{TODO: add a new table, containing a topic generated by BTM, which is most similar to the extracted topic from KB.}
 \begin{table}[h]
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
 \centering
-\caption{Top words' topic coherence of \textit{Aviation}'s history state. * means the group also contains the five top words \textit{aircraft}, \textit{air}, \textit{airport}, \textit{flight}, and \textit{airline}, but we don't show them in table to save space. NPMI is computed on ten words (a combination of words in each row with the five top words).}
+\caption{The comparison on the topic coherence(NPMI) between our method and LightLDA\cite{yuan2015lightlda}, taking \textit{Aviation} as an example. (GID is short for Group Id. * means each group contains the five top words. NPMI is computed on a group of ten words. \(\sim\) stands for the top five words.)}
 \scalebox{0.65}{
 \begin{tabular}{|c|l|l|c !{\vrule width 1pt} c|l|l|c|}
 \hline
-\multicolumn{4}{|c!{\vrule width 1pt}}{Category-Level Topics extracted from Wikipedia by \textsc{TransDetector}} & \multicolumn{4}{c|}{Topics Learned from Wikipedia by LightLDA}    \\ \hline
-Group ID& \#words*  & words  & NPMI & Group ID& \#words*& words & NPMI \\ \hline
+\multicolumn{4}{|c!{\vrule width 1pt}}{Category-Level Topics extracted from Wikipedia by \textsc{TransDetector}} & \multicolumn{4}{c|}{Topics Learned from Wikipedia by LightLDA\cite{yuan2015lightlda}}    \\ \hline
+GID& \#words*  & words  & NPMI & GID& \#words*& words & NPMI \\ \hline
 - & 1-5 & aircraft air airport flight airline &-& - & 1-5 & engine aircraft car air power &-\\ \hline
-0 & 6-10 & airlines aviation flying pilot squadron &  0.113 & 0 & 6-10 & design flight model production speed & 0.112\\ \hline
-1 & 11-15 &flights pilots raf airways fighter & 0.155 & 1 & 11-15 &system vehicle cars engines mm & 0.062\\ \hline
-2 & 16-20 &boeing runway force crashed flew   & 0.092 & 2 & 16-20 & fuel vehicles designed models type & 0.072\\ \hline
-3 & 21-25 &airfield landing passengers plane aerial & 0.179 & 3 & 21-25 & version front produced rear electric & 0.035\\ \hline
-4 & 26-30 &bomber radar wing bombers crash & 0.137 & 4 & 26-30 & space control motor standard development & 0.085\\ \hline
-5 & 31-35 &airbus airports operations jet helicopter & 0.189 & 5 & 31-35 & film range light using available & -0.002\\ \hline
-6 & 36-40 &squadrons base flown havilland crew & 0.088 & 6 & 36-40 & wing powered wheel weight launch & 0.087\\ \hline
-7 & 41-45 &combat luftwaffe aerodrome carrier fokker & 0.159 & 7 & 41-45 & developed low test ford cylinder & 0.007\\ \hline
-8 & 46-50 &planes fly engine takeoff fleet & 0.186 & 8 & 46-50 & equipment side pilot hp aviation & 0.091\\ \hline
-9 & 51-55 &fuselage helicopters aviator naval aero & 0.157 & 9 & 51-55 & systems us sold body drive & -0.051\\ \hline
-10 & 56-60 &glider command training balloon faa & 0.166 & 10 & 56-60 & gear introduced class safety seat & 0.069\\ \hline
+0 & 1-5, 6-10 & \(\sim\), airlines aviation flying pilot squadron &  0.113 & 0 & 1-5, 6-10 & \(\sim\), design flight model production speed & 0.112\\ \hline
+1 & 1-5, 11-15 & \(\sim\), flights pilots raf airways fighter & 0.155 & 1 & 1-5, 11-15 &\(\sim\), system vehicle cars engines mm & 0.062\\ \hline
+2 & 1-5, 16-20 & \(\sim\), boeing runway force crashed flew   & 0.092 & 2 & 1-5, 16-20 & \(\sim\), fuel vehicles designed models type & 0.072\\ \hline
+3 & 1-5, 21-25 &\(\sim\), airfield landing passengers plane aerial & 0.179 & 3 & 1-5, 21-25 & \(\sim\), version front produced rear electric & 0.035\\ \hline
+4 & 1-5, 26-30 &\(\sim\), bomber radar wing bombers crash & 0.137 & 4 & 1-5, 26-30 & \(\sim\), space control motor standard development & 0.085\\ \hline
+5 & 1-5, 31-35 &\(\sim\), airbus airports operations jet helicopter & 0.189 & 5 & 1-5, 31-35 & \(\sim\), film range light using available & -0.002\\ \hline
+6 & 1-5, 36-40 &\(\sim\), squadrons base flown havilland crew & 0.088 & 6 & 1-5, 36-40 & \(\sim\), wing powered wheel weight launch & 0.087\\ \hline
+7 & 1-5, 41-45 & \(\sim\), combat luftwaffe aerodrome carrier fokker & 0.159 & 7 & 1-5, 41-45 & \(\sim\), developed low test ford cylinder & 0.007\\ \hline
+8 & 1-5, 46-50 &\(\sim\), planes fly engine takeoff fleet & 0.186 & 8 & 1-5, 46-50 & \(\sim\), equipment side pilot hp aviation & 0.091\\ \hline
+9 & 1-5, 51-55 &\(\sim\), fuselage helicopters aviator naval aero & 0.157 & 9 & 1-5, 51-55 & \(\sim\), systems us sold body drive & -0.051\\ \hline
+10 & 1-5, 56-60 &\(\sim\), glider command training balloon faa & 0.166 & 10 & 1-5, 56-60 & \(\sim\), gear introduced class safety seat & 0.069\\ \hline
 \(\cdots\) & \(\cdots\) &\(\cdots\) &\(\cdots\) & \(\cdots\) & \(\cdots\) &\(\cdots\) &\(\cdots\)\\ \hline
-18 & 96-100 &scheduled carriers military curtiss biplane &0.131 & 18 & 96-100 & transmission special replaced limited different & 0.059\\ \hline
-19 & 101-105 &accident engines iaf albatross rcaf &0.068 & 19 & 101-105 & features machine nuclear even unit & 0.011\\ \hline
+18 & 1-5, 96-100 &\(\sim\), scheduled carriers military curtiss biplane &0.131 & 18 & 1-5, 96-100 & \(\sim\), transmission special replaced limited different & 0.059\\ \hline
+19 & 1-5, 101-105 &\(\sim\), accident engines iaf albatross rcaf &0.068 & 19 & 1-5, 101-105 & \(\sim\), features machine nuclear even unit & 0.011\\ \hline
 \end{tabular}
 }
 \label{tbl:NPMIDetails}
@@ -556,86 +537,21 @@ Group ID& \#words*  & words  & NPMI & Group ID& \#words*& words & NPMI \\ \hline
 	\setlength{\belowcaptionskip}{0.cm}
         \centering
         \includegraphics[width=1.0\columnwidth]{img/NPMI.pdf}
-        \caption{The variable that has the greatest impact on the outcome is its newsworthiness.}
+        \caption{More topics are compared at the NPMI metrics between our method and LightLDA}
         \label{fig:NPMI}
 \end{figure}
 
-\textbf{Category-Level Topics Learned from Microblog Stream.}
-For Trans-LDA, \(K\) is set to be 200, which means Trans-LDA learned 100 history-state-like topics and 100 other topics.
+For CTrans-LDA, \(K\) is set to be 200, which means CTrans-LDA learned 50 category-level topics and 150 other topics.
 After cross-validated grid-search, \(\lambda\) is set to be 12.8. The other parameters are set as \(\alpha=0.1\), \(\beta=0.005\).
-We run \textsc{Trans-LDA} window by window on text stream, and learn specific categories' topics.
+We run CTrans-LDA window by window on text stream, and learn specific categories' topics.
+The result in Table 2 demonstrates the effectiveness of transferring category-level topics into the microblog stream, and finding more new words in the stream which is not restored in the knowledge base.
 
-
-
-
-%如图（topic）中，能够从Military*中学习出tweet（20110728）话题中包含libyan。
-
-
-%We use 20newsgroups\cite{lang1995newsweeder} dataset\footnote{\url{http://qwone.com/~jason/20Newsgroups}} to check the effects of normal states initialization.
-
-\begin{comment}
-\begin{table}[]
-\tiny
-\centering
-\caption{Normal State's cateogries corresponding to the 20-newsgroups corpus, and the F1 score on the classification task}
-\label{my-label}
-\begin{tabular}{|l|l|l|l|l|}
-\hline
- &  & LDA & BOW  & \begin{tabular}[c]{@{}l@{}}NS-Prior-\\ LDA\end{tabular} \\ \hline
-comp.graphics & Computer graphics &  &  &    \\ \hline
-comp.os.ms-windows.misc & Microsoft Windows &  &  &    \\ \hline
-comp.sys.ibm.pc.hardware & IBM personal computers &  &  &    \\ \hline
-comp.sys.mac.hardware & Macintosh computers &  &  &    \\ \hline
-comp.windows.x & X Window System &  &  &    \\ \hline
-rec.autos & Automobiles &  &  &    \\ \hline
-rec.motorcycles & Motorcycles &  &  &    \\ \hline
-rec.sport.baseball & Baseball &  &  &    \\ \hline
-rec.sport.hockey & Hockey &  &  &    \\ \hline
-sci.crypt & Cryptography &  &  &    \\ \hline
-sci.electronics & Electronics &  &  &    \\ \hline
-sci.med & Medicine &  &  &    \\ \hline
-sci.space & Outer space &  &  &    \\ \hline
-misc.forsale & Sales &  &  &    \\ \hline
-talk.politics.misc & Politics &  &  &    \\ \hline
-talk.politics.guns & Gun politics &  &  &    \\ \hline
-talk.politics.mideast & Middle East &  &  &   \\ \hline
-talk.religion.misc & Religion &  &  &    \\ \hline
-alt.atheism & Atheism &  &  &    \\ \hline
-soc.religion.christian & Christians &  &   &  \\ \hline
-In total &  &  &  & \\ \hline
-\end{tabular}
-\end{table}
-\end{comment}
-
-\begin{comment}
-\begin{figure}
-        \centering
-        \includegraphics[height=4.0cm]{img/pmi.pdf}
-        \caption{The quality of all twitter topics learned by NS-Prior-LDA increases with normal states weight (\(\lambda\)) before \(\lambda=12.8\). The optimized PMI is gained with moderate normal states weight when considering topics \(k\leq K_{\bm{KB}}\) and topics \(k > K_{\bm{KB}}\) together.}
-\end{figure}
-\end{comment}
-
-\begin{comment}
-\begin{table}
-\centering
-\caption{The PMI of twitter topics learned by NS-Prior-LDA, its variant, and other baselines}
-    \begin{tabular}{|l|l|c|}
-    \hline
-    Model & Prior Knowledge & PMI \\ \hline
-    LDA & None  & 1.265 \(\pm\) 0.013     \\ \hline
-    BurstyBTM\cite{Yan:2015wm} & None    & 1.467 \(\pm\) 0.017     \\ \hline
-    NS-Prior-LDA\(^{(-)}\)   &   \begin{tabular}[c]{@{}l@{}}\footnotesize{Words in categories simply}\\ \footnotesize{extracted from Wikipedia}\end{tabular} & 1.439 \(\pm\) 0.010     \\ \hline
-    NS-Prior-LDA         & \begin{tabular}[c]{@{}l@{}}\footnotesize{Normal states initialized} \\\footnotesize{from wikipedia}\end{tabular} & 1.523 \(\pm\) 0.017     \\ \hline
-    \end{tabular}
-\label{tbl:NS-Prior-LDA}
-\end{table}
-\end{comment}
 
 \begin{table*}[ht]
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
 \centering
-\caption{Category-Level Topics extracted from knowledge base and the corresponding topics on microblog stream learned from Trans-LDA, taking the categories \textit{Aviation},  \textit{Health}, \textit{Middle East}, \textit{Military}, and \textit{Mobile Phones} as examples. The words in \textbf{\textit{bold italic}} font are newly learned on the microblog stream by the transfer learning, which semantic meanings are verified consistent with the categories; while the words in normal font play the role as the bridge in transfer learning, and appear in the both category-level topics in two domains.}
+\caption{Category-Level Topics extracted from knowledge base and the corresponding topics on microblog stream learned from CTrans-LDA, taking the categories \textit{Aviation},  \textit{Health}, \textit{Middle East}, \textit{Military}, and \textit{Mobile Phones} as examples. The words in \textbf{\textit{bold italic}} font are newly learned on the microblog stream by the transfer learning, which semantic meanings are verified consistent with the categories; while the words in normal font play the role as the bridge in transfer learning, and appear in the both category-level topics in two domains.}
 \scalebox{0.8}{
 \begin{tabular}{|cc|cc|cc|cc|cc|cc|}
 \hline
@@ -657,18 +573,6 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 }
 \label{tbl:historyStates}
 \end{table*}
-%TODO: add the top words in the category-level topic 
-%\hlgreen{TODO: add the top words of the category-level topic in each window of microblog stream AFTER Table 2.}
-
-%TODO: add the effect of transfer learning by using text classification, compared with fastText and SVM.
-%\hlgreen{TODO: add the effect of transfer learning by using text classification, compared with fastText and SVM.}
-\begin{comment}
-\begin{figure*}
-    \label{fig:algorithm}
-    \includegraphics[width=1.0\textwidth]{img/screenShot.png}
-    \caption{An illustration of the time series of Military related states on Twitter dataset from 2011-06-30 to 2011-09-15.}
-\end{figure*}
-\end{comment}
 
 \subsection{Effects of Event Detection}
 \textbf{Baselines Methods.} We compare our proposed method against the following methods, Twevent\cite{Twevent2012}, BurstyBTM\cite{Yan:2015wm}, LSH\cite{Petrovic:2010uj}, EDCoW\cite{Weng:2011wz}, and TimeUserLDA\cite{Diao:2012wj}, which are mentioned in the Section \ref{sec:relatedWorks}.
@@ -687,11 +591,8 @@ The labeling process generates the Benchmark2, and contains 395 events.
 We use precision and recall to evaluate each method on both benchmarks, and utilize the DERate(Duplicate Event Rate) metric\cite{Twevent2012} to measure the readability of detected events.
 The smaller the metric DERate, the less duplicate events to be filtered out in the application.
 
-%LSH-FSD\cite{Petrovic:2010uj}没有评测FSD的情况，我们也可以提一句，我们不评测FSD，我们只评测检测出的事件是否是真实的事件。
-
 
 \textbf{Results.}
-%\chinese{我们需要说明几个问题。1，在Benchmark2上，事件有395个；LSH能够检测到3337个聚类簇，判断它是否命中我们采用比较聚类簇中心的方法，}
 In general, our method is better than the existing methods in terms of the precision and the recall, only sacrificing in the DERate slightly, as shown in Table \ref{tbl:overall}. 
 This is because an event could be grouped into multiple categories (e.g. the event \textit{``S\&P downgrade US credit rating"}, related to the politics category and the financial category simultaneously), but is not a problem as the method \textsc{TrasnDetector} has already achieved the high precision and recall. 
 
@@ -738,7 +639,7 @@ In our experimental settings, the methods all perform well on the very popular e
 For the not-so-popular events, the underlying bursty pattern is not so obvious that leads many methods to fail to catch the pattern.
 We further find out that the number of microblogs in an event follows a power-law distribution, which similar phenomenon is also reported in \cite{Twevent2012}.
 The widespread existence of such not-so-popular events challenge almost all the existing event detection methods.
-
+More result in Table 4 shows the examples of military related events detected by \textsc{TransDetector} on the real dataset.
 
 \begin{figure}[h]
 	\setlength{\abovecaptionskip}{0.cm}
@@ -748,19 +649,6 @@ The widespread existence of such not-so-popular events challenge almost all the 
         \caption{The relation between the recall and the event size}
         \label{fig:Benchmark1}
 \end{figure}
-
-Illustrated in Table \ref{tbl:overall} and Figure \ref{fig:Benchmark1}, \textsc{TransDetector} achieves very good results even on the not-so-popular events. 
-\hlgreen{To check} 
-After processing each time window's data, the words in microblogs can be enriched semantically with knowledge base.
-In this way, the transfer learning model provides richer semantics and less noise for microblog stream, which promotes the accuracy of event detection significantly. 
-The following definitions are the concepts used by the transfer learning model \textsc{TransDetector}. 
-\hlgreen{To Check}
-After transfer learning, events are detected accurately because the word time series is refined to finer grain as multiple corresponding (word, category) time series, and the bursty pattern is better exposed. 
-Taking the word \textit{hood} as an example, it belongs to the category \textit{Military} when it appeared in \textit{Ft Hood}, a US military establishment located in Texas.
-\hlgreen{To Check}
-As shown in Figure \ref{fig:hood}, the bursty pattern of \textit{hood} is clearly exposed after distinguishing its \textit{Military} time series from the raw one.
-%Therefore, the processing on each category's accurate stream states leads to the accurate event detection. 
-
 
 
 \begin{table}
@@ -789,37 +677,13 @@ As shown in Figure \ref{fig:hood}, the bursty pattern of \textit{hood} is clearl
 }
 \end{table}
 
-%An accurate recent states learning leads to accurate event detection.
-\begin{comment}
-These methods work in four ways. 
-1) Based on topic model, BurstyBTM and TimeUserLDA detect bursty topics. 
-Although they are designed for batch learning initially, we run them on the slide windows to adapt to the text stream environment.
-2) Integrated with knowledge base, Twevent detects bursty segments, groups them into clusters, and then filters out the meaningless ones by Wikipedia.
-3) By clustering articles, UMass System and LSH decide whether the article belongs to the existing event or a new one.
-As designed for First Story Detection task (one of the Topic Detection and Tracking subtasks\cite{allan2012topic}) initially, they prefer to enlarge the recall of detected events. 
-4) By analyzing word frequencies, EDCoW clusters the bursty words into events.
-\end{comment}
-
-\begin{comment}
-20-newsgroup\footnote{http://qwone.com/~jason/20Newsgroups/}
-\end{comment}
-
 \section{Conclusions \& Future Work}
 Knowledge base is constructed elaborately and contains rich information, which can benefit the not-well-organized text stream. 
 As a part of our future work, we will explore the effects of transfer learning from knowledge base to text stream for more tasks, such as text classification and key words extraction, especially for short texts. 
 %Another work what we are interested in is to utilize the knowledge base Microsoft Academic Graph, which also contains the taxonomy structure and text contents, to mine the research topics and trends from arXiv stream in fine grain. 
 
-\begin{comment}
-Twitter, as a new type of social media, has experienced an explosive growth in terms of both users and information volume in recent years. 
-The characteristics of tweets propose severe challenges to many tasks including event detection. 
-In this paper, we present a novel event detection system for Twitter stream, called Twevent, to tackle the adverse impacts of tweets: short and noisy content, diverse and dynamic topics, and large data volume. 
-One of the key concept in Twevent is to use tweet segment instead of unigram for identifying the bursty features and then distinguishing the realistic events from the noisy ones. 
-Twevent demonstrates outstanding performance in our experiments: effectiveness, informativeness, and efficiency. 
-As a part of our future work, we will investigate the effectiveness of utilizing more features from tweets (e.g., retweet rate and hashtags) in Twevent. 
-Another important task is to investigate the effectiveness of Twevent when none of the segments of an event is covered by Wikipedia.
-\end{comment}
 
-\newpage
+%\newpage
 \bibliographystyle{unsrt}
 \small
 \bibliography{paperbib}
