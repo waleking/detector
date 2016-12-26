@@ -110,17 +110,12 @@
 % proceedings, working notes, and technical reports.
 %
 \title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
-%\title{Leveraging Knowledge Base for Accurate Event Detection on Microblog Stream}
 \titlerunning{\ }
-%构造（building）一个**词表（找一个词对它更合适的描述），for transfer learning in accurate event detection
-%\title{Constructing Knowledge Base's Category Topics for Transfer Learning in Accurate Microblog Event Detection}
-\begin{comment}% for double blind
 \author{Weijing Huang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.} \and Tengjiao Wang\inst{1} \and Yazhou Wang\inst{1} }
 \institute{Key Laboratory of High Confidence Software Technologies (Ministry of Education), EECS, Peking University, Beijing, China \\ 
 \path{huangwaleking@gmail.com,{pekingchenwei,tjwang}@pku.edu.cn}\\ 
 \path{pkuwangyz@gmail.com}
 }
-\end{comment}
 
 \maketitle
 
@@ -152,7 +147,7 @@ Different from the not-well-organized microblog stream, knowledge base (e.g. Wik
 For example, the microblog message ``Possible Ft. Hood Attack Thwarted (2011-07-28)'' is short, but still comprehensible because the words ``\textit{Ft. Hood}" is included in the wiki page ``\textit{Ft. Hood}", and belongs to the category ``\textit{Military}'' at a higher conceptual level.
 By regarding these wiki information and the word \textit{attack} (also highly related to \textit{Military}), the model easily understands the example tweet is about something related to \textit{Military}.
 In other words, knowledge base enriches the linkages between words and concepts, and provides more comprehensive context for microblogs.
-Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information restored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
+Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information stored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
 Taking the below Figure \ref{fig:hood} as an example, the fluctuation of time series of raw word \textit{hood} is not so obvious to reflect the event happened to the military base \textit{Ft. Hood}.
 After transferring the knowledge about \textit{``Military"} into the microblog stream, the time series of word \textit{``hood"} related to \textit{``Military"} is extracted, which is more vivid to detect the event happened on July 28th, 2011.
 
@@ -166,14 +161,14 @@ After transferring the knowledge about \textit{``Military"} into the microblog s
         \label{fig:hood}
 \end{figure}
 
-The benefit of enriching the semantics for micorblogs is attractive, but it's non-trivial to transfer the knowledge restored in the knowledge base into microblog stream directly.
+The benefit of enriching the semantics for micorblogs is attractive, but it's non-trivial to transfer the knowledge stored in the knowledge base into microblog stream directly.
 The existing RDF model\cite{klyne2006rdf} lacks an efficient quick mechanism to transfer the knowledge, since it's mainly designed for managing knowledge as tuples on graph. And the query on large graph is also very expensive\cite{huang2011scalable}, which is not suitable for the scene of quickly and accurately detecting events.
 In existing methods, what meets the demand most is Twevent\cite{Twevent2012}, but it's limited in only treating Wikipedia as a looking-up table and may drop some events incorrectly.
 
 In our paper, to balance the performance and the cost of leveraging knowledge base for event detection, we develop a novel category-level transfer learning method, namely \textsc{TransDetector}.
 It consists of three phases: extracting category-level topics in knowledge base, conducting transfer learning to get category-level topics in microblog stream, and detecting events from category-level word time series, as illustrated in Figure \ref{fig:modelDesc}.
 We explain the main idea of the three parts in \textsc{TransDetector}, and leave more technique details in Section \ref{sec:TransDetector}.
-(1) In the \textbf{extracting} phase, we propose a structural-guided category-level topics extraction method on the knowledge base, . 
+(1) In the \textbf{extracting} phase, we propose a structural-guided category-level topics extraction method on the knowledge base. 
 It bases on the following facts. 
 The knowledge base has the three fold hierarchical structure, consisting of the taxonomy graph (\textit{class} \(\rightarrow\) \textit{subclass}), the category-page bipartite graph (\textit{class} \(\rightarrow\) \textit{instance}), and the page-content map (\textit{instance} \(\rightarrow\) \textit{content}), as illustrated in Figure \ref{fig:NSinitializaton}.
 In terms of concept level, the latter part is finer than the former. 
@@ -214,7 +209,7 @@ To sum up, the contribution of this paper is mainly in four aspects.
 
 \section{Related Works}
 \label{sec:relatedWorks}
-\textbf{Event Detection.} Based on how much data used, the methods are mainly in two groups, the detection \textit{without extra information} and that by \textit{leveraging extra information}. 
+\textbf{Event Detection.} Based on how much data are used, the methods are mainly in two groups, the detection \textit{without extra information} and that by \textit{leveraging extra information}. 
 
 Most existing methods are implemented \textit{without extra information}.
 They are mainly carried out by clustering articles\cite{Allan:2000wu,Petrovic:2010uj,Wurzer:2015wq}, analyzing word frequencies\cite{Mathioudakis:2010fc,Weng:2011wz}, or finding bursty topics\cite{Diao:2012wj,Yan:2015wm} etc. 
@@ -311,7 +306,7 @@ In Wikipedia, by considering \(G^{(0)'}\) and \(G^{(1)}\) together as shown in l
 
 \textbf{Page-Content Map \(G^{(2)}\)}. 
 For a specific Wikipedia dumps version, the edges  \textit{page} \(\rightarrow\)\textit{content} in \(G^{(2)}\) define a one-to-one mapping.
-There are a bulk of information restored in the wiki text content.
+There are a bulk of information stored in the wiki text content.
 In order to extract the key words in wiki page's content, which distinguish it from other pages, we use the chi-square statistics\cite{yang1997comparative}\cite{liu2009imbalanced} to measure the importance of each word for the specific page.
 
 For a given category in \(G^{(0)'}\), chi-square statistics also can evaluate the importance of each word appeared in text contents. 
@@ -544,7 +539,7 @@ GID& \#words*  & words  & NPMI & GID& \#words*& words & NPMI \\ \hline
 For CTrans-LDA, \(K\) is set to be 200, which means CTrans-LDA learned 50 category-level topics and 150 other topics.
 After cross-validated grid-search, \(\lambda\) is set to be 12.8. The other parameters are set as \(\alpha=0.1\), \(\beta=0.005\).
 We run CTrans-LDA window by window on text stream, and learn specific categories' topics.
-The result in Table 2 demonstrates the effectiveness of transferring category-level topics into the microblog stream, and finding more new words in the stream which is not restored in the knowledge base.
+The result in Table 2 demonstrates the effectiveness of transferring category-level topics into the microblog stream, and finding more new words in the stream which is not stored in the knowledge base.
 
 
 \begin{table*}[ht]
