@@ -229,7 +229,7 @@ However it's not easy to get this kind contextual information.
 Twevent \cite{Twevent2012} divides the tweet into segments according to the Microsoft Web N-Gram service and Wikpedia, then detect the bursty segments and cluster these segments into candidate events for necessary post processings.
 But as shown in \cite{Yan:2015wm}, Twevent is still hampered by the performance of simply clustering the bursty segments.
 Beyond the scope of microblog stream, \cite{steiner2013mj} utilizes the concurrent wikipedia edit spikes for event detection.
-And \cite{liuleveraging2016} leverages the ACE corpus\cite{doddington2004automatic} and the structure of FrameNet\cite{baker1998berkeley} to improve the event detection within FrameNet, but has not shown how to apply the knowledge base for more general unstructured corpus.
+%And \cite{liuleveraging2016} leverages the ACE corpus\cite{doddington2004automatic} and the structure of FrameNet\cite{baker1998berkeley} to improve the event detection within FrameNet, but has not shown how to apply the knowledge base for more general unstructured corpus.
 In a nutshell, existing works are different from ours, as we transfer the category information of knowledge base into microblog's words and get the finer processing objects in event detection, rather than treating the knowledge base as a lookup table or a comparison base.
 
 \textbf{Knowledge Base.} Many general knowledge bases and customized knowledge bases are constructed and utilized for different text mining tasks. 
@@ -289,7 +289,7 @@ And section \ref{subsec:detection} interprets the high accuracy event detection 
 In this part, we discuss in detail how to extract the \textit{category-level topics in knowledge base} on the given categories. 
 The knowledge base such as Wikipedia has the structure of classes, subclasses, instances, and the edges between them. 
 This structure usually can be represented as triples in RDF graph\cite{klyne2006rdf}, which is adopted to build DBPedia\cite{auer2007dbpedia} and YAGO\cite{suchanek2007yago} from Wikipedia. 
-But the reasoning and maintenance of knowledge on the graph is usually expensive\cite{bursztyn2015reasoning}. 
+But the the query on the large graph is usually very expensive\cite{huang2011scalable}. 
 To make a trade-off between cost and performance, we use the lightweight data structure \textit{topics} to represent the knowledge at category(class) level.
 And the knowledge base's threefold structure \(G^{(0)}\), \(G^{(1)}\), \(G^{(2)}\) benefits the extraction of \textit{category-level topics}. 
 
@@ -581,7 +581,7 @@ The evaluation is conducted on two benchmarks.
 The first benchmark on \textit{Edinburgh twitter corpus} contains 27 manually labeled events\cite{petrovic2013can}\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/Newswire_Events.tar.gz}}, which all exist in our rebuilt dataset on the \textit{Edinburgh twitter}'s IDs.
 These labeled events focus on the events that are both mentioned in twitter and newswire,e.g. \textit{``Oslo Attacks"} and \textit{``US Increasing Debt Ceiling"}, but still miss many important events such as \textit{``Hurricane Irene"}, \textit{``Al-Qaida's No. 2 Leader Being Killed"}, and popular events such as \textit{``Harry Potter and the Deathly Hallows (Part 2)"}.
 To include these important events and enlarge the ground truth of realistic events pool, we build the second benchmark carefully.
-We manually evaluate the candidate events detected by LSH,  \textsc{TransDetector}, Twevent, EDCoW, BurstyBTM, and TimeUserLDA, with the help of the Wikipedia Current Event Portal\footnote{\url{https://en.wikipedia.org/wiki/Portal:Current_events}} and a local search engine built on Lucene.
+We manually evaluate the candidate events detected by LSH,  \textsc{TransDetector}, Twevent, EDCoW, BurstyBTM, and TimeUserLDA, with the help of the \textit{Wikipedia Current Event Portal}\footnote{\url{https://en.wikipedia.org/wiki/Portal:Current_events}} and a local search engine built on Lucene.
 The labeling process generates the Benchmark2, and contains 395 events.
 We use precision and recall to evaluate each method on both benchmarks, and utilize the DERate(Duplicate Event Rate) metric\cite{Twevent2012} to measure the readability of detected events.
 The smaller the metric DERate, the less duplicate events to be filtered out in the application.
@@ -677,6 +677,8 @@ Knowledge base is constructed elaborately and contains rich information, which c
 As a part of our future work, we will explore the effects of transfer learning from knowledge base to text stream for more tasks, such as text classification and key words extraction, especially for short texts. 
 %Another work what we are interested in is to utilize the knowledge base Microsoft Academic Graph, which also contains the taxonomy structure and text contents, to mine the research topics and trends from arXiv stream in fine grain. 
 
+\section*{Acknowledgments}\label{sec:Acknowledgments}
+This research is supported by the Natural Science Foundation of China (Grant No. 61300003, 61572043), and the Specialized Research Fund for the Doctoral Program of Higher Education (Grant No. 20130001120001).
 
 %\newpage
 \bibliographystyle{unsrt}
