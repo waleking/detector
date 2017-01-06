@@ -109,11 +109,11 @@
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection\thanks{This research is supported by the Natural Science Foundation of China (Grant No. 61572043), and the National Key Research and Development Program (Grant No. 2016YFB1000704).}}
 \titlerunning{Transfer Learning for Accurate Event Detection\ }
-\author{Weijing Huang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.} \and Tengjiao Wang\inst{1} \and Yazhou Wang\inst{1} }
-\institute{Key Laboratory of High Confidence Software Technologies (Ministry of Education), EECS, Peking University, Beijing, China \\ 
-\path{huangwaleking@gmail.com,{pekingchenwei,tjwang}@pku.edu.cn}\\ 
+\author{Weijing Huang\inst{1} \and Tengjiao Wang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.} \and Yazhou Wang\inst{1} }
+\institute{\(^{1}\)Key Laboratory of High Confidence Software Technologies (Ministry of Education), EECS, Peking University, Beijing, China \\ 
+\path{huangwaleking@gmail.com,{tjwang,pekingchenwei}@pku.edu.cn}\\ 
 \path{pkuwangyz@gmail.com}
 }
 
@@ -128,8 +128,8 @@
 
 
 \begin{abstract}
-Many web applications need the accurate event detection technique on microblog stream. 
-But the accuracy of existing methods are still challenged by microblog's short length and high noise. 
+Many Web applications need the accurate event detection technique on microblog stream. 
+But the accuracy of existing methods is still challenged by microblog's short length and high noise. 
 We develop a novel category-level transfer learning method \textsc{TransDetector} to deal with the task.  
 \textsc{TransDetector} bases on two facts, that microblog is short but can be enriched by knowledge base semantically with transfer learning; and events can be detected more accurately on microblogs with richer semantics.
 %文本短，建模很困难；直接做迁移学习困难，两者的组织结构不同，如何从精心构造的知识库迁移到微博是一个很大的挑战。
@@ -142,13 +142,13 @@ The following contributions are made in \textsc{TransDetector}.
 (4) Experiment verifies the quality of category-level topics extracted from knowledge base, and the further study on the benchmark \textit{Edinburgh twitter corpus} validates the effectiveness of our proposed transfer learning method for event detection.
 \textsc{TransDetector} achieves high accuracy, promoting the precision by 9\% without  sacrificing the recall rate.
 %另外，我们还标注了事件，使其语义可理解。以及LTDetector是efficient的。
-
+\keywords{event detection, microblog stream, transfer learning, knowledge base.}
 \end{abstract}
 
 \section{Introduction}
-Many web applications need the accurate event detection technique on microblog stream, such as public opinion analysis\cite{thelwall2011sentiment}, public security\cite{Li:2012gw}, and disaster response\cite{Yin:2012ht}, etc.
+Many Web applications need the accurate event detection technique on microblog stream, such as public opinion analysis\cite{thelwall2011sentiment}, public security\cite{Li:2012gw}, and disaster response\cite{Yin:2012ht}, etc.
 Although event detection has been a research topic for a long while\cite{allan1998topic}, event detection in microblog stream is still challenging\cite{atefeh2015survey}.
-According to \cite{huang2016probabilistic}, the characteristics of microblog, which is fast changing, high noise, and short length, raise the challenge.
+According to \cite{huang2016probabilistic}, the characteristics of microblog, which are fast changing, high noise, and short length, raise the challenge.
 
 Knowledge base can be a good supplementary for event detection on microblog stream to address these challenges.
 Different from the not-well-organized microblog stream, knowledge base (e.g. Wikipedia) is constructed elaborately and contains rich information. 
@@ -685,7 +685,7 @@ Knowledge base is constructed elaborately and contains rich information, which c
 As a part of our future work, we will explore the effects of transfer learning from knowledge base to text stream for more tasks, such as text classification and key words extraction, especially for short texts. 
 %Another work what we are interested in is to utilize the knowledge base Microsoft Academic Graph, which also contains the taxonomy structure and text contents, to mine the research topics and trends from arXiv stream in fine grain. 
 
-\setlength{\parindent}{0pt}\textbf{Acknowledgments.} This research is supported by the Natural Science Foundation of China (Grant No. 61572043), and the National Key Research and Development Program (Grant No. 2016YFB1000704).
+%\setlength{\parindent}{0pt}\textbf{Acknowledgments.} This research is supported by the Natural Science Foundation of China (Grant No. 61572043), and the National Key Research and Development Program (Grant No. 2016YFB1000704).
 %\newpage
 \bibliographystyle{unsrt}
 \small
