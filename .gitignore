@@ -62,3 +62,13 @@ detector.Rproj
 tmp2.py
 
 ~$TransDetector_Result2.xlsx
+
+*.aux
+
+*.bbl
+
+*.log
+
+*.out
+
+*.gz
