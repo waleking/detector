@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Paper>
-	<PaperType>research</PaperType>
-	<PaperID>64</PaperID>
-	<Title>Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection</Title>
-	<Authors>Weijing Huang, Tengjiao Wang, Wei Chen, Yazhou Wang</Authors>
-	<CorrespondingAuthor>Wei Chen</CorrespondingAuthor>
-	<CorrespondingAuthorEmail>pekingchenwei@pku.edu.cn</CorrespondingAuthorEmail>
-</Paper>
