@@ -276,7 +276,7 @@ Given category \(c\), the category level topic in microblog stream at time \(t\)
 \end{rmkWithoutSpacing}
 
 \begin{rmkWithoutSpacing}[\textbf{Category-Level Word Time Series}] 
-Given category \(c\) and word \(w\), the category level word time series is a list of document frequencies extracted from \(\{\bm{r}_{c,t}\}_{t=1}^{T}\), and denoted as \(\{n(c,t,w^{(c)}_{i})\}_{t=1}^{T}\).
+Given category \(c\) and word \(w\), the category-level word time series is a list of document frequencies extracted from \(\{\bm{r}_{c,t}\}_{t=1}^{T}\), and denoted as \(\{n(c,t,w^{(c)}_{i})\}_{t=1}^{T}\).
 \end{rmkWithoutSpacing}
 
 
@@ -358,7 +358,7 @@ In this subsection, we describe how the proposed probabilistic model CTrans-LDA 
 
 There are two facts inspiring CTrans-LDA. 
 (1) The topics in the document may contain category-level topics. 
-As an example, the tweet ``Libyan rebel chief gunned down in Benghazi (2011-07-28)'' contains the topic that is similar to the \textit{Military}'s \textit{category-level topics in knowledge base}.
+As an example, the tweet ``Libyan rebel chief gunned down in Benghazi (2011-07-28)'' contains the topic that is similar to the \textit{Military}'s \textit{category-level topic in knowledge base}.
 (2) The \textit{category-level topics in microblog stream} can reuse the information stored in the corresponding \textit{category-level topics in knowledge base}.
 The word \textit{libyan} in the aforementioned example tweet ranks much higher in the \textit{Military} and the \textit{Middle East} category-level topics than the other categories' topics.
 After considering the relatedness between the remaining context and the \textit{category-level topics in knowledge base}, the learned topics of the example tweet include \textit{Military} and \textit{Middle East}. 
@@ -382,7 +382,7 @@ The generative process of CTrans-LDA can be described as follows.
 
 \end{enumerate}
 
-In the above generative process, the line 2(a) is the key point to distinguish CTrans-LDA from LDA\cite{blei2003latent}, where \(\bm{\tau}_k\) is defined by Equation(\ref{eq:wikiPrior}).
+In the above generative process, the line 2 is the key point to distinguish CTrans-LDA from LDA\cite{blei2003latent}, where \(\bm{\tau}_k\) is defined by Equation(\ref{eq:wikiPrior}).
 \(K_{KB}\) is the number of pre-defined categories used for transferring, and \(S_k\) is the set of words appeared in the \(k\)-th category-level topic.
 As \cite{wallach2008structured} mentioned that the asymmetric prior distribution can significantly improve the quality of topic modelling, \(\bm{\phi_k} \sim Dir(\bm{\beta}+ \bm{\tau_k})\) incorporates \textit{category-level topics in knowledge base} into the asymmetric prior of the word distribution on topic. 
 The effect of \(\bm{\tau_k}\) is obvious, e.g., \(\tau_{Military,army}/\tau_{Military,basketball}=203\) leads to that topic \textit{Military} prefers to contain the word \textit{army} other than \textit{basketball}.
@@ -685,7 +685,7 @@ More result in Table 4 shows the examples of military related events detected by
 
 \section{Conclusions \& Future Work}
 Knowledge base is constructed elaborately and contains rich information, which can benefit the not-well-organized text stream. 
-In our proposed \textsc{TransDetector} method, by using category-level topic in knowledge base as the prior knowledge, we transfer abundant knowledge from knowledge base into microblog stream, which enriches the semantics of microblogs and further enhances the accuracy of event detection for microblogs. 
+In our proposed \textsc{TransDetector} method, by using category-level topic in knowledge base as the prior knowledge, we transfer abundant knowledge from knowledge base into microblog stream, which enriches the semantics of microblogs and further enhances the accuracy of microblogs event detection. 
 As a part of our future work, we will explore the effects of transfer learning from knowledge base to text stream for more tasks, such as text classification and key words extraction, especially for short texts. 
 %Another work what we are interested in is to utilize the knowledge base Microsoft Academic Graph, which also contains the taxonomy structure and text contents, to mine the research topics and trends from arXiv stream in fine grain. 
 
