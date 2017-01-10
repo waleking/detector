@@ -1,7 +1,6 @@
 % !Mode:: "TeX:UTF-8"
 \documentclass[runningheads,a4paper]{llncs}
 
-%\usepackage{aaai17}
 \usepackage{times}
 \usepackage{helvet}
 \usepackage{courier}
@@ -12,7 +11,7 @@
 \let\proof\relax
 \let\endproof\relax
 \usepackage{amsthm}%used for theorem and definition
-%\usepackage{showframe}%show the margin
+\usepackage{showframe}%show the margin
 %\usepackage{ulem}%used for uwave
 \usepackage{comment}
 \usepackage{subfigure}
@@ -156,7 +155,7 @@ For example, the microblog message ``Possible Ft. Hood Attack Thwarted (2011-07-
 By regarding these wiki information and the word \textit{attack} (also highly related to \textit{Military}), the model easily understands the example tweet is about something related to \textit{Military}.
 In other words, knowledge base enriches the linkages between words and concepts, and provides more comprehensive context for microblogs.
 Since the transfer learning\cite{pan2010survey} aims at utilizing the extra information stored in the source dataset to benefit the target dataset, it provides a feasible way to enhance the event detection in microblog stream.
-Taking the below Figure \ref{fig:hood} as an example, the fluctuation of time series of raw word \textit{hood} is not so obvious to reflect the event happened to the military base \textit{Ft. Hood}.
+Taking Figure \ref{fig:hood} below as an example, the fluctuation of time series of raw word \textit{hood} is not so obvious to reflect the event happened to the military base \textit{Ft. Hood}.
 After transferring the knowledge about \textit{``Military"} into the microblog stream, the time series of word \textit{``hood"} related to \textit{``Military"} is extracted, which is more vivid to detect the event happened on July 28th, 2011.
 
 \intextsep=1pt plus 1pt minus 1pt
@@ -187,12 +186,16 @@ CTrans-LDA works in the bayesian transfer learning way like \cite{dai2007transfe
 CTrans-LDA labels whether a word in a microblog message should link to a category in knowledge base, or just label it as no-category-related word.
 Applying CTrans-LDA on more microblogs, it gets the \textit{category-level topics in microblog stream} and \textit{category-level word time series}.
 (3) In the \textbf{detecting} phase, since the words in microblogs have been enriched semantically and the meaningless words are labeled as no-category-related, the event detection on \textit{category-level word time series} is much more accurate than other methods which don't conduct the transfer learning.
-Without loss of generality, we use Wikipedia as a representative of the knowledge base in the remaining of this paper.
+%Without loss of generality, we use Wikipedia as a representative of the knowledge base in the remaining of this paper.
 And the experiment on the \textit{Edinburgh twitter corpus} demonstrates the effectiveness of our proposed \textsc{TransDetector}.
 
-
-\intextsep=5pt plus 3pt minus 1pt
-\begin{figure}
+To sum up, the contribution of this paper is mainly in four aspects.
+(1) We propose a structure-guided category-level topics extraction method, exploiting the knowledge base's hierarchical structure to extract categories' highly correlated topics. 
+(2) We develop a probabilistic model CTrans-LDA for category-level transfer learning, which utilizes the word co-occurrences and transfers the knowledge base's category-level topics into microblogs. 
+(3) Events are detected accurately on category-level word time series, due to richer semantics and less noise. 
+(4) Experiment verifies the quality of category-level topics extracted from knowledge base, and the further study on the benchmark \textit{Edinburgh twitter corpus} validates the effectiveness of our proposed transfer learning method for event detection.
+\intextsep=1pt plus 1pt minus 1pt
+\begin{figure}[h]
 	\setlength{\abovecaptionskip}{0.cm}
 	\setlength{\belowcaptionskip}{0.cm}
 	\centering
@@ -209,15 +212,10 @@ And the experiment on the \textit{Edinburgh twitter corpus} demonstrates the eff
         \caption{(a) \textsc{TransDetector}'s process flow, taking \textit{Military} related events in microblogs as an example. \textsc{TransDetector} includes three phases: extracting category-level topics in knowledge base, conducting transfer learning to get category-level topics in microblog stream, and detecting events from category-level word time series; (b) Illustration on how to extract category-level topics in knowledge base via its three fold hierarchical structure, taking \textit{Military} as an example.}
 \end{figure}
 
-To sum up, the contribution of this paper is mainly in four aspects.
-(1) We propose a structure-guided category-level topics extraction method, exploiting the knowledge base's hierarchical structure to extract categories' highly correlated topics. 
-(2) We develop a probabilistic model CTrans-LDA for category-level transfer learning, which utilizes the word co-occurrences and transfers the knowledge base's category-level topics into microblogs. 
-(3) Events are detected accurately on category-level word time series, due to richer semantics and less noise. 
-(4) Experiment verifies the quality of category-level topics extracted from knowledge base, and the further study on the benchmark \textit{Edinburgh twitter corpus} validates the effectiveness of our proposed transfer learning method for event detection.
 
 \section{Related Works}
 \label{sec:relatedWorks}
-\textbf{Event Detection.} Based on how much data are used, the methods are mainly in two groups, the detection \textit{without extra information} and that by \textit{leveraging extra information}. 
+\textbf{Event Detection.} Based on how much data are used, the methods are mainly in two groups,  \textit{without extra information} and \textit{leveraging extra information}. 
 
 Most existing methods are implemented \textit{without extra information}.
 They are mainly carried out by clustering articles\cite{Allan:2000wu,Petrovic:2010uj,Wurzer:2015wq}, analyzing word frequencies\cite{Mathioudakis:2010fc,Weng:2011wz}, or finding bursty topics\cite{Diao:2012wj,Yan:2015wm} etc. 
@@ -225,15 +223,15 @@ They are mainly carried out by clustering articles\cite{Allan:2000wu,Petrovic:20
 The decision is based on whether the dissimilarity between the incoming article and existed event clusters is over the user-specified threshold. 
 (2) By analyzing word frequencies, EDCoW\cite{Weng:2011wz} exploits wavelet transformation, which converts signal from time domain to time-scale domain, to detect the change point of word signal. 
 However they treat the word as the most basic unit in analysis, without regarding polysemy words.
-(3) By finding bursty topics via topic modelling, TimeUserLDA\cite{Diao:2012wj}, BurstyBTM\cite{Yan:2015wm} generates detected events.
-TimeUserLDA distinguishes user's long term interests and short term bursty events, and BurstyBTM utilizes the burstiness of biterms as prior knowledge.
+(3) By finding bursty topics via topic modelling, such as TimeUserLDA\cite{Diao:2012wj}, EUTB\cite{Yin2013A}, and BurstyBTM\cite{Yan:2015wm}.
+TimeUserLDA and EUTB distinguish user's long term interests and short term bursty events, and BurstyBTM utilizes the burstiness of biterms as prior knowledge.
 This kind method needs to set the appropriate number of topics, and detects the ``large" events but ignore the ``small" ones. 
 To summarize, due to microblog's short length and high noise, it's not easy to set the directly applicable parameter for existing methods to achieve high precision and high recall simultaneously.
 
 The second group methods detect events by \textit{leveraging extra information}. 
 \cite{huang2016efficient} incorporates user's and the followees' profiles to help to detect the events of public concern. 
 However it's not easy to get this kind contextual information.
-\cite{osborne2012bieber} compares two time series generated by event-related tweets and the corresponding Wikipedia article's page views, and further filter out spurious events of microblogs.
+\cite{osborne2012bieber} compares two time series generated by event-related tweets and the corresponding Wikipedia article's page views, and further filter out spurious events.
 Twevent \cite{Twevent2012} divides the tweet into segments according to the Microsoft Web N-Gram service and Wikpedia, then detect the bursty segments and cluster these segments into candidate events for necessary post processings.
 But as shown in \cite{Yan:2015wm}, Twevent is still hampered by the performance of simply clustering the bursty segments.
 Beyond the scope of microblog stream, \cite{steiner2013mj} utilizes the concurrent wikipedia edit spikes for event detection.
@@ -245,13 +243,18 @@ For example, Probase\cite{wu2012probase} constructs a large general probabilisti
 Such kind efforts are also made by DBPedia\cite{auer2007dbpedia}, Yago\cite{fabian2007yago}, and Freebase\cite{bollacker2008freebase}. 
 These works manages knowledge as tuples on graph. 
 However the query on large graph is very expensive\cite{huang2011scalable}, which is not very suitable for the scene of quickly and accurately detecting events.
-
 The customized knowledge bases such as EVIN\cite{kuzey2014evin}, Event Registry\cite{leban2014eventRegistry}, and Story-base\cite{wu2015storybase}, are designed for managing events.
 These knowledge bases are mainly built on news articles.
 EVIN maps the existing event-related news articles into semantic classes. 
 Event Registry collects the articles by the API of News Feed Service\cite{trampuvs2012newsfeed}, then detects events, and provides the structural information of the events, such as the related Wikipedia article, timestamp, and location etc. 
 Storybase introduces Wikipedia current events\footnote{\url{https://en.wikipedia.org/wiki/Portal:Current_events}} as the resources for constructing event-and-storyline knowledge base on news articles, which are provided by GDELT project\cite{leetaru2013gdelt}.
 As the news articles may lag behind the microblogs when the emergency of events, it's not enough to detect events from microblog stream by directly applying these customized knowledge bases. 
+
+\textbf{Transfer Learning.} 
+%Transfer learning uses the knowledge in the source domain to enhance the performance of learning tasks on the target domain. \cite{dai2007transferring}
+Although the training examples in the target domain is very sparse, transfer learning\cite{Pan2010A} can utilize the domain-independent knowledge as the bridge to fill the information gap between source domain and target domain\cite{Xiang2010Bridging} to get more ``examples" for training.
+By bayesian transfer learning, \cite{dai2007transferring} uses the distribution in source domain as the prior knowledge for text classfication.
+And inspired by this idea, we propose the \textit{category-level topic} as the bridge for transferring knowledge. 
 
 \section{\textsc{TransDetector}} 
 \label{sec:TransDetector}
@@ -260,7 +263,7 @@ Illustrated in Figure \ref{fig:modelDesc}, \textsc{TransDetector} consists of th
 The following definitions are used by our method \textsc{TransDetector}. 
 Definition 1 is used in the \textbf{extracting} phase, Definitions 2 and 3 are used in the \textbf{conducting transfer learning} phase, and Definitions 4 to 6 are used in the \textbf{detecting} phase.
 Because Definitions 2 to 6 are very easy to understand, what needs to be specified are Definition 1.
-\textit{Category-level topics in knowledge base} is a set of tuples extracted from knowledge base, which weighs the importance of given words to the specific category, defined in Definition 1 formally. 
+\textit{Category-level topics in knowledge base} is a set of tuples extracted from knowledge base, which weighs the importance of given words to the specific category by the chi-square score, defined in Definition 1 formally. 
 Taking the \textit{Military} category in Figure \ref{fig:NSinitializaton} as an example, the category-level topic of \textit{military} contain the words \textit{army}, \textit{military}, and \textit{shootings} etc, which are highly related to the category \textit{Military}.
 
 \begin{rmkWithoutSpacing}[\textbf{Category-Level Topics in Knowledge Base}] 
@@ -433,7 +436,7 @@ Event detection on category-level word time series is discussed in the following
 \subsection{Detecting Events from Category-Level Word Time Series}
 \label{subsec:detection}
 After transfer learning, it's much easier to detect the event from category-level word time series, which is shown in Figure \ref{fig:hood}. We take the detection in three sub-phases: (1) detecting events' candidate words; (2) generating event phrases; and (3) retrieving event related microblogs.
-Note that these sub-phases are also available for the common text stream, but they performs better when words are enriched by category concepts of knowledge base.
+Note that these sub-phases are also available for the common text stream, but they perform better when words are enriched by category concepts of knowledge base.
 %这里添加对这几个Definition的解释。
 
 \textbf{Detecting events' candidate words}. For a word \(w\) and a category \(c\), on its time series \(\{n(c,t,w^{(c)})\}_{t=1}^{T}\), many bursty detection methods can be applied to check if the word \(w\) is bursty in category \(c\) by given time \(t\). 
@@ -479,7 +482,7 @@ In this subsection, we demonstrate the effectiveness of \textsc{TransDetector}, 
 \textbf{Knowledge Base.} 
 We construct the taxonomy graph \(G^{(0)}\), the category-page bipartite graph \(G^{(1)}\) from the latest dump of category links\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-categorylinks.sql.gz}} and the page-content map \(G^{(2)}\) from Wikipedia pages\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles.xml.bz2 }}.
 We set \(K_{KB}=50\), which means 50 categories are selected manually to cover the topics of Wikipedia and the target corpus as widely as possible. 
-There are two kinds of categories are considered. 
+There are two kinds of categories considered. 
 The mid-high categories in the taxonomy graph \(G^{(0)'}\), which are representative, are likely to be selected, such as \textit{Aviation}, \textit{Military}, and \textit{Middle East}, etc.
 And the mid categories, which reflect the main interests of the target corpus, are also taken into consideration, such as \textit{American Football}, \textit{Basketball}, and \textit{Baseball}, etc. 
 %Other knowledge bases which have the above mentioned threefold structure are also available for conducting.
@@ -578,11 +581,11 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 \end{table*}
 
 \subsection{Effects of Event Detection}
-\textbf{Baselines Methods.} We compare our proposed method against the following methods, Twevent\cite{Twevent2012}, BurstyBTM\cite{Yan:2015wm}, LSH\cite{Petrovic:2010uj}, EDCoW\cite{Weng:2011wz}, and TimeUserLDA\cite{Diao:2012wj}, which are mentioned in the Section \ref{sec:relatedWorks}.
+\textbf{Baseline Methods.} We compare our proposed method against the following methods, Twevent\cite{Twevent2012}, BurstyBTM\cite{Yan:2015wm}, LSH\cite{Petrovic:2010uj}, EDCoW\cite{Weng:2011wz}, and TimeUserLDA\cite{Diao:2012wj}, which are mentioned in the Section \ref{sec:relatedWorks}.
 We implement these competing methods based on the open source community versions, e.g. EDCoW\footnote{\url{https://github.com/Falitokiniaina/EDCoW}}, or the authors' releases, e.g. BurstyBTM\footnote{\url{https://github.com/xiaohuiyan/BurstyBTM}}.
-The above methods are set carefully according to the descriptions in the papers.
-More precisely, (1) for LSH, 13 bits per hash table, 20 hash tables are set, and top 500 clusters with high entropy are selected as the event candidates; (2) for Twevent, the number of candidate bursty segments is set to be the square root of the window size, the newsworthiness threshold is set to be 4, and 375 candidate events are detected; (3) for EDCoW, the tunable parameter \(\gamma\) value is set to be 40, and 349 bursty ``phrases" are found for evaluation; (4) for TimeUserLDA, the topic number is set to be 500, and the most 100 bursty topics are selected as candidate events; (5) for BurstyBTM, the topic number is set to be 200, which is also the number of bursty topics in the model.
-The information about the number of events to be evaluated is listed in Table \ref{tbl:overall}, where TransDetector detects 457 events after filtering out too niche events that contain less than 20 tweets. 
+The above methods are set according to the descriptions in their papers.
+More precisely, (1) for LSH, 13 bits per hash table, 20 hash tables are set, and top 500 clusters with high entropy are selected as the event candidates; (2) for Twevent, the number of candidate bursty segments is set to be the square root of the window size, the newsworthiness threshold is set to be 4, and 375 candidate events are detected; (3) for EDCoW, the parameter \(\gamma\) is set to be 40, and 349 bursty ``phrases" are found for evaluation; (4) for TimeUserLDA, the topic number is set to be 500, and the most 100 bursty topics are selected as candidate events; (5) for BurstyBTM, the topic number is set to be 200, which is also the number of bursty topics in the model.
+The information about the number of events to be evaluated is listed in Table \ref{tbl:overall}, where TransDetector detects 457 events after filtering out too niche events containing less than 20 tweets. 
 
 \textbf{Benchmarks and Evaluation Metrics.} 
 The evaluation is conducted on two benchmarks.
@@ -600,7 +603,7 @@ In general, our method is better than the existing methods in terms of the preci
 This is because an event could be grouped into multiple categories (e.g. the event \textit{``S\&P downgrade US credit rating"}, related to the politics category and the financial category simultaneously), but is not a problem as the method \textsc{TrasnDetector} has already achieved the high precision and recall. 
 
 Comparing to \textsc{TrasnDetector}, the existing methods are suffered from having to choose between precision and recall, but not both. 
-Taking the method Twevent as an example, which also utilizes the knowledge base for promoting the event detection performance, it has three parameters to trade off, in which the newsworthiness is the most impact one. 
+Taking Twevent as an example, which also utilizes the knowledge base for promoting the event detection, it has three parameters to trade off, in which the newsworthiness is the most impact one. 
 In our experiment, when setting newsworthiness to be 4, Twevent achieves its best performance in terms of F value; lower or higher of value sacrifices the recall or precision. 
 The other methods also meet the same problem of tuning parameters, such as the topic number for TimeUserLDA and BurstyBTM, and the distance threshold for LSH.
 
@@ -682,10 +685,11 @@ More result in Table 4 shows the examples of military related events detected by
 
 \section{Conclusions \& Future Work}
 Knowledge base is constructed elaborately and contains rich information, which can benefit the not-well-organized text stream. 
+In our proposed \textsc{TransDetector} method, by using category-level topic in knowledge base as the prior knowledge, we transfer abundant knowledge from knowledge base into microblog stream, which enriches the semantics of microblogs and further enhances the accuracy of event detection for microblogs. 
 As a part of our future work, we will explore the effects of transfer learning from knowledge base to text stream for more tasks, such as text classification and key words extraction, especially for short texts. 
 %Another work what we are interested in is to utilize the knowledge base Microsoft Academic Graph, which also contains the taxonomy structure and text contents, to mine the research topics and trends from arXiv stream in fine grain. 
 
-%\setlength{\parindent}{0pt}\textbf{Acknowledgments.} This research is supported by the Natural Science Foundation of China (Grant No. 61572043), and the National Key Research and Development Program (Grant No. 2016YFB1000704).
+\setlength{\parindent}{0pt}\textbf{Acknowledgments.} Thanks to Dr. Jian Tang and the anonymous reviewers for giving valuable suggestions on this work.
 %\newpage
 \bibliographystyle{unsrt}
 \small
