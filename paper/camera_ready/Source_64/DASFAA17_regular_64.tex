@@ -109,7 +109,7 @@
 % proceedings, working notes, and technical reports.
 %
 \title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection\thanks{This research is supported by the Natural Science Foundation of China (Grant No. 61572043), and the National Key Research and Development Program (Grant No. 2016YFB1000704).}}
-\titlerunning{Transfer Learning for Accurate Event Detection\ }
+\titlerunning{Category-Level Transfer Learning from Knowledge Base to Microblog Stream\ }
 \author{Weijing Huang\inst{1} \and Tengjiao Wang\inst{1} \and Wei Chen\inst{1} \thanks{Corresponding author.} \and Yazhou Wang\inst{1} }
 \institute{\(^{1}\)Key Laboratory of High Confidence Software Technologies (Ministry of Education), EECS, Peking University, Beijing, China \\ 
 \path{huangwaleking@gmail.com,{tjwang,pekingchenwei}@pku.edu.cn}\\ 
@@ -120,8 +120,8 @@
 % BEGIN
 % To Proceeding Editors:
 % Special codes there for remove page numbers in the LaTeX documents
-\thispagestyle{empty}
-\pagestyle{empty}
+%\thispagestyle{empty}
+%\pagestyle{empty}
 %
 % END
 
@@ -240,7 +240,7 @@ In a nutshell, existing works are different from ours, as we transfer the catego
 
 \textbf{Knowledge Base.} Many general knowledge bases and customized knowledge bases are constructed and utilized for different text mining tasks. 
 For example, Probase\cite{wu2012probase} constructs a large general probabilistic \textit{IsA} taxomomy from webpages, and is used for semantic web search, and text classification\cite{wang2014concept}.
-Such kind efforts are also made by DBPedia\cite{auer2007dbpedia}, Yago\cite{fabian2007yago}, and Freebase\cite{bollacker2008freebase}. 
+Such kind efforts are also made by DBPedia\cite{auer2007dbpedia}, Yago\cite{suchanek2007yago}, and Freebase\cite{bollacker2008freebase}. 
 These works manages knowledge as tuples on graph. 
 However the query on large graph is very expensive\cite{huang2011scalable}, which is not very suitable for the scene of quickly and accurately detecting events.
 The customized knowledge bases such as EVIN\cite{kuzey2014evin}, Event Registry\cite{leban2014eventRegistry}, and Story-base\cite{wu2015storybase}, are designed for managing events.
@@ -252,7 +252,7 @@ As the news articles may lag behind the microblogs when the emergency of events,
 
 \textbf{Transfer Learning.} 
 %Transfer learning uses the knowledge in the source domain to enhance the performance of learning tasks on the target domain. \cite{dai2007transferring}
-Although the training examples in the target domain is very sparse, transfer learning\cite{Pan2010A} can utilize the domain-independent knowledge as the bridge to fill the information gap between source domain and target domain\cite{Xiang2010Bridging} to get more ``examples" for training.
+Although the training examples in the target domain is very sparse, transfer learning\cite{pan2010survey} can utilize the domain-independent knowledge as the bridge to fill the information gap between source domain and target domain\cite{Xiang2010Bridging} to get more ``examples" for training.
 By bayesian transfer learning, \cite{dai2007transferring} uses the distribution in source domain as the prior knowledge for text classfication.
 And inspired by this idea, we propose the \textit{category-level topic} as the bridge for transferring knowledge. 
 
