@@ -72,3 +72,9 @@ tmp2.py
 *.out
 
 *.gz
+
+*.nav
+
+*.snm
+
+*.toc

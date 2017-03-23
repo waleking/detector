@@ -1,0 +1,70 @@
+\documentclass{beamer}
+
+\usetheme{CambridgeUS}
+
+\setbeamercolor{title}{bg=red!65!black,fg=white}
+
+\setbeamertemplate{sidebar right}
+{
+  \vfill%
+  \llap{\insertlogo\hskip0.1cm}%
+  \vskip2pt%
+  %\llap{\href{http://tex.stackexchange.com/}{A link to tex.sx}\hskip0.2cm}% NEW
+  \vskip3pt% NEW
+  \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+  \vskip2pt%
+}
+
+\begin{document}
+
+\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+\author{Weijing Huang, Tengjiao Wang, Wei Chen, Yazhou Wang}
+\institute[Peking University]{Peking University}
+\date{DASFAA 2017}
+\maketitle
+
+%------------------------------
+%page 2
+\begin{frame}
+\frametitle{Neural Network View of Topic Models (1/2)}
+
+The conditional probability \(p(w|d)\) is the combination of \textbf{word-topic distribution} \(p(w|t_i)\) and \textbf{topic-document distribution} \(p(t_i|d)\).
+\begin{equation}
+\label{eq:tm}
+	p(w|d)=\sum_{i=1}^{K} p(w|t_i)p(t_i|d)
+\end{equation}
+
+Equation (\ref{eq:tm}) equals to the following form:
+\begin{equation}
+\label{eq:nnv_tm}
+p(w|d)=\phi(w) \theta^T(d)
+\end{equation}
+, where \(\phi(w)\) is the row vector \textbf{word-topic distribution} \([p(w|t_1), \cdots, p(w|t_K)]\), and \(\theta(d)\) is the row vector \textbf{topic-document distribution} \([p(t_1|d), \cdots, p(t_K|d)]\).
+
+\end{frame}
+
+%------------------------------
+%page 3
+\begin{frame}
+\frametitle{Neural Network View of Topic Models (2/2)}
+
+In equation (\ref{eq:nnv_tm}), the distributions \(\phi(w)\) and \(\theta(d)\) have the following explanation:
+\begin{enumerate}
+	\item \(\phi(w)\) functions as the look-up layer for words with the \textbf{sigmoid} activation functions.
+	\item \(\theta(d)\) functions as the look-up layer for documents with the \textbf{softmax} activation function. 
+\end{enumerate}	
+
+\end{frame}
+
+%------------------------------
+%page 4
+\begin{frame}
+\frametitle{Neural Topic Model (NTM)}	
+Symbols:
+
+\end{frame}
+
+
+
+
+\end{document}
