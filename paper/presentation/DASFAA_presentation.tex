@@ -63,6 +63,9 @@
 %use bold arrow
 \usepackage{marvosym}
 
+%used for aligning the figure to left
+\usepackage[export]{adjustbox}
+
 \setbeamertemplate{sidebar right}
 {
   \vfill%
@@ -200,7 +203,7 @@ Event detection methods \textit{by leveraging extra information}
 	\begin{itemize}
 		\item divides the tweet into segments according to the Microsoft Web N-Gram service and Wikpedia
 		\item detects the bursty segments and cluster these segments into candidate events
-		\item still have to trade off between precision and recall
+		\item still has to trade off between precision and recall
 	\end{itemize}
 \end{enumerate}
 \end{frame}
@@ -209,14 +212,22 @@ Event detection methods \textit{by leveraging extra information}
 %------------------------------
 %page 6
 \begin{frame}
+Much easier to detect the event on the time series of word "hood" related to \textit{Military}.
 \frametitle{An Example}	
 \begin{figure}[h]
 		\setlength{\abovecaptionskip}{0.cm}
         \setlength{\belowcaptionskip}{0.cm}
         \centering
         \includegraphics[width=1.0\columnwidth]{../img/hood.pdf}
-        \caption{The comparison of the time series between the raw word \textit{hood} and the \textit{Military} related word \textit{hood}, computed on the \textit{Edinburgh twitter corpus}. The rise of document frequency on July 28th, 2011 is corresponding to the event mentioned in \url{https://en.wikipedia.org/wiki/Fort_Hood\#2011_attack_plot}.}
+        \caption{The comparison of the time series between the raw word \textit{hood} and the \textit{Military} related word \textit{hood}, computed on the \textit{Edinburgh twitter corpus}. Refer the event to \url{https://en.wikipedia.org/wiki/Fort_Hood\#2011_attack_plot}.}
         \label{fig:hood}
+\end{figure}
+
+\begin{figure}[h]
+		\setlength{\abovecaptionskip}{0.cm}
+        \setlength{\belowcaptionskip}{0.cm}
+        \centering
+        \includegraphics[width=0.5\columnwidth, left]{Fort_Hood.pdf}
 \end{figure}
 \end{frame}
 
