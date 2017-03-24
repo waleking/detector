@@ -78,3 +78,17 @@ tmp2.py
 *.snm
 
 *.toc
+
+paper/presentation/temp.dvi
+
+paper/presentation/temp.pdf
+
+paper/presentation/temp.ps
+
+paper/presentation/temp.tex
+
+paper/presentation/.texpadtmp/temp.dvi
+
+paper/presentation/.texpadtmp/temp.ps
+
+paper/presentation/.texpadtmp/temp.vrb

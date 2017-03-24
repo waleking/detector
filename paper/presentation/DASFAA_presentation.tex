@@ -1,14 +1,64 @@
+% arara: pdflatex
+% !arara: indent: {overwrite: on}
 \documentclass{beamer}
 
 \usetheme{CambridgeUS}
 
+%-chage foot part-------------------------------
+\makeatother
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.17\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.46\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.37\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}% 
+  \insertdate \hspace{0.2cm}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+%--------------------------------
+
+%-chage titlepage's font-------------------------------
 \setbeamercolor{title}{bg=red!65!black,fg=white}
 \usepackage{bm}
+\usepackage{comment}
 \usepackage{graphics} % used for scalebox
 \usepackage{multirow}%used for multicolumn
 \usepackage{array}%used for vrule
 \usepackage{subfigure}
 \usepackage{threeparttable} % used for footnotes in table
+
+%---set tikz highlighter------------------------
+\usepackage{multirow, booktabs, dcolumn, color} % Tables
+\usepackage[beamer,customcolors]{hf-tikz}
+\usetikzlibrary{calc}
+% To set the hypothesis highlighting boxes red.
+\tikzset{hl/.style={
+    set fill color=red!80!black!40,
+    set border color=red!80!black,
+  },
+}
+%-----------------------------------------------
+
+%---set tikz marker-----------------------------
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\tikzset{>=stealth}
+
+\newcommand{\tikzmark}[3][]{\tikz[overlay,remember picture,baseline] \node [anchor=base,#1](#2) {#3};}
+%-----------------------------------------------
+
+%---set textblock----------------------------
+\usepackage[absolute,overlay]{textpos}
+%--------------------------------------------------------
 
 
 \setbeamertemplate{sidebar right}
@@ -24,8 +74,8 @@
 
 \begin{document}
 
-\title{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
-\author{Weijing Huang, Tengjiao Wang, Wei Chen, Yazhou Wang}
+\title[Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection]{Category-Level Transfer Learning from Knowledge Base to Microblog Stream for Accurate Event Detection}
+\author[Weijing Huang, et,al.]{Weijing Huang, Tengjiao Wang, Wei Chen, Yazhou Wang}
 \institute[EECS, Peking University]{School of Electronics Engineering and Computer Science, Peking University}
 \date{\(\bm{@}\)DASFAA 2017, Suzhou, China}
 \maketitle
@@ -70,13 +120,14 @@ In equation (\ref{eq:nnv_tm}), the distributions \(\phi(w)\) and \(\theta(d)\) h
 %page 4
 \begin{frame}
 \frametitle{Challenges (2/2)}	
-Statistics of some labeled events on Edinburgh twitter corpus.
+\tikzmark{comment18}\,
+
 \intextsep=5pt plus 3pt minus 1pt % 调整表格与正文的上间距
 \begin{table}[]
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
 \centering
-\caption{My caption}
+\caption{Statistics of labeled events on Edinburgh twitter corpus.}
 \label{my-label}
 \scalebox{0.65}{
 \begin{tabular}{|l|l|r|}
@@ -95,16 +146,22 @@ Google announces plans to bury Motorola Mobility & 15/08/2011 & 127      \\ \hli
 NASA announces there might be water on Mars      & 04/08/2011 & 124      \\ \hline
 Car bomb explodes in Oslo, Norway                & 22/07/2011 & 114      \\ \hline
 ... & ... & ... \\ \hline
-Indian and Bangladesh sign a border pact         & 06/09/2011 & 25       \\ \hline
+\tikzmarkin<1>[hl]{bH1}Indian and Bangladesh sign a border pact         & 06/09/2011 & 25       \\ \hline
 Flight 4896 crash                                & 13/07/2011 & 21       \\ \hline
 First aritficial organ transplant                & 12/07/2011 & 18       \\ \hline
 three men die in riots in england                & 10/08/2011 & 16       \\ \hline
-rebels capture interational tripoli airport      & 21/08/2011 & 13       \\ \hline
+rebels capture interational tripoli airport      & 21/08/2011 & 13       \tikzmarkend{bH1} \\ \hline
 \end{tabular}
 }
 \end{table}
+
+ \begin{textblock}{0.1}(14,12)
+  \footnotesize{Small events with fewer tweets}
+ \end{textblock}
+
 \end{frame}
 
+%\begin{comment}
 %------------------------------
 %page 5
 \begin{frame}
@@ -367,7 +424,7 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 
 \end{frame}
 
-
+%\end{comment}
 
 
 \end{document}
