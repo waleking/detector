@@ -60,6 +60,8 @@
 \usepackage[absolute,overlay]{textpos}
 %--------------------------------------------------------
 
+%use bold arrow
+\usepackage{marvosym}
 
 \setbeamertemplate{sidebar right}
 {
@@ -101,9 +103,22 @@ But detecting events on twitter stream accurately is still challenging.
 %page 3
 \begin{frame}
 \frametitle{Challenges (1/2)}
-What we have already known:
+According to [Huang, WWW 2016], the challenges include,
+\begin{enumerate}
+\item fast changing
+\item high noise
+\item short length
+\end{enumerate}	
 
-What we maybe know, but didn't pay much attention:
+\vfill
+
+And, we found another key factor, 
+\begin{enumerate}
+\item Small events with fewer tweets \MVRightarrow \ \ Hard to trade off between precision and recall. 
+\end{enumerate}
+
+
+
 
 \end{frame}
 
@@ -111,14 +126,14 @@ What we maybe know, but didn't pay much attention:
 %page 4
 \begin{frame}
 \frametitle{Challenges (2/2)}	
-\tikzmark{comment18}\,
+Exploratory study on the on Edinburgh twitter corpus: 11/29 events contains less than 50 tweets.
 
 \intextsep=5pt plus 3pt minus 1pt % 调整表格与正文的上间距
 \begin{table}[]
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
 \centering
-\caption{Statistics of labeled events on Edinburgh twitter corpus.}
+\caption{Statistics of labeled events.}
 \label{my-label}
 \scalebox{0.65}{
 \begin{tabular}{|l|l|r|}
@@ -146,8 +161,8 @@ rebels capture interational tripoli airport      & 21/08/2011 & 13       \tikzma
 }
 \end{table}
 
- \begin{textblock}{0.1}(14,12)
-  \footnotesize{Small events with fewer tweets}
+ \begin{textblock}{0.1}(13.5,11.7)
+  \footnotesize{11 Small events with fewer tweets}
  \end{textblock}
 
 \end{frame}
