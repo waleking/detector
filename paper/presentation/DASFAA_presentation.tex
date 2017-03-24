@@ -85,19 +85,16 @@
 \begin{frame}
 \frametitle{Motivation}
 
-The conditional probability \(p(w|d)\) is the combination of \textbf{word-topic distribution} \(p(w|t_i)\) and \textbf{topic-document distribution} \(p(t_i|d)\).
-\begin{equation}
-\label{eq:tm}
-	p(w|d)=\sum_{i=1}^{K} p(w|t_i)p(t_i|d)
-\end{equation}
+Many Web applications need the \textbf{accurate event detection} technique on microblog stream, including:
+\begin{enumerate}
+	\item public opinion analysis [Chen, SIGIR 2013]
+	\item public security [Li, ICDE 2012], [Imran, WWW 2014]
+	\item disaster response [Sakaki,WWW2010]
+	\item breaking news report\footnote{\url{http://www.theverge.com/2016/12/1/13804542/reuters-algorithm-breaking-news-twitter}}
+\end{enumerate}	
+\vfill
 
-Equation (\ref{eq:tm}) equals to the following form:
-\begin{equation}
-\label{eq:nnv_tm}
-p(w|d)=\phi(w) \theta^T(d)
-\end{equation}
-, where \(\phi(w)\) is the row vector \textbf{word-topic distribution} \([p(w|t_1), \cdots, p(w|t_K)]\), and \(\theta(d)\) is the row vector \textbf{topic-document distribution} \([p(t_1|d), \cdots, p(t_K|d)]\).
-
+But detecting events on twitter stream accurately is still challenging.
 \end{frame}
 
 %------------------------------
@@ -107,12 +104,6 @@ p(w|d)=\phi(w) \theta^T(d)
 What we have already known:
 
 What we maybe know, but didn't pay much attention:
-
-In equation (\ref{eq:nnv_tm}), the distributions \(\phi(w)\) and \(\theta(d)\) have the following explanation:
-\begin{enumerate}
-	\item \(\phi(w)\) functions as the look-up layer for words with the \textbf{sigmoid} activation functions.
-	\item \(\theta(d)\) functions as the look-up layer for documents with the \textbf{softmax} activation function. 
-\end{enumerate}	
 
 \end{frame}
 
