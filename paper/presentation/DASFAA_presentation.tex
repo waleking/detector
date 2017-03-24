@@ -126,7 +126,7 @@ And, we found another key factor,
 %page 4
 \begin{frame}
 \frametitle{Challenges (2/2)}	
-Exploratory study on the on Edinburgh twitter corpus: 11/29 events contains less than 50 tweets.
+Exploratory study on the \textit{Edinburgh twitter corpus}: 11/29 events contain less than 50 tweets.
 
 \intextsep=5pt plus 3pt minus 1pt % 调整表格与正文的上间距
 \begin{table}[]
@@ -171,9 +171,40 @@ rebels capture interational tripoli airport      & 21/08/2011 & 13       \tikzma
 %------------------------------
 %page 5
 \begin{frame}
-\frametitle{How about existing methods on dealing with challenges?}
-
+\frametitle{How about existing methods? (1/2)}
+Event detection methods \textit{without extra information}, such as
+\begin{enumerate}
+\item clustering articles
+\begin{itemize}
+	\item LSH[Petrovic, NAACL 2010]
+	\item need to set threshold to determine whether new article represents a new event.
+\end{itemize}
+\item analyzing word frequencies
+\begin{itemize}
+	\item EDCoW[Weng, ICWSM 2011]
+	\item treat the word as the basic unit in analysis, without regarding polysemy words (words have different meanings, e.g. ``apple")
+\end{itemize}
+\item finding bursty topics via topic modeling
+\begin{itemize}
+	\item TimeUserLDA[Diao, ACL 2012], BurstyBTM[Yan, AAAI 2015]
+	\item detects the ``large" events but may ignore the ``small" ones. 
+\end{itemize}
+\end{enumerate}
 \end{frame}
+
+\begin{frame}
+\frametitle{How about existing methods? (2/2)}
+Event detection methods \textit{by leveraging extra information}
+\begin{enumerate}
+	\item typical one: Twevent[Li, CIKM 2012]
+	\begin{itemize}
+		\item divides the tweet into segments according to the Microsoft Web N-Gram service and Wikpedia
+		\item detects the bursty segments and cluster these segments into candidate events
+		\item still have to trade off between precision and recall
+	\end{itemize}
+\end{enumerate}
+\end{frame}
+
 
 %------------------------------
 %page 6
