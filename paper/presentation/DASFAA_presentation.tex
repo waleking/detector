@@ -66,6 +66,9 @@
 %used for aligning the figure to left
 \usepackage[export]{adjustbox}
 
+%used for colored block
+\usepackage[listings,theorems]{tcolorbox}
+
 \setbeamertemplate{sidebar right}
 {
   \vfill%
@@ -212,7 +215,7 @@ Event detection methods \textit{by leveraging extra information}
 %------------------------------
 %page 6
 \begin{frame}
-Much easier to detect the event on the time series of word "hood" related to \textit{Military}.
+\textbf{Much easier} to detect the event on the time series of word ``hood" related to \textit{Military}, \textbf{without adjusting the threshold}.
 \frametitle{An Example}	
 \begin{figure}[h]
 		\setlength{\abovecaptionskip}{0.cm}
@@ -235,6 +238,34 @@ Much easier to detect the event on the time series of word "hood" related to \te
 %page 7
 \begin{frame}
 \frametitle{The insights on the example}	
+\begin{columns}[onlytextwidth, t]
+\column{0.48\linewidth}
+    \begin{tcolorbox}[colback=red!5,colframe=red!5]
+    Knowledge Base
+        \begin{itemize}
+            \item Well organized
+            \item Constructed elaborately
+            \item full of rich information
+        \end{itemize}
+    \end{tcolorbox}
+
+\column{0.48\linewidth}
+    \begin{tcolorbox}[colback=red!5,colframe=red!5]
+    Microblog stream
+        \begin{itemize}
+            \item Short length
+            \item Fast changing
+            \item High noise
+        \end{itemize}
+    \end{tcolorbox}
+\end{columns}
+
+\begin{tcolorbox}[colback=red!5,colframe=red!75!black]
+The benefit of \textbf{enriching the semantics} and \textbf{filtering out noise} by Knowledge Base for microblogs is attractive.
+\\~\\
+But it's expensive to retrieve every word of tweets in the Knowledge Base.
+\end{tcolorbox}
+
 
 \end{frame}
 
@@ -242,7 +273,7 @@ Much easier to detect the event on the time series of word "hood" related to \te
 %------------------------------
 %page 8
 \begin{frame}
-\frametitle{Overview of our method}	
+\frametitle{Overview of our solution}	
 
 \begin{figure}[h]
 		\setlength{\abovecaptionskip}{0.cm}
@@ -256,7 +287,7 @@ Much easier to detect the event on the time series of word "hood" related to \te
 
 \end{frame}
 
-
+\begin{comment}
 %------------------------------
 %page 9
 \begin{frame}
@@ -472,7 +503,7 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 
 \end{frame}
 
-%\end{comment}
+\end{comment}
 
 
 \end{document}
