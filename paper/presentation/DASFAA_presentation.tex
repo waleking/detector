@@ -69,6 +69,10 @@
 %used for colored block
 \usepackage[listings,theorems]{tcolorbox}
 
+%used for algorithm
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{algorithmic}
+
 \setbeamertemplate{sidebar right}
 {
   \vfill%
@@ -132,7 +136,7 @@ And, we found another key factor,
 %page 4
 \begin{frame}
 \frametitle{Challenges (2/2)}	
-Exploratory study on the \textit{Edinburgh twitter corpus}: 11/29 events contain less than 50 tweets.
+Exploratory study on the \textit{Edinburgh twitter corpus}: 11/27 events contain less than 50 tweets.
 
 \intextsep=5pt plus 3pt minus 1pt % 调整表格与正文的上间距
 \begin{table}[]
@@ -273,30 +277,84 @@ But it's expensive to retrieve every word of tweets in the Knowledge Base.
 %------------------------------
 %page 8
 \begin{frame}
-\frametitle{Overview of our solution}	
+\frametitle{Our solution}	
+\textsc{TransDetector}: a novel category-level transfer learning method
+\begin{itemize}
+	\item transfer KB's \textbf{category-level info} into microblog stream
+	\item balance the performance and the cost of leveraging knowledge base for event detection
+\end{itemize}
 
+\intextsep=5pt plus 3pt minus 1pt % 调整表格与正文的上间距
 \begin{figure}[h]
 		\setlength{\abovecaptionskip}{0.cm}
         \setlength{\belowcaptionskip}{0.cm}
         \centering
-        \includegraphics[width=0.5\columnwidth]{../img/NSDetectorExample.pdf}
-        \caption{\textsc{TransDetector}'s processing flow, taking \textit{Military} related events in microblogs as an example.}
+        \includegraphics[width=0.43\columnwidth]{../img/NSDetectorExample.pdf}
+        \caption{\textsc{TransDetector}'s processing flow, in 3 phases.}
         \label{fig:hood}
 \end{figure}
 
 
 \end{frame}
 
-\begin{comment}
+\begin{frame}
+\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB)}	
+There is a three fold hierarchical structure in Knowledge Base.
+\begin{enumerate}
+	\item \textbf{Taxonomy Graph \(G^{(0)}\)}. The directed edges in \(G^{(0)}\) represent the \textit{class}\(\rightarrow\)\textit{subclass} relations in KB. 
+		\begin{itemize}
+			\item e.g., \textit{Main topic classifications} \(\rightarrow\) \textit{Society}
+		\end{itemize}
+	\item \textbf{Category-Page Bipartite Graph \(G^{(1)}\)}. The directed edges in \(G^{(1)}\) represent the \textit{class}\(\rightarrow\)\textit{instance} relations in KB.
+		\begin{itemize}
+			\item e.g., \textit{Military} \(\rightarrow\) \textit{page: Armed Forces}
+		\end{itemize}
+	\item \textbf{Page-Content Map \(G^{(2)}\)}. 
+For a specific Wikipedia dumps version, the edges  \textit{page} \(\rightarrow\)\textit{content} in \(G^{(2)}\) define a one-to-one mapping.
+		\begin{itemize}
+			\item e.g., \textit{page: Armed Forces} \(\rightarrow\) \textit{content(20170325version): ``The armed forces of a country are its government-sponsored defense, fighting forces, and organizations..."}
+		\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB)}
+\begin{algorithm}[H]
+\scriptsize
+\caption{Extraction of Category-Level Topics in Knowledge Base}
+\label{alg:normalStatesInit}
+
+\KwIn{Taxonomy's Graph \(G^{(0)}\), Category-Page Bipartite Graph \(G^{(1)}\), Page-Content Bipartite Graph \(G^{(2)}\), topic related category node \(c\)}
+\KwOut{\(c\)'s category-level topic in knowledge base \(\bm{h}_c\)}
+\(Pages(c)\leftarrow \varnothing\), \(\bm{h}_c \leftarrow \varnothing\)\\
+DAG \(G^{(0)'} \leftarrow\) Remove Cycles of \(G^{(0)}\) by nodes' HITS-PageRank scores. \label{alg:line2inNormalStatesInit}\\
+\(SuccessorNodes(c) \leftarrow \) Breadth-first-traverse(\(G^{(0)'},c\))\label{alg:line3inNormalStatesInit}\\
+\For{\(node \in SuccessorNodes(c)\)}{
+    \(Pages(c) \leftarrow Pages(c) \cup G^{(1)}.neighbours(node)\) \label{alg:line5inNormalStatesInit}\\
+}
+Word frequency table \(n(c,.) \leftarrow \) do word count on the text contents of \(Pages(c)\) \\
+Word frequency table \(n(All,.) \leftarrow \) do word count on the text contents of all pages in \(G^{(2)}\).\\
+\For{word \(w\) in WordFrequencyTable(All).keys()}{
+    \(chi(c,w) \leftarrow \) \(w\)'s chi-square statistics on \(WordFrequencyTable(c)\) and \(WordFrequencyTable(All)\).\\
+    \(h_{c,w} \leftarrow chi(c,w)\) \label{alg:line10inNormalStatesInit}\\
+}
+\Return{\(\bm{h}_c\)}
+\end{algorithm}
+	
+\end{frame}
+
+
+%\begin{comment}
 %------------------------------
 %page 9
 \begin{frame}
-\frametitle{\textsc{TransDetector}: Phrase 1}	
+\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB) (1/3)}	
+Taking the category \textit{Military} as an example, we extract \textit{Military}'s category-level topic \(\bm{h_{Military}}\).
 \begin{figure}[h]
 		\setlength{\abovecaptionskip}{0.cm}
         \setlength{\belowcaptionskip}{0.cm}
         \centering
-        \includegraphics[width=0.5\columnwidth]{../img/initializationExample.pdf}
+        \includegraphics[width=0.45\columnwidth]{../img/initializationExample.pdf}
         \caption{Extracting Category-Level Topics in Knowledge Base via its three fold hierarchical structure, taking \textit{Military} as an example.}
         \label{fig:hood}
 \end{figure}
@@ -306,34 +364,120 @@ But it's expensive to retrieve every word of tweets in the Knowledge Base.
 %------------------------------
 %page 10
 \begin{frame}
-\frametitle{\textsc{TransDetector}: Phrase 2}	
+\frametitle{\textsc{TransDetector}: Phase 2 (Transferring Category-Level Info into Microblog Stream) (2/3)}	
+Transfer KB's Category-Level Topics \(\{\bm{h_c}\}_{c=1}^{K_{KB}}\) into microblogs stream: CTrans-LDA.
+\begin{figure}[h]
+		\setlength{\abovecaptionskip}{0.cm}
+        \setlength{\belowcaptionskip}{0.cm}
+        \centering
+        \includegraphics[width=0.6\columnwidth]{../model/lda_tikz.pdf}
+        \caption{Diagram of CTrans-LDA.}
+        \label{fig:hood}
+\end{figure}
+
+In CTrans-LDA, \(\{\bm{h_c}\}_{c=1}^{K_{KB}}\) is used as prior information:
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\begin{scriptsize}
+\begin{equation}
+\label{eq:wikiPrior}
+\begin{aligned}
+\tau_{kv}=
+\left\{ \begin{aligned}
+\lambda \frac{h_{kv}}{\sum_{v\in S_{k}}h_{kv}} &,v\in S_{k}\ and  \ k \leq K_{\bm{KB}} \\
+0&,v \notin S_{k} \ or \ k > K_{\bm{KB}} \\
+\end{aligned}\right.
+\end{aligned}
+\end{equation}
+\end{scriptsize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\textsc{TransDetector}: Phase 2 (Transferring Category-Level Info into Microblog Stream) (3/3)}	
+We use Gibbs Sampling for solving CTrans-LDA.
+\begin{itemize}
+	\item The initialization probability \(\hat{q}_{k|v}\) makes sure that the learned topics are aligned to the pre-defined category-level topic.
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\begin{scriptsize} 
+\begin{equation}
+\label{eq:initProbability}
+\begin{aligned}
+\hat{q}_{k|v}=
+\left\{ \begin{aligned}
+\frac{\tau_{kv}}{\sum_{k=1}^{K}\tau_{kv}} &,\sum_{k}\tau_{kv}>0 & (a)\\
+0&, \sum_{k}\tau_{kv}=0 \ and \ k \leq K_{\bm{KB}} & (b)\\
+1/(K-K_{\bm{KB}})&,\sum_{k}\tau_{kv}=0 \ and \ k > K_{\bm{KB}} & (c)
+\end{aligned}\right.
+\end{aligned}
+\end{equation}
+\end{scriptsize}
+\item Conditional probability in gibbs sampling:
+\(p(z_{dn}=k|.)\propto (n^{(d)}_{dk}+\alpha m_k)(n^{(w)}_{kv}+\tau_{kv}+\beta)/(n^{(w)}_{k,.}+\tau_{k,.}+V\beta)\).
+\end{itemize}
 
 \end{frame}
+
 
 %------------------------------
 %page 11
 \begin{frame}
-\frametitle{\textsc{TransDetector}: Phrase 3}	
+\frametitle{\textsc{TransDetector}: Phase 3 (Detecting Events on Category-Level Word Time Series) (1/2)}	
+After transfer learning, we conduct analysis on category-level word time series, and detect events in microblog stream.
+\begin{figure}[h]
+		\setlength{\abovecaptionskip}{0.cm}
+        \setlength{\belowcaptionskip}{0.cm}
+        \centering
+        \includegraphics[width=.99\columnwidth]{../img/screenShot.png}
+        \caption{Visualizing Category-Level Word Time Series in Microblog Stream on Edinburgh Twitter Corpus (20110711-20110915), taking \textit{Military} as an example.}
+        \label{fig:hood}
+\end{figure}
+\end{frame}
 
+\begin{frame}
+\frametitle{\textsc{TransDetector}: Phase 3 (Detecting Events on Category-Level Word Time Series) (2/2)}
+With richer semantics, and fewer noise, we detect events more accurately, in all the following granularities.(see more technique details in our paper)
+\begin{enumerate}
+	\item events' candidate words
+	\begin{itemize}
+		\item e.g., \textit{Ft.}, \textit{Hood}, \textit{attack}.
+	\end{itemize}
+	\item event phrases
+	\begin{itemize}
+		\item e.g., \textit{Ft. Hood attack}.
+	\end{itemize}
+	\item events' representative microblogs
+	\begin{itemize}
+		\item e.g., \textit{Possible Ft. Hood Attack Thwarted \url{http://t.co/BSJ33hk}}.
+	\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment Settings}
+\textbf{Dataset}
+\begin{itemize}
+	\item Knowledge Base. Wikipedia dumps\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-categorylinks.sql.gz}}\footnote{\url{https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles.xml.bz2}}
+	\item Microblog Stream. Edinburgh twitter corpus\footnote{\url{http://demeter.inf.ed.ac.uk/cross/docs/fsd_corpus.tar.gz}}
+\end{itemize} 
+
+\textbf{Baseline Methods}
+\begin{itemize}
+	\item Twevent, BurstyBTM, LSH, EDCoW, and TimeUserLDA
+\end{itemize}
+\textbf{Ground Truth}
+\begin{itemize}
+	\item Benchmark1 is labeled events in previous study.
+	\item Benchmark2 is our manually checked events based on Twevent, BurstyBTM, LSH, EDCoW, TimeUserLDA and \textsc{TransDetector}.
+\end{itemize}
 \end{frame}
 
 
 %------------------------------
 %page 12
 \begin{frame}
-\frametitle{Experimental Results}	
-\begin{figure}[h]
-	\setlength{\abovecaptionskip}{0.cm}
-	\setlength{\belowcaptionskip}{0.cm}
-        \centering
-        \includegraphics[width=1.0\columnwidth]{../img/NPMI.pdf}
-        \caption{More topics are compared at the NPMI metrics between our method and LightLDA}
-        \label{fig:NPMI}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\frametitle{some}
+\frametitle{Experimental Results}
+Evaluation on Categroy-Level Topics in Knowledge Base. On \textit{Aviation} topic, semantic coherence is much better than LightLDA (same as LDA) in terms of NPMI[Röder, WSDM 2015]. 
 
 \begin{table}[h]
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
@@ -367,15 +511,29 @@ GID& \#words*  & words  & NPMI & GID& \#words*& words & NPMI \\ \hline
 	
 \end{frame}
 
+
 \begin{frame}
-\frametitle{Experiment Settings}
-	
+\frametitle{Experimental Results}	
+Evaluation on Categroy-Level Topics in Knowledge Base.
+On more topics, semantic coherence is much better than LightLDA (same as LDA) in terms of NPMI[Röder, WSDM 2015]. 
+\begin{figure}[h]
+	\setlength{\abovecaptionskip}{0.cm}
+	\setlength{\belowcaptionskip}{0.cm}
+        \centering
+        \includegraphics[width=1.0\columnwidth]{../img/NPMI.pdf}
+        \caption{More topics are compared at the NPMI metrics between our method and LightLDA}
+        \label{fig:NPMI}
+\end{figure}
 \end{frame}
+
+
 
 
 
 \begin{frame}
 \frametitle{Experimental Results}	
+Effectiveness of transferring category-level topics into the microblog stream, and finding more new words in the stream which is not stored in the knowledge base.
+
 \begin{table}
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
@@ -479,6 +637,20 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Conclusions}	
+\begin{itemize}
+	\item Knowledge base is constructed elaborately and contains rich information, which can benefit the not-well-organized microblog stream. 
+	\item We propose \textsc{TransDetector} method, and
+	\begin{itemize}
+		\item use category-level topic in knowledge base as the prior knowledge,
+		\item transfer abundant knowledge from knowledge base into microblog stream
+		\item enrich the semantics of microblogs and further enhances the accuracy of microblogs event detection
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
 
 \begin{frame}
 %\frametitle{A first slide}
@@ -503,7 +675,7 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 
 \end{frame}
 
-\end{comment}
+%\end{comment}
 
 
 \end{document}
