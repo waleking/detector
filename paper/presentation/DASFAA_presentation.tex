@@ -101,7 +101,7 @@ Many Web applications need the \textbf{accurate event detection} technique on mi
 \begin{enumerate}
 	\item public opinion analysis [Chen, SIGIR 2013]
 	\item public security [Li, ICDE 2012], [Imran, WWW 2014]
-	\item disaster response [Sakaki,WWW2010]
+	\item disaster response [Sakaki,WWW 2010]
 	\item breaking news report\footnote{\url{http://www.theverge.com/2016/12/1/13804542/reuters-algorithm-breaking-news-twitter}}
 \end{enumerate}	
 \vfill
@@ -298,7 +298,7 @@ But it's expensive to retrieve every word of tweets in the Knowledge Base.
 \end{frame}
 
 \begin{frame}
-\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB)}	
+\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB) (1/3)}	
 There is a three fold hierarchical structure in Knowledge Base.
 \begin{enumerate}
 	\item \textbf{Taxonomy Graph \(G^{(0)}\)}. The directed edges in \(G^{(0)}\) represent the \textit{class}\(\rightarrow\)\textit{subclass} relations in KB. 
@@ -318,7 +318,7 @@ For a specific Wikipedia dumps version, the edges  \textit{page} \(\rightarrow\)
 \end{frame}
 
 \begin{frame}
-\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB)}
+\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB) (2/3)}
 \begin{algorithm}[H]
 \scriptsize
 \caption{Extraction of Category-Level Topics in Knowledge Base}
@@ -348,7 +348,7 @@ Word frequency table \(n(All,.) \leftarrow \) do word count on the text contents
 %------------------------------
 %page 9
 \begin{frame}
-\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB) (1/3)}	
+\frametitle{\textsc{TransDetector}: Phase 1 (Extracting Category-Level Topics in KB) (3/3)}	
 Taking the category \textit{Military} as an example, we extract \textit{Military}'s category-level topic \(\bm{h_{Military}}\).
 \begin{figure}[h]
 		\setlength{\abovecaptionskip}{0.cm}
@@ -364,7 +364,7 @@ Taking the category \textit{Military} as an example, we extract \textit{Military
 %------------------------------
 %page 10
 \begin{frame}
-\frametitle{\textsc{TransDetector}: Phase 2 (Transferring Category-Level Info into Microblog Stream) (2/3)}	
+\frametitle{\textsc{TransDetector}: Phase 2 (Transferring Category-Level Info into Microblog Stream) (1/2)}	
 Transfer KB's Category-Level Topics \(\{\bm{h_c}\}_{c=1}^{K_{KB}}\) into microblogs stream: CTrans-LDA.
 \begin{figure}[h]
 		\setlength{\abovecaptionskip}{0.cm}
@@ -393,7 +393,7 @@ In CTrans-LDA, \(\{\bm{h_c}\}_{c=1}^{K_{KB}}\) is used as prior information:
 \end{frame}
 
 \begin{frame}
-\frametitle{\textsc{TransDetector}: Phase 2 (Transferring Category-Level Info into Microblog Stream) (3/3)}	
+\frametitle{\textsc{TransDetector}: Phase 2 (Transferring Category-Level Info into Microblog Stream) (2/2)}	
 We use Gibbs Sampling for solving CTrans-LDA.
 \begin{itemize}
 	\item The initialization probability \(\hat{q}_{k|v}\) makes sure that the learned topics are aligned to the pre-defined category-level topic.
@@ -564,6 +564,15 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 
 \begin{frame}
 \frametitle{Experimental Results}	
+Effectiveness of event detection:
+\begin{enumerate}
+	\item \textsc{TransDetector} performs better in terms of the precision and the recall.
+	\item only sacrificing in the DERate slightly because an event could be grouped into multiple categories.
+	\begin{itemize}
+		\item the event \textit{``S\&P downgrade US credit rating"}, related to \textit{politics} and  \textit{financial} simultaneously.
+	\end{itemize}
+\end{enumerate}
+
 \begin{table}[h]
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
@@ -595,7 +604,10 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 \end{frame}
 
 \begin{frame}
-\frametitle{Experimental Results}	
+\frametitle{Experimental Results}
+To understand why \textsc{TransDetector} performs better.
+\vfill
+Show the relationship between the recall and the event size.
 \begin{figure}[h]
 	\setlength{\abovecaptionskip}{0.cm}
 	\setlength{\belowcaptionskip}{0.cm}
@@ -609,6 +621,8 @@ squadron & fly & cancer & body & syria & world & battle & attack & htc & apps\\
 
 \begin{frame}
 \frametitle{Experimental Results}	
+To understand why \textsc{TransDetector} performs better.\\
+Show the relationship between the recall and the event size, taking the \textit{military}-related events as an example.
 \begin{table}
 \setlength{\abovecaptionskip}{0.cm}%set the distance between caption and table to 0 cm.
 \setlength{\belowcaptionskip}{0.cm}
