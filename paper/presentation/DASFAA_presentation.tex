@@ -4,6 +4,8 @@
 
 \usetheme{CambridgeUS}
 
+\usepackage{subfigure}
+
 %-chage foot part-------------------------------
 \makeatother
 \setbeamertemplate{footline}
@@ -234,11 +236,18 @@ Event detection methods \textit{by leveraging extra information}
 \end{figure}
 
 \begin{figure}[h]
-		\setlength{\abovecaptionskip}{0.cm}
-        \setlength{\belowcaptionskip}{0.cm}
-        \centering
-        \includegraphics[width=0.5\columnwidth, left]{Fort_Hood.pdf}
+	\setlength{\abovecaptionskip}{0.cm}
+	\setlength{\belowcaptionskip}{0.cm}
+	\centering
+        \subfigure[]{
+                \includegraphics[height=2.12cm]{Hood(headgear)-Wikipedia.pdf}
+        }
+        \subfigure[]{
+                \includegraphics[height=2.12cm]{Fort_Hood.pdf}
+        }
 \end{figure}
+
+
 \end{frame}
 
 %------------------------------
@@ -664,6 +673,7 @@ Show the relationship between the recall and the event size, taking the \textit{
 		\item transfer abundant knowledge from knowledge base into microblog stream
 		\item enrich the semantics of microblogs and further enhances the accuracy of microblogs event detection
 	\end{itemize}
+	
 \end{itemize}
 \end{frame}
 
